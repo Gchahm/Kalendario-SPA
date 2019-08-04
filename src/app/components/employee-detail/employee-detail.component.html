@@ -1,0 +1,40 @@
+<div *ngIf="employee">
+  <div (empId)=employee.id class="row">
+    <div class="col-3">
+      <div class="card">
+        <button class="btn btn-block btn-secondary" routerLink="/staff">back to staff</button>
+        <img src="{{employee.photoUrl}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{employee.name}}</h5>
+          <p class="card-text">{{employee.bio}}</p>
+        </div>
+        <div class="list-group list-group-flush text-center">
+          <div class="list-group-item">select a service</div>
+          <div class="list-group-item" [class.active]="service.id === serviceId"
+               *ngFor="let service of employee.services">
+            <a (click)="handleServiceClick(service)">{{service.name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <app-agenda [events]="events"
+                  [default-date]="date"
+                  (dayRender)="handleDayRender($event)"
+      >
+
+      </app-agenda>
+      <!--<full-calendar defaultView="timeGridDay"-->
+      <!--[plugins]="calendarPlugins"-->
+      <!--[visibleRange]="visibleRange"-->
+      <!--minTime="07:00:00"-->
+      <!--maxTime="22:00:00"-->
+      <!--[events]="events"-->
+      <!--(eventClick)="handleFCEventClick($event)"-->
+      <!--(dayRender)="handleDayRender($event)"-->
+      <!--&gt;</full-calendar>-->
+    </div>
+  </div>
+</div>
+
+

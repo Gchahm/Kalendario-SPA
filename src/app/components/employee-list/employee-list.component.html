@@ -1,0 +1,5 @@
+<div class="card-deck">
+  <div class="card" *ngFor="let employee of employees$ | async">
+    <app-employee-card [employee]="employee"></app-employee-card>
+  </div>
+</div>

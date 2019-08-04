@@ -1,16 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { EmployeeCardComponent } from './components/employee-card/employee-card.component';
+import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import {HttpClientModule} from '@angular/common/http';
+import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
+import {FullCalendarModule} from '@fullcalendar/angular';
+import { AgendaComponent } from './components/agenda/agenda.component';
+import { AgendaEventComponent } from './components/agenda-event/agenda-event.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    NavbarComponent,
+    EmployeeCardComponent,
+    EmployeeListComponent,
+    EmployeeDetailComponent,
+    AgendaComponent,
+    AgendaEventComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule,
+    HttpClientModule,
+    FullCalendarModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
