@@ -5,5 +5,7 @@
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
 @import '~@fullcalendar/bootstrap/main.css';
+@import '~alertifyjs/build/css/alertify.min.css';
+@import '~alertifyjs/build/css/themes/bootstrap.min.css';
 
 

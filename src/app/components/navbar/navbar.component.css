@@ -1,0 +1,11 @@
+.dropdown-item {
+  cursor: pointer;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+a.dropdown-item:hover {
+  color: black;
+}

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {EmployeeListComponent} from './components/employee-list/employee-list.component';
 import {EmployeeDetailComponent} from './components/employee-detail/employee-detail.component';
+import {RegisterComponent} from './components/register/register.component';
+import {NotLoggedInGuard} from './guards/not-logged-in.guard';
 
 
 const routes: Routes = [
@@ -13,6 +15,15 @@ const routes: Routes = [
   {
     path: 'staff',
     component: EmployeeListComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [NotLoggedInGuard]
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: '',

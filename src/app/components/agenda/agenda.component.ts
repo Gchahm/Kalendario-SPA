@@ -18,13 +18,13 @@ export class AgendaComponent implements OnInit {
   ngOnInit() {
   }
 
-  nextDay() {
-    this.currentDate.setDate(this.currentDate.getDate() + 1);
+  previousDay() {
+    this.currentDate.setDate(this.currentDate.getDate() - 1);
     this.emitDayRender();
   }
 
-  previousDay() {
-    this.currentDate.setDate(this.currentDate.getDate() - 1);
+  nextDay() {
+    this.currentDate.setDate(this.currentDate.getDate() + 1);
     this.emitDayRender();
   }
 

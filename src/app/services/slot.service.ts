@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class SlotService {
 
-  private baseUrl = environment.apiUrl + 'slots';
+  private baseUrl = environment.apiUrl + 'slots/';
 
   constructor(private http: HttpClient) { }
 
@@ -18,5 +18,9 @@ export class SlotService {
     return this.http.get<AgendaEvent[]>(this.baseUrl, {params})
       .pipe(map(agendaEvents => agendaEvents.map(ae => new AgendaEvent(ae.start, ae.end))
       ));
+  }
+
+  create(employee, service, customer, year, month, day) {
+
   }
 }

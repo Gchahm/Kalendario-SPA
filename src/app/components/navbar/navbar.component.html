@@ -1,10 +1,33 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-  <h5 class="my-0 mr-md-auto font-weight-normal"><a routerLink="">Company name</a></h5>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" [routerLinkActive]="['active']"  routerLink="/staff" >Staff</a>
-    <a class="p-2 text-dark" href="#">Enterprise</a>
-    <a class="p-2 text-dark" href="#">Support</a>
-    <a class="p-2 text-dark" href="#">Pricing</a>
-  </nav>
-  <a class="btn btn-outline-primary" href="#">Sign up</a>
-</div>
+<nav class="navbar navbar-expand-md navbar-light bg-light p-0 mb-3">
+  <a class="navbar-brand" routerLink="/home">Company Name</a>
+  <button class="navbar-toggler" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="/staff">Staff</a>
+      </li>
+    </ul>
+    <div class="nav-item dropdown" ngbDropdown *ngIf="isLoggedIn(); else loginTemplate">
+      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+        Welcome {{currentUser().first_name}}
+      </a>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <a class="dropdown-item" ngbDropdownItem>Action</a>
+        <a class="dropdown-item"  ngbDropdownItem>Another action</a>
+        <a class="dropdown-item" ngbDropdownItem (click)="logout()" >Logout</a>
+      </div>
+    </div>
+    <ng-template #loginTemplate>
+      <form #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (submit)="login()">
+        <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="Username"
+               name="username" required [(ngModel)]="user.username">
+        <input class="form-control form-control-sm mr-sm-2" type="password" placeholder="Password"
+               name="password" required [(ngModel)]="user.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-sm btn-outline-primary" type="submit">Login</button>
+      </form>
+      <button class="btn btn-sm btn-outline-primary" routerLink="/register">Register</button>
+    </ng-template>
+  </div>
+</nav>

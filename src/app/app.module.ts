@@ -13,6 +13,11 @@ import { EmployeeDetailComponent } from './components/employee-detail/employee-d
 import {FullCalendarModule} from '@fullcalendar/angular';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { AgendaEventComponent } from './components/agenda-event/agenda-event.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RegisterComponent } from './components/register/register.component';
+import {ErrorInterceptorProvider} from './services/error.interceptor';
+import {AuthService} from './services/auth.service';
+import {AlertifyService} from './services/alertify.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,8 @@ import { AgendaEventComponent } from './components/agenda-event/agenda-event.com
     EmployeeListComponent,
     EmployeeDetailComponent,
     AgendaComponent,
-    AgendaEventComponent
+    AgendaEventComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +37,15 @@ import { AgendaEventComponent } from './components/agenda-event/agenda-event.com
     BrowserModule,
     HttpClientModule,
     FullCalendarModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AlertifyService,
+    ErrorInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
