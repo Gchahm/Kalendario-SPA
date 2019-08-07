@@ -12,6 +12,7 @@ export class AgendaComponent implements OnInit {
   @Input('events') events: AgendaEvent[];
 
   @Output() dayRender = new EventEmitter<DateEvent>();
+  @Output() agendaEventClicked = new EventEmitter<AgendaEvent>();
 
   constructor() { }
 
@@ -33,6 +34,10 @@ export class AgendaComponent implements OnInit {
       date: this.currentDate
     };
     this.dayRender.emit(event);
+  }
+
+  handleAgendaEventClicked($event: AgendaEvent) {
+    this.agendaEventClicked.emit($event);
   }
 }
 

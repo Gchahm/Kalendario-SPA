@@ -5,6 +5,8 @@ import {EmployeeListComponent} from './components/employee-list/employee-list.co
 import {EmployeeDetailComponent} from './components/employee-detail/employee-detail.component';
 import {RegisterComponent} from './components/register/register.component';
 import {NotLoggedInGuard} from './guards/not-logged-in.guard';
+import {BookAppointmentComponent} from './components/book-appointment/book-appointment.component';
+import {AuthGuard} from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -15,6 +17,11 @@ const routes: Routes = [
   {
     path: 'staff',
     component: EmployeeListComponent
+  },
+  {
+    path: 'booking/:employee/:service/:date',
+    component: BookAppointmentComponent,
+    // canActivate: [AuthGuard]
   },
   {
     path: 'register',

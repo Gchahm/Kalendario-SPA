@@ -28,6 +28,7 @@
             ],
             "scripts": [
               "node_modules/alertifyjs/build/alertify.min.js"
+              "node_modules/moment/min/moment.min.js"
             ]
           },
           "configurations": {

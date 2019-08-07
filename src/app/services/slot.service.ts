@@ -19,8 +19,4 @@ export class SlotService {
       .pipe(map(agendaEvents => agendaEvents.map(ae => new AgendaEvent(ae.start, ae.end))
       ));
   }
-
-  create(employee, service, customer, year, month, day) {
-
-  }
 }

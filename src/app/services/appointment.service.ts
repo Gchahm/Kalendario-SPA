@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Appointment} from '../models/Appointment';
+import {Moment} from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,8 @@ export class AppointmentService {
     return this.http.get<Appointment>(this.baseUrl + id + '/');
   }
 
+  create(employee, customer, service, start: Moment) {
+    console.log({employee, customer, service, start});
+    return this.http.post<Appointment>(this.baseUrl, {employee, customer, service, start});
+  }
 }

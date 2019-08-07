@@ -1,0 +1,11 @@
+<div class="card" *ngIf="employee">
+  <div class="card-header">
+    Booking Appointment {{date.format('LLLL')}}
+  </div>
+  <div class="card-body">
+    <p>Service: {{ service.name }}</p>
+    <p>Duration: {{service.duration}}</p>
+    <p>Employee: {{employee.name}}</p>
+  </div>
+  <button class="btn btn-secondary" (click)="bookAppointment()">Book Appointment</button>
+</div>

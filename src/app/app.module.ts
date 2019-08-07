@@ -18,6 +18,7 @@ import { RegisterComponent } from './components/register/register.component';
 import {ErrorInterceptorProvider} from './services/error.interceptor';
 import {AuthService} from './services/auth.service';
 import {AlertifyService} from './services/alertify.service';
+import { BookAppointmentComponent } from './components/book-appointment/book-appointment.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {AlertifyService} from './services/alertify.service';
     EmployeeDetailComponent,
     AgendaComponent,
     AgendaEventComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookAppointmentComponent
   ],
   imports: [
     BrowserModule,

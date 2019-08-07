@@ -3,7 +3,7 @@
     <div class="col-3">
       <div class="card">
         <button class="btn btn-block btn-secondary" routerLink="/staff">back to staff</button>
-        <img src="{{employee.photoUrl}}" class="card-img-top" alt="...">
+        <!--<img src="{{employee.photoUrl}}" class="card-img-top" alt="...">-->
         <div class="card-body">
           <h5 class="card-title">{{employee.name}}</h5>
           <p class="card-text">{{employee.bio}}</p>
@@ -21,18 +21,9 @@
       <app-agenda [events]="events"
                   [default-date]="date"
                   (dayRender)="handleDayRender($event)"
+                  (agendaEventClicked)="handleDateEventClicked($event)"
       >
-
       </app-agenda>
-      <!--<full-calendar defaultView="timeGridDay"-->
-      <!--[plugins]="calendarPlugins"-->
-      <!--[visibleRange]="visibleRange"-->
-      <!--minTime="07:00:00"-->
-      <!--maxTime="22:00:00"-->
-      <!--[events]="events"-->
-      <!--(eventClick)="handleFCEventClick($event)"-->
-      <!--(dayRender)="handleDayRender($event)"-->
-      <!--&gt;</full-calendar>-->
     </div>
   </div>
 </div>

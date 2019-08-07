@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AgendaEvent} from '../../models/AgendaEvent';
+import {Moment} from 'moment';
 
 @Component({
   selector: 'app-agenda-event',
@@ -8,16 +9,17 @@ import {AgendaEvent} from '../../models/AgendaEvent';
 })
 export class AgendaEventComponent implements OnInit {
 
-  @Input('event') agendaEvent: AgendaEvent;
+  @Input() agendaEvent: AgendaEvent;
+
+  @Output() onClick = new EventEmitter<AgendaEvent>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  timePart(date: Date): string {
-    const min = date.getMinutes();
-    return date.getHours() + ':' + (min === 0 ? '00' : min);
+  emitEventClicked() {
+    this.onClick.emit(this.agendaEvent);
   }
 
 }
