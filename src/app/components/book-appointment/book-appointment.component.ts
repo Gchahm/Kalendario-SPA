@@ -1,14 +1,14 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Employee} from '../../models/Employee';
 import {Service} from '../../models/Service';
 import {EmployeeService} from '../../services/employee.service';
 import {AppointmentService} from '../../services/appointment.service';
-import {AuthService} from '../../services/auth.service';
 import {AlertifyService} from '../../services/alertify.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Moment} from 'moment';
 import * as moment from 'moment';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-book-appointment',
@@ -27,7 +27,7 @@ export class BookAppointmentComponent implements OnInit, OnDestroy {
 
   constructor(private empService: EmployeeService,
               private appointmentService: AppointmentService,
-              private authService: AuthService,
+              private userService: UserService,
               private alertify: AlertifyService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -56,9 +56,9 @@ export class BookAppointmentComponent implements OnInit, OnDestroy {
 
   bookAppointment() {
     this.appointmentSubscription = this.appointmentService
-      .create(this.employee.id, this.authService.current_user().id, this.service.id, this.date)
+      .create(this.employee.id, this.userService.getCurrentUser().id, this.service.id, this.date)
       .subscribe(res => this.alertify.success('appointment booked'),
         error => this.alertify.error(error),
-        () => this.router.navigate(['/home']));
+        () => this.router.navigate(['/my-appointments']));
   }
 }

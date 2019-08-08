@@ -14,8 +14,7 @@
         Welcome {{currentUser().first_name}}
       </a>
       <div class="dropdown-menu" ngbDropdownMenu>
-        <a class="dropdown-item" ngbDropdownItem>Action</a>
-        <a class="dropdown-item"  ngbDropdownItem>Another action</a>
+        <a class="dropdown-item" ngbDropdownItem routerLink="/my-appointments">My appointments</a>
         <a class="dropdown-item" ngbDropdownItem (click)="logout()" >Logout</a>
       </div>
     </div>

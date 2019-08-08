@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth.service';
 import {Subscription} from 'rxjs';
 import {AlertifyService} from '../../services/alertify.service';
 import {User} from '../../models/User';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   loginSubscription: Subscription;
 
   constructor(private authService: AuthService,
+              private userService: UserService,
               private alertify: AlertifyService) {
   }
 
@@ -40,7 +42,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.authService.isLoggedIn();
   }
   currentUser(): User {
-    return this.authService.current_user();
+    return this.userService.getCurrentUser();
   }
 
   logout() {

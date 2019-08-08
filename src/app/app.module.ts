@@ -11,14 +11,14 @@ import { EmployeeListComponent } from './components/employee-list/employee-list.
 import {HttpClientModule} from '@angular/common/http';
 import { EmployeeDetailComponent } from './components/employee-detail/employee-detail.component';
 import {FullCalendarModule} from '@fullcalendar/angular';
-import { AgendaComponent } from './components/agenda/agenda.component';
-import { AgendaEventComponent } from './components/agenda-event/agenda-event.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
-import {ErrorInterceptorProvider} from './services/error.interceptor';
-import {AuthService} from './services/auth.service';
-import {AlertifyService} from './services/alertify.service';
+import { ErrorInterceptorProvider} from './interceptors/error.interceptor';
 import { BookAppointmentComponent } from './components/book-appointment/book-appointment.component';
+import { CustomerAppointmentsComponent } from './components/customer-appointments/customer-appointments.component';
+import { AppointmentCardComponent } from './components/appointment-card/appointment-card.component';
+import { AuthInterceptorProvider} from './interceptors/token.interceptor';
+import {CalendarModule} from './calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +28,10 @@ import { BookAppointmentComponent } from './components/book-appointment/book-app
     EmployeeCardComponent,
     EmployeeListComponent,
     EmployeeDetailComponent,
-    AgendaComponent,
-    AgendaEventComponent,
     RegisterComponent,
-    BookAppointmentComponent
+    BookAppointmentComponent,
+    CustomerAppointmentsComponent,
+    AppointmentCardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,11 +42,11 @@ import { BookAppointmentComponent } from './components/book-appointment/book-app
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    CalendarModule
   ],
   providers: [
-    AuthService,
-    AlertifyService,
-    ErrorInterceptorProvider
+    ErrorInterceptorProvider,
+    AuthInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

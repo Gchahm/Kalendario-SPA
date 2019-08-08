@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AgendaEventComponent } from './agenda-event.component';
+import { AppointmentCardComponent } from './appointment-card.component';
 
-describe('AgendaEventComponent', () => {
-  let component: AgendaEventComponent;
-  let fixture: ComponentFixture<AgendaEventComponent>;
+describe('AppointmentCardComponent', () => {
+  let component: AppointmentCardComponent;
+  let fixture: ComponentFixture<AppointmentCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AgendaEventComponent ]
+      declarations: [ AppointmentCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AgendaEventComponent);
+    fixture = TestBed.createComponent(AppointmentCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

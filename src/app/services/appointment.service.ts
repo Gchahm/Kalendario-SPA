@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Appointment} from '../models/Appointment';
+import {Appointment, AppointmentAdapter} from '../models/Appointment';
 import {Moment} from 'moment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {adaptList} from '../core/adapter';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +14,20 @@ export class AppointmentService {
 
   private baseUrl = environment.apiUrl + 'appointments/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private adapter: AppointmentAdapter) { }
 
-  getAll(employee: string, year, month, day) {
+  getAll(): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(this.baseUrl).pipe(
+      map(adaptList(this.adapter))
+    );
+  }
+
+  getEmployeeAppointments(employee: string, year, month, day) {
     const params = { employee, year, month, day };
-    return this.http.get<Appointment[]>(this.baseUrl, {params});
+    return this.http.get<Appointment[]>(this.baseUrl, {params}).pipe(
+      map(adaptList(this.adapter))
+    );
   }
 
   get(id: string) {

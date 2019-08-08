@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {User} from '../models/User';
+import {UserService} from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private userService: UserService) {
   }
 
   login(user: LoginModel): Observable<any> {
@@ -21,25 +23,27 @@ export class AuthService {
       .pipe(
         map((response: any) => {
           if (response) {
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('current_user', JSON.stringify(response.user));
+            this.setToken(response.token);
+            this.userService.setCurrentUser(response.user);
           }
         })
       );
   }
 
   isLoggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return !!this.getToken();
+  }
+
+  private setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  public getToken(): string {
+    return localStorage.getItem('token');
   }
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('current_user');
-  }
-
-  current_user(): User {
-    const user = localStorage.getItem('current_user');
-    return JSON.parse(user) as User;
+    localStorage.removeItem('token');
   }
 }

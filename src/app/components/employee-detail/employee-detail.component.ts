@@ -3,9 +3,13 @@ import {Employee} from '../../models/Employee';
 import {Subscription} from 'rxjs';
 import {EmployeeService} from '../../services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AgendaEvent} from '../../models/AgendaEvent';
 import {SlotService} from '../../services/slot.service';
 import {Service} from '../../models/Service';
+import {Moment} from 'moment';
+import * as moment from 'moment';
+import {Slot} from '../../models/Slot';
+import {DateChangedEvent} from '../../calendar/events/DateChangedEvent';
+import {CalendarEvent} from '../../calendar/models/CalendarEvent';
 
 @Component({
   selector: 'app-employee-detail',
@@ -15,12 +19,12 @@ import {Service} from '../../models/Service';
 export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
   employee: Employee;
-  events: AgendaEvent[];
+  slots: Slot[];
   empServiceSubscription: Subscription;
   queryParamSubscription: Subscription;
 
   serviceId: number;
-  date: Date;
+  date: Moment;
 
   constructor(private empService: EmployeeService,
               private slotService: SlotService,
@@ -29,8 +33,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.date = new Date();
-    this.date.setDate(this.date.getDate() + 1);
+    this.date = moment.utc().add(1, 'days');
     this.queryParamSubscription = this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.empServiceSubscription = this.empService.get(id).subscribe(emp => {
@@ -47,8 +50,8 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.queryParamSubscription.unsubscribe();
   }
 
-  handleDayRender($event: any) {
-    this.date = new Date($event.date);
+  handleDayRender($event: DateChangedEvent) {
+    this.date = $event.date;
     this.loadSlots();
   }
 
@@ -58,12 +61,12 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   loadSlots() {
-    this.slotService.getAll(this.employee.id, this.serviceId, this.date.getFullYear(), this.date.getMonth() + 1, this.date.getDate())
+    this.slotService.getAll(this.employee.id, this.serviceId, this.date.year(), this.date.month() + 1, this.date.date())
       .toPromise()
-      .then(slots => this.events = slots);
+      .then(slots => this.slots = slots);
   }
 
-  handleDateEventClicked($event: AgendaEvent) {
+  handleDateEventClicked($event: CalendarEvent) {
     this.router.navigate(['booking/', this.employee.id, this.serviceId, $event.start.toISOString()] );
   }
 }

@@ -1,0 +1,21 @@
+<div class="card border-primary m-2">
+  <div class="row no-gutters">
+    <div class="col-auto square">
+      <h1 class="m-0">{{appointment.start.format('DD')}}</h1>
+      <h5 class="m-0">{{appointment.start.format('MMM[/]YY')}}</h5>
+    </div>
+    <div class="col">
+      <div class="card-header border-primary">
+        <h4 class="m-0">
+          {{appointment.service.name}}
+          @
+          {{appointment.start.format('HH:mm')}}
+        </h4>
+      </div>
+      <div class="card-body">
+        {{beautify(appointment.service.duration)}}
+        <p class="m-0">{{appointment.employee.name}}</p>
+      </div>
+    </div>
+  </div>
+</div>

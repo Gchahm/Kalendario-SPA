@@ -1,12 +1,11 @@
 <div class="card">
   <div class="card-header">
     <div class="row">
-      <h4 class="col-4">
-        {{currentDate.toDateString()}}
-      </h4>
-      <div class="col-8 text-right">
-        <a class="btn btn-secondary">today</a>
+      <div class="col-sm-12 col-md-4 h4 text-center align-self-center">AVAILABILITY</div>
+      <div class="col-sm-12 col-md-4 h4 text-center align-self-center">{{currentDate.format('ddd DD MMM YY')}}</div>
+      <div class="col-sm-12 col-md-4">
         <div class="btn-group">
+          <a class="btn btn-secondary">today</a>
           <a class="btn btn-primary" (click)="previousDay()"><i class="fa fa-chevron-left"></i></a>
           <a class="btn btn-primary" (click)="nextDay()"><i class="fa fa-chevron-right"></i></a>
         </div>
@@ -15,11 +14,11 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-6" *ngFor="let agendaEvent of events">
-        <app-agenda-event [agendaEvent]="agendaEvent"
+      <div class="col-sm-12 col-md-6" *ngFor="let calendarEvent of events">
+        <app-calendar-event [calendarEvent]="calendarEvent"
                           (onClick)="handleAgendaEventClicked($event)">
 
-        </app-agenda-event>
+        </app-calendar-event>
       </div>
     </div>
   </div>
