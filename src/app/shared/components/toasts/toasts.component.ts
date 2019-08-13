@@ -12,5 +12,4 @@ export class ToastsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

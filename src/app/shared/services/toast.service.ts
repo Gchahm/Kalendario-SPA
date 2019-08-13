@@ -14,19 +14,19 @@ export class ToastService {
     this.toasts = this.toasts.filter(t => t !== toast);
   }
 
-  success(message: string, header: string = 'SUCCESS!') {
+  success(message: string, header?: string) {
     this.toasts.push({ message, header, class: 'bg-success text-light' });
   }
 
-  error(message: string, header: string = 'ERROR') {
+  error(message: string, header?: string) {
     this.toasts.push({ message, header, class: 'bg-danger text-light' });
   }
 
-  warning(message: string, header: string = 'WARNING') {
+  warning(message: string, header?: string) {
     this.toasts.push({ message, header, class: 'bg-warning text-light' });
   }
 
-  message(message: string, header: string = 'NEED HELP?') {
+  message(message: string, header?: string) {
     this.toasts.push({ message, header, class: 'bg-info text-light' });
   }
 }
