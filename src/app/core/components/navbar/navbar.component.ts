@@ -1,41 +1,22 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoginModel} from '../../../staff-services/models/LoginModel';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../shared/services/auth.service';
-import {Subscription} from 'rxjs';
-import {ToastService} from '../../../shared/services/toast.service';
 import {User} from '../../../staff-services/models/User';
 import {UserService} from '../../../shared/services/user.service';
+import {ToastService} from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
 
-  user: LoginModel = new LoginModel(  );
-  loginSubscription: Subscription;
-
-  constructor(private authService: AuthService,
-              private userService: UserService,
+  constructor(private userService: UserService,
+              private authService: AuthService,
               private toastService: ToastService) {
   }
 
   ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-    if (this.loginSubscription) {
-      this.loginSubscription.unsubscribe();
-    }
-  }
-
-  login() {
-    this.loginSubscription = this.authService.login(this.user).subscribe(next => {
-      this.toastService.success('logged in');
-    }, error1 => {
-      this.toastService.error(error1);
-    });
   }
 
   isLoggedIn() {
@@ -50,7 +31,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.toastService.message('Logged out');
   }
 
-  toast() {
-    this.toastService.message('this is the message');
-  }
 }

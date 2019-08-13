@@ -4,6 +4,7 @@ import {HomeComponent} from './components/home/home.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {RegisterComponent} from './components/register/register.component';
 import {CoreRoutingModule} from './core-routing.module';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -12,6 +13,7 @@ import {CoreRoutingModule} from './core-routing.module';
     HomeComponent,
     NavbarComponent,
     RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     SharedModule,
