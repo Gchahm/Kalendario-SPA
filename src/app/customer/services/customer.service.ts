@@ -8,7 +8,7 @@ import {Customer} from '../../staff-services/models/Customer';
 })
 export class CustomerService {
 
-  private baseUrl = environment.apiUrl + 'customers/';
+  private baseUrl = environment.apiUrl + 'customers/register/';
 
   constructor(private http: HttpClient) { }
 

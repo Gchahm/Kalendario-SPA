@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Employee} from '../../../staff-services/models/Employee';
 import {Service} from '../../../staff-services/models/Service';
 import {EmployeeService} from '../../../staff-services/services/employee.service';
-import {AppointmentService} from '../../../shared/services/appointment.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
@@ -56,7 +56,7 @@ export class BookAppointmentComponent implements OnInit, OnDestroy {
 
   bookAppointment() {
     this.appointmentSubscription = this.appointmentService
-      .create(this.employee.id, this.userService.getCurrentUser().id, this.service.id, this.date)
+      .create(this.employee.id, this.service.id, this.date)
       .subscribe(res => this.alertify.success('appointment booked'),
         error => this.alertify.error(error),
         () => this.router.navigate(['/my-appointments']));
