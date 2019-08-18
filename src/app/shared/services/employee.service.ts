@@ -3,8 +3,12 @@ import {HttpClient} from '@angular/common/http';
 import {Employee} from '../models/Employee';
 import {environment} from '../../../environments/environment';
 import {concatMap, flatMap, map, mergeMap} from 'rxjs/operators';
-import {forkJoin} from 'rxjs';
-import {InstagramProfile} from '../models/InstagramProfile';
+import {forkJoin, Observable} from 'rxjs';
+import {InstagramProfile} from '../../staff-services/models/InstagramProfile';
+import {Slot, SlotAdapter} from '../../staff-services/models/Slot';
+import {adaptList} from '../adapter';
+import {Moment} from 'moment';
+import {Service} from '../models/Service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +17,8 @@ export class EmployeeService {
 
   private baseUrl = environment.apiUrl + 'employees/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private slotAdapter: SlotAdapter) {
   }
 
   getAll() {
@@ -34,5 +39,16 @@ export class EmployeeService {
           );
         })
       );
+  }
+
+  current(): Observable<Employee> {
+    return this.http.get<Employee>(this.baseUrl + 'current/');
+  }
+
+  slots(employee: Employee, service: Service, date: Moment) {
+    const params = { service: service.id.toString(), date: date.format('YYYY-MM-DD') };
+    return this.http.get<Slot[]>(this.baseUrl + employee.id + '/slots/', {params}).pipe(
+      map(adaptList(this.slotAdapter))
+    );
   }
 }

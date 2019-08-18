@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Employee} from '../../../staff-services/models/Employee';
-import {Service} from '../../../staff-services/models/Service';
-import {EmployeeService} from '../../../staff-services/services/employee.service';
+import {Employee} from '../../../shared/models/Employee';
+import {Service} from '../../../shared/models/Service';
+import {EmployeeService} from '../../../shared/services/employee.service';
 import {AppointmentService} from '../../services/appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';

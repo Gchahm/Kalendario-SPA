@@ -1,0 +1,17 @@
+<div class="card border-dark m-2">
+  <div class="card-header text-center border-dark">
+    <div class="row">
+      <div class="col-md-6">
+        <h2><i class="fa fa-clock-o"></i></h2>
+      </div>
+      <div class="col-md-6">
+        {{appointment.start.format('HH:mm')}}
+        {{appointment.end.format('HH:mm')}}
+      </div>
+    </div>
+  </div>
+  <div class="card-body text-left">
+    <b>{{appointment.service.name}}</b>
+    <p class="m-0">{{appointment.customer.name}}</p>
+  </div>
+</div>

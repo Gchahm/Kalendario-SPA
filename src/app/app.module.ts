@@ -6,6 +6,7 @@ import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {CustomerModule} from './customer/customer.module';
 import {StaffServicesModule} from './staff-services/staff-services.module';
+import {EmployeeModule} from './employee/employee.module';
 
 
 
@@ -19,6 +20,7 @@ import {StaffServicesModule} from './staff-services/staff-services.module';
     CoreModule,
     CustomerModule,
     StaffServicesModule,
+    EmployeeModule,
     AppRoutingModule,
   ],
   providers: [

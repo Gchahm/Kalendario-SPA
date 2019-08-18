@@ -10,21 +10,26 @@
           <h5 class="card-title">{{employee.name}}</h5>
           <p class="card-text">{{employee.bio}}</p>
         </div>
-        <div class="list-group list-group-flush text-center">
-          <div class="list-group-item">SELECT A SERVICE</div>
-          <div (click)="handleServiceClick(service)" class="list-group-item click" [class.active]="service.id === serviceId"
-               *ngFor="let service of employee.services">
-            <a>{{service.name}}</a>
-          </div>
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action">SELECT A SERVICE</div>
+          <a (click)="handleServiceClick(service)" class="list-group-item list-group-item-action"
+             [class.active]="service.id === service"
+             *ngFor="let service of employee.services">
+            {{service.name}}
+          </a>
         </div>
       </div>
     </div>
     <div class="col-sm-12 col-md-9">
-      <app-calendar [events]="slots"
-                  [default-date]="date"
-                  (dayRender)="handleDayRender($event)"
-                  (agendaEventClicked)="handleDateEventClicked($event)"
-      >
+      <app-calendar [default-date]="date"
+                    [min-date]="date"
+                    (dayRender)="handleDayRender($event)"
+                    (agendaEventClicked)="handleEventClicked($event)">
+        <app-slot
+          class="col-sm-12 col-md-6"
+          *ngFor="let slot of slots"
+          [slot]="slot"
+          (onClick)="handleEventClicked($event)"></app-slot>
       </app-calendar>
     </div>
   </div>

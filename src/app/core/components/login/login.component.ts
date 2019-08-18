@@ -3,7 +3,6 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
 import {LoginModel} from '../../../staff-services/models/LoginModel';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',

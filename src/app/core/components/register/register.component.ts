@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../shared/services/auth.service';
-import {Customer} from '../../../staff-services/models/Customer';
+import {Customer} from '../../../shared/models/Customer';
 import {LoginModel} from '../../../staff-services/models/LoginModel';
 import {Router, RouterModule} from '@angular/router';
 

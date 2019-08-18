@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Employee} from '../../models/Employee';
-import {EmployeeService} from '../../services/employee.service';
+import {Employee} from '../../../shared/models/Employee';
+import {EmployeeService} from '../../../shared/services/employee.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 

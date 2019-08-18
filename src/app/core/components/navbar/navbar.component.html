@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-info p-0 mb-3">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary p-0 mb-3">
   <a class="navbar-brand">Company Name</a>
   <button class="navbar-toggler" type="button">
     <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,10 @@
         Welcome {{currentUser().first_name}}
       </a>
       <div class="dropdown-menu" ngbDropdownMenu>
-        <a class="dropdown-item" ngbDropdownItem routerLink="/my-appointments">My appointments</a>
+        <a class="dropdown-item" ngbDropdownItem routerLink="/employee-dashboard" *ngIf="currentUser().is_employee; else customerLinks">Dashboard</a>
+        <ng-template #customerLinks>
+          <a class="dropdown-item" ngbDropdownItem routerLink="/my-appointments">My appointments</a>
+        </ng-template>
         <a class="dropdown-item" ngbDropdownItem (click)="logout()" >Logout</a>
       </div>
     </div>

@@ -1,6 +1,6 @@
-import {Employee} from '../../staff-services/models/Employee';
-import {Customer} from '../../staff-services/models/Customer';
-import {Service, ServiceAdapter} from '../../staff-services/models/Service';
+import {Employee} from './Employee';
+import {Customer} from './Customer';
+import {Service, ServiceAdapter} from './Service';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {Injectable} from '@angular/core';
@@ -8,6 +8,7 @@ import {Adapter} from '../adapter';
 
 export class Appointment {
   constructor(
+    public id: number,
     public customer: Customer,
     public employee: Employee,
     public service: Service,
@@ -26,6 +27,7 @@ export class AppointmentAdapter implements Adapter<Appointment> {
 
   adapt(item: any): Appointment {
     return new Appointment(
+      item.id,
       item.customer,
       item.employee,
       this.serviceAdapter.adapt(item.service),

@@ -5,6 +5,7 @@ import {EmployeeCardComponent} from './components/employee-card/employee-card.co
 import {EmployeeListComponent} from './components/employee-list/employee-list.component';
 import {EmployeeDetailComponent} from './components/employee-detail/employee-detail.component';
 import {CalendarModule} from '../calendar/calendar.module';
+import { SlotEventComponent } from './components/slot-event/slot-event.component';
 
 
 
@@ -13,6 +14,7 @@ import {CalendarModule} from '../calendar/calendar.module';
     EmployeeCardComponent,
     EmployeeListComponent,
     EmployeeDetailComponent,
+    SlotEventComponent,
   ],
   imports: [
     SharedModule,
