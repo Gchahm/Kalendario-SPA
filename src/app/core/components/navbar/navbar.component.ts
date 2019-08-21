@@ -3,6 +3,7 @@ import {AuthService} from '../../../shared/services/auth.service';
 import {User} from '../../../shared/models/User';
 import {UserService} from '../../../shared/services/user.service';
 import {ToastService} from '../../../shared/services/toast.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -11,19 +12,19 @@ import {ToastService} from '../../../shared/services/toast.service';
 })
 export class NavbarComponent implements OnInit {
 
+  user$: Observable<User>;
+
   constructor(private userService: UserService,
               private authService: AuthService,
               private toastService: ToastService) {
   }
 
   ngOnInit() {
+    this.user$ = this.userService.currentUser();
   }
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
-  }
-  currentUser(): User {
-    return this.userService.getCurrentUser();
   }
 
   logout() {

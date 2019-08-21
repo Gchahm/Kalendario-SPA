@@ -1,21 +1,26 @@
-import { Injectable } from '@angular/core';
-import {User} from '../models/User';
+import {Injectable} from '@angular/core';
+import {User, UserAdapter} from '../models/User';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  private baseUrl = environment.apiUrl + 'users/';
 
-  getCurrentUser(): User {
-    const user = localStorage.getItem('current_user');
-    return JSON.parse(user) as User;
+  constructor(private http: HttpClient,
+              private adapter: UserAdapter) {
   }
 
-  setCurrentUser(user: User) {
-    localStorage.setItem('current_user', JSON.stringify(user));
+  currentUser(): Observable<User> {
+    return this.http.get<User>(this.baseUrl + 'current/')
+      .pipe(map(res => {
+        console.log(res);
+        return this.adapter.adapt(res);
+      }));
   }
-
-
 }

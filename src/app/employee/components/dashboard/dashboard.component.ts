@@ -10,7 +10,7 @@ import {Employee} from '../../../shared/models/Employee';
 })
 export class DashboardComponent implements OnInit {
 
-  employee$: Observable<Employee>
+  employee$: Observable<Employee>;
 
   constructor(private employeeService: EmployeeService) { }
 

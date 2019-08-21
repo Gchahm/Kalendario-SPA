@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } fro
 import { Observable } from 'rxjs';
 import {UserService} from '../../shared/services/user.service';
 import {ToastService} from '../../shared/services/toast.service';
+import {map, switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,8 @@ export class IsEmployeeGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.userService.getCurrentUser().is_employee) {
-      this.toastr.error('Restricted to employees only');
-      return false;
-    }
-    return true;
+    return this.userService.currentUser().pipe(
+      map(user => user.isEmployee)
+    );
   }
 }

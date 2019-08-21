@@ -10,16 +10,18 @@
       </li>
     </ul>
     <div class="nav-item dropdown" ngbDropdown *ngIf="isLoggedIn(); else loginTemplate">
-      <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-        Welcome {{currentUser().first_name}}
-      </a>
-      <div class="dropdown-menu" ngbDropdownMenu>
-        <a class="dropdown-item" ngbDropdownItem routerLink="/employee-dashboard" *ngIf="currentUser().is_employee; else customerLinks">Dashboard</a>
-        <ng-template #customerLinks>
-          <a class="dropdown-item" ngbDropdownItem routerLink="/my-appointments">My appointments</a>
-        </ng-template>
-        <a class="dropdown-item" ngbDropdownItem (click)="logout()" >Logout</a>
-      </div>
+      <ng-container *ngIf="user$ | async as user">
+        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+          Welcome {{user.firstName}}
+        </a>
+        <div class="dropdown-menu" ngbDropdownMenu>
+          <a class="dropdown-item" ngbDropdownItem routerLink="/employee-dashboard" *ngIf="user.isEmployee; else customerLinks">Dashboard</a>
+          <ng-template #customerLinks>
+            <a class="dropdown-item" ngbDropdownItem routerLink="/my-appointments">My appointments</a>
+          </ng-template>
+          <a class="dropdown-item" ngbDropdownItem (click)="logout()" >Logout</a>
+        </div>
+      </ng-container>
     </div>
     <ng-template #loginTemplate>
       <div class="btn-group">

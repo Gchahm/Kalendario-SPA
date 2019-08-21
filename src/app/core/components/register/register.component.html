@@ -4,7 +4,7 @@
       <div class="card-title m-auto">REGISTER</div>
     </div>
     <div class="card-body">
-      <div class="form-group" *ngIf="registerForm.get('first_name') as firstName">
+      <div class="form-group" *ngIf="registerForm.get('firstName') as firstName">
         <input type="text"
                [ngClass]="{'is-invalid': firstName.errors
                 && firstName.touched}"
@@ -13,7 +13,7 @@
                formControlName="first_name">
         <div class="invalid-feedback">Please enter your first name</div>
       </div>
-      <div class="form-group" *ngIf="registerForm.get('last_name') as lastName">
+      <div class="form-group" *ngIf="registerForm.get('lastName') as lastName">
         <input type="text"
                [ngClass]="{'is-invalid': lastName.errors
                 && lastName.touched}"

@@ -1,7 +1,28 @@
-export interface User {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  is_employee: boolean;
+import {Adapter} from '../adapter';
+import {Injectable} from '@angular/core';
+
+export class User {
+  constructor(public id: string,
+              public firstName: string,
+              public lastName: string,
+              public email: string,
+              public isEmployee: boolean) {}
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserAdapter implements Adapter<User> {
+
+  adapt(item: any): User {
+    return new User(
+      item.id,
+      item.first_name,
+      item.last_name,
+      item.email,
+      item.is_employee
+    );
+  }
+
 }

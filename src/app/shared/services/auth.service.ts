@@ -5,7 +5,7 @@ import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {UserService} from './user.service';
-import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class AuthService {
   private baseUrl = environment.apiUrl + 'auth/';
 
   constructor(private http: HttpClient,
-              private userService: UserService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -26,7 +25,6 @@ export class AuthService {
         map((response: any) => {
           if (response) {
             this.setToken(response.token);
-            this.userService.setCurrentUser(response.user);
             const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
             this.router.navigate([returnUrl]);
           }
@@ -48,6 +46,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('token');
+    this.router.navigate(['']);
   }
 }
