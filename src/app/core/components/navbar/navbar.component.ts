@@ -28,8 +28,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.toastService.message('Logged out');
+    this.authService.logout()
+      .toPromise()
+      .then( res => this.toastService.message(res.detail));
   }
 
 }

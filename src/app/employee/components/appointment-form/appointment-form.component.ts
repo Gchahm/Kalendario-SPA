@@ -2,13 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Employee} from '../../../shared/models/Employee';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {CustomerService} from '../../../customer/services/customer.service';
+import {CustomerService} from '../../../shared/services/customer.service';
 import {CreateAppointment} from '../../models/CreateAppointment';
 import * as moment from 'moment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {Moment} from 'moment';
-import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {Appointment} from '../../../shared/models/Appointment';
 
 @Component({
