@@ -1,5 +1,5 @@
-<div class="card-deck">
-  <div class="card" *ngFor="let employee of employees$ | async">
+<div class="row">
+  <div class="col-md-4 col-sm-6" *ngFor="let employee of employees$ | async">
     <app-employee-card [employee]="employee"></app-employee-card>
   </div>
 </div>
