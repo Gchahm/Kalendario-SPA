@@ -4,9 +4,8 @@ import {LoginModel} from '../../staff-services/models/LoginModel';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {UserService} from './user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Customer} from '../models/Customer';
+import {FacebookAuthService} from './facebook-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +16,17 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private fbService: FacebookAuthService) {
+
   }
 
   login(user: LoginModel): Observable<any> {
     return this.http.post(this.baseUrl + 'login/', user).pipe(map(this.log));
+  }
+
+  FBLogin() {
+    this.fbService.login(this.log);
   }
 
   logout() {

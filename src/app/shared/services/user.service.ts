@@ -19,7 +19,6 @@ export class UserService {
   currentUser(): Observable<User> {
     return this.http.get<User>(this.baseUrl + 'current/')
       .pipe(map(res => {
-        console.log(res);
         return this.adapter.adapt(res);
       }));
   }

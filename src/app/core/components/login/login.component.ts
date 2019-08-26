@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private toastService: ToastService) { }
 
   ngOnInit() {
+
   }
 
   ngOnDestroy(): void {
@@ -34,5 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-
+  FBLogin() {
+    this.authService.FBLogin();
+  }
 }
