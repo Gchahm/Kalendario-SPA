@@ -1,3 +1,6 @@
+<div class="card-title text-center">
+  Book Appointment
+</div>
 <form #appointmentForm="ngForm">
   <div class="form-group">
     <input [(ngModel)]="form.startDate"
@@ -5,6 +8,7 @@
            #startDate="ngModel"
            class="form-control"
            type="date"
+           (change)="emitDateChanged(form.startDate)"
            required>
     <div class="invalid-feedback" [hidden]="startDate.valid || !startDate.touched">Please enter a date</div>
   </div>
@@ -61,8 +65,6 @@
     book appointment
   </button>
 </form>
-
 <ng-template #rt let-r="result" let-t="term">
   <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
 </ng-template>
-

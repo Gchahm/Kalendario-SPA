@@ -1,14 +1,6 @@
-<div class="card m-2" (click)="emitEventClicked()">
-  <div class="card-body text-center">
-    <div class="row">
-      <div class="col-6">
-        <div class="d-md-inline align-top text-right">FROM:</div>
-        <h2 class="d-md-inline">{{slot.start.format('HH:mm')}}</h2>
-      </div>
-      <div class="col-6">
-        <div class="d-md-inline align-top text-right">TO:</div>
-        <h2 class="d-md-inline">{{slot.end.format('HH:mm')}}</h2>
-      </div>
-    </div>
+<div class="card m-2 border-dark" (click)="emitEventClicked()">
+  <div class="card-body text-center font-italic">
+    <i class="fa fa-clock-o"></i>
+    {{slot.start.format('HH:mm')}} - {{slot.end.format('HH:mm')}}
   </div>
 </div>

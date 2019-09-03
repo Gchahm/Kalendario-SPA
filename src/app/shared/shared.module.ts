@@ -7,7 +7,8 @@ import {AuthInterceptorProvider} from './interceptors/token.interceptor';
 import {ErrorInterceptorProvider} from './interceptors/error.interceptor';
 import {ToastService} from './services/toast.service';
 import { ToastsComponent } from './components/toasts/toasts.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -20,11 +21,13 @@ import { ToastsComponent } from './components/toasts/toasts.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     ErrorInterceptorProvider,
     AuthInterceptorProvider,
-    ToastService
+    ToastService,
   ],
   exports: [
     CommonModule,
@@ -33,6 +36,8 @@ import { ToastsComponent } from './components/toasts/toasts.component';
     FormsModule,
     ReactiveFormsModule,
     ToastsComponent,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class SharedModule { }

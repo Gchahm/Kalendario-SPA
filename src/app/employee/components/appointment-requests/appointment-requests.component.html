@@ -1,0 +1,17 @@
+<div class="card-title text-center">
+  <div class="row">
+    <div class="col-md-6">pending requests</div>
+    <div class="col-md-6">
+      <a (click)="loadAppointments()"><i class="fa fa-refresh"></i></a>
+    </div>
+  </div>
+</div>
+<div *ngIf="(appointments$ | async) as appointments; else spinner">
+  <div *ngFor="let appointment of appointments">
+    <app-appointment-event (eventClicked)="handleAppointmentClicked($event)" [appointment]="appointment"
+                           [showDate]="true"></app-appointment-event>
+  </div>
+</div>
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>

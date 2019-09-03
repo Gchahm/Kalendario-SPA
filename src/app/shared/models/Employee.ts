@@ -1,8 +1,6 @@
-import {Service} from './Service';
+import {Service, ServiceAdapter} from './Service';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
-import * as moment from 'moment';
-
 
 export class Employee {
   constructor(public id: number,
@@ -29,5 +27,4 @@ export class EmployeeAdapter implements Adapter<Employee> {
       item.services
     );
   }
-
 }

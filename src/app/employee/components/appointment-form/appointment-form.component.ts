@@ -8,7 +8,6 @@ import * as moment from 'moment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {Moment} from 'moment';
-import {Appointment} from '../../../shared/models/Appointment';
 
 @Component({
   selector: 'app-appointment-form',
@@ -22,7 +21,7 @@ export class AppointmentFormComponent implements OnInit {
     this.form.startDate = value.format('YYYY-MM-DD');
   }
 
-  @Output() appointmentBooked = new EventEmitter<Appointment>();
+  @Output() dateChanged = new EventEmitter<Moment>();
 
   selectedCustomer = '';
   appointment: CreateAppointment;
@@ -32,7 +31,7 @@ export class AppointmentFormComponent implements OnInit {
   constructor(private customerService: CustomerService,
               private employeeAppointment: EmployeeAppointmentService,
               private toast: ToastService) {
-    this.appointment = {customer: '', start: '', service: ''};
+    this.appointment = {customer: '', start: '', service: '', status: 'A'};
     this.form = {startDate: '', startTime: '', customerName: ''};
   }
 
@@ -63,10 +62,14 @@ export class AppointmentFormComponent implements OnInit {
     this.employeeAppointment.create(this.appointment)
       .toPromise()
       .then(success => {
-        this.appointmentBooked.emit(success);
+        this.dateChanged.emit(success.start);
         this.toast.success('appointment booked');
       })
       .catch(error => this.toast.error(error));
+  }
+
+  emitDateChanged(date: string) {
+    this.dateChanged.emit(moment.utc(date));
   }
 
 }

@@ -12,9 +12,23 @@ export class Appointment {
     public customer: Customer,
     public employee: Employee,
     public service: Service,
+    public status: string,
     public start: Moment,
     public end: Moment
   ) {}
+
+  statusDescription() {
+    switch (this.status) {
+      case 'A':
+        return 'accepted';
+      case 'R':
+        return 'rejected';
+      case 'P':
+        return 'pending';
+      default:
+        return 'pending';
+    }
+  }
 }
 
 @Injectable({
@@ -31,6 +45,7 @@ export class AppointmentAdapter implements Adapter<Appointment> {
       item.customer,
       item.employee,
       this.serviceAdapter.adapt(item.service),
+      item.status,
       moment.utc(item.start),
       moment.utc(item.end)
     );

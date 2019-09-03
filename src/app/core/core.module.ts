@@ -5,6 +5,7 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {RegisterComponent} from './components/register/register.component';
 import {CoreRoutingModule} from './core-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -14,13 +15,15 @@ import { LoginComponent } from './components/login/login.component';
     NavbarComponent,
     RegisterComponent,
     LoginComponent,
+    FooterComponent,
   ],
   imports: [
     SharedModule,
     CoreRoutingModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent,
   ]
 })
 export class CoreModule { }

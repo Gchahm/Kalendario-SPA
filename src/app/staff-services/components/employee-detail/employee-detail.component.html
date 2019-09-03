@@ -1,24 +1,25 @@
-<div *ngIf="employee">
+<div *ngIf="employee" class="container h-100">
   <div (empId)=employee.id class="row">
     <div class="col-sm-12 col-md-3">
-      <div class="card">
+      <div class="card h-100">
         <div class="card-header click">
           <div class="card-title m-auto text-center" routerLink="/staff">BACK TO STAFF</div>
         </div>
-        <img src="{{employee.photoUrl}}" class="card-img-top" alt="...">
+        <img src="{{employee.photoUrl}}" class="card-img-top d-none d-sm-none d-md-block" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{employee.name}}</h5>
           <p class="card-text">{{employee.bio}}</p>
         </div>
         <div class="list-group">
           <div class="list-group-item list-group-item-action">SELECT A SERVICE</div>
-          <a (click)="handleServiceClick(service)" class="list-group-item list-group-item-action"
-             [class.active]="service.id === service"
-             *ngFor="let service of employee.services">
-            {{service.name}}
+          <a (click)="handleServiceClick(s)" class="list-group-item list-group-item-action"
+             [class.active]="service.id === s.id"
+             *ngFor="let s of employee.services">
+            {{s.name}}
           </a>
         </div>
-      </div>
+        <div class="card-body"></div>
+        </div>
     </div>
     <div class="col-sm-12 col-md-9">
       <app-calendar [default-date]="date"
@@ -26,10 +27,11 @@
                     (dayRender)="handleDayRender($event)"
                     (agendaEventClicked)="handleEventClicked($event)">
         <app-slot
-          class="col-sm-12 col-md-6"
+          class="col-sm-6 col-md-4"
           *ngFor="let slot of slots"
           [slot]="slot"
-          (onClick)="handleEventClicked($event)"></app-slot>
+          (SlotClicked)="handleEventClicked($event)"></app-slot>
+        <b class="p-4" *ngIf="slots && slots.length === 0">No time available</b>
       </app-calendar>
     </div>
   </div>

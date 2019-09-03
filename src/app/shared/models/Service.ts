@@ -1,4 +1,3 @@
-import {Time} from '@angular/common';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import * as moment from 'moment';

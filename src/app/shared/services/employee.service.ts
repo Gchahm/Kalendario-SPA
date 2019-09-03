@@ -8,7 +8,7 @@ import {InstagramProfile} from '../../staff-services/models/InstagramProfile';
 import {Slot, SlotAdapter} from '../../staff-services/models/Slot';
 import {adaptList} from '../adapter';
 import {Moment} from 'moment';
-import {Service} from '../models/Service';
+import {Service, ServiceAdapter} from '../models/Service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class EmployeeService {
 
   constructor(private http: HttpClient,
               private slotAdapter: SlotAdapter,
-              private employeeAdapter: EmployeeAdapter) {
+              private employeeAdapter: EmployeeAdapter,
+              private serviceAdapter: ServiceAdapter) {
   }
 
   getAll() {
@@ -27,15 +28,21 @@ export class EmployeeService {
   }
 
   get(id: string) {
-    return this.http.get<Employee>(this.baseUrl + id + '/').pipe(map(this.employeeAdapter.adapt));
+    return this.http.get<Employee>(this.baseUrl + id + '/').pipe(
+      map(this.employeeAdapter.adapt),
+      map(emp => {
+        emp.services = emp.services.map(this.serviceAdapter.adapt);
+        return emp;
+      })
+    );
   }
 
   current(): Observable<Employee> {
     return this.http.get<Employee>(this.baseUrl + 'current/');
   }
 
-  slots(employee: Employee, service: Service, date: Moment) {
-    const params = { service: service.id.toString(), date: date.format('YYYY-MM-DD') };
+  slots(employee: Employee, service: Service, start: Moment, end: Moment) {
+    const params = {service: service.id.toString(), start: start.format('YYYY-MM-DDTHH:mm'), end: end.format('YYYY-MM-DDTHH:mm')};
     return this.http.get<Slot[]>(this.baseUrl + employee.id + '/slots/', {params}).pipe(
       map(adaptList(this.slotAdapter))
     );

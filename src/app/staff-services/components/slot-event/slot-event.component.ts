@@ -9,7 +9,7 @@ import {Slot} from '../../models/Slot';
 export class SlotEventComponent implements OnInit {
 
   @Input() slot: Slot;
-  @Output() onClick = new EventEmitter<Slot>();
+  @Output() SlotClicked = new EventEmitter<Slot>();
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class SlotEventComponent implements OnInit {
   }
 
   emitEventClicked() {
-    this.onClick.emit(this.slot);
+    this.SlotClicked.emit(this.slot);
   }
 
 }

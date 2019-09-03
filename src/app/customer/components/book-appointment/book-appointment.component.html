@@ -1,13 +1,23 @@
-<div class="card" *ngIf="employee">
-
-  <div class="card-header">
-    Booking Appointment {{date.format('LLLL')}}
+<div class="container mt-4" *ngIf="employee">
+  <div class="card border-dark">
+    <div class="card-header">
+      Booking Appointment
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <i class="fa fa-calendar"></i> {{date.format('dddd DD/MM/YYYY')}} <br/>
+          <i class="fa fa-clock-o"></i> {{date.format('hh:mm')}} ({{service.duration.minutes()}} minutes) <br/>
+          <i class="fa fa-user"></i> {{employee.name}} <br/>
+          Service: {{ service.name }}
+        </div>
+        <div class="col-md-6">
+          <label for="extra-info">Additional Information</label>
+          <textarea id="extra-info" name="extra-info" class="form-control border-dark"></textarea>
+          <hr>
+          <button class="btn btn-secondary btn-block" (click)="bookAppointment()">Book Appointment</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="card-body">
-    <p>Service: {{ service.name }}</p>
-    <p>Duration: {{service.duration}}</p>
-    <p>Employee: {{employee.name}}</p>
-  </div>
-  <button class="btn btn-secondary" (click)="bookAppointment()">Book Appointment</button>
 </div>
-

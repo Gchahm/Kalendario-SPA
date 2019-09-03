@@ -1,6 +1,5 @@
-import {Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Moment} from 'moment';
-import * as moment from 'moment';
 import {DateChangedEvent} from '../../events/DateChangedEvent';
 
 @Component({
@@ -23,8 +22,6 @@ export class CalendarComponent implements OnInit {
   }
 
   previousDay() {
-    // console.log('start date: ' + this.startDate.toISOString());
-    // console.log('current date: ' + this.currentDate.toISOString());
     if (!this.minDate || this.minDate && this.currentDate > this.minDate) {
       this.currentDate.subtract(1, 'days');
       this.emitDayRender();

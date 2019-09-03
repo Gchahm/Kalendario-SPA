@@ -58,12 +58,14 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   loadSlots() {
-    this.empService.slots(this.employee, this.service, this.date)
+    this.empService.slots(this.employee, this.service,
+      this.date.clone().startOf('day'),
+      this.date.clone().endOf('day'))
       .toPromise()
       .then(slots => this.slots = slots);
   }
 
   handleEventClicked($event: Slot) {
-    this.router.navigate(['booking/', this.employee.id, this.service, $event.start.toISOString()] );
+    this.router.navigate(['booking/', this.employee.id, this.service.id, $event.start.toISOString()] );
   }
 }
