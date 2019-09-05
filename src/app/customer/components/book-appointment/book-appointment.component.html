@@ -12,8 +12,14 @@
           Service: {{ service.name }}
         </div>
         <div class="col-md-6">
-          <label for="extra-info">Additional Information</label>
-          <textarea id="extra-info" name="extra-info" class="form-control border-dark"></textarea>
+          <form #appointmentForm="ngForm">
+            <label for="customer-notes">Additional Information</label>
+            <textarea [(ngModel)]="customerNote"
+                      maxlength="255"
+                      id="customer-notes"
+                      name="customer-notes"
+                      class="form-control border-dark"></textarea>
+          </form>
           <hr>
           <button class="btn btn-secondary btn-block" (click)="bookAppointment()">Book Appointment</button>
         </div>

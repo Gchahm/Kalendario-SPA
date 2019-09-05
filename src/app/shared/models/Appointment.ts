@@ -14,7 +14,8 @@ export class Appointment {
     public service: Service,
     public status: string,
     public start: Moment,
-    public end: Moment
+    public end: Moment,
+    public customerNotes: string,
   ) {}
 
   statusDescription() {
@@ -47,7 +48,8 @@ export class AppointmentAdapter implements Adapter<Appointment> {
       this.serviceAdapter.adapt(item.service),
       item.status,
       moment.utc(item.start),
-      moment.utc(item.end)
+      moment.utc(item.end),
+      item.customer_notes
     );
   }
 

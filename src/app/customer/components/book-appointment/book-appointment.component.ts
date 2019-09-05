@@ -20,6 +20,7 @@ export class BookAppointmentComponent implements OnInit, OnDestroy {
   date: Moment;
   employee: Employee;
   service: Service;
+  customerNote: string;
 
   empServiceSubscription: Subscription;
   queryParamSubscription: Subscription;
@@ -56,7 +57,7 @@ export class BookAppointmentComponent implements OnInit, OnDestroy {
 
   bookAppointment() {
     this.appointmentSubscription = this.appointmentService
-      .create(this.employee.id, this.service.id, this.date)
+      .create(this.employee.id, this.service.id, this.date, this.customerNote)
       .subscribe(res => this.alertify.success('appointment booked'),
         error => this.alertify.error(error),
         () => this.router.navigate(['/my-appointments']));

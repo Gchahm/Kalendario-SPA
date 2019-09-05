@@ -37,7 +37,7 @@ export class AppointmentEventComponent implements OnInit {
   }
 
   private updateStatus(status: string) {
-    this.appointment.status = status;
+    this.appointment.selectedStatus = status;
     this.appointmentsService.update(this.appointment)
       .toPromise()
       .then(appointment => {
