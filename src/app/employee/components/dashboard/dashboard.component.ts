@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
     return this.activatedPanel === 'schedule' && this.appointmentsListViewType === AppointmentsListViewType.book;
   }
 
-  pendingappointmentClicked() {
+  pendingAppointmentClicked() {
     this.activatedPanel = 'schedule';
     this.appointmentsListViewType = AppointmentsListViewType.pending;
   }
