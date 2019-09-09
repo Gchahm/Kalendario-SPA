@@ -3,7 +3,7 @@ import {Employee} from '../../../shared/models/Employee';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {CustomerService} from '../../../shared/services/customer.service';
-import {CreateAppointment} from '../../models/CreateAppointment';
+import {CreateAppointmentForm, CreateAppointmentModel} from '../../models/CreateAppointment';
 import * as moment from 'moment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
@@ -24,15 +24,12 @@ export class AppointmentFormComponent implements OnInit {
   @Output() dateChanged = new EventEmitter<Moment>();
 
   selectedCustomer = '';
-  appointment: CreateAppointment;
-  form: {startTime: string, startDate: string, customerName: string};
-
+  form: CreateAppointmentForm;
 
   constructor(private customerService: CustomerService,
               private employeeAppointment: EmployeeAppointmentService,
               private toast: ToastService) {
-    this.appointment = {customer: '', start: '', service: '', status: 'A'};
-    this.form = {startDate: '', startTime: '', customerName: ''};
+    this.form = new CreateAppointmentForm('', '', '', '', '');
   }
 
   ngOnInit() {}
@@ -47,19 +44,18 @@ export class AppointmentFormComponent implements OnInit {
 
   formatter = (x: { name: string, id: string }) => {
     this.selectedCustomer = x.name;
-    this.appointment.customer = x.id;
+    this.form.customerId = x.id;
     return x.name;
   };
 
   customerChange(e) {
     if (e.target.value !== this.selectedCustomer) {
-      this.appointment.customer = null;
+      this.form.customerId = null;
     }
   }
 
   submit() {
-    this.appointment.start  = moment.utc(this.form.startDate + ' ' + this.form.startTime).toISOString();
-    this.employeeAppointment.create(this.appointment)
+    this.employeeAppointment.createAppointment(this.form.model())
       .toPromise()
       .then(success => {
         this.dateChanged.emit(success.start);

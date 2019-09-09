@@ -1,8 +1,9 @@
 <div class="card-title text-center">
-  Book Appointment
+  Lock time
 </div>
 <form #appointmentForm="ngForm">
   <div class="form-group">
+    <label>From:</label>
     <input [(ngModel)]="form.startDate"
            name="startDate"
            #startDate="ngModel"
@@ -24,38 +25,34 @@
   </div>
 
   <div class="form-group">
-    <input [(ngModel)]="form.customerName"
-           #customerName="ngModel"
-           name="customerName"
-           placeholder="customer"
+    <label>To:</label>
+    <input [(ngModel)]="form.endDate"
+           name="endDate"
+           #endDate="ngModel"
            class="form-control"
-           type="text"
-           [ngbTypeahead]="search"
-           [resultTemplate]="rt"
-           [inputFormatter]="formatter"
-           (change)="customerChange($event)">
-
-    <input [(ngModel)]="form.customerId"
-           #customerId="ngModel"
-           name="customerId"
-           class="form-control"
-           type="hidden"
+           type="date"
            required>
-    <div [hidden]="customerId.valid || !customerName.touched" class="alert alert-danger">invalid customer</div>
+    <div class="invalid-feedback" [hidden]="endDate.valid || !endDate.touched">Please enter a date</div>
   </div>
 
   <div class="form-group">
-    <select [(ngModel)]="form.service"
-            #service="ngModel"
-            name="service"
-            class="form-control"
-            required>
-      <option disabled>select a service</option>
-      <option *ngFor="let service of employee.services" [ngValue]="service.id">{{service.name}}</option>
-    </select>
-    <div [hidden]="service.valid || !service.touched" class="alert alert-danger">
-      service is required
-    </div>
+    <input [(ngModel)]="form.endTime"
+           name="endTime"
+           #endTime="ngModel"
+           class="form-control"
+           type="time"
+           required>
+    <div class="invalid-feedback" [hidden]="endTime.valid || !endTime.touched">Please enter a time</div>
+  </div>
+
+  <div class="form-group">
+    <input [(ngModel)]="form.reason"
+           name="reason"
+           #reason="ngModel"
+           class="form-control"
+           type="text"
+           required>
+    <div class="invalid-feedback" [hidden]="reason.valid || !reason.touched">Please enter a reason</div>
   </div>
 
   <button type="submit"

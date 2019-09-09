@@ -1,4 +1,4 @@
-<div class="card border-dark m-2">
+<div *ngIf="appointment" class="card border-dark m-2">
   <div (click)="emitEventClicked()" class="card-header text-center border-dark p-0">
     <div class="row">
       <div class="col-md-6">
@@ -30,5 +30,27 @@
     <button [class.d-none]="appointment.status==='P'" class="btn font-weight-bold" disabled>{{appointment.statusDescription()}}</button>
     <button [class.d-none]="appointment.status==='A'" class="btn btn-success" (click)="changeStatus('A')" >confirm</button>
     <button [class.d-none]="appointment.status==='R'" class="btn btn-danger" (click)="changeStatus('R')">cancel</button>
+  </div>
+</div>
+
+
+<div *ngIf="selfAppointment" class="card border-dark m-2">
+  <div (click)="emitEventClicked()" class="card-header text-center border-dark p-0  ">
+    <div class="row">
+      <div class="col-md-6">
+        <div *ngIf="showDate">
+          <i class="fa fa-calendar"></i>
+          {{selfAppointment.start.format('DD/MM/YY')}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <i class="fa fa-clock-o"></i>
+        {{selfAppointment.start.format('HH:mm')}}
+        {{selfAppointment.end.format('HH:mm')}}
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    {{selfAppointment.reason}}
   </div>
 </div>

@@ -15,6 +15,10 @@
               <i class="fa fa-calendar"></i> Book Appointment</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" [class.active]="lockAppointmentActive()" (click)="lockAppointmentClicked()">
+              <i class="fa fa-calendar"></i> Lock Time</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" [class.active]="pendingAppointmentActive()" (click)="pendingAppointmentClicked()">
               <i class="fa fa-list"></i> Pending Appointment</a>
           </li>

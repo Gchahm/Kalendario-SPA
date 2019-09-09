@@ -39,4 +39,13 @@ export class DashboardComponent implements OnInit {
   pendingAppointmentActive() {
     return this.activatedPanel === 'schedule' && this.appointmentsListViewType === AppointmentsListViewType.pending;
   }
+
+  lockAppointmentClicked() {
+    this.activatedPanel = 'schedule';
+    this.appointmentsListViewType = AppointmentsListViewType.lockTime;
+  }
+
+  lockAppointmentActive() {
+    return this.activatedPanel === 'schedule' && this.appointmentsListViewType === AppointmentsListViewType.lockTime;
+  }
 }

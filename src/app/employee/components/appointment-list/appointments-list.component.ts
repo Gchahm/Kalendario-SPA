@@ -29,5 +29,6 @@ export class AppointmentsListComponent implements OnInit {
 
 export enum AppointmentsListViewType {
   book = 1,
-  pending = 2,
+  lockTime = 2,
+  pending = 3,
 }

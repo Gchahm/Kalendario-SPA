@@ -9,6 +9,7 @@ import { AppointmentFormComponent } from './components/appointment-form/appointm
 import { AppointmentRequestsComponent } from './components/appointment-requests/appointment-requests.component';
 import { EmployeeCalendarComponent } from './components/employee-calendar/employee-calendar.component';
 import { CancelModalComponent } from './components/cancel-modal/cancel-modal.component';
+import { SelfAppointmentFormComponent } from './components/self-appointment-form/self-appointment-form.component';
 
 
 
@@ -20,7 +21,8 @@ import { CancelModalComponent } from './components/cancel-modal/cancel-modal.com
     AppointmentFormComponent,
     AppointmentRequestsComponent,
     EmployeeCalendarComponent,
-    CancelModalComponent
+    CancelModalComponent,
+    SelfAppointmentFormComponent
   ],
   imports: [
     SharedModule,

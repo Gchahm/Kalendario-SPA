@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Appointment} from '../../../shared/models/Appointment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {Observable} from 'rxjs';
 import {Moment} from 'moment';
+import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 
 @Component({
   selector: 'app-appointment-requests',
@@ -13,7 +13,7 @@ export class AppointmentRequestsComponent implements OnInit {
 
   @Output() eventClicked = new EventEmitter<Moment>();
 
-  appointments$: Observable<Appointment[]>;
+  appointments$: Observable<BaseAppointment[]>;
 
   constructor(private appointmentsService: EmployeeAppointmentService) { }
 

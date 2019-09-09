@@ -8,6 +8,12 @@
           (dateChanged)="updateCalendar($event)"></app-appointment-form>
       </div>
       <div *ngSwitchCase="2" class="card-body">
+        <app-self-appointment-form
+          [employee]="employee"
+          [date]="calendarDate"
+          (dateChanged)="updateCalendar($event)"></app-self-appointment-form>
+      </div>
+      <div *ngSwitchCase="3" class="card-body">
         <app-appointment-requests (eventClicked)="updateCalendar($event)"></app-appointment-requests>
       </div>
 

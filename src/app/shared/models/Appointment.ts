@@ -5,8 +5,9 @@ import {Moment} from 'moment';
 import * as moment from 'moment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
+import {BaseAppointment} from './BaseAppointment';
 
-export class Appointment {
+export class Appointment implements BaseAppointment {
   constructor(
     public id: number,
     public customer: Customer,

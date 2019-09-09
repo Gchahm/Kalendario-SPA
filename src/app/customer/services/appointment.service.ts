@@ -7,14 +7,14 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {adaptList} from '../../shared/adapter';
 import {EmployeeAdapter} from '../../shared/models/Employee';
-import moment = require('moment');
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-  private baseUrl = environment.apiUrl + 'customer/appointments/';
+  private baseUrl = environment.apiUrl + 'appointments/';
 
   constructor(private http: HttpClient,
               private adapter: AppointmentAdapter,

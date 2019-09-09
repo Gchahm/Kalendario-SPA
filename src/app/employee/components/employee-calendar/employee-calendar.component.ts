@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Appointment} from '../../../shared/models/Appointment';
 import {Moment} from 'moment';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
+import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 
 @Component({
   selector: 'app-employee-calendar',
@@ -11,8 +11,9 @@ import {EmployeeAppointmentService} from '../../services/employee-appointment.se
 })
 export class EmployeeCalendarComponent implements OnInit {
 
-  appointments: Appointment[];
+  appointments: BaseAppointment[];
   date: Moment;
+
   @Input() set setDate(date: Moment) {
     this.loadAppointments(date);
     this.date = date;
@@ -40,7 +41,9 @@ export class EmployeeCalendarComponent implements OnInit {
     const fromDate = date.clone().startOf('day');
     const toDate = date.clone().endOf('day');
     this.appointmentService.getAccepted(fromDate.toISOString(), toDate.toISOString())
+      // .subscribe(apps => apps.map(a => console.log(a)));
       .toPromise().then(appointments => {
+      appointments.map(a => console.log(a.id));
       this.appointments = appointments;
       this.date = date;
     });
