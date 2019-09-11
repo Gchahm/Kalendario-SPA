@@ -4,11 +4,11 @@ import {Employee} from '../../../shared/models/Employee';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-appointment-list',
-  templateUrl: './appointments-list.component.html',
-  styleUrls: ['./appointments-list.component.css']
+  selector: 'app-employee-appointments',
+  templateUrl: './employee-appointments.component.html',
+  styleUrls: ['./employee-appointments.component.css']
 })
-export class AppointmentsListComponent implements OnInit {
+export class EmployeeAppointmentsComponent implements OnInit {
 
   @Input() employee: Employee;
   @Input() viewType: AppointmentsListViewType;

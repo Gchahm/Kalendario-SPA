@@ -22,7 +22,7 @@ export class EmployeeAdapter implements Adapter<Employee> {
       item.name,
       item.email,
       item.instagram,
-      'http://res.cloudinary.com/gchahm/' + item.profile_img,
+      'https://res.cloudinary.com/gchahm/' + item.profile_img,
       item.bio,
       item.services
     );

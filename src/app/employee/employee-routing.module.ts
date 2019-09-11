@@ -1,12 +1,12 @@
 import {RouterModule, Routes} from '@angular/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {EmployeeDashboardComponent} from './components/employee-dashboard/employee-dashboard.component';
 import {IsEmployeeGuard} from './guards/is-employee.guard';
 import {NgModule} from '@angular/core';
 
 const routes: Routes = [
   {
     path: 'employee-dashboard',
-    component: DashboardComponent,
+    component: EmployeeDashboardComponent,
     canActivate: [IsEmployeeGuard]
   },
 ];

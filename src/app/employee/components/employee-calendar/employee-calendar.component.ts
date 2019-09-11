@@ -3,6 +3,7 @@ import {Moment} from 'moment';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {BaseAppointment} from '../../../shared/models/BaseAppointment';
+import {Employee} from '../../../shared/models/Employee';
 
 @Component({
   selector: 'app-employee-calendar',
@@ -13,7 +14,14 @@ export class EmployeeCalendarComponent implements OnInit {
 
   appointments: BaseAppointment[];
   date: Moment;
+  emp: Employee;
 
+  @Input() set employee(employee: Employee) {
+    this.emp = employee;
+    if (this.date) {
+      this.loadAppointments(this.date);
+    }
+  }
   @Input() set setDate(date: Moment) {
     this.loadAppointments(date);
     this.date = date;
@@ -40,10 +48,8 @@ export class EmployeeCalendarComponent implements OnInit {
     this.date = date.clone().utc();
     const fromDate = date.clone().startOf('day');
     const toDate = date.clone().endOf('day');
-    this.appointmentService.getAccepted(fromDate.toISOString(), toDate.toISOString())
-      // .subscribe(apps => apps.map(a => console.log(a)));
+    this.appointmentService.getAccepted(this.emp.id.toString(), fromDate.toISOString(), toDate.toISOString())
       .toPromise().then(appointments => {
-      appointments.map(a => console.log(a.id));
       this.appointments = appointments;
       this.date = date;
     });

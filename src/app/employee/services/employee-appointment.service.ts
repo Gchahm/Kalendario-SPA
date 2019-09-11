@@ -24,13 +24,13 @@ export class EmployeeAppointmentService {
               private selfAppointmentAdapter: SelfAppointmentAdapter) {
   }
 
-  getPending(): Observable<BaseAppointment[]> {
+  getPending(empId): Observable<BaseAppointment[]> {
     const params = {status: 'P'};
     return this.filteredAppointments(params);
   }
 
-  getAccepted(from, to): Observable<BaseAppointment[]> {
-    const params = {from_date: from, to_date: to, status: 'A'};
+  getAccepted(empId, from, to): Observable<BaseAppointment[]> {
+    const params = {from_date: from, to_date: to, status: 'A', employee: empId};
     return this.getList(params);
   }
 

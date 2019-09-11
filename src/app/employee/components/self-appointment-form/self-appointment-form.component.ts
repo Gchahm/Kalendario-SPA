@@ -4,6 +4,7 @@ import {Moment} from 'moment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {CreateSelfAppointmentForm} from '../../models/CreateSelfAppointment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-self-appointment-form',
@@ -12,7 +13,15 @@ import {CreateSelfAppointmentForm} from '../../models/CreateSelfAppointment';
 })
 export class SelfAppointmentFormComponent implements OnInit {
 
-  @Input() employee: Employee;
+  private _employee: Employee;
+  get employee() {
+    return this._employee;
+  }
+  @Input() set employee(employee: Employee) {
+    this._employee = employee;
+    this.form.employeeId = employee.id.toString();
+  }
+
   @Input() set date(value: Moment) {
     this.form.startDate = value.format('YYYY-MM-DD');
     this.form.endDate = value.format('YYYY-MM-DD');
@@ -24,7 +33,7 @@ export class SelfAppointmentFormComponent implements OnInit {
 
   constructor(private employeeAppointment: EmployeeAppointmentService,
               private toast: ToastService) {
-    this.form = new CreateSelfAppointmentForm( '', '', '', '', '');
+    this.form = new CreateSelfAppointmentForm( '', '', '', '', '', '');
   }
 
   ngOnInit() {
@@ -40,4 +49,7 @@ export class SelfAppointmentFormComponent implements OnInit {
       .catch(error => this.toast.error(error));
   }
 
+  emitDateChanged(date: string) {
+    this.dateChanged.emit(moment.utc(date));
+  }
 }

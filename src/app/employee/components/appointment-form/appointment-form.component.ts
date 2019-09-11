@@ -16,7 +16,15 @@ import {Moment} from 'moment';
 })
 export class AppointmentFormComponent implements OnInit {
 
-  @Input() employee: Employee;
+  private _employee: Employee;
+  get employee() {
+    return this._employee;
+  }
+  @Input() set employee(employee: Employee) {
+    this._employee = employee;
+    this.form.employeeId = employee.id.toString();
+  }
+
   @Input() set date(value: Moment) {
     this.form.startDate = value.format('YYYY-MM-DD');
   }
@@ -29,10 +37,11 @@ export class AppointmentFormComponent implements OnInit {
   constructor(private customerService: CustomerService,
               private employeeAppointment: EmployeeAppointmentService,
               private toast: ToastService) {
-    this.form = new CreateAppointmentForm('', '', '', '', '');
+    this.form = new CreateAppointmentForm('', '', '', '', '', '');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   search = (text$: Observable<string>) =>
     text$.pipe(

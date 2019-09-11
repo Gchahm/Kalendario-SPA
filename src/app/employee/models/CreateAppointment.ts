@@ -5,7 +5,8 @@ export class CreateAppointmentForm {
               public startDate: string,
               public customerName: string,
               public customerId: string,
-              public service: string) {
+              public service: string,
+              public employeeId: string) {
   }
 
   model(): CreateAppointmentModel {
@@ -13,13 +14,15 @@ export class CreateAppointmentForm {
       customer: this.customerId,
       status: 'A',
       start: moment.utc(this.startDate + ' ' + this.startTime).toISOString(),
-      service: this.service
+      service: this.service,
+      employee: this.employeeId
     };
   }
 }
 
 
 export interface CreateAppointmentModel {
+  employee: string;
   customer: string;
   service: string;
   start: string;

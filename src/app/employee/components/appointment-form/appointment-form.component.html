@@ -50,10 +50,10 @@
             name="service"
             class="form-control"
             required>
-      <option disabled>select a service</option>
+      <option [ngValue]="0" selected>select a service</option>
       <option *ngFor="let service of employee.services" [ngValue]="service.id">{{service.name}}</option>
     </select>
-    <div [hidden]="service.valid || !service.touched" class="alert alert-danger">
+    <div [hidden]="form.service != 0 || !service.touched" class="alert alert-danger">
       service is required
     </div>
   </div>

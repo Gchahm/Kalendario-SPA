@@ -38,7 +38,9 @@ export class EmployeeService {
   }
 
   current(): Observable<Employee> {
-    return this.http.get<Employee>(this.baseUrl + 'current/');
+    return this.http.get<Employee>(this.baseUrl + 'current/').pipe(
+      map(this.employeeAdapter.adapt)
+    );
   }
 
   slots(employee: Employee, service: Service, start: Moment, end: Moment) {

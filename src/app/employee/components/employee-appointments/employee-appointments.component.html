@@ -14,13 +14,13 @@
           (dateChanged)="updateCalendar($event)"></app-self-appointment-form>
       </div>
       <div *ngSwitchCase="3" class="card-body">
-        <app-appointment-requests (eventClicked)="updateCalendar($event)"></app-appointment-requests>
+        <app-appointment-requests [employee]="employee" (eventClicked)="updateCalendar($event)"></app-appointment-requests>
       </div>
 
     </div>
   </div>
   <div class="col-md-9">
-    <app-employee-calendar (eventClicked)="updateCalendar($event)" [setDate]="calendarDate"></app-employee-calendar>
+    <app-employee-calendar [employee]="employee" (eventClicked)="updateCalendar($event)" [setDate]="calendarDate"></app-employee-calendar>
   </div>
 </div>
 
