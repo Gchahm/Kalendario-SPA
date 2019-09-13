@@ -1,3 +1,6 @@
 .card {
-  width: 30rem;
+  max-width: 300px;
+}
+.form-register > * {
+  width: 100%;
 }

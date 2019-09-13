@@ -3,18 +3,18 @@ import {Employee} from '../../../shared/models/Employee';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {CustomerService} from '../../../shared/services/customer.service';
-import {CreateAppointmentForm, CreateAppointmentModel} from '../../models/CreateAppointment';
+import {CreateAppointmentForm} from '../../models/CreateAppointment';
 import * as moment from 'moment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {Moment} from 'moment';
 
 @Component({
-  selector: 'app-appointment-form',
-  templateUrl: './appointment-form.component.html',
-  styleUrls: ['./appointment-form.component.css']
+  selector: 'employee-form-appointment',
+  templateUrl: './form-appointment.component.html',
+  styleUrls: ['./form-appointment.component.css']
 })
-export class AppointmentFormComponent implements OnInit {
+export class FormAppointmentComponent implements OnInit {
 
   private _employee: Employee;
   get employee() {
@@ -32,6 +32,7 @@ export class AppointmentFormComponent implements OnInit {
   @Output() dateChanged = new EventEmitter<Moment>();
 
   selectedCustomer = '';
+  minDate = new Date();
   form: CreateAppointmentForm;
 
   constructor(private customerService: CustomerService,

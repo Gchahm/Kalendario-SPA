@@ -2,24 +2,17 @@
   <div (empId)=employee.id class="row">
     <div class="col-sm-12 col-md-3">
       <div class="card h-100">
-        <div class="card-header click">
-          <div class="card-title m-auto text-center" routerLink="/staff">BACK TO STAFF</div>
-        </div>
+        <button mat-stroked-button routerLink="/staff">BACK TO STAFF</button>
         <img src="{{employee.photoUrl}}" class="card-img-top d-none d-sm-none d-md-block" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{employee.name}}</h5>
           <p class="card-text">{{employee.bio}}</p>
         </div>
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action">SELECT A SERVICE</div>
-          <a (click)="handleServiceClick(s)" class="list-group-item list-group-item-action"
-             [class.active]="service.id === s.id"
-             *ngFor="let s of employee.services">
-            {{s.name}}
-          </a>
-        </div>
+        <button [color]="selectedServiceColor(s)" mat-flat-button *ngFor="let s of employee.services" (click)="handleServiceClick(s)">
+          {{s.name}}
+        </button>
         <div class="card-body"></div>
-        </div>
+      </div>
     </div>
     <div class="col-sm-12 col-md-9">
       <app-calendar [default-date]="date"

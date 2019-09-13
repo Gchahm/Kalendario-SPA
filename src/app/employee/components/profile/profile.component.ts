@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Employee} from '../../../shared/models/Employee';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'employee-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })

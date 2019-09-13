@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Moment} from 'moment';
 import {DateChangedEvent} from '../../events/DateChangedEvent';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-calendar',
@@ -9,9 +10,16 @@ import {DateChangedEvent} from '../../events/DateChangedEvent';
 })
 export class CalendarComponent implements OnInit {
 
+  minDate: Moment;
+
   @Input('default-date') currentDate;
-  @Input('min-date') minDate: Moment;
   @Input('max-date') maxDate: Moment;
+
+  @Input('min-date') set date(value: Moment) {
+    if (!this.minDate) {
+      this.minDate = value.clone();
+    }
+  }
 
   @Output() dayRender = new EventEmitter<DateChangedEvent>();
 
@@ -19,6 +27,11 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  today() {
+    this.currentDate = moment.utc();
+    this.emitDayRender();
   }
 
   previousDay() {
@@ -33,6 +46,10 @@ export class CalendarComponent implements OnInit {
       this.currentDate.add(1, 'days');
       this.emitDayRender();
     }
+  }
+
+  prevDisabled(): boolean {
+    return this.minDate && this.minDate.toISOString() === this.currentDate.toISOString();
   }
 
   emitDayRender() {

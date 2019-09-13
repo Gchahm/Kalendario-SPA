@@ -1,20 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Moment} from 'moment';
-import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
+import {Employee} from '../../../shared/models/Employee';
+import * as moment from 'moment';
 import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {BaseAppointment} from '../../../shared/models/BaseAppointment';
-import {Employee} from '../../../shared/models/Employee';
+import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 
 @Component({
-  selector: 'app-employee-calendar',
-  templateUrl: './employee-calendar.component.html',
-  styleUrls: ['./employee-calendar.component.css']
+  selector: 'employee-schedule-view',
+  templateUrl: './schedule-view.component.html',
+  styleUrls: ['./schedule-view.component.css']
 })
-export class EmployeeCalendarComponent implements OnInit {
-
-  appointments: BaseAppointment[];
-  date: Moment;
-  emp: Employee;
+export class ScheduleViewComponent implements OnInit {
 
   @Input() set employee(employee: Employee) {
     this.emp = employee;
@@ -22,26 +19,26 @@ export class EmployeeCalendarComponent implements OnInit {
       this.loadAppointments(this.date);
     }
   }
-  @Input() set setDate(date: Moment) {
-    this.loadAppointments(date);
-    this.date = date;
-  }
 
-  @Output() eventClicked = new EventEmitter<Moment>();
+  emp: Employee;
+  date: Moment;
+  activePanel = 'book';
+  appointments: BaseAppointment[];
 
   constructor(private appointmentService: EmployeeAppointmentService) {
   }
 
   ngOnInit() {
+    this.date = moment.utc().add(1, 'days');
     this.loadAppointments(this.date);
+  }
+
+  updateCalendar($event: Moment) {
+    this.date = $event.clone();
   }
 
   handleDayRender($event: DateChangedEvent) {
     this.loadAppointments($event.date);
-  }
-
-  handleEventClick($event: Moment) {
-    this.eventClicked.emit($event);
   }
 
   loadAppointments(date: Moment) {
@@ -55,3 +52,4 @@ export class EmployeeCalendarComponent implements OnInit {
     });
   }
 }
+

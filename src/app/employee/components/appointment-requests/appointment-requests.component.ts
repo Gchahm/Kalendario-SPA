@@ -6,7 +6,7 @@ import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 import {Employee} from '../../../shared/models/Employee';
 
 @Component({
-  selector: 'app-appointment-requests',
+  selector: 'employee-appointment-requests',
   templateUrl: './appointment-requests.component.html',
   styleUrls: ['./appointment-requests.component.css']
 })

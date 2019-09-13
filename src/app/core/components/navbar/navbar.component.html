@@ -1,34 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary p-0">
-  <a class="navbar-brand">Company Name</a>
-  <button (click)="isCollapsed = !isCollapsed" class="navbar-toggler" type="button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link" routerLink="/staff">Staff</a>
-      </li>
-    </ul>
-    <div class="nav-item dropdown" ngbDropdown *ngIf="isLoggedIn(); else loginTemplate">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Vintage Studio</span>
+    <button mat-button routerLink="/staff">
+      <mat-icon class="icon">emoji_people</mat-icon>
+      staff
+    </button>
+    <span class="example-spacer"></span>
+    <div *ngIf="isLoggedIn(); else loginTemplate">
       <ng-container *ngIf="user$ | async as user">
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
-          Welcome {{user.firstName}}
-        </a>
-        <div class="dropdown-menu" ngbDropdownMenu>
-          <a class="dropdown-item" ngbDropdownItem routerLink="/employee-dashboard"
-             *ngIf="user.isEmployee; else customerLinks">Dashboard</a>
+        <button mat-button [matMenuTriggerFor]="menu">Welcome {{user.firstName}}</button>
+        <mat-menu #menu="matMenu">
+          <button *ngIf="user.isEmployee; else customerLinks" mat-menu-item routerLink="/employee/dashboard">
+            Dashboard
+          </button>
           <ng-template #customerLinks>
-            <a class="dropdown-item" ngbDropdownItem routerLink="/my-appointments">My appointments</a>
+            <button mat-menu-item routerLink="/my-appointments">
+              My appointments
+            </button>
           </ng-template>
-          <a class="dropdown-item" ngbDropdownItem (click)="logout()">Logout</a>
-        </div>
+          <button mat-menu-item (click)="logout()">
+            Logout
+          </button>
+        </mat-menu>
       </ng-container>
     </div>
     <ng-template #loginTemplate>
-      <div class="navbar-nav">
-        <div class="nav-item"><a class="nav-link" routerLink="/login">Login</a></div>
-        <div class="nav-item"><a class="nav-link" routerLink="/register">Register</a></div>
-      </div>
+      <button mat-button routerLink="/login">
+        login
+      </button>
+      <button mat-button routerLink="/register">
+        register
+      </button>
     </ng-template>
-  </div>
-</nav>
+  </mat-toolbar-row>
+</mat-toolbar>
+

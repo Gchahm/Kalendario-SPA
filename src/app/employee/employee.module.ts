@@ -1,29 +1,27 @@
 import { NgModule } from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
-import { EmployeeDashboardComponent } from './components/employee-dashboard/employee-dashboard.component';
+import { DashboardPageComponent } from './components/dashboard-page/dashboard-page.component';
 import {EmployeeRoutingModule} from './employee-routing.module';
 import {CalendarModule} from '../calendar/calendar.module';
 import { AppointmentEventComponent } from './components/appointment-event/appointment-event.component';
-import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
+import { FormAppointmentComponent } from './components/form-appointment/form-appointment.component';
 import { AppointmentRequestsComponent } from './components/appointment-requests/appointment-requests.component';
-import { EmployeeCalendarComponent } from './components/employee-calendar/employee-calendar.component';
 import { CancelModalComponent } from './components/cancel-modal/cancel-modal.component';
-import { SelfAppointmentFormComponent } from './components/self-appointment-form/self-appointment-form.component';
+import { FormSelfAppointmentComponent } from './components/form-self-appointment/form-self-appointment.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import {EmployeeAppointmentsComponent} from './components/employee-appointments/employee-appointments.component';
+import {ScheduleViewComponent} from './components/schedule-view/schedule-view.component';
 
 
 
 @NgModule({
   declarations: [
-    EmployeeDashboardComponent,
-    EmployeeAppointmentsComponent,
+    DashboardPageComponent,
+    ScheduleViewComponent,
     AppointmentEventComponent,
-    AppointmentFormComponent,
+    FormAppointmentComponent,
     AppointmentRequestsComponent,
-    EmployeeCalendarComponent,
     CancelModalComponent,
-    SelfAppointmentFormComponent,
+    FormSelfAppointmentComponent,
     ProfileComponent,
   ],
   imports: [

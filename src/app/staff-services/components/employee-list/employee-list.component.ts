@@ -18,4 +18,7 @@ export class EmployeeListComponent implements OnInit {
     this.employees$ = this.empService.getAll();
   }
 
+  services(employee: Employee): string {
+    return employee.services.map(s => s.name).join(' - ');
+  }
 }

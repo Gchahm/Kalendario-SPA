@@ -9,7 +9,7 @@ import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 import {SelfAppointment} from '../../models/SelfAppointment';
 
 @Component({
-  selector: 'app-appointment-event',
+  selector: 'employee-appointment-event',
   templateUrl: './appointment-event.component.html',
   styleUrls: ['./appointment-event.component.css']
 })

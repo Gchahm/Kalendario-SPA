@@ -1,9 +1,0 @@
-<app-calendar [default-date]="date" (dayRender)="handleDayRender($event)">
-  <app-appointment-event class="col-md-4 col-sm-12"
-                         *ngFor="let app of appointments"
-                         (eventClicked)="handleEventClick($event)"
-                         [appointment]="app"></app-appointment-event>
-  <b class="p-4" *ngIf="appointments && appointments.length === 0">
-      No appointments booked on this date.
-  </b>
-</app-calendar>

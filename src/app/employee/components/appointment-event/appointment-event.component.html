@@ -1,56 +1,38 @@
-<div *ngIf="appointment" class="card border-dark m-2">
-  <div (click)="emitEventClicked()" class="card-header text-center border-dark p-0">
-    <div class="row">
-      <div class="col-md-6">
-        <div *ngIf="showDate">
-          <i class="fa fa-calendar"></i>
-          {{appointment.start.format('DD/MM/YY')}}
-        </div>
-      </div>
-      <div class="col-md-6">
-        <i class="fa fa-clock-o"></i>
+<ng-container *ngIf="appointment">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{appointment.service.name}}
+      </mat-panel-title>
+      <mat-panel-description class="align-content-center">
+        <mat-icon class="mt-auto mb-auto">schedule</mat-icon>
         {{appointment.start.format('HH:mm')}}
         {{appointment.end.format('HH:mm')}}
-      </div>
-    </div>
-  </div>
-  <div class="card-body text-center p-0">
-    <div class="row no-gutters">
-      <div class="col-md-6">
-        <i class="fa fa-user"></i>
-        {{appointment.customer.name}}
-      </div>
-      <div class="col-md-6">
-        <i class="fa fa-tag"></i>
-        {{appointment.service.name}}
-      </div>
-    </div>
-  </div>
-  <div class="btn-group btn-group-sm p-0">
-    <button [class.d-none]="appointment.status==='P'" class="btn font-weight-bold" disabled>{{appointment.statusDescription()}}</button>
-    <button [class.d-none]="appointment.status==='A'" class="btn btn-success" (click)="changeStatus('A')" >confirm</button>
-    <button [class.d-none]="appointment.status==='R'" class="btn btn-danger" (click)="changeStatus('R')">cancel</button>
-  </div>
-</div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    {{appointment.customer.name}}
+    {{appointment.customerNotes}}
+    <!--<button mat-flat-button [class.d-none]="appointment.status==='P'" disabled>{{appointment.statusDescription()}}</button>-->
+    <!--<button mat-flat-button color="accent" [class.d-none]="appointment.status==='A'" (click)="changeStatus('A')" >confirm</button>-->
+    <!--<button mat-flat-button color="warn" [class.d-none]="appointment.status==='R'" (click)="changeStatus('R')">cancel</button>-->
+  </mat-expansion-panel>
+
+  <!--</div>-->
+</ng-container>
 
 
-<div *ngIf="selfAppointment" class="card border-dark m-2">
-  <div (click)="emitEventClicked()" class="card-header text-center border-dark p-0  ">
-    <div class="row">
-      <div class="col-md-6">
-        <div *ngIf="showDate">
-          <i class="fa fa-calendar"></i>
-          {{selfAppointment.start.format('DD/MM/YY')}}
-        </div>
-      </div>
-      <div class="col-md-6">
-        <i class="fa fa-clock-o"></i>
+<ng-container *ngIf="selfAppointment">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Time blocked
+      </mat-panel-title>
+      <mat-panel-description class="align-content-center">
+        <mat-icon class="mt-auto mb-auto">schedule</mat-icon>
         {{selfAppointment.start.format('HH:mm')}}
         {{selfAppointment.end.format('HH:mm')}}
-      </div>
-    </div>
-  </div>
-  <div class="card-body p-0">
+      </mat-panel-description>
+    </mat-expansion-panel-header>
     {{selfAppointment.reason}}
-  </div>
-</div>
+  </mat-expansion-panel>
+</ng-container>

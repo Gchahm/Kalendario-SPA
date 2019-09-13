@@ -1,10 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootswatch/dist/litera/bootstrap.css';
 @import "~font-awesome/css/font-awesome.css";
-@import '~@fullcalendar/core/main.css';
-@import '~@fullcalendar/daygrid/main.css';
-@import '~@fullcalendar/timegrid/main.css';
-@import '~@fullcalendar/bootstrap/main.css';
+/*@import '~@fullcalendar/core/main.css';*/
+/*@import '~@fullcalendar/daygrid/main.css';*/
+/*@import '~@fullcalendar/timegrid/main.css';*/
+/*@import '~@fullcalendar/bootstrap/main.css';*/
 @import '~alertifyjs/build/css/alertify.min.css';
 @import '~alertifyjs/build/css/themes/bootstrap.min.css';
 
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0;
+}

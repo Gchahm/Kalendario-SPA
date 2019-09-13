@@ -7,11 +7,11 @@ import {CreateSelfAppointmentForm} from '../../models/CreateSelfAppointment';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-self-appointment-form',
-  templateUrl: './self-appointment-form.component.html',
-  styleUrls: ['./self-appointment-form.component.css']
+  selector: 'employee-form-self-appointment',
+  templateUrl: './form-self-appointment.component.html',
+  styleUrls: ['./form-self-appointment.component.css']
 })
-export class SelfAppointmentFormComponent implements OnInit {
+export class FormSelfAppointmentComponent implements OnInit {
 
   private _employee: Employee;
   get employee() {
@@ -29,6 +29,7 @@ export class SelfAppointmentFormComponent implements OnInit {
 
   @Output() dateChanged = new EventEmitter<Moment>();
 
+  minDate = new Date();
   form: CreateSelfAppointmentForm;
 
   constructor(private employeeAppointment: EmployeeAppointmentService,

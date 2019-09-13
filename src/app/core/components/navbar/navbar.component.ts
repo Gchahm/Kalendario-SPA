@@ -13,7 +13,6 @@ import {Observable} from 'rxjs';
 export class NavbarComponent implements OnInit {
 
   user$: Observable<User>;
-  public isCollapsed = true;
 
   constructor(private userService: UserService,
               private authService: AuthService,

@@ -1,11 +1,7 @@
-.dropdown-item {
-  cursor: pointer;
+.example-icon {
+  padding: 0 14px;
 }
 
-.dropdown-toggle {
-  cursor: pointer;
-}
-
-a.dropdown-item:hover {
-  color: black;
+.example-spacer {
+  flex: 1 1 auto;
 }

@@ -57,6 +57,13 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.loadSlots();
   }
 
+  selectedServiceColor(service: Service) {
+    if (this.service.id === service.id) {
+      return 'accent';
+    }
+    return '';
+  }
+
   loadSlots() {
     this.empService.slots(this.employee, this.service,
       this.date.clone().startOf('day'),

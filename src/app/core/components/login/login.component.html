@@ -1,22 +1,36 @@
-<div class="text-center p-4">
+<div class="container">
   <!--<a class="btn-connect-option facebook" (click)="FBLogin()"></a>-->
-  <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"
-       data-auto-logout-link="false" data-use-continue-as="false"></div>
-  <form #loginForm="ngForm" class="form-signin" (submit)="login()">
-    <hr/>
-    <div class="pb-3">login in with your email</div>
-    <label for="inputEmail" class="sr-only">Email address</label>
-    <input id="inputEmail" class="form-control" type="text" placeholder="Username"
-           name="username" required [(ngModel)]="user.email">
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input id="inputPassword" class="form-control" type="password" placeholder="Password"
-           name="password" required [(ngModel)]="user.password">
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+  <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"-->
+       <!--data-auto-logout-link="false" data-use-continue-as="false"></div>-->
+  <div class="card m-auto">
+
+    <div class="card-body">
+      <h4 class="card-title">sign in</h4>
+      <form #loginForm="ngForm" class="form-signin" (submit)="login()">
+        <mat-form-field>
+          <input id="inputEmail"
+                 matInput
+                 class="form-control"
+                 type="text"
+                 placeholder="Username"
+                 name="username"
+                 [(ngModel)]="user.email"
+                 required>
+        </mat-form-field>
+        <mat-form-field>
+          <input id="inputPassword"
+                 matInput
+                 class="form-control"
+                 type="password"
+                 placeholder="Password"
+                 name="password"
+                 [(ngModel)]="user.password"
+                 required>
+        </mat-form-field>
+        <button mat-flat-button color="accent" [disabled]="!loginForm.valid" type="submit">Login</button>
+        <button mat-flat-button color="primary" routerLink="/register">Register</button>
+      </form>
     </div>
-    <button [disabled]="!loginForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-    <button class="btn btn-block btn-secondary" routerLink="/register">Register</button>
-  </form>
+  </div>
+
 </div>
