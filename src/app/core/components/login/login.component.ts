@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
-import {LoginModel} from '../../../staff-services/models/LoginModel';
+import {LoginModel} from '../../../shared/models/LoginModel';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import {LoginModel} from '../../../staff-services/models/LoginModel';
 export class LoginComponent implements OnInit, OnDestroy {
 
   private loginSubscription: Subscription;
-  user: LoginModel = new LoginModel(  );
+  user: LoginModel = {email: '', password: ''};
 
   constructor(private authService: AuthService,
               private toastService: ToastService) { }

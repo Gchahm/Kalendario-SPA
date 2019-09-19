@@ -10,14 +10,20 @@
         {{appointment.end.format('HH:mm')}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    {{appointment.customer.name}}
-    {{appointment.customerNotes}}
-    <!--<button mat-flat-button [class.d-none]="appointment.status==='P'" disabled>{{appointment.statusDescription()}}</button>-->
-    <!--<button mat-flat-button color="accent" [class.d-none]="appointment.status==='A'" (click)="changeStatus('A')" >confirm</button>-->
-    <!--<button mat-flat-button color="warn" [class.d-none]="appointment.status==='R'" (click)="changeStatus('R')">cancel</button>-->
+        <p><sup>name</sup> {{appointment.customer.name}}</p>
+        <p><sup>phone</sup> {{appointment.customer.phone}}</p>
+        <p><sup>additional info</sup> {{appointment.customerNotes}}</p>
+    <ng-container *ngIf="showButtons">
+      <button mat-flat-button [class.d-none]="appointment.status==='P'" disabled>{{appointment.statusDescription()}}
+      </button>
+      <button mat-flat-button color="accent" [class.d-none]="appointment.status==='A'" (click)="changeStatus('A')">
+        confirm
+      </button>
+      <button mat-flat-button color="warn" [class.d-none]="appointment.status==='R'" (click)="changeStatus('R')">
+        cancel
+      </button>
+    </ng-container>
   </mat-expansion-panel>
-
-  <!--</div>-->
 </ng-container>
 
 

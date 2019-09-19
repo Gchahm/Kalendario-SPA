@@ -1,81 +1,80 @@
-<form #appointmentForm="ngForm" class="appointment-form">
-  <mat-form-field>
-    <input [(ngModel)]="form.startDate"
-           matInput
-           [min]="minDate"
-           [matDatepicker]="picker"
-           placeholder="Choose a date"
-           name="startDate"
-           #startDate="ngModel"
-           (change)="emitDateChanged(form.startDate)"
-           required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error>
-      Please enter a date
-    </mat-error>
-  </mat-form-field>
+<div class="card">
+  <div class="card-body">
+    <form #appointmentForm="ngForm" class="appointment-form">
 
-  <mat-form-field>
-    <input [(ngModel)]="form.startTime"
-           name="startTime"
-           matInput
-           #startTime="ngModel"
-           type="time"
-           required>
-    <mat-error>
-      Please enter a time
-    </mat-error>
-  </mat-form-field>
+      <mat-form-field>
+        <input [(ngModel)]="form.customerName"
+               matInput
+               disabled
+               id="customer-name-field"
+               #customerName="ngModel"
+               name="customerName"
+               placeholder="customer name"
+               type="text">
+        <button mat-mini-fab
+                (click)="openCustomerList()">
+          select
+        </button>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input [(ngModel)]="form.customerName"
-           matInput
-           #customerName="ngModel"
-           name="customerName"
-           placeholder="customer"
-           type="text"
-           [ngbTypeahead]="search"
-           [resultTemplate]="rt"
-           [inputFormatter]="formatter"
-           (change)="customerChange($event)">
-    <input [(ngModel)]="form.customerId"
-           #customerId="ngModel"
-           name="customerId"
-           class="form-control"
-           type="hidden"
-           required>
-    <mat-error *ngIf="customerId.valid || !customerName.touched">
-      invalid customer
-    </mat-error>
-  </mat-form-field>
+      <input [(ngModel)]="form.customerId"
+             hidden
+             #customerName="ngModel"
+             name="customerId"
+             type="text"
+             required>
 
-  <mat-form-field>
-    <mat-label>Service</mat-label>
-    <mat-select [(ngModel)]="form.service"
-                #service="ngModel"
-                name="service"
-                class="form-control"
-                required>
-      <mat-option *ngFor="let service of employee.services" [value]="service.id">
-        {{service.name}}
-      </mat-option>
-    </mat-select>
-    <mat-error>
-      service is required
-    </mat-error>
-  </mat-form-field>
+      <mat-form-field>
+        <input [(ngModel)]="form.startDate"
+               matInput
+               [min]="minDate"
+               [matDatepicker]="picker"
+               placeholder="Choose a date"
+               name="startDate"
+               #startDate="ngModel"
+               (change)="emitDateChanged(form.startDate)"
+               required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          Please enter a date
+        </mat-error>
+      </mat-form-field>
 
-  <button type="submit"
-          color="primary"
-          mat-flat-button
-          [disabled]="!appointmentForm.valid"
-          (click)="submit()">
-    book appointment
-  </button>
-</form>
-<ng-template #rt let-r="result" let-t="term">
+      <mat-form-field>
+        <input [(ngModel)]="form.startTime"
+               name="startTime"
+               matInput
+               #startTime="ngModel"
+               type="time"
+               required>
+        <mat-error>
+          Please enter a time
+        </mat-error>
+      </mat-form-field>
 
-  <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
-</ng-template>
-
+      <mat-form-field>
+        <mat-label>Service</mat-label>
+        <mat-select [(ngModel)]="form.service"
+                    #service="ngModel"
+                    name="service"
+                    class="form-control"
+                    required>
+          <mat-option *ngFor="let service of employee.services" [value]="service.id">
+            {{service.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          service is required
+        </mat-error>
+      </mat-form-field>
+      <button type="submit"
+              color="primary"
+              mat-flat-button
+              [disabled]="!appointmentForm.valid"
+              (click)="submit()">
+        book appointment
+      </button>
+    </form>
+  </div>
+</div>

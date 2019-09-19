@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {LoginModel} from '../../staff-services/models/LoginModel';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FacebookAuthService} from './facebook-auth.service';
+import {LoginModel} from '../models/LoginModel';
 
 @Injectable({
   providedIn: 'root'

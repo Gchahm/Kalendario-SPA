@@ -1,45 +1,31 @@
-<div class="card border-dark m-auto">
-  <div class="row no-gutters">
-    <div class="col-auto">
-      <img src="{{appointment.employee.photoUrl}}">
-    </div>
-    <div class="col">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-md-6 col-sm-12">
-            <i class="fa fa-calendar"></i>
-            {{appointment.start.format('DD/MM/YY')}} - {{appointment.start.format('HH:mm')}}
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <i class="fa fa-clock-o"></i>
-            {{beautify(appointment.service.duration)}}
-            <ng-template #tipContent>{{appointment.statusDescription()}}</ng-template>
-            <div class="float-right" [ngbTooltip]="tipContent">
-              <button *ngIf="appointment.status==='P'" disabled class="btn btn-sm">
-                <i class="fa fa-hourglass-o"></i>
-              </button>
-              <button *ngIf="appointment.status==='A'" disabled class="btn btn-sm btn-success">
-                <i class="fa fa-check"></i>
-              </button>
-              <button *ngIf="appointment.status==='R'" disabled class="btn btn-sm btn-danger">
-                <i class="fa fa-crosshairs"></i>
-              </button>
-            </div>
-          </div>
+<div class="card  m-auto">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="m-auto">
+        {{appointment.statusDescription()}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <div class="col-sm-12 col-md-6 d-flex align-self-center">
+          <mat-icon>event</mat-icon>
+          {{appointment.start.format('DD/MM/YY')}}
         </div>
+        <div class="col-sm-12 col-md-6 m-auto">
+          {{appointment.start.format('HH:mm')}}
+          {{appointment.end.format('HH:mm')}}
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="row text-left">
+      <div class="col-6">
+        <img src="{{appointment.employee.photoUrl}}">
       </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-6">
-            <i class="fa fa-user"></i>
-            {{appointment.employee.name}} <br/>
-            {{appointment.service.name}} <br/>
-          </div>
-          <div class="col-6 border-dark">
-            {{appointment.customerNotes}}
-          </div>
-        </div>
+      <div class="col-6">
+        <h6>{{appointment.employee.name}}</h6>
+        <h6 class="text-muted">
+          {{appointment.service.name}}
+        </h6>
+        {{appointment.customerNotes}}
       </div>
     </div>
-  </div>
+  </mat-expansion-panel>
 </div>

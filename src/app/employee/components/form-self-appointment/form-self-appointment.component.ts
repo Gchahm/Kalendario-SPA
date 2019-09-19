@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Employee} from '../../../shared/models/Employee';
 import {Moment} from 'moment';
-import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {ToastService} from '../../../shared/services/toast.service';
-import {CreateSelfAppointmentForm} from '../../models/CreateSelfAppointment';
 import * as moment from 'moment';
+import {AppointmentService, CreateSelfAppointmentModel} from '../../../shared/services/appointment.service';
 
 @Component({
   selector: 'employee-form-self-appointment',
@@ -32,7 +31,7 @@ export class FormSelfAppointmentComponent implements OnInit {
   minDate = new Date();
   form: CreateSelfAppointmentForm;
 
-  constructor(private employeeAppointment: EmployeeAppointmentService,
+  constructor(private employeeAppointment: AppointmentService,
               private toast: ToastService) {
     this.form = new CreateSelfAppointmentForm( '', '', '', '', '', '');
   }
@@ -45,6 +44,7 @@ export class FormSelfAppointmentComponent implements OnInit {
       .toPromise()
       .then(success => {
         this.dateChanged.emit(success.start);
+        this.form.clear();
         this.toast.success('appointment booked');
       })
       .catch(error => this.toast.error(error));
@@ -52,5 +52,31 @@ export class FormSelfAppointmentComponent implements OnInit {
 
   emitDateChanged(date: string) {
     this.dateChanged.emit(moment.utc(date));
+  }
+}
+
+class CreateSelfAppointmentForm {
+  constructor(public startDate: string,
+              public endDate: string,
+              public startTime: string,
+              public endTime: string,
+              public reason: string,
+              public employeeId: string) {
+  }
+
+  model(): CreateSelfAppointmentModel {
+    return {
+      start: moment.utc(this.startDate + ' ' + this.startTime).toISOString(),
+      end: moment.utc(this.endDate + ' ' + this.endTime).toISOString(),
+      reason: this.reason,
+      employee: this.employeeId
+    };
+  }
+
+  clear() {
+    this.startTime = null;
+    this.endTime = null;
+    this.endDate = null;
+    this.reason = null;
   }
 }

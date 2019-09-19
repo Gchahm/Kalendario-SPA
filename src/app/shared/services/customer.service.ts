@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Customer} from '../models/Customer';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,30 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
-  search(search: string) {
-    return this.http.get(this.baseUrl + 'search/', {params: {search}});
+  all(params: CustomerQParams): Observable<CustomerListResult> {
+    return this.http.get<CustomerListResult>(this.baseUrl, {params: {...params}});
   }
+
+  create(model: CreateCustomer) {
+    return this.http.post<Customer>(this.baseUrl, model);
+  }
+}
+
+export interface CustomerQParams {
+  search?: string;
+  page?: string;
+  page_size?: string;
+}
+
+export interface CreateCustomer {
+  first_name: string;
+  last_name: string;
+  phone: string;
+}
+
+interface CustomerListResult {
+  count: number;
+  next: string;
+  previous: string;
+  results: Customer[];
 }

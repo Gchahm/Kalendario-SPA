@@ -6,12 +6,13 @@
     <mat-menu #menu="matMenu">
       <button *ngFor="let employee of employees$ | async"
               mat-menu-item
-              (click)="SelectEmployee(employee)">
+              (click)="emp = employee">
         {{employee.name}}
       </button>
     </mat-menu>
     <mat-icon class="example-icon" matTooltip="Profile" (click)="activePanel = 'profile'">account_box</mat-icon>
-    <mat-icon class="example-icon" matTooltip="Create appointment" (click)="activePanel = 'book'">calendar_today
+    <mat-icon class="example-icon" matTooltip="Create appointment" (click)="activePanel = 'book'">
+      calendar_today
     </mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -15,8 +15,6 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   empSubscription: Subscription;
   employees$: Observable<Employee[]>;
 
-  isCollapsed = false;
-  empListCollapsed = true;
   activePanel = 'book';
 
   constructor(private employeeService: EmployeeService) { }
@@ -29,11 +27,4 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.empSubscription.unsubscribe();
   }
-
-  SelectEmployee(emp: Employee) {
-    this.empListCollapsed = true;
-    this.emp = emp;
-  }
-
-
 }

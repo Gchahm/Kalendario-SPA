@@ -24,6 +24,10 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatExpansionModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatDialogModule, MatSnackBarModule
 } from '@angular/material';
 
 
@@ -55,6 +59,11 @@ import {
     MatCardModule,
     MatButtonToggleModule,
     MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -81,6 +90,11 @@ import {
     MatCardModule,
     MatButtonToggleModule,
     MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSnackBarModule,
   ]
 })
 export class AngularMaterialModule { }

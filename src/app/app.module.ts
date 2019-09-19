@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {CustomerModule} from './customer/customer.module';
-import {StaffServicesModule} from './staff-services/staff-services.module';
 import {EmployeeModule} from './employee/employee.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,7 +24,6 @@ import { MatListModule } from '@angular/material/list';
     SharedModule,
     CoreModule,
     CustomerModule,
-    StaffServicesModule,
     EmployeeModule,
     AppRoutingModule,
     LayoutModule,

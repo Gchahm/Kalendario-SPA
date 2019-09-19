@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
 import {Observable} from 'rxjs';
 import {Moment} from 'moment';
 import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 import {Employee} from '../../../shared/models/Employee';
+import {AppointmentService} from '../../../shared/services/appointment.service';
 
 @Component({
   selector: 'employee-appointment-requests',
@@ -24,14 +24,14 @@ export class AppointmentRequestsComponent implements OnInit {
 
   appointments$: Observable<BaseAppointment[]>;
 
-  constructor(private appointmentsService: EmployeeAppointmentService) { }
+  constructor(private appointmentsService: AppointmentService) { }
 
   ngOnInit() {
     this.loadAppointments();
   }
 
   loadAppointments() {
-    this.appointments$ = this.appointmentsService.getPending(this.employee.id.toString());
+    this.appointments$ = this.appointmentsService.getAppointments({employee: this.employee.id.toString(), status: 'P'});
   }
 
   handleAppointmentClicked($event: Moment) {

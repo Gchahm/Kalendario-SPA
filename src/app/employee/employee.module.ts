@@ -10,25 +10,31 @@ import { CancelModalComponent } from './components/cancel-modal/cancel-modal.com
 import { FormSelfAppointmentComponent } from './components/form-self-appointment/form-self-appointment.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {ScheduleViewComponent} from './components/schedule-view/schedule-view.component';
+import {DialogCustomerListComponent} from './components/dialog-customer-list/dialog-customer-list.component';
+import {DialogCreateCustomerComponent} from './components/dialog-create-customer/dialog-create-customer.component';
 
 
 
 @NgModule({
   declarations: [
+    CancelModalComponent,
     DashboardPageComponent,
     ScheduleViewComponent,
     AppointmentEventComponent,
     FormAppointmentComponent,
     AppointmentRequestsComponent,
-    CancelModalComponent,
     FormSelfAppointmentComponent,
     ProfileComponent,
+    DialogCustomerListComponent,
+    DialogCreateCustomerComponent
   ],
   imports: [
     SharedModule,
     EmployeeRoutingModule,
     CalendarModule,
   ],
-  bootstrap: [CancelModalComponent]
+  bootstrap: [CancelModalComponent, DialogCreateCustomerComponent, DialogCustomerListComponent]
 })
-export class EmployeeModule { }
+export class EmployeeModule {
+  private static FormCreateCustomerComponent: any;
+}

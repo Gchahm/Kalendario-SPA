@@ -1,0 +1,7 @@
+.card {
+  max-width: 40rem;
+}
+span {
+  display: inline-flex;
+  vertical-align: middle;
+}

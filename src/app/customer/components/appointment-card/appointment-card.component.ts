@@ -19,10 +19,10 @@ export class AppointmentCardComponent implements OnInit {
   beautify(duration: Duration) {
     let result = '';
     if (duration.hours() > 0 ) {
-      result += duration.hours().toString() + (duration.hours() > 1 ? ' hours ' : ' hour ');
+      result += duration.hours().toString() + (duration.hours() > 1 ? ' hrs ' : ' hour ');
     }
     if (duration.minutes() > 0 ) {
-      result += duration.minutes().toString() + (duration.minutes() > 1 ? ' minutes ' : ' minute ');
+      result += duration.minutes().toString() + 'min';
     }
     return result;
   }

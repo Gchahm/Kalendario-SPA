@@ -1,12 +1,15 @@
 import {Adapter} from '../adapter';
 import {Injectable} from '@angular/core';
+import {Person} from './Person';
 
 export class User {
   constructor(public id: string,
               public firstName: string,
               public lastName: string,
               public email: string,
-              public isEmployee: boolean) {}
+              public person: Person,
+              public isEmployee: boolean,
+              public isCustomer: boolean) {}
 }
 
 
@@ -21,7 +24,9 @@ export class UserAdapter implements Adapter<User> {
       item.first_name,
       item.last_name,
       item.email,
-      item.is_employee
+      {id: item.person.id, firstName: item.person.first_name, lastName: item.person.last_name},
+      item.is_employee,
+      item.is_customer
     );
   }
 

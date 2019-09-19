@@ -1,8 +1,8 @@
 import {Employee} from './Employee';
 import {Customer} from './Customer';
 import {Service, ServiceAdapter} from './Service';
-import {Moment} from 'moment';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {BaseAppointment} from './BaseAppointment';
@@ -17,7 +17,8 @@ export class Appointment implements BaseAppointment {
     public start: Moment,
     public end: Moment,
     public customerNotes: string,
-  ) {}
+  ) {
+  }
 
   statusDescription() {
     switch (this.status) {
@@ -30,6 +31,18 @@ export class Appointment implements BaseAppointment {
       default:
         return 'pending';
     }
+  }
+
+    updateModel(): UpdateAppointmentModel {
+      return {
+        id: this.id.toString(),
+        customer: this.customer.id.toString(),
+        employee: this.employee.id.toString(),
+        service: this.service.id.toString(),
+        status: this.status,
+        start: this.start.toISOString(),
+        customer_notes: this.customerNotes
+      };
   }
 }
 
@@ -54,4 +67,23 @@ export class AppointmentAdapter implements Adapter<Appointment> {
     );
   }
 
+}
+
+export interface CreateAppointmentModel {
+  employee: number;
+  customer: number;
+  service: number;
+  start: string;
+  status: string;
+  customer_notes: string;
+}
+
+export interface UpdateAppointmentModel {
+  id: string;
+  employee: string;
+  customer: string;
+  service: string;
+  start: string;
+  status: string;
+  customer_notes: string;
 }

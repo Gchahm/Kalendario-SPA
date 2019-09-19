@@ -2,9 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Moment} from 'moment';
 import {Employee} from '../../../shared/models/Employee';
 import * as moment from 'moment';
-import {EmployeeAppointmentService} from '../../services/employee-appointment.service';
-import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
+import {AppointmentService} from '../../../shared/services/appointment.service';
+import {BaseAppointment} from '../../../shared/models/BaseAppointment';
 
 @Component({
   selector: 'employee-schedule-view',
@@ -22,10 +22,10 @@ export class ScheduleViewComponent implements OnInit {
 
   emp: Employee;
   date: Moment;
-  activePanel = 'book';
+  activePanel = 'minimize';
   appointments: BaseAppointment[];
 
-  constructor(private appointmentService: EmployeeAppointmentService) {
+  constructor(private appointmentService: AppointmentService) {
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class ScheduleViewComponent implements OnInit {
   }
 
   updateCalendar($event: Moment) {
-    this.date = $event.clone();
+    this.loadAppointments($event);
   }
 
   handleDayRender($event: DateChangedEvent) {
@@ -45,7 +45,12 @@ export class ScheduleViewComponent implements OnInit {
     this.date = date.clone().utc();
     const fromDate = date.clone().startOf('day');
     const toDate = date.clone().endOf('day');
-    this.appointmentService.getAccepted(this.emp.id.toString(), fromDate.toISOString(), toDate.toISOString())
+    this.appointmentService.getAll({
+      employee: this.emp.id.toString(),
+      from_date: fromDate.toISOString(),
+      to_date: toDate.toISOString(),
+      status: 'A'
+    })
       .toPromise().then(appointments => {
       this.appointments = appointments;
       this.date = date;

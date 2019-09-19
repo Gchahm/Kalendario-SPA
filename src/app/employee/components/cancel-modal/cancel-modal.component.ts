@@ -1,17 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-cancel-modal',
   templateUrl: './cancel-modal.component.html',
   styleUrls: ['./cancel-modal.component.css']
 })
-export class CancelModalComponent implements OnInit {
+export class CancelModalComponent {
 
-  constructor(public activeModal: NgbActiveModal) {}
-  @Input() type: string;
-
-  ngOnInit() {
-  }
-
+  constructor(
+    public dialogRef: MatDialogRef<CancelModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {type: string}) {}
 }
