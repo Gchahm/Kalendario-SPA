@@ -47,6 +47,7 @@ export class FormAppointmentComponent {
   }
 
   submit() {
+    console.log(this.form.model())
     this.appointmentService.createAppointment(this.form.model())
       .toPromise()
       .then(success => {
@@ -87,7 +88,8 @@ class CreateAppointmentForm {
   model(): CreateAppointmentModel {
     const start = moment.utc(this.startDate).startOf('day');
     start.set('hour', +this.startTime.substr(0, 2));
-    start.set('hour', +this.startTime.substr(2));
+    start.set('minute', +this.startTime.substr(3));
+    console.log(this.startTime.toString());
     return {
       customer: this.customerId,
       status: 'A',

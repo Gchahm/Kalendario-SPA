@@ -52,8 +52,8 @@ export class AppointmentService {
   updateAppointment(appointment: Appointment) {
     return this.http.put<UpdateAppointmentModel>(this.appointmentBaseUrl + appointment.id + '/', appointment.updateModel())
       .pipe(
-        switchMap(a => this.getAppointment(a.id)),
-        map(a => this.appointmentAdapter.adapt(a)));
+        map(a => this.appointmentAdapter.adapt(a))
+      );
   }
 
   getSelfAppointments(params: AppointmentQParams): Observable<SelfAppointment[]> {

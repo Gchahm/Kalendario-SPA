@@ -1,33 +1,40 @@
 <div class="row">
-  <div class="col-sm-12 col-md-4 col-lg-3 text-center">
-    <mat-button-toggle-group value="minimize">
-      <mat-button-toggle value="minimize" (click)="activePanel = 'minimize'">
-        <mat-icon matTooltip="book appointment">minimize</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="book" (click)="activePanel = 'book'">
-        <mat-icon matTooltip="book appointment">calendar_today</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="lock" (click)="activePanel = 'lock'">
-        <mat-icon matTooltip="lock time">lock</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle value="request" (click)="activePanel = 'request'">
-        <mat-icon matTooltip="pending appointment requests">view_list</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+  <div class="col-sm-12 col-md-4 col-lg-3">
+    <div class="row">
+      <div class="col-12 text-center">
+        <mat-button-toggle-group value="minimize">
+          <mat-button-toggle value="minimize" (click)="activePanel = 'minimize'">
+            <mat-icon matTooltip="book appointment">minimize</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="book" (click)="activePanel = 'book'">
+            <mat-icon matTooltip="book appointment">calendar_today</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="lock" (click)="activePanel = 'lock'">
+            <mat-icon matTooltip="lock time">lock</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="request" (click)="activePanel = 'request'">
+            <mat-icon matTooltip="pending appointment requests">view_list</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
 
-    <div [ngSwitch]="activePanel">
-      <employee-form-appointment *ngSwitchCase="'book'"
-                                 [employee]="emp"
-                                 [date]="date"
-                                 (dateChanged)="updateCalendar($event)"></employee-form-appointment>
-      <employee-form-self-appointment *ngSwitchCase="'lock'"
-                                      [employee]="emp"
-                                      [date]="date"
-                                      (dateChanged)="updateCalendar($event)"></employee-form-self-appointment>
-      <employee-appointment-requests *ngSwitchCase="'request'"
-                                     class="card" [employee]="emp"
-                                     (eventClicked)="updateCalendar($event)"></employee-appointment-requests>
+      <div class="col-12">
+        <div [ngSwitch]="activePanel">
+          <employee-form-appointment *ngSwitchCase="'book'"
+                                     [employee]="emp"
+                                     [date]="date"
+                                     (dateChanged)="updateCalendar($event)"></employee-form-appointment>
+          <employee-form-self-appointment *ngSwitchCase="'lock'"
+                                          [employee]="emp"
+                                          [date]="date"
+                                          (dateChanged)="updateCalendar($event)"></employee-form-self-appointment>
+          <employee-appointment-requests *ngSwitchCase="'request'"
+                                         class="card" [employee]="emp"
+                                         (eventClicked)="updateCalendar($event)"></employee-appointment-requests>
+        </div>
+      </div>
     </div>
+
 
   </div>
   <div class="col-sm-12 col-md-8 col-lg-9">
