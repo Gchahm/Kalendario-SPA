@@ -32,7 +32,7 @@ export class AuthService {
   logout() {
     return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
       map(res => {
-        localStorage.removeItem('token');
+        this.removeToken();
         this.router.navigate(['']);
         return res;
       })
@@ -59,6 +59,10 @@ export class AuthService {
 
   public getToken(): string {
     return localStorage.getItem('token');
+  }
+
+  public removeToken() {
+    localStorage.removeItem('token');
   }
 
 }
