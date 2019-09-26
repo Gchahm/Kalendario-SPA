@@ -26,7 +26,7 @@ export class UserService {
       }),
         catchError(err => {
           this.authService.removeToken();
-          return of([]);
+          return of(User.AnonymousUser());
         })
       );
   }

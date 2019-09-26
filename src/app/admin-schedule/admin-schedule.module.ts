@@ -35,6 +35,6 @@ import {DialogCreateCustomerComponent} from './components/dialog-create-customer
   ],
   bootstrap: [CancelModalComponent, DialogCreateCustomerComponent, DialogCustomerListComponent]
 })
-export class EmployeeModule {
+export class AdminScheduleModule {
   private static FormCreateCustomerComponent: any;
 }

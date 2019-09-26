@@ -7,7 +7,7 @@ import {forkJoin, Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {adaptList} from '../adapter';
 import {BaseAppointment} from '../models/BaseAppointment';
-import {SelfAppointment, SelfAppointmentAdapter} from '../../employee/models/SelfAppointment';
+import {SelfAppointment, SelfAppointmentAdapter} from '../../admin-schedule/models/SelfAppointment';
 
 @Injectable({
   providedIn: 'root'

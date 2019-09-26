@@ -9,7 +9,12 @@ export class User {
               public email: string,
               public person: Person,
               public isEmployee: boolean,
-              public isCustomer: boolean) {}
+              public isCustomer: boolean) {
+  }
+
+  public static AnonymousUser(): User {
+    return new User(null, null, null, null, null, false, false);
+  }
 }
 
 
