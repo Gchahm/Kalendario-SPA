@@ -52,7 +52,6 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   }
 
   bookAppointment() {
-    console.log(this.appointment.model());
     this.appointmentService.createAppointment(this.appointment.model())
       .toPromise()
       .then(res => this.alertify.success('appointment booked'))
@@ -71,7 +70,7 @@ class AppointmentForm {
   model(): CreateAppointmentModel {
     return {
       employee: this.employee.id,
-      customer: this.customer.id,
+      customer: (!!this.customer ? this.customer.id : null),
       service: this.service.id,
       start: this.start.toISOString(),
       customer_notes: this.customerNotes,

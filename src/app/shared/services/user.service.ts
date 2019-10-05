@@ -14,8 +14,7 @@ export class UserService {
   private baseUrl = environment.apiUrl + 'users/';
 
   constructor(private http: HttpClient,
-              private adapter: UserAdapter,
-              private authService: AuthService) {
+              private adapter: UserAdapter) {
   }
 
   currentUser(): Observable<User> {
@@ -25,7 +24,7 @@ export class UserService {
         return this.adapter.adapt(res);
       }),
         catchError(err => {
-          this.authService.removeToken();
+          AuthService.removeToken();
           return of(User.AnonymousUser());
         })
       );

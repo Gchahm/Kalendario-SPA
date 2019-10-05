@@ -20,6 +20,21 @@ export class AuthService {
               private fbService: FacebookAuthService) {
 
   }
+  static setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  static getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  static isLoggedIn() {
+    return !!AuthService.getToken();
+  }
+
+  static removeToken() {
+    localStorage.removeItem('token');
+  }
 
   login(user: LoginModel): Observable<any> {
     return this.http.post(this.baseUrl + 'login/', user).pipe(map(this.log));
@@ -32,7 +47,7 @@ export class AuthService {
   logout() {
     return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
       map(res => {
-        this.removeToken();
+        AuthService.removeToken();
         this.router.navigate(['']);
         return res;
       })
@@ -43,26 +58,11 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'registration/', form).pipe(map(this.log));
   }
 
-  private log = (project: any) => {
-    this.setToken(project.key);
+  private log = (project) => {
+    AuthService.setToken(project.key);
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     this.router.navigate([returnUrl]);
   };
 
-  isLoggedIn() {
-    return !!this.getToken();
-  }
-
-  private setToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-
-  public getToken(): string {
-    return localStorage.getItem('token');
-  }
-
-  public removeToken() {
-    localStorage.removeItem('token');
-  }
-
 }
+

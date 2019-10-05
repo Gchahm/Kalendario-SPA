@@ -29,10 +29,17 @@ export class UserAdapter implements Adapter<User> {
       item.first_name,
       item.last_name,
       item.email,
-      {id: item.person.id, firstName: item.person.first_name, lastName: item.person.last_name},
+      person(item.person),
       item.is_employee,
       item.is_customer
     );
   }
 
+}
+
+function person(item: any): Person {
+  if (item === null) {
+    return null;
+  }
+  return {id: item.id, firstName: item.first_name, lastName: item.last_name};
 }

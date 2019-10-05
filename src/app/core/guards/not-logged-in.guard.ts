@@ -15,7 +15,7 @@ export class NotLoggedInGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isLoggedIn()) {
+    if (AuthService.isLoggedIn()) {
       this.alertify.error('already registered');
       return false;
     }

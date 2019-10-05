@@ -12,10 +12,10 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authService.isLoggedIn() && req.url.includes(this.baseUrl)) {
+    if (AuthService.isLoggedIn() && req.url.includes(this.baseUrl)) {
       req = req.clone({
         setHeaders: {
-          Authorization: `Token ${this.authService.getToken()}`
+          Authorization: `Token ${AuthService.getToken()}`
         }
       });
     }
