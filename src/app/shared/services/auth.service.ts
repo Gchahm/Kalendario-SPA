@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FacebookAuthService} from './facebook-auth.service';
 import {LoginModel} from '../models/LoginModel';
+import {User, UserAdapter} from '../models/User';
+import {Globals} from '../Globals';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +15,19 @@ import {LoginModel} from '../models/LoginModel';
 export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth/';
+  private userUrl = environment.apiUrl + 'users/';
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
+              private adapter: UserAdapter,
+              private globals: Globals,
               private fbService: FacebookAuthService) {
-
+    if (!this.globals.user) {
+      this.loadUser();
+    }
   }
+
   static setToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -28,12 +36,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  static isLoggedIn() {
-    return !!AuthService.getToken();
-  }
-
   static removeToken() {
     localStorage.removeItem('token');
+  }
+
+  static isLoggedIn() {
+    return !!AuthService.getToken();
   }
 
   login(user: LoginModel): Observable<any> {
@@ -48,6 +56,7 @@ export class AuthService {
     return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
       map(res => {
         AuthService.removeToken();
+        this.globals.user = User.AnonymousUser();
         this.router.navigate(['']);
         return res;
       })
@@ -60,9 +69,18 @@ export class AuthService {
 
   private log = (project) => {
     AuthService.setToken(project.key);
+    this.loadUser();
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
     this.router.navigate([returnUrl]);
-  };
+  }
 
+  private loadUser() {
+    this.http.get<User>(this.userUrl + 'current/')
+      .toPromise()
+      .then(user => {
+        this.globals.user = this.adapter.adapt(user);
+      })
+      .catch(() => this.globals.user = User.AnonymousUser());
+  }
 }
 

@@ -7,17 +7,18 @@
     </button>
     <span class="example-spacer"></span>
     <div *ngIf="isLoggedIn(); else loginTemplate">
-      <ng-container *ngIf="user$ | async as user">
+      <ng-container *ngIf="globals.user as user">
         <button mat-button [matMenuTriggerFor]="menu">Welcome {{user.firstName}}</button>
         <mat-menu #menu="matMenu">
-          <button *ngIf="user.isEmployee; else customerLinks" mat-menu-item routerLink="/employee/dashboard">
-            Dashboard
+          <button *ngIf="user.canViewEmployee()" mat-menu-item>
+            Employees
           </button>
-          <ng-template #customerLinks>
-            <button mat-menu-item routerLink="/my-appointments">
+            <button *ngIf="user.isEmployee" mat-menu-item routerLink="/employee/dashboard">
+              Dashboard
+            </button>
+            <button *ngIf="user.isCustomer" mat-menu-item routerLink="/my-appointments">
               My appointments
             </button>
-          </ng-template>
           <button mat-menu-item (click)="logout()">
             Logout
           </button>

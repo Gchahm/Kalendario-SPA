@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../shared/services/auth.service';
-import {User} from '../../../shared/models/User';
 import {UserService} from '../../../shared/services/user.service';
 import {ToastService} from '../../../shared/services/toast.service';
-import {Observable} from 'rxjs';
+import {Globals} from '../../../shared/Globals';
 
 @Component({
   selector: 'app-navbar',
@@ -12,15 +11,13 @@ import {Observable} from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  user$: Observable<User>;
-
   constructor(private userService: UserService,
               private authService: AuthService,
-              private toastService: ToastService) {
+              private toastService: ToastService,
+              public globals: Globals) {
   }
 
-  ngOnInit() {
-    this.user$ = this.userService.currentUser();
+  async ngOnInit() {
   }
 
   isLoggedIn() {
@@ -30,7 +27,10 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout()
       .toPromise()
-      .then( res => this.toastService.message(res.detail));
+      .then( res => {
+        this.toastService.message(res.detail);
+        console.log('navbar user: ' + this.globals.user.firstName);
+      });
   }
 
 }
