@@ -1,0 +1,16 @@
+<admin-dashboard>
+  <mat-toolbar class="p500">
+    <mat-toolbar-row>
+      <span class="nav-spacer"></span>
+      <button [hidden]="!globals.user.can.add.employees()" mat-button class="p900" (click)="createModel()">new</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <ng-container *ngIf="services">
+    <mat-accordion>
+      <employee-profile [model]="emp"
+                        [services]="services"
+                        (onUpdate)="updateModel($event)"
+                        *ngFor="let emp of employees"></employee-profile>
+    </mat-accordion>
+  </ng-container>
+</admin-dashboard>

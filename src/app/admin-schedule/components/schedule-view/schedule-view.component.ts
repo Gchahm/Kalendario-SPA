@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Moment} from 'moment';
-import {Employee} from '../../../shared/models/Employee';
+import {Employee} from '../../../core/models/Employee';
 import * as moment from 'moment';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {AppointmentService} from '../../../shared/services/appointment.service';
-import {BaseAppointment} from '../../../shared/models/BaseAppointment';
+import {BaseAppointment} from '../../../core/models/BaseAppointment';
 
 @Component({
   selector: 'employee-schedule-view',

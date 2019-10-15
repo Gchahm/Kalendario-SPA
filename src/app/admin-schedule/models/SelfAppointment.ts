@@ -1,8 +1,8 @@
-import {BaseAppointment} from '../../shared/models/BaseAppointment';
-import {Employee} from '../../shared/models/Employee';
+import {BaseAppointment} from '../../core/models/BaseAppointment';
+import {Employee} from '../../core/models/Employee';
 import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
-import {Adapter} from '../../shared/adapter';
+import {Adapter} from '../../core/interfaces/adapter';
 import * as moment from 'moment';
 
 export class SelfAppointment implements BaseAppointment {

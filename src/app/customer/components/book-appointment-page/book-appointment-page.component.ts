@@ -2,15 +2,15 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {forkJoin, Subscription} from 'rxjs';
-import {UserService} from '../../../shared/services/user.service';
+import {Subscription} from 'rxjs';
 import {AppointmentService} from '../../../shared/services/appointment.service';
-import {Employee} from '../../../shared/models/Employee';
+import {Employee} from '../../../core/models/Employee';
 import {Moment} from 'moment';
-import {Service} from '../../../shared/models/Service';
-import {Person} from '../../../shared/models/Person';
+import {Service} from '../../../core/models/Service';
+import {Person} from '../../../core/models/Person';
 import * as moment from 'moment';
-import {CreateAppointmentModel} from '../../../shared/models/Appointment';
+import {CreateAppointmentModel} from '../../../core/models/Appointment';
+import {Globals} from '../../../core/services/Globals';
 
 @Component({
   selector: 'customer-book-appointment-page',
@@ -26,7 +26,7 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
 
   constructor(private empService: EmployeeService,
               private appointmentService: AppointmentService,
-              private userService: UserService,
+              private globals: Globals,
               private alertify: ToastService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -35,13 +35,9 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.queryParamSubscription = this.route.paramMap.subscribe(params => {
       this.appointment.start = moment.utc(params.get('date'));
-      this.empServiceSubscription = forkJoin(
-        this.empService.get(params.get('employee')),
-        this.userService.currentUser()
-      ).subscribe(([emp, user]) => {
+      this.empService.get(params.get('employee')).subscribe((emp) => {
         this.appointment.employee = emp;
         this.appointment.service = emp.services.find(s => s.id === +params.get('service'));
-        this.appointment.customer = user.person;
       });
     });
   }
@@ -52,6 +48,7 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   }
 
   bookAppointment() {
+    this.appointment.customer = this.globals.user.person;
     this.appointmentService.createAppointment(this.appointment.model())
       .toPromise()
       .then(res => this.alertify.success('appointment booked'))

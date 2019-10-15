@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Employee} from '../../../shared/models/Employee';
+import {Employee} from '../../../core/models/Employee';
 import {Moment} from 'moment';
 import {ToastService} from '../../../shared/services/toast.service';
 import * as moment from 'moment';

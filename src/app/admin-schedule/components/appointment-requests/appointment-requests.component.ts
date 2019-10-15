@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Moment} from 'moment';
-import {BaseAppointment} from '../../../shared/models/BaseAppointment';
-import {Employee} from '../../../shared/models/Employee';
+import {BaseAppointment} from '../../../core/models/BaseAppointment';
+import {Employee} from '../../../core/models/Employee';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 
 @Component({

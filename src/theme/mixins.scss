@@ -1,0 +1,48 @@
+@import '../../node_modules/@angular/material/theming';
+// Plus imports for other components in your app.
+
+
+@mixin div-component($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, background);
+
+  div, mat-toolbar, button, mat-list, mat-drawer, mat-list-item {
+    &.p900{
+      color: white;
+      background-color: mat-color($primary, 900);
+    }
+    &.p800{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 800);
+    }
+    &.p700{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 700);
+    }
+    &.p600{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 600);
+    }
+    &.p500{
+      color: white;
+      background-color: mat-color($primary, 500);
+    }
+    &.p400{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 400);
+    }
+    &.p300{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 300);
+    }
+    &.p200{
+      background-color: mat-color($primary, 200);
+    }
+    &.p100{
+      background-color: mat-color($primary, 100);
+    }
+    &.p50{
+      background-color: mat-color($primary, 50);
+    }
+  }
+}

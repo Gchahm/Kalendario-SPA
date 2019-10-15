@@ -1,15 +1,15 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { IsEmployeeGuard } from './is-employee.guard';
+import { CanBookAppointments } from './can-book-appointments.service';
 
-describe('IsEmployeeGuard', () => {
+describe('CanBookAppointments', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [IsEmployeeGuard]
+      providers: [CanBookAppointments]
     });
   });
 
-  it('should ...', inject([IsEmployeeGuard], (guard: IsEmployeeGuard) => {
+  it('should ...', inject([CanBookAppointments], (guard: CanBookAppointments) => {
     expect(guard).toBeTruthy();
   }));
 });

@@ -1,13 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Employee} from '../../../shared/models/Employee';
+import {Employee} from '../../../core/models/Employee';
 import * as moment from 'moment';
 import {ToastService} from '../../../shared/services/toast.service';
 import {Moment} from 'moment';
 import {AppointmentService} from '../../../shared/services/appointment.service';
-import {CreateAppointmentModel} from '../../../shared/models/Appointment';
+import {CreateAppointmentModel} from '../../../core/models/Appointment';
 import {DateAdapter, MAT_DATE_FORMATS, MatDialog} from '@angular/material';
-import {DialogCustomerListComponent} from '../dialog-customer-list/dialog-customer-list.component';
 import {APP_DATE_FORMATS, AppDateAdapter} from '../../../shared/helpers/format-datepicker';
+import {CustomerListDialogComponent} from '../../dialogs/customer-list/customer-list-dialog.component';
 
 @Component({
   selector: 'employee-form-appointment',
@@ -63,7 +63,7 @@ export class FormAppointmentComponent {
   }
 
   openCustomerList() {
-    const dialogRef = this.dialog.open(DialogCustomerListComponent, {
+    const dialogRef = this.dialog.open(CustomerListDialogComponent, {
       width: '1400px'
     });
 

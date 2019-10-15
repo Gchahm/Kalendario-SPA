@@ -1,0 +1,8 @@
+.create-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-form > * {
+  width: 100%;
+}

@@ -1,0 +1,25 @@
+<mat-toolbar *ngIf="emp" class="p500">
+  <mat-toolbar-row>
+    <span>Dashboard</span>
+    <button mat-stroked-button color="accent" [matMenuTriggerFor]="menu">{{emp.name}}</button>
+    <mat-menu #menu="matMenu">
+      <button *ngFor="let employee of employees"
+              mat-menu-item
+              (click)="emp = employee">
+        {{employee.name}}
+      </button>
+    </mat-menu>
+    <mat-icon class="example-icon" matTooltip="Profile" (click)="activePanel = 'profile'">account_box</mat-icon>
+    <mat-icon class="example-icon" matTooltip="Create appointment" (click)="activePanel = 'book'">
+      calendar_today
+    </mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div *ngIf="emp" class="container-fluid">
+  <div [ngSwitch]="activePanel">
+    <employee-profile *ngSwitchCase="'profile'" [model]="emp"></employee-profile>
+    <employee-schedule-view *ngSwitchCase="'book'" [employee]="emp"></employee-schedule-view>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Appointment} from '../../../shared/models/Appointment';
+import {Appointment} from '../../../core/models/Appointment';
 import {AppointmentQParams, AppointmentService} from '../../../shared/services/appointment.service';
 import * as moment from 'moment';
 

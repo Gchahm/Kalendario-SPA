@@ -1,0 +1,11 @@
+.edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form > .form-row > * > * {
+  width: 100%;
+}
+
+
+

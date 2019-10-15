@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Employee, EmployeeAdapter} from '../models/Employee';
+import {Employee, EmployeeAdapter} from '../../core/models/Employee';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Slot, SlotAdapter} from '../../customer/models/Slot';
-import {adaptList} from '../adapter';
+import {adaptList} from '../../core/interfaces/adapter';
 import {Moment} from 'moment';
-import {Service, ServiceAdapter} from '../models/Service';
+import {Service, ServiceAdapter} from '../../core/models/Service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../../shared/services/auth.service';
+import {AuthService} from '../../../admin-schedule/services/auth.service';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
-import {LoginModel} from '../../../shared/models/LoginModel';
+import {LoginModel} from '../../models/LoginModel';
 
 @Component({
   selector: 'app-login',

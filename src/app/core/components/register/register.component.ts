@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../shared/services/auth.service';
+import {AuthService} from '../../../admin-schedule/services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({

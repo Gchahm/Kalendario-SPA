@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Employee} from '../../../shared/models/Employee';
+import {Employee} from '../../../core/models/Employee';
 import {Subscription} from 'rxjs';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Service} from '../../../shared/models/Service';
+import {Service} from '../../../core/models/Service';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {Slot} from '../../models/Slot';

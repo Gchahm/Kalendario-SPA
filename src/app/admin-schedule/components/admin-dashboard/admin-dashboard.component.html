@@ -1,0 +1,10 @@
+<mat-drawer-container class="drawer-container" autosize>
+  <mat-drawer #drawer class="p300" mode="side" [(opened)]="sideOpen">
+    <admin-dashboard-side-bar></admin-dashboard-side-bar>
+  </mat-drawer>
+  <button type="button" (click)="drawer.toggle()" class="toggle p900">
+    <mat-icon *ngIf="sideOpen">chevron_left</mat-icon>
+    <mat-icon *ngIf="!sideOpen">chevron_right</mat-icon>
+  </button>
+  <ng-content></ng-content>
+</mat-drawer-container>

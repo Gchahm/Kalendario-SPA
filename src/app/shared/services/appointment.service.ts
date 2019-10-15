@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Appointment, AppointmentAdapter, CreateAppointmentModel, UpdateAppointmentModel} from '../models/Appointment';
-import {EmployeeAdapter} from '../models/Employee';
+import {Appointment, AppointmentAdapter, CreateAppointmentModel, UpdateAppointmentModel} from '../../core/models/Appointment';
+import {EmployeeAdapter} from '../../core/models/Employee';
 import {forkJoin, Observable} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {adaptList} from '../adapter';
-import {BaseAppointment} from '../models/BaseAppointment';
+import {adaptList} from '../../core/interfaces/adapter';
+import {BaseAppointment} from '../../core/models/BaseAppointment';
 import {SelfAppointment, SelfAppointmentAdapter} from '../../admin-schedule/models/SelfAppointment';
 
 @Injectable({

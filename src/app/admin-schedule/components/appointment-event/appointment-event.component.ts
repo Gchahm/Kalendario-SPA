@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Appointment} from '../../../shared/models/Appointment';
+import {Appointment} from '../../../core/models/Appointment';
 import {ToastService} from '../../../shared/services/toast.service';
 import {CancelModalComponent} from '../cancel-modal/cancel-modal.component';
 import {Moment} from 'moment';
-import {BaseAppointment} from '../../../shared/models/BaseAppointment';
+import {BaseAppointment} from '../../../core/models/BaseAppointment';
 import {SelfAppointment} from '../../models/SelfAppointment';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import {MatDialog} from '@angular/material';

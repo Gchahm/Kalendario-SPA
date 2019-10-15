@@ -1,0 +1,113 @@
+<mat-expansion-panel *ngIf="onUpdateEvent.model as writeModel">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{model.name}}
+    </mat-panel-title>
+    <mat-panel-description>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <ng-container *ngIf="editMode; else viewMode">
+    <form #EmployeeForm="ngForm">
+
+      <div class="row">
+        <div class="col-4">
+          <img src="{{writeModel.photoUrl}}">
+        </div>
+        <div class="col-4">
+
+          <mat-form-field>
+            <input [(ngModel)]="writeModel.first_name"
+                   placeholder="first name"
+                   #firstName="ngModel"
+                   name="firstName"
+                   type="text"
+                   matInput
+                   required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input [(ngModel)]="writeModel.last_name"
+                   placeholder="last name"
+                   #lastName="ngModel"
+                   name="lastName"
+                   type="text"
+                   matInput
+                   required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input [(ngModel)]="writeModel.instagram"
+                   placeholder="instagram"
+                   #instagram="ngModel"
+                   name="instagram"
+                   type="text"
+                   matInput
+                   required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input [(ngModel)]="writeModel.email"
+                   placeholder="email"
+                   #email="ngModel"
+                   name="email"
+                   type="text"
+                   matInput
+                   required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea [(ngModel)]="writeModel.bio"
+                      placeholder="bio"
+                      #bio="ngModel"
+                      name="bio"
+                      type="text"
+                      matInput
+                      required></textarea>
+          </mat-form-field>
+
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <mat-select placeholder="services"
+                        multiple
+                        [(value)]="writeModel.services">
+              <mat-option *ngFor="let service of services" [value]="service.id.toString()">{{service.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 text-right">
+          <button (click)="save()" color="accent" mat-flat-button>confirm</button>
+          <button (click)="editMode = !editMode" color="danger" mat-flat-button>cancel</button>
+        </div>
+      </div>
+    </form>
+
+  </ng-container>
+
+  <ng-template #viewMode>
+    <div class="row">
+      <div class="col-4">
+        <img src="{{model.photoUrl}}">
+      </div>
+      <div class="col-4">
+        <p><span class="top">instagram:</span> {{model.instagram}}</p>
+        <div class="align-content-center">
+          <mat-icon>email</mat-icon>
+          <span class="m-auto">{{model.email}}</span>
+        </div>
+        <p>{{model.bio}}</p>
+      </div>
+      <div class="col-4">
+        services
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let service of model.services">{{service.name}}</mat-list-item>
+        </mat-list>
+      </div>
+      <div class="col-12 text-right">
+        <button [hidden]="!globals.user.can.change.employees()" (click)="editMode = !editMode" color="accent" mat-flat-button>edit</button>
+      </div>
+    </div>
+  </ng-template>
+</mat-expansion-panel>
