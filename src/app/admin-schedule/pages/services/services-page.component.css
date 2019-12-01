@@ -1,4 +1,7 @@
-.nav-spacer {
-  flex: 1 1 auto;
+.active {
+  color: white;
+  border-radius: 5px;
 }
-
+.model-create {
+  width: 100%;
+}

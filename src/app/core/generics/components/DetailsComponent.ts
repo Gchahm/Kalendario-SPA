@@ -2,14 +2,14 @@ import {EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UpdateModelEvent} from './UpdateModelEvent';
 import {IReadModel} from '../../models/interfaces/IReadModel';
 
-export abstract class DetailsComponent implements OnInit {
+export abstract class DetailsComponent<R extends IReadModel, W> implements OnInit {
 
-  @Input() model: IReadModel;
+  @Input() model: R;
   @Output() onUpdate = new EventEmitter<UpdateModelEvent>();
 
   onUpdateEvent: UpdateModelEvent = {
     model: null,
-    onSuccess: (model: IReadModel) => {
+    onSuccess: (model: R) => {
       this.model = model;
       this.onUpdateEvent.model = model.writeModel();
       this.editMode = false;
@@ -21,6 +21,11 @@ export abstract class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.onUpdateEvent.model = this.model.writeModel();
+  }
+
+  edit() {
+    this.onUpdateEvent.model = this.model.writeModel();
+    this.editMode = true;
   }
 
   save() {

@@ -1,18 +1,11 @@
-<mat-expansion-panel *ngIf="onUpdateEvent.model as writeModel">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      {{model.name}}
-    </mat-panel-title>
-    <mat-panel-description>
-    </mat-panel-description>
-  </mat-expansion-panel-header>
+<div *ngIf="onUpdateEvent.model as writeModel">
 
   <ng-container *ngIf="editMode; else viewMode">
     <form #EmployeeForm="ngForm">
-
       <div class="row">
         <div class="col-4">
-          <img src="{{writeModel.photoUrl}}">
+          <img src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}">
+
         </div>
         <div class="col-4">
 
@@ -76,12 +69,11 @@
             </mat-select>
           </mat-form-field>
         </div>
-
         <div class="col-12 text-right">
           <button (click)="save()" color="accent" mat-flat-button>confirm</button>
           <button (click)="editMode = !editMode" color="danger" mat-flat-button>cancel</button>
         </div>
-      </div>
+        </div>
     </form>
 
   </ng-container>
@@ -89,25 +81,28 @@
   <ng-template #viewMode>
     <div class="row">
       <div class="col-4">
-        <img src="{{model.photoUrl}}">
+        <img src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}">
       </div>
       <div class="col-4">
-        <p><span class="top">instagram:</span> {{model.instagram}}</p>
-        <div class="align-content-center">
-          <mat-icon>email</mat-icon>
-          <span class="m-auto">{{model.email}}</span>
-        </div>
-        <p>{{model.bio}}</p>
+        <table class="table table-borderless">
+          <tr><th>instagram</th><td>{{model.instagram}}</td></tr>
+          <tr><th>email</th><td>{{model.email}}</td></tr>
+          <tr><th>bio</th><td>{{model.bio}}</td></tr>
+        </table>
       </div>
       <div class="col-4">
-        services
-        <mat-list role="list">
-          <mat-list-item role="listitem" *ngFor="let service of model.services">{{service.name}}</mat-list-item>
-        </mat-list>
+        <table class="table">
+          <thead>
+          <tr><th>Services</th><th>Duration</th></tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let service of model.services"><td>{{service.name}}</td><td>{{service.duration}}</td></tr>
+          </tbody>
+        </table>
       </div>
       <div class="col-12 text-right">
-        <button [hidden]="!globals.user.can.change.employees()" (click)="editMode = !editMode" color="accent" mat-flat-button>edit</button>
+        <button [hidden]="!globals.user.can.change.employees()" (click)="edit()" color="accent" mat-flat-button>edit</button>
       </div>
     </div>
   </ng-template>
-</mat-expansion-panel>
+</div>

@@ -32,6 +32,7 @@
     "@types/facebook-js-sdk": "^3.3.0",
     "alertifyjs": "^1.11.4",
     "bootstrap": "^4.3.1",
+    "bootstrap-4-grid": "^3.2.0",
     "bootswatch": "^4.3.1",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",

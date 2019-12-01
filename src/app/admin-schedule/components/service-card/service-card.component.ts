@@ -7,26 +7,24 @@ import {Service, ServiceWriteModel} from '../../../core/models/Service';
   templateUrl: './service-card.component.html',
   styleUrls: ['./service-card.component.css']
 })
-export class ServiceCardComponent extends DetailsComponent implements OnInit {
+export class ServiceCardComponent extends DetailsComponent<Service, ServiceWriteModel> implements OnInit {
 
   constructor() {
     super();
   }
-  duration = {hours: 0, minutes: 0};
 
-  writeModel: ServiceWriteModel;
+  duration = {hours: 0, minutes: 0};
 
   ngOnInit() {
     super.ngOnInit();
-    const service = this.model as Service;
-    this.duration.hours = service.duration.hours();
-    this.duration.minutes = service.duration.minutes();
-    this.writeModel = this.onUpdateEvent.model as ServiceWriteModel;
+    this.duration.hours = this.model.duration.hours();
+    this.duration.minutes = this.model.duration.minutes();
   }
 
   save() {
-    this.writeModel.duration = this.duration.hours + ':' + this.duration.minutes;
-    this.onUpdateEvent.model = this.writeModel;
+    const model = this.onUpdateEvent.model as ServiceWriteModel;
+    model.duration = this.duration.hours + ':' + this.duration.minutes;
+    this.onUpdateEvent.model = model;
     super.save();
   }
 }

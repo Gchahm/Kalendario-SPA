@@ -1,3 +1,17 @@
-.nav-spacer {
-  flex: 1 1 auto;
+mat-list {
+  font-weight: bolder;
+}
+
+mat-list-item {
+  cursor: pointer;
+}
+
+.active {
+  color: white;
+  border-radius: 5px;
+}
+
+
+.model-create {
+  width: 100%;
 }

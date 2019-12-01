@@ -7,14 +7,25 @@
   background: #eee;
 }
 
+.mat-drawer-side {
+    border: 0;
+}
+
 .toggle {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  top: 64px;
   height: 64px;
   width: 30px;
   border: 0;
+  border-top-right-radius: 100%;
+  border-bottom-right-radius: 100%;
   padding: auto;
+}
+
+.admin-dashboard-content {
+  margin-left: 60px;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 button:focus {outline:0;}

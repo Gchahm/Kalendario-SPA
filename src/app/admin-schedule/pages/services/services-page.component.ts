@@ -13,11 +13,8 @@ import {CreateServiceDialogComponent} from '../../dialogs/create-service/create-
   templateUrl: './services-page.component.html',
   styleUrls: ['./services-page.component.css']
 })
-export class ServicesPageComponent extends ListComponent implements OnInit, OnDestroy {
+export class ServicesPageComponent extends ListComponent<Service> implements OnInit, OnDestroy {
 
-  services: Service[];
-  subscription: Subscription;
-  breakpoint = 0;
 
   constructor(private serviceService: ServiceService,
               public globals: Globals,
@@ -27,23 +24,16 @@ export class ServicesPageComponent extends ListComponent implements OnInit, OnDe
   }
 
   ngOnInit() {
-    this.subscription = this.serviceService.get().subscribe(s => this.services = s);
-    this.breakpoint = (window.innerWidth <= 400) ? 1 : 6;
+    this.subscription = this.serviceService.get().subscribe((services: Service[]) => {
+      this.loadModels(services);
+    });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  onModelCreate(response) {
-    this.services.push(response);
+    super.ngOnDestroy();
   }
 
   dialogData() {
     return null;
-  }
-
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 6;
   }
 }

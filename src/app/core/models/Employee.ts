@@ -52,7 +52,7 @@ export class EmployeeAdapter implements Adapter<Employee> {
 }
 
 
-interface EmployeeReadModel extends IReadModel {
+export interface EmployeeReadModel extends IReadModel {
   id: number;
   firstName: string;
   lastName: string;

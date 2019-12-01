@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootswatch/dist/litera/bootstrap.css';
+/*@import '~bootswatch/dist/litera/bootstrap.css';*/
+@import '~bootstrap/dist/css/bootstrap.min.css';
 /*@import "~font-awesome/css/font-awesome.css";*/
 /*@import '~@fullcalendar/core/main.css';*/
 /*@import '~@fullcalendar/daygrid/main.css';*/
@@ -7,7 +8,6 @@
 /*@import '~@fullcalendar/bootstrap/main.css';*/
 @import '~alertifyjs/build/css/alertify.min.css';
 @import '~alertifyjs/build/css/themes/bootstrap.min.css';
-@import "./theme/bootstrap.min.css";
 /*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 /*@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";*/
 
@@ -25,3 +25,4 @@ body {
 /*.primary-text-color    { color: #212121; }*/
 /*.secondary-text-color  { color: #757575; }*/
 /*.divider-color         { border-color: #BDBDBD; }*/
+

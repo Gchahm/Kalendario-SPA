@@ -15,10 +15,8 @@ import {CreateEmployeeDialogComponent} from '../../dialogs/create-employee/creat
   templateUrl: './employees-page.component.html',
   styleUrls: ['./employees-page.component.css']
 })
-export class EmployeesPageComponent extends ListComponent implements OnInit, OnDestroy {
+export class EmployeesPageComponent extends ListComponent<Service> implements OnInit, OnDestroy {
 
-  subscription: Subscription;
-  employees: Employee[];
   services: Service[];
 
   @ViewChild('accordion', {read: MatAccordion, static: false}) accordion: MatAccordion;
@@ -37,16 +35,12 @@ export class EmployeesPageComponent extends ListComponent implements OnInit, OnD
       this.employeeService.get(),
     ).subscribe(([services, employees]) => {
       this.services = services;
-      this.employees = employees;
+      this.loadModels(employees);
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  onModelCreate(response) {
-    this.employees.push(response);
+    super.ngOnDestroy();
   }
 
   dialogData() {

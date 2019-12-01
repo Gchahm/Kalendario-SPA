@@ -1,16 +1,25 @@
 <admin-dashboard>
-  <mat-toolbar class="p500">
-    <mat-toolbar-row>
-      <span class="nav-spacer"></span>
-      <button [hidden]="!globals.user.can.add.employees()" mat-button class="p900" (click)="createModel()">new</button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <ng-container *ngIf="services">
-    <mat-accordion>
-      <employee-profile [model]="emp"
-                        [services]="services"
-                        (onUpdate)="updateModel($event)"
-                        *ngFor="let emp of employees"></employee-profile>
-    </mat-accordion>
-  </ng-container>
+  <div class="row">
+    <div class="col-2">
+      <mat-list>
+        <button [hidden]="!globals.user.can.add.employees()" mat-stroked-button color="accent" class="model-create"
+                (click)="createModel()">new
+        </button>
+        <mat-list-item *ngFor="let emp of modelList"
+                       (click)="selectModel(emp.id)"
+                       [ngClass]="{'A400 active': emp.id === selectedModel.id}">
+          {{emp.name}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-10">
+      <ng-container *ngIf="services">
+        <employee-profile [(model)]="selectedModel"
+                          [services]="services"
+                          (onUpdate)="updateModel($event)"></employee-profile>
+      </ng-container>
+    </div>
+  </div>
 </admin-dashboard>
+
+
