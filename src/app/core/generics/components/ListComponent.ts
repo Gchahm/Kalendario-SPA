@@ -9,7 +9,7 @@ import {Component, OnDestroy, TemplateRef} from '@angular/core';
 import {CreateDialogComponent} from './CreateDialogComponent';
 import {Subscription} from 'rxjs';
 
-export abstract class ListComponent<TModel> implements OnDestroy {
+export abstract class ListComponent<TModel extends IReadModel> implements OnDestroy {
 
   protected constructor(private modelService: DjangoRWModelService<IReadModel, IWriteModel>,
                         private dialog: MatDialog,

@@ -2,13 +2,14 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {EmployeeWriteModel} from '../../../core/models/Employee';
 import {Service} from '../../../core/models/Service';
+import {CreateDialogComponent} from '../../../core/generics/components/CreateDialogComponent';
 
 @Component({
   selector: 'admin-create-employee-dialog',
   templateUrl: './create-employee-dialog.component.html',
   styleUrls: ['./create-employee-dialog.component.css']
 })
-export class CreateEmployeeDialogComponent {
+export class CreateEmployeeDialogComponent implements CreateDialogComponent {
 
   form = new CreateEmployeeForm();
 

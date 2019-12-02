@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Employee} from '../../../core/models/Employee';
-import {forkJoin, Subscription} from 'rxjs';
+import {forkJoin} from 'rxjs';
 import {AdminEmployeeService} from '../../services/admin-employee.service';
 import {ServiceService} from '../../services/service.service';
 import {Service} from '../../../core/models/Service';
@@ -15,7 +15,7 @@ import {CreateEmployeeDialogComponent} from '../../dialogs/create-employee/creat
   templateUrl: './employees-page.component.html',
   styleUrls: ['./employees-page.component.css']
 })
-export class EmployeesPageComponent extends ListComponent<Service> implements OnInit, OnDestroy {
+export class EmployeesPageComponent extends ListComponent<Employee> implements OnInit, OnDestroy {
 
   services: Service[];
 

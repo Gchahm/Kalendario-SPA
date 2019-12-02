@@ -9,7 +9,7 @@ import {EmployeeReadModel, EmployeeWriteModel} from '../../../core/models/Employ
   templateUrl: './employee-panel.component.html',
   styleUrls: ['./employee-panel.component.css']
 })
-export class EmployeePanelComponent extends DetailsComponent<EmployeeReadModel, EmployeeWriteModel> {
+export class EmployeePanelComponent extends DetailsComponent<EmployeeReadModel> {
 
   constructor(public globals: Globals) {
     super();

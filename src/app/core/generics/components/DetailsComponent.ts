@@ -2,7 +2,7 @@ import {EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UpdateModelEvent} from './UpdateModelEvent';
 import {IReadModel} from '../../models/interfaces/IReadModel';
 
-export abstract class DetailsComponent<R extends IReadModel, W> implements OnInit {
+export abstract class DetailsComponent<R extends IReadModel> implements OnInit {
 
   @Input() model: R;
   @Output() onUpdate = new EventEmitter<UpdateModelEvent>();

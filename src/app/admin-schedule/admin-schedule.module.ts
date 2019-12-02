@@ -19,6 +19,9 @@ import {AppointmentDashboardPageComponent} from './pages/appointment-dashboard/a
 import {EmployeePanelComponent} from './components/employee-panel/employee-panel.component';
 import {ServiceCardComponent} from './components/service-card/service-card.component';
 import { CreateServiceDialogComponent } from './dialogs/create-service/create-service-dialog.component';
+import { ShiftsPageComponent } from './pages/shifts-page/shifts-page.component';
+import { ShiftDetailComponent } from './components/shift-detail/shift-detail.component';
+import { CreateShiftDialogComponent } from './dialogs/create-shift/create-shift-dialog.component';
 
 
 @NgModule({
@@ -43,6 +46,9 @@ import { CreateServiceDialogComponent } from './dialogs/create-service/create-se
     EmployeesPageComponent,
     AdminDashboardComponent,
     CreateServiceDialogComponent,
+    ShiftsPageComponent,
+    ShiftDetailComponent,
+    CreateShiftDialogComponent,
   ],
   imports: [
     SharedModule,

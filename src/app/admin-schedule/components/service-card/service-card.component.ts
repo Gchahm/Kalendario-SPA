@@ -7,7 +7,7 @@ import {Service, ServiceWriteModel} from '../../../core/models/Service';
   templateUrl: './service-card.component.html',
   styleUrls: ['./service-card.component.css']
 })
-export class ServiceCardComponent extends DetailsComponent<Service, ServiceWriteModel> implements OnInit {
+export class ServiceCardComponent extends DetailsComponent<Service> implements OnInit {
 
   constructor() {
     super();
