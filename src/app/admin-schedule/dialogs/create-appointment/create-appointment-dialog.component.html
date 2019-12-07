@@ -1,0 +1,77 @@
+<form #appointmentForm="ngForm" class="appointment-form">
+
+  <mat-form-field>
+    <input [(ngModel)]="form.customerName"
+           matInput
+           disabled
+           id="customer-name-field"
+           #customerName="ngModel"
+           name="customerName"
+           placeholder="customer name"
+           type="text">
+    <button mat-mini-fab
+            (click)="openCustomerList()">
+      select
+    </button>
+  </mat-form-field>
+
+  <input [(ngModel)]="form.customerId"
+         hidden
+         #customerName="ngModel"
+         name="customerId"
+         type="text"
+         required>
+
+  <mat-form-field>
+    <input [(ngModel)]="form.startDate"
+           matInput
+           [min]="minDate"
+           [matDatepicker]="picker"
+           placeholder="Choose a date"
+           name="startDate"
+           #startDate="ngModel"
+           (change)="emitDateChanged(form.startDate)"
+           required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error>
+      Please enter a date
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="form.startTime"
+           name="startTime"
+           matInput
+           #startTime="ngModel"
+           type="time"
+           required>
+    <mat-error>
+      Please enter a time
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Service</mat-label>
+    <mat-select [(ngModel)]="form.service"
+                #service="ngModel"
+                name="service"
+                class="form-control"
+                required>
+      <mat-option *ngFor="let service of employee.services" [value]="service.id">
+        {{service.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error>
+      service is required
+    </mat-error>
+  </mat-form-field>
+  <button type="submit"
+          color="primary"
+          mat-flat-button
+          (click)="submit()"
+          [disabled]="!appointmentForm.valid">
+    book appointment
+  </button>
+  <button mat-flat-button color="warn" (click)="onNoClick()">cancel</button>
+</form>

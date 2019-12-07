@@ -1,65 +1,49 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Employee} from '../../../core/models/Employee';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
 import * as moment from 'moment';
 import {ToastService} from '../../../shared/services/toast.service';
 import {Moment} from 'moment';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import {CreateAppointmentModel} from '../../../core/models/Appointment';
-import {DateAdapter, MAT_DATE_FORMATS, MatDialog} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {APP_DATE_FORMATS, AppDateAdapter} from '../../../shared/helpers/format-datepicker';
-import {CustomerListDialogComponent} from '../../dialogs/customer-list/customer-list-dialog.component';
+import {CustomerListDialogComponent} from '../customer-list/customer-list-dialog.component';
+import {Employee} from '../../../core/models/Employee';
 
 @Component({
   selector: 'employee-form-appointment',
-  templateUrl: './form-appointment.component.html',
-  styleUrls: ['./form-appointment.component.css'],
+  templateUrl: './create-appointment-dialog.component.html',
+  styleUrls: ['./create-appointment-dialog.component.css'],
   providers: [
     {provide: DateAdapter, useClass: AppDateAdapter},
     {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
   ]
 })
-export class FormAppointmentComponent {
-
-  private _employee: Employee;
-  get employee() {
-    return this._employee;
-  }
-
-  @Input() set employee(employee: Employee) {
-    this._employee = employee;
-    this.form.employeeId = employee.id;
-  }
-
-  @Input() set date(value: Moment) {
-    this.form.startDate = value.toISOString();
-  }
+export class CreateAppointmentDialogComponent {
 
   @Output() dateChanged = new EventEmitter<Moment>();
 
   minDate = new Date();
   form: CreateAppointmentForm;
+  employee: Employee;
 
   constructor(private appointmentService: AppointmentService,
               private toast: ToastService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<CreateAppointmentDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { employee: Employee, date: Moment}) {
     this.form = new CreateAppointmentForm();
     this.form.customerName = 'select customer';
+    this.form.startDate = data.date.toISOString();
+    this.employee = data.employee;
+    this.form.employeeId = data.employee.id;
+  }
+
+  onNoClick() {
+    this.dialogRef.close();
   }
 
   submit() {
-    console.log(this.form.model())
-    this.appointmentService.createAppointment(this.form.model())
-      .toPromise()
-      .then(success => {
-        this.dateChanged.emit(success.start);
-        this.toast.success('appointment booked');
-        this.form.clear();
-      })
-      .catch(error => this.toast.error(error));
-  }
-
-  emitDateChanged(date: string) {
-    this.dateChanged.emit(moment.utc(date));
+    this.dialogRef.close(this.form.createModel());
   }
 
   openCustomerList() {
@@ -85,11 +69,10 @@ class CreateAppointmentForm {
   public service: number;
   public employeeId: number;
 
-  model(): CreateAppointmentModel {
+  createModel(): CreateAppointmentModel {
     const start = moment.utc(this.startDate).startOf('day');
     start.set('hour', +this.startTime.substr(0, 2));
     start.set('minute', +this.startTime.substr(3));
-    console.log(this.startTime.toString());
     return {
       customer: this.customerId,
       status: 'A',
@@ -98,12 +81,5 @@ class CreateAppointmentForm {
       employee: this.employeeId,
       customer_notes: ''
     };
-  }
-
-  clear() {
-    this.startTime = null;
-    this.customerId = null;
-    this.customerName = null;
-    this.service = null;
   }
 }

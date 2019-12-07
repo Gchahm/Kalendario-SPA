@@ -1,0 +1,21 @@
+<ng-container *ngIf="appointment">
+  <table class="table table-borderless">
+    <tr><th>service:</th><td>{{appointment.service.name}}</td></tr>
+    <tr><th>date:</th><td>{{appointment.start.format('DD/MM/YYYY')}}</td></tr>
+    <tr><th>time:</th><td>{{appointment.start.format('HH:mm')}} - {{appointment.end.format('HH:mm')}}</td></tr>
+    <tr><th>customer:</th><td>{{appointment.customer.name}}</td></tr>
+    <tr><th>phone:</th><td>{{appointment.customer.phone}}</td></tr>
+    <tr><th>notes:</th><td>{{appointment.customer.notes}}</td></tr>
+  </table>
+
+
+</ng-container>
+
+
+<ng-container *ngIf="selfAppointment">
+  <table class="table table-borderless">
+    <tr><th>from:</th><td>{{selfAppointment.start.format('HH:mm')}}</td></tr>
+    <tr><th>to:</th><td>{{selfAppointment.end.format('HH:mm')}}</td></tr>
+    <tr><th>notes:</th><td>{{selfAppointment.reason}}</td></tr>
+  </table>
+</ng-container>

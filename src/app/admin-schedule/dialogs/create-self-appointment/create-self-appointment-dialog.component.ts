@@ -4,18 +4,20 @@ import {Moment} from 'moment';
 import {ToastService} from '../../../shared/services/toast.service';
 import * as moment from 'moment';
 import {AppointmentService, CreateSelfAppointmentModel} from '../../../shared/services/appointment.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'employee-form-self-appointment',
-  templateUrl: './form-self-appointment.component.html',
-  styleUrls: ['./form-self-appointment.component.css']
+  templateUrl: './create-self-appointment-dialog.component.html',
+  styleUrls: ['./create-self-appointment-dialog.component.css']
 })
-export class FormSelfAppointmentComponent implements OnInit {
+export class CreateSelfAppointmentDialogComponent implements OnInit {
 
   private _employee: Employee;
   get employee() {
     return this._employee;
   }
+
   @Input() set employee(employee: Employee) {
     this._employee = employee;
     this.form.employeeId = employee.id.toString();
@@ -32,8 +34,9 @@ export class FormSelfAppointmentComponent implements OnInit {
   form: CreateSelfAppointmentForm;
 
   constructor(private employeeAppointment: AppointmentService,
-              private toast: ToastService) {
-    this.form = new CreateSelfAppointmentForm( '', '', '', '', '', '');
+              private toast: ToastService,
+              dialogRef: MatDialogRef<CreateSelfAppointmentDialogComponent>) {
+    this.form = new CreateSelfAppointmentForm('', '', '', '', '', '');
   }
 
   ngOnInit() {

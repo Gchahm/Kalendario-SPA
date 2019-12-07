@@ -8,8 +8,8 @@
 </div>
 <div *ngIf="(appointments$ | async) as appointments; else spinner">
   <div *ngFor="let appointment of appointments">
-    <employee-appointment-event (eventClicked)="handleAppointmentClicked($event)" [appointment]="appointment"
-                                [showDate]="true" [showButtons]="true"></employee-appointment-event>
+    <!--<employee-appointment-event (eventClicked)="handleAppointmentClicked($event)" [appointment]="appointment"-->
+                                <!--[showDate]="true" [showButtons]="true"></employee-appointment-event>-->
   </div>
 </div>
 <ng-template #spinner>

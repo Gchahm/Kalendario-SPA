@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {EmployeeRoutingModule} from './employee-routing.module';
 import {CalendarModule} from '../calendar/calendar.module';
-import { AppointmentEventComponent } from './components/appointment-event/appointment-event.component';
-import { FormAppointmentComponent } from './components/form-appointment/form-appointment.component';
+import { AppointmentEventDialogComponent } from './dialogs/appointment-event/appointment-event-dialog.component';
 import { AppointmentRequestsComponent } from './components/appointment-requests/appointment-requests.component';
 import { CancelModalComponent } from './components/cancel-modal/cancel-modal.component';
-import { FormSelfAppointmentComponent } from './components/form-self-appointment/form-self-appointment.component';
 import {ScheduleViewComponent} from './components/schedule-view/schedule-view.component';
 import {ServicesPageComponent} from './pages/services/services-page.component';
 import {EmployeesPageComponent} from './pages/employees/employees-page.component';
@@ -22,6 +20,8 @@ import { CreateServiceDialogComponent } from './dialogs/create-service/create-se
 import { ShiftsPageComponent } from './pages/shifts-page/shifts-page.component';
 import { ShiftDetailComponent } from './components/shift-detail/shift-detail.component';
 import { CreateShiftDialogComponent } from './dialogs/create-shift/create-shift-dialog.component';
+import {CreateSelfAppointmentDialogComponent} from './dialogs/create-self-appointment/create-self-appointment-dialog.component';
+import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/create-appointment-dialog.component';
 
 
 @NgModule({
@@ -29,18 +29,20 @@ import { CreateShiftDialogComponent } from './dialogs/create-shift/create-shift-
     CancelModalComponent,
     AppointmentDashboardPageComponent,
     ScheduleViewComponent,
-    AppointmentEventComponent,
-    FormAppointmentComponent,
+    AppointmentEventDialogComponent,
     AppointmentRequestsComponent,
-    FormSelfAppointmentComponent,
     DashboardSideBarComponent,
 
     EmployeePanelComponent,
     ServiceCardComponent,
 
+    CreateSelfAppointmentDialogComponent,
+    CreateAppointmentDialogComponent,
+
     CustomerListDialogComponent,
     CreateCustomerDialogComponent,
     CreateEmployeeDialogComponent,
+    CreateShiftDialogComponent,
 
     ServicesPageComponent,
     EmployeesPageComponent,
@@ -48,7 +50,6 @@ import { CreateShiftDialogComponent } from './dialogs/create-shift/create-shift-
     CreateServiceDialogComponent,
     ShiftsPageComponent,
     ShiftDetailComponent,
-    CreateShiftDialogComponent,
   ],
   imports: [
     SharedModule,
@@ -60,7 +61,10 @@ import { CreateShiftDialogComponent } from './dialogs/create-shift/create-shift-
     CreateCustomerDialogComponent,
     CustomerListDialogComponent,
     CreateEmployeeDialogComponent,
-    CreateServiceDialogComponent
+    CreateServiceDialogComponent,
+    AppointmentEventDialogComponent,
+    CreateAppointmentDialogComponent,
+    CreateSelfAppointmentDialogComponent
   ]
 })
 export class AdminScheduleModule {

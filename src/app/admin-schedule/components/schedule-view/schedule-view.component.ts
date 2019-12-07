@@ -5,6 +5,12 @@ import * as moment from 'moment';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import {BaseAppointment} from '../../../core/models/BaseAppointment';
+import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
+import {MatDialog} from '@angular/material';
+import {AppointmentEventDialogComponent} from '../../dialogs/appointment-event/appointment-event-dialog.component';
+import {CreateSelfAppointmentDialogComponent} from '../../dialogs/create-self-appointment/create-self-appointment-dialog.component';
+import {CreateAppointmentDialogComponent} from '../../dialogs/create-appointment/create-appointment-dialog.component';
+import {ToastService} from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'employee-schedule-view',
@@ -19,29 +25,62 @@ export class ScheduleViewComponent implements OnInit {
       this.loadAppointments(this.date);
     }
   }
+  @Input() set currentDate(date: Moment) {
+    this.date = date;
+    this.loadAppointments(date);
+  }
 
-  emp: Employee;
   date: Moment;
-  activePanel = 'minimize';
+  emp: Employee;
   appointments: BaseAppointment[];
+  events: CalendarEvent[];
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(private appointmentService: AppointmentService,
+              private toast: ToastService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.date = moment.utc().add(1, 'days');
+    // this.date = moment.utc().add(1, 'days');
     this.loadAppointments(this.date);
   }
 
-  updateCalendar($event: Moment) {
-    this.loadAppointments($event);
+  // updateCalendar($event: Moment) {
+  //   this.loadAppointments($event);
+  // }
+
+  bookSelfAppointment() {
+    const dialogRef = this.dialog.open(CreateSelfAppointmentDialogComponent, {
+      width: '400px'
+    });
+  }
+
+  bookAppointment() {
+    const dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
+      width: '400px',
+      data: {employee: this.emp, date: this.date}
+    });
+
+    dialogRef.afterClosed().toPromise()
+      .then(createModel => {
+        if (createModel) {
+          this.appointmentService.createAppointment(createModel)
+            .toPromise()
+            .then(success => {
+              this.appointments.push(success);
+              this.loadEvents();
+              this.toast.success('appointment booked');
+            })
+            .catch(error => this.toast.error(error));
+        }
+      });
   }
 
   handleDayRender($event: DateChangedEvent) {
     this.loadAppointments($event.date);
   }
 
-  loadAppointments(date: Moment) {
+  private loadAppointments(date: Moment) {
     this.date = date.clone().utc();
     const fromDate = date.clone().startOf('day');
     const toDate = date.clone().endOf('day');
@@ -53,8 +92,29 @@ export class ScheduleViewComponent implements OnInit {
     })
       .toPromise().then(appointments => {
       this.appointments = appointments;
+      this.loadEvents();
       this.date = date;
     });
+  }
+
+  private loadEvents() {
+    const dialog = this.dialog;
+    this.events = this.appointments.map(apt => this.event(apt, dialog));
+  }
+
+  private event(apt: BaseAppointment, dialog): CalendarEvent {
+    const fn = () => {
+      dialog.open(AppointmentEventDialogComponent, {
+        width: '400px',
+        data: {id: apt.id}
+      });
+    };
+    return {
+      title: apt.start.format('DD/MM/YYYY HH:mm') + ' - ' + apt.end.format('HH:mm'),
+      start: apt.start,
+      end: apt.end,
+      onClick: fn
+    };
   }
 }
 

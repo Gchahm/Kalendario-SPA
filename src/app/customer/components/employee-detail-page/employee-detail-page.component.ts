@@ -8,6 +8,7 @@ import {Moment} from 'moment';
 import * as moment from 'moment';
 import {Slot} from '../../models/Slot';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
+import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
 
 @Component({
   selector: 'customer-employee-detail-page',
@@ -17,7 +18,8 @@ import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
 
   employee: Employee;
-  slots: Slot[];
+  events: CalendarEvent[];
+  // slots: Slot[];
   empServiceSubscription: Subscription;
   queryParamSubscription: Subscription;
 
@@ -65,14 +67,28 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
   }
 
   loadSlots() {
+    const router = this.router;
+    const serviceId = this.service.id;
+    const empId = this.employee.id;
+
     this.empService.slots(this.employee, this.service,
       this.date.clone().startOf('day'),
       this.date.clone().endOf('day'))
       .toPromise()
-      .then(slots => this.slots = slots);
+      .then(slots => {
+        this.events = slots.map(slot => {
+          return {
+            title: slot.start.format('HH:mm') + ' - ' + slot.end.format('HH:mm'),
+            start: slot.start,
+            end: slot.end,
+            onClick: () => {
+             router.navigate(['booking/', empId, serviceId, slot.start.toISOString()]);
+            }
+          };
+        });
+      });
   }
 
   handleEventClicked($event: Slot) {
-    this.router.navigate(['booking/', this.employee.id, this.service.id, $event.start.toISOString()] );
   }
 }

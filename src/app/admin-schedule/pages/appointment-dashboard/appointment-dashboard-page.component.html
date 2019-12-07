@@ -1,25 +1,32 @@
-<mat-toolbar *ngIf="emp" class="p500">
+<mat-toolbar *ngIf="employees" class="p500">
   <mat-toolbar-row>
     <span>Dashboard</span>
-    <button mat-stroked-button color="accent" [matMenuTriggerFor]="menu">{{emp.name}}</button>
+    <button mat-button color="accent" [matMenuTriggerFor]="menu">select employee</button>
     <mat-menu #menu="matMenu">
-      <button *ngFor="let employee of employees"
+      <button *ngFor="let emp of employees"
               mat-menu-item
-              (click)="emp = employee">
-        {{employee.name}}
+              (click)="addPanel(emp)">
+        <mat-icon *ngIf="isSelected(emp)">done</mat-icon>{{emp.name}}
       </button>
     </mat-menu>
-    <mat-icon class="example-icon" matTooltip="Profile" (click)="activePanel = 'profile'">account_box</mat-icon>
-    <mat-icon class="example-icon" matTooltip="Create appointment" (click)="activePanel = 'book'">
-      calendar_today
-    </mat-icon>
+    <button mat-flat-button color="accent" (click)="today()">Today</button>
+    <button mat-stroked-button color="accent" (click)="previousDay()">
+      <mat-icon class="icon">chevron_left</mat-icon>
+    </button>
+    <button mat-stroked-button color="accent" (click)="nextDay()">
+      <mat-icon class="icon">chevron_right</mat-icon>
+    </button>
+    {{date.format('dddd DD MMMM YYYY')}}
   </mat-toolbar-row>
 </mat-toolbar>
 
-
-<div *ngIf="emp" class="container-fluid">
-  <div [ngSwitch]="activePanel">
-    <employee-profile *ngSwitchCase="'profile'" [model]="emp"></employee-profile>
-    <employee-schedule-view *ngSwitchCase="'book'" [employee]="emp"></employee-schedule-view>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" *ngFor="let emp of selectedEmployees">
+      <button mat-stroked-button color="accent" class="close-button" (click)="removePanel(emp)">
+        <mat-icon >close</mat-icon>
+      </button>
+      <employee-schedule-view [employee]="emp" [currentDate]="date"></employee-schedule-view>
+    </div>
   </div>
 </div>

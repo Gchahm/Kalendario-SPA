@@ -4,26 +4,20 @@
       <div class="card h-100">
         <button mat-stroked-button routerLink="/staff">BACK TO STAFF</button>
         <img src="{{employee.photoUrl}}" class="card-img-top d-none d-sm-none d-md-block" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{employee.name}}</h5>
-          <p class="card-text">{{employee.bio}}</p>
-        </div>
+        <h5 class="card-title text-center">{{employee.name}}</h5>
+        <p class="pl-2 pr-2">{{employee.bio}}</p>
         <button [color]="selectedServiceColor(s)" mat-flat-button *ngFor="let s of employee.services" (click)="handleServiceClick(s)">
           {{s.name}}
         </button>
         <div class="card-body"></div>
       </div>
     </div>
-    <div class="col-sm-12 col-md-9">
+    <div class="col-sm-12 col-md-9 pt-2">
       <app-calendar [default-date]="date"
                     [min-date]="date"
+                    [events]="events"
                     (dayRender)="handleDayRender($event)"
                     (agendaEventClicked)="handleEventClicked($event)">
-        <app-slot
-          class="col-sm-6 col-md-4"
-          *ngFor="let slot of slots"
-          [slot]="slot"
-          (SlotClicked)="handleEventClicked($event)"></app-slot>
         <b class="p-4" *ngIf="slots && slots.length === 0">No time available</b>
       </app-calendar>
     </div>

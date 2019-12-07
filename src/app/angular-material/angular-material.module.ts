@@ -29,7 +29,7 @@ import {
   MatSortModule,
   MatBadgeModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule,
 } from '@angular/material';
 
 

@@ -42,7 +42,7 @@ export class EmployeeService {
     );
   }
 
-  slots(employee: Employee, service: Service, start: Moment, end: Moment) {
+  slots(employee: Employee, service: Service, start: Moment, end: Moment): Observable<Slot[]> {
     const params = {service: service.id.toString(), start: start.format('YYYY-MM-DDTHH:mm'), end: end.format('YYYY-MM-DDTHH:mm')};
     return this.http.get<Slot[]>(this.baseUrl + employee.id + '/slots/', {params}).pipe(
       map(adaptList(this.slotAdapter))

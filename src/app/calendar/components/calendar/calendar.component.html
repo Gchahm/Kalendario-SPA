@@ -1,11 +1,16 @@
-<div class="card">
+<div class="card mat-elevation-z6">
   <div class="card-header">
     <div class="row">
-      <div class="col-sm-12 col-md-8 font-italic align-self-center">
+      <div *ngIf="!hideButtons" class="col-sm-12 col-md-4 font-italic align-self-center">
         <mat-icon class="icon">calendar_today</mat-icon>
         {{currentDate.format('dddd DD MMMM YYYY')}}
       </div>
-      <div class="col-sm-12 col-md-4 text-right">
+      <div class="col-sm-12"
+           [class.col-md-4]="!hideButtons"
+           [class.col-md-12]="hideButtons">
+        <ng-content></ng-content>
+      </div>
+      <div *ngIf="!hideButtons" class="col-sm-12 col-md-4 text-right">
         <button mat-flat-button color="accent" (click)="today()">Today</button>
         <button mat-stroked-button [disabled]="prevDisabled()" color="accent" (click)="previousDay()">
           <mat-icon class="icon">chevron_left</mat-icon>
@@ -16,7 +21,24 @@
       </div>
     </div>
   </div>
-  <div class="card-body">
-    <ng-content></ng-content>
+
+  <div class="calendar-event mat-elevation-z1" *ngFor="let event of events"
+       [style.top]="topPosition(event)"
+       [style.height]="eventHeight(event)"
+       (click)="event.onClick()">
+    <p>{{event.title}}</p>
+  </div>
+
+  <div id="calendar-table-container" class="calendar-table" [style.height]="calendarHeight()">
+    <ng-container *ngFor="let hour of calendarHours">
+      <tr>
+        <th width="60px">{{hour}}:00</th>
+        <td class="w-100 top-line"></td>
+      </tr>
+      <tr>
+        <th class="bottom-line"></th>
+        <td class="w-100 bottom-line"></td>
+      </tr>
+    </ng-container>
   </div>
 </div>

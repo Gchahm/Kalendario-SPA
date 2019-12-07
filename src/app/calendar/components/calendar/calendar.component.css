@@ -1,8 +1,47 @@
-.card{
-  min-height:100%;
+.card-header {
+  height: 60px;
 }
 
 h4 {
   margin: auto;
   width: 50%;
+}
+
+.calendar-table {
+  overflow-y: scroll;
+}
+
+.calendar-table > th {
+  width: 60px;
+}
+
+.top-line {
+  border-bottom: 1px solid lightgray;
+  height: 30px;
+}
+
+.bottom-line {
+  border-bottom: 1px solid gray;
+  height: 30px;
+}
+
+th {
+  border-right: 1px solid gray;
+}
+
+.calendar-event {
+  display: table;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid lightgray;
+  position: absolute;
+  left: 60px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.calendar-event > p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
