@@ -6,9 +6,9 @@ import {IWriteModel} from '../../models/interfaces/IWriteModel';
 
 export class DjangoRWModelService<R extends IReadModel, M extends IWriteModel> {
 
-  constructor(private http: HttpClient,
+  constructor(protected http: HttpClient,
               private adapter: Adapter<R>,
-              private baseUrl) { }
+              protected baseUrl) { }
 
   get() {
     return this.http.get<R[]>(this.baseUrl).pipe(map(adaptList(this.adapter)));

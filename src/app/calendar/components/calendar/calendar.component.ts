@@ -70,7 +70,7 @@ export class CalendarComponent implements OnInit {
   }
 
   topPosition(event: CalendarEvent): string {
-    const value = event.start.hour() * 60 - this.minStart * 60 + 60;
+    const value = event.start.hour() * 60 + event.start.minute() - this.minStart * 60;
     return value.toString() + 'px';
   }
 
@@ -82,7 +82,6 @@ export class CalendarComponent implements OnInit {
   calendarHeight() {
     const el = document.getElementById('calendar-table-container');
     const topOffset = el.getBoundingClientRect().top;
-    console.log(topOffset);
     const value = (window.innerHeight - topOffset - 10);
     return value.toString() + 'px';
   }

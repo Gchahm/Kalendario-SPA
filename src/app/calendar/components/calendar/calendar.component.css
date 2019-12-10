@@ -1,14 +1,11 @@
-.card-header {
-  height: 60px;
-}
-
 h4 {
   margin: auto;
   width: 50%;
 }
 
-.calendar-table {
+#calendar-table-container {
   overflow-y: scroll;
+  position: relative;
 }
 
 .calendar-table > th {

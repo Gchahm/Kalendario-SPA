@@ -4,7 +4,8 @@
     <form #EmployeeForm="ngForm">
       <div class="row">
         <div class="col-4">
-          <img src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}">
+          <img src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}"
+               class="profile-img">
 
         </div>
         <div class="col-4">
@@ -73,7 +74,7 @@
           <button (click)="save()" color="accent" mat-flat-button>confirm</button>
           <button (click)="editMode = !editMode" color="danger" mat-flat-button>cancel</button>
         </div>
-        </div>
+      </div>
     </form>
 
   </ng-container>
@@ -81,27 +82,48 @@
   <ng-template #viewMode>
     <div class="row">
       <div class="col-4">
-        <img src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}">
+        <input type="image" src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}"
+               (click)="imageInput.click()"
+               class="profile-img"
+               alt="upload profile image"
+               title="change image">
+        <input type="file" accept="image/*" #imageInput hidden (change)="processFile(imageInput)">
       </div>
       <div class="col-4">
         <table class="table table-borderless">
-          <tr><th>instagram</th><td>{{model.instagram}}</td></tr>
-          <tr><th>email</th><td>{{model.email}}</td></tr>
-          <tr><th>bio</th><td>{{model.bio}}</td></tr>
+          <tr>
+            <th>instagram</th>
+            <td>{{model.instagram}}</td>
+          </tr>
+          <tr>
+            <th>email</th>
+            <td>{{model.email}}</td>
+          </tr>
+          <tr>
+            <th>bio</th>
+            <td>{{model.bio}}</td>
+          </tr>
         </table>
       </div>
       <div class="col-4">
         <table class="table">
           <thead>
-          <tr><th>Services</th><th>Duration</th></tr>
+          <tr>
+            <th>Services</th>
+            <th>Duration</th>
+          </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let service of model.services"><td>{{service.name}}</td><td>{{service.duration}}</td></tr>
+          <tr *ngFor="let service of model.services">
+            <td>{{service.name}}</td>
+            <td>{{service.duration}}</td>
+          </tr>
           </tbody>
         </table>
       </div>
       <div class="col-12 text-right">
-        <button [hidden]="!globals.user.can.change.employees()" (click)="edit()" color="accent" mat-flat-button>edit</button>
+        <button [hidden]="!globals.user.can.change.employees()" (click)="edit()" color="accent" mat-flat-button>edit
+        </button>
       </div>
     </div>
   </ng-template>

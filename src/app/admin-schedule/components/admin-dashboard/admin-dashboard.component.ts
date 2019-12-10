@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MenuOption} from '../../models/MenuOption';
 
 @Component({
   selector: 'admin-dashboard',
@@ -8,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class AdminDashboardComponent implements OnInit {
 
   sideOpen = true;
+  options: MenuOption[] = [
+    {name: 'Employee', link: '/admin/employees'},
+    {name: 'Services', link: '/admin/services'}
+  ];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

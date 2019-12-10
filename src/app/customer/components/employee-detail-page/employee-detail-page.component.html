@@ -1,7 +1,7 @@
-<div *ngIf="employee" class="container h-100">
+<div *ngIf="employee" class="container pt-2">
   <div (empId)=employee.id class="row">
     <div class="col-sm-12 col-md-3">
-      <div class="card h-100">
+      <div class="card mat-elevation-z5">
         <button mat-stroked-button routerLink="/staff">BACK TO STAFF</button>
         <img src="{{employee.photoUrl}}" class="card-img-top d-none d-sm-none d-md-block" alt="...">
         <h5 class="card-title text-center">{{employee.name}}</h5>
@@ -12,7 +12,7 @@
         <div class="card-body"></div>
       </div>
     </div>
-    <div class="col-sm-12 col-md-9 pt-2">
+    <div class="col-sm-12 col-md-9">
       <app-calendar [default-date]="date"
                     [min-date]="date"
                     [events]="events"

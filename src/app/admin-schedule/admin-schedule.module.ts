@@ -64,7 +64,7 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     CreateServiceDialogComponent,
     AppointmentEventDialogComponent,
     CreateAppointmentDialogComponent,
-    CreateSelfAppointmentDialogComponent
+    CreateSelfAppointmentDialogComponent,
   ]
 })
 export class AdminScheduleModule {

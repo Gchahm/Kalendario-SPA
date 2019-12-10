@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Globals} from '../../../core/services/Globals';
 import {User} from '../../../core/models/User';
+import {MenuOption} from '../../models/MenuOption';
 
 @Component({
   selector: 'admin-dashboard-side-bar',
@@ -10,6 +11,7 @@ import {User} from '../../../core/models/User';
 export class DashboardSideBarComponent implements OnInit {
 
   user: User;
+  @Input() options: MenuOption[] = [];
 
   constructor(public globals: Globals) { }
 

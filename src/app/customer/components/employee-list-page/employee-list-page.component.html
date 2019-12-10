@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container p-2">
   <div class="card-deck">
-    <div class="card" *ngFor="let employee of employees$ | async">
+    <div class="card mat-elevation-z10" *ngFor="let employee of employees$ | async">
       <img class="m-auto" src="{{employee.photoUrl}}">
       <div class="card-body">
         <h4 class="card-title">

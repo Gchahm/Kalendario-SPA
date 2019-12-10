@@ -1,6 +1,6 @@
 <mat-drawer-container class="drawer-container" autosize>
   <mat-drawer #drawer mode="side" class="mat-elevation-z10 drawer" [(opened)]="sideOpen">
-    <admin-dashboard-side-bar></admin-dashboard-side-bar>
+    <admin-dashboard-side-bar [options]="options"></admin-dashboard-side-bar>
   </mat-drawer>
   <button type="button" (click)="drawer.toggle()" class="toggle mat-elevation-z5 p200">
     <mat-icon *ngIf="sideOpen">chevron_left</mat-icon>
