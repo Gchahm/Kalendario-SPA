@@ -3,10 +3,13 @@
               [hide-buttons]="true"
               (dayRender)="handleDayRender($event)">
   {{emp.name}}
-  <button mat-stroked-button color="accent" (click)="bookAppointment()">
+  <button mat-raised-button (click)="bookAppointment()">
     <mat-icon matTooltip="book appointment">calendar_today</mat-icon>
   </button>
-  <button mat-stroked-button color="accent" (click)="bookSelfAppointment()">
+  <button mat-raised-button (click)="bookSelfAppointment()">
     <mat-icon matTooltip="lock time">lock</mat-icon>
+  </button>
+  <button mat-raised-button (click)="openRequests()" *ngIf="requests" matBadge="{{requests.length > 0 ? requests.length : null }}" matBadgePosition="above after" matBadgeColor="accent">
+    <mat-icon matTooltip="requests">event</mat-icon>
   </button>
 </app-calendar>

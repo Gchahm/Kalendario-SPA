@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="employees" class="p500">
+<mat-toolbar *ngIf="employees">
   <mat-toolbar-row>
     <span>Dashboard</span>
     <button mat-button color="accent" [matMenuTriggerFor]="menu">select employee</button>
@@ -16,7 +16,7 @@
     <button mat-stroked-button color="accent" (click)="nextDay()">
       <mat-icon class="icon">chevron_right</mat-icon>
     </button>
-    {{date.format('dddd DD MMMM YYYY')}}
+    <span class="m-2">{{date.format('dddd DD MMMM YYYY')}}</span>
   </mat-toolbar-row>
 </mat-toolbar>
 

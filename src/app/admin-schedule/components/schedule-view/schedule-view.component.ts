@@ -11,6 +11,8 @@ import {AppointmentEventDialogComponent} from '../../dialogs/appointment-event/a
 import {CreateSelfAppointmentDialogComponent} from '../../dialogs/create-self-appointment/create-self-appointment-dialog.component';
 import {CreateAppointmentDialogComponent} from '../../dialogs/create-appointment/create-appointment-dialog.component';
 import {ToastService} from '../../../shared/services/toast.service';
+import {Appointment} from '../../../core/models/Appointment';
+import {AppointmentRequestsDialogComponent} from '../../dialogs/appointment-requests/appointment-requests-dialog.component';
 
 @Component({
   selector: 'employee-schedule-view',
@@ -33,6 +35,7 @@ export class ScheduleViewComponent implements OnInit {
   date: Moment;
   emp: Employee;
   appointments: BaseAppointment[];
+  requests: Appointment[];
   events: CalendarEvent[];
 
   constructor(private appointmentService: AppointmentService,
@@ -41,13 +44,16 @@ export class ScheduleViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.date = moment.utc().add(1, 'days');
     this.loadAppointments(this.date);
+    this.loadRequests();
   }
 
-  // updateCalendar($event: Moment) {
-  //   this.loadAppointments($event);
-  // }
+  openRequests() {
+    const dialogRef = this.dialog.open(AppointmentRequestsDialogComponent, {
+      width: '400px',
+      data: {requests: this.requests}
+    });
+  }
 
   bookSelfAppointment() {
     const dialogRef = this.dialog.open(CreateSelfAppointmentDialogComponent, {
@@ -100,6 +106,12 @@ export class ScheduleViewComponent implements OnInit {
   private loadEvents() {
     const dialog = this.dialog;
     this.events = this.appointments.map(apt => this.event(apt, dialog));
+  }
+
+  private loadRequests() {
+    this.appointmentService.getAppointments({employee: this.emp.id.toString(), status: 'P'})
+      .toPromise()
+      .then(appointments => this.requests = appointments);
   }
 
   private event(apt: BaseAppointment, dialog): CalendarEvent {

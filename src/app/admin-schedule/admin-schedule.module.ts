@@ -3,7 +3,7 @@ import {SharedModule} from '../shared/shared.module';
 import {EmployeeRoutingModule} from './employee-routing.module';
 import {CalendarModule} from '../calendar/calendar.module';
 import { AppointmentEventDialogComponent } from './dialogs/appointment-event/appointment-event-dialog.component';
-import { AppointmentRequestsComponent } from './components/appointment-requests/appointment-requests.component';
+import { AppointmentRequestsDialogComponent } from './dialogs/appointment-requests/appointment-requests-dialog.component';
 import { CancelModalComponent } from './components/cancel-modal/cancel-modal.component';
 import {ScheduleViewComponent} from './components/schedule-view/schedule-view.component';
 import {ServicesPageComponent} from './pages/services/services-page.component';
@@ -30,7 +30,7 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     AppointmentDashboardPageComponent,
     ScheduleViewComponent,
     AppointmentEventDialogComponent,
-    AppointmentRequestsComponent,
+    AppointmentRequestsDialogComponent,
     DashboardSideBarComponent,
 
     EmployeePanelComponent,
@@ -65,6 +65,7 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     AppointmentEventDialogComponent,
     CreateAppointmentDialogComponent,
     CreateSelfAppointmentDialogComponent,
+    AppointmentRequestsDialogComponent,
   ]
 })
 export class AdminScheduleModule {
