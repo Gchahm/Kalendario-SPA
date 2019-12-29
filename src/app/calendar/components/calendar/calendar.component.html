@@ -1,6 +1,6 @@
 <div class="card mat-elevation-z6">
   <div class="card-header">
-    <div class="row">
+    <div class="row text-center">
       <div *ngIf="!hideButtons"
            class="col-sm-12 font-italic align-self-center"
            [class.col-md-4]="hideButtons"
@@ -12,14 +12,14 @@
         <ng-content></ng-content>
       </div>
       <div *ngIf="!hideButtons"
-           class="col-sm-12 col-md-4 text-right"
+           class="col-sm-12 col-md-4"
            [class.col-md-4]="hideButtons"
            [class.col-md-6]="!hideButtons">
-        <button mat-flat-button color="accent" (click)="today()">Today</button>
-        <button mat-stroked-button [disabled]="prevDisabled()" color="accent" (click)="previousDay()">
+        <button mat-flat-button [disabled]="prevDisabled()" color="accent" (click)="previousDay()">
           <mat-icon class="icon">chevron_left</mat-icon>
         </button>
-        <button mat-stroked-button color="accent" (click)="nextDay()">
+        <button mat-stroked-button color="accent" (click)="today()">Today</button>
+        <button mat-flat-button color="accent" (click)="nextDay()">
           <mat-icon class="icon">chevron_right</mat-icon>
         </button>
       </div>

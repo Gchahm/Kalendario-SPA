@@ -8,7 +8,6 @@
            placeholder="Choose a start date"
            name="startDate"
            #startDate="ngModel"
-           (change)="emitDateChanged(form.startDate)"
            required>
     <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
     <mat-datepicker #startPicker></mat-datepicker>
@@ -52,7 +51,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <textarea [(ngModel)]="form.reason"
+    <textarea [(ngModel)]="model.reason"
               matInput
               mat-autosize
               placeholder="reason"
@@ -67,7 +66,7 @@
           color="primary"
           mat-flat-button
           [disabled]="!appointmentForm.valid"
-          [mat-dialog-close]="form.createModel()">
+          (click)="submit()">
     book appointment
   </button>
   <button mat-flat-button color="warn" (click)="onNoClick()">cancel</button>

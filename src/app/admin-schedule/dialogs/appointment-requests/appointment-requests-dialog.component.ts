@@ -30,7 +30,7 @@ export class AppointmentRequestsDialogComponent {
 
   private updateStatus(appointment, status) {
     appointment.status = status;
-    this.appointmentsService.updateAppointment(appointment)
+    this.appointmentsService.post(appointment)
       .toPromise()
       .then(apt => {
         this.toast.success('appointment updated');

@@ -4,13 +4,9 @@ import {ToastService} from '../../../shared/services/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AppointmentService} from '../../../shared/services/appointment.service';
-import {Employee} from '../../../core/models/Employee';
-import {Moment} from 'moment';
-import {Service} from '../../../core/models/Service';
-import {Person} from '../../../core/models/Person';
 import * as moment from 'moment';
-import {CreateAppointmentModel} from '../../../core/models/Appointment';
 import {Globals} from '../../../core/services/Globals';
+import {Appointment} from '../../../core/models/Appointment';
 
 @Component({
   selector: 'customer-book-appointment-page',
@@ -22,7 +18,7 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
 
   empServiceSubscription: Subscription;
   queryParamSubscription: Subscription;
-  appointment: AppointmentForm = new AppointmentForm();
+  appointment: Appointment = new Appointment();
 
   constructor(private empService: EmployeeService,
               private appointmentService: AppointmentService,
@@ -48,30 +44,12 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   }
 
   bookAppointment() {
-    this.appointment.customer = this.globals.user.person;
-    this.appointmentService.createAppointment(this.appointment.model())
+    const model = this.appointment.writeModel();
+    model.customer = this.globals.user.person.id.toString();
+    this.appointmentService.post(model)
       .toPromise()
       .then(res => this.alertify.success('appointment booked'))
       .catch(error => this.alertify.error(error))
       .finally(() => this.router.navigate(['/my-appointments']));
-  }
-}
-
-class AppointmentForm {
-  employee: Employee;
-  start: Moment;
-  service: Service;
-  customer: Person;
-  customerNotes: string;
-
-  model(): CreateAppointmentModel {
-    return {
-      employee: this.employee.id,
-      customer: (!!this.customer ? this.customer.id : null),
-      service: this.service.id,
-      start: this.start.toISOString(),
-      customer_notes: this.customerNotes,
-      status: 'P'
-    };
   }
 }

@@ -1,91 +1,16 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {Appointment, AppointmentAdapter, CreateAppointmentModel, UpdateAppointmentModel} from '../../core/models/Appointment';
-import {EmployeeAdapter} from '../../core/models/Employee';
-import {forkJoin, Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
-import {adaptList} from '../../core/interfaces/adapter';
-import {BaseAppointment} from '../../core/models/BaseAppointment';
-import {SelfAppointment, SelfAppointmentAdapter} from '../../admin-schedule/models/SelfAppointment';
+import {DjangoRWModelService} from '../../core/generics/services/DjangoRWModelService';
+import {AppointmentAdapter, IAppointmentReadModel, IAppointmentWriteModel} from '../../core/models/Appointment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentService {
-  private appointmentBaseUrl = environment.apiUrl + 'appointments/';
-  private selfAppointmentBaseUrl = environment.apiUrl + 'self-appointments/';
+export class AppointmentService extends DjangoRWModelService<IAppointmentReadModel, IAppointmentWriteModel> {
 
-  constructor(private http: HttpClient,
-              private appointmentAdapter: AppointmentAdapter,
-              private selfAppointmentAdapter: SelfAppointmentAdapter,
-              private empAdapter: EmployeeAdapter) {
+  constructor(http: HttpClient,
+              private appointmentAdapter: AppointmentAdapter) {
+    super(http, appointmentAdapter, environment.apiUrl + 'appointments/');
   }
-
-  getAll(params: AppointmentQParams): Observable<BaseAppointment[]> {
-    return forkJoin(
-      this.getSelfAppointments(params),
-      this.getAppointments(params),
-    ).pipe(
-      map(([o1, o2], index) => [].concat(o1).concat(o2))
-    );
-  }
-
-  getAppointments(params: AppointmentQParams): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(this.appointmentBaseUrl, {params: {...params}}).pipe(
-      map(adaptList(this.appointmentAdapter)),
-      map(as => as.map(a => {
-        a.employee = this.empAdapter.adapt(a.employee);
-        return a;
-      }))
-    );
-  }
-
-  getAppointment(id: string) {
-    return this.http.get<Appointment>(this.appointmentBaseUrl + id + '/').pipe(map(a => this.appointmentAdapter.adapt(a)));
-  }
-
-  createAppointment(model: CreateAppointmentModel) {
-    return this.http.post<Appointment>(this.appointmentBaseUrl, model).pipe(map(a => this.appointmentAdapter.adapt(a)));
-  }
-
-  updateAppointment(appointment: Appointment) {
-    return this.http.put<UpdateAppointmentModel>(this.appointmentBaseUrl + appointment.id + '/', appointment.updateModel())
-      .pipe(
-        map(a => this.appointmentAdapter.adapt(a))
-      );
-  }
-
-  getSelfAppointments(params: AppointmentQParams): Observable<SelfAppointment[]> {
-    return this.http.get<SelfAppointment[]>(this.selfAppointmentBaseUrl, {params: {...params}}).pipe(
-      map(adaptList(this.selfAppointmentAdapter)),
-      map(as => as.map(a => {
-        a.employee = this.empAdapter.adapt(a.employee);
-        return a;
-      }))
-    );
-  }
-
-  getSelfAppointment(id: string) {
-    return this.http.get<SelfAppointment>(this.appointmentBaseUrl + id + '/').pipe(map(a => this.selfAppointmentAdapter.adapt(a)));
-  }
-
-  createSelfAppointment(model: CreateSelfAppointmentModel) {
-    return this.http.post<SelfAppointment>(this.selfAppointmentBaseUrl, model).pipe(map(a => this.selfAppointmentAdapter.adapt(a)));
-  }
-}
-
-export interface CreateSelfAppointmentModel {
-  start: string;
-  end: string;
-  reason: string;
-  employee: string;
-}
-
-export interface AppointmentQParams {
-  employee?: string;
-  customer?: string;
-  status?: string;
-  from_date?: string;
-  to_date?: string;
 }

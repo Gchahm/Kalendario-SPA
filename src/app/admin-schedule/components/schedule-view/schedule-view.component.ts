@@ -1,50 +1,52 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Moment} from 'moment';
 import {Employee} from '../../../core/models/Employee';
-import * as moment from 'moment';
-import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
-import {AppointmentService} from '../../../shared/services/appointment.service';
-import {BaseAppointment} from '../../../core/models/BaseAppointment';
+import {IBaseAppointmentRead} from '../../../core/models/IBaseAppointmentRead';
 import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
 import {MatDialog} from '@angular/material';
 import {AppointmentEventDialogComponent} from '../../dialogs/appointment-event/appointment-event-dialog.component';
 import {CreateSelfAppointmentDialogComponent} from '../../dialogs/create-self-appointment/create-self-appointment-dialog.component';
 import {CreateAppointmentDialogComponent} from '../../dialogs/create-appointment/create-appointment-dialog.component';
 import {ToastService} from '../../../shared/services/toast.service';
-import {Appointment} from '../../../core/models/Appointment';
+import {Appointment, IAppointmentReadModel} from '../../../core/models/Appointment';
 import {AppointmentRequestsDialogComponent} from '../../dialogs/appointment-requests/appointment-requests-dialog.component';
+import {BaseAppointmentService} from '../../../shared/services/base-appointment.service';
+import {UpdateModelEvent} from '../../../core/generics/components/UpdateModelEvent';
+import {ListComponent} from '../../../core/generics/components/ListComponent';
+import {SelfAppointment} from '../../models/SelfAppointment';
 
 @Component({
   selector: 'employee-schedule-view',
   templateUrl: './schedule-view.component.html',
   styleUrls: ['./schedule-view.component.css']
 })
-export class ScheduleViewComponent implements OnInit {
+export class ScheduleViewComponent extends ListComponent<IBaseAppointmentRead> implements OnInit {
 
   @Input() set employee(employee: Employee) {
     this.emp = employee;
     if (this.date) {
-      this.loadAppointments(this.date);
+      this.loadAppointments();
     }
   }
+
   @Input() set currentDate(date: Moment) {
     this.date = date;
-    this.loadAppointments(date);
+    this.loadAppointments();
   }
 
   date: Moment;
   emp: Employee;
-  appointments: BaseAppointment[];
-  requests: Appointment[];
+  requests: IAppointmentReadModel[];
   events: CalendarEvent[];
 
-  constructor(private appointmentService: AppointmentService,
-              private toast: ToastService,
-              public dialog: MatDialog) {
+  constructor(public baseAptService: BaseAppointmentService,
+              toast: ToastService,
+              dialog: MatDialog) {
+    super(baseAptService.aptService, dialog, CreateSelfAppointmentDialogComponent, toast);
   }
 
   ngOnInit() {
-    this.loadAppointments(this.date);
+    this.loadAppointments();
     this.loadRequests();
   }
 
@@ -56,70 +58,70 @@ export class ScheduleViewComponent implements OnInit {
   }
 
   bookSelfAppointment() {
-    const dialogRef = this.dialog.open(CreateSelfAppointmentDialogComponent, {
-      width: '400px'
-    });
+    this.componentType = CreateSelfAppointmentDialogComponent;
+    this.modelService = this.baseAptService.selfAptService;
+    this.createModel();
   }
 
   bookAppointment() {
-    const dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
+    this.componentType = CreateAppointmentDialogComponent;
+    this.modelService = this.baseAptService.aptService;
+    this.createModel();
+  }
+
+  editAppointment(apt: IBaseAppointmentRead) {
+    if (apt instanceof Appointment) {
+      this.modelService = this.baseAptService.aptService;
+    }
+    if (apt instanceof SelfAppointment) {
+      this.modelService = this.baseAptService.selfAptService;
+    }
+    const dialogRef = this.dialog.open(AppointmentEventDialogComponent, {
       width: '400px',
-      data: {employee: this.emp, date: this.date}
+      data: {appointment: apt}
     });
-
-    dialogRef.afterClosed().toPromise()
-      .then(createModel => {
-        if (createModel) {
-          this.appointmentService.createAppointment(createModel)
-            .toPromise()
-            .then(success => {
-              this.appointments.push(success);
-              this.loadEvents();
-              this.toast.success('appointment booked');
-            })
-            .catch(error => this.toast.error(error));
-        }
-      });
-  }
-
-  handleDayRender($event: DateChangedEvent) {
-    this.loadAppointments($event.date);
-  }
-
-  private loadAppointments(date: Moment) {
-    this.date = date.clone().utc();
-    const fromDate = date.clone().startOf('day');
-    const toDate = date.clone().endOf('day');
-    this.appointmentService.getAll({
-      employee: this.emp.id.toString(),
-      from_date: fromDate.toISOString(),
-      to_date: toDate.toISOString(),
-      status: 'A'
-    })
-      .toPromise().then(appointments => {
-      this.appointments = appointments;
-      this.loadEvents();
-      this.date = date;
+    const sub = dialogRef.componentInstance.onUpdate.subscribe((event: UpdateModelEvent) => {
+      this.handleUpdateModelEvent(event);
     });
+    dialogRef.afterClosed().toPromise().then(r => sub.unsubscribe());
   }
 
-  private loadEvents() {
-    const dialog = this.dialog;
-    this.events = this.appointments.map(apt => this.event(apt, dialog));
+  afterPatchEvent(model) {
+    this.loadAppointments();
+  }
+
+  afterCreateEvent(model) {
+    this.loadAppointments();
+  }
+
+  afterDeleteEvent(id) {
+    this.loadAppointments();
   }
 
   private loadRequests() {
-    this.appointmentService.getAppointments({employee: this.emp.id.toString(), status: 'P'})
+    this.baseAptService.aptService.get({employee: this.emp.id.toString(), status: 'P'})
       .toPromise()
       .then(appointments => this.requests = appointments);
   }
 
-  private event(apt: BaseAppointment, dialog): CalendarEvent {
+  private loadAppointments() {
+    const params = {
+      employee: this.emp.id.toString(),
+      from_date: this.date.startOf('day').toISOString(),
+      to_date: this.date.endOf('day').toISOString(),
+      status: 'A'
+    };
+
+    this.baseAptService.get(params)
+      .toPromise().then(appointments => {
+      this.modelList = appointments;
+      this.events = this.modelList.map(apt => this.event(apt));
+    });
+  }
+
+  private event(apt: IBaseAppointmentRead): CalendarEvent {
     const fn = () => {
-      dialog.open(AppointmentEventDialogComponent, {
-        width: '400px',
-        data: {id: apt.id}
-      });
+      this.editAppointment(apt);
     };
     return {
       title: apt.start.format('DD/MM/YYYY HH:mm') + ' - ' + apt.end.format('HH:mm'),
@@ -127,6 +129,10 @@ export class ScheduleViewComponent implements OnInit {
       end: apt.end,
       onClick: fn
     };
+  }
+
+  dialogData(): object {
+    return {employee: this.emp, date: this.date};
   }
 }
 

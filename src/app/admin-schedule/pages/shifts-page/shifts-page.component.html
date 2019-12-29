@@ -1,1 +1,19 @@
-<p>shift-page works!</p>
+<admin-dashboard>
+  <div class="row" *ngIf="selectedModel">
+    <div class="col-2 model-list pretty-scroll">
+      <mat-list>
+        <button [hidden]="!globals.user.can.add.shifts()" mat-stroked-button color="accent" class="model-create"
+                (click)="createModel()">new
+        </button>
+        <mat-list-item *ngFor="let shift of modelList"
+                       (click)="selectModel(shift.id)"
+                       [ngClass]="{'A400 active': shift.id === selectedModel.id}">
+          {{shift.name}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-10 p-5">
+        <shift-detail [(model)]="selectedModel" (onUpdate)="handleUpdateModelEvent($event)"></shift-detail>
+    </div>
+  </div>
+</admin-dashboard>

@@ -1,0 +1,7 @@
+.shift-form {
+  width: 400px;
+}
+
+.form-row > * > *:not(button) {
+  width: 100%;
+}

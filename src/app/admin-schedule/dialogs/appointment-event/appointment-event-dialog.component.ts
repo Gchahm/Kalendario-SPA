@@ -1,40 +1,53 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {Appointment} from '../../../core/models/Appointment';
-import {Moment} from 'moment';
+import {Component, Inject} from '@angular/core';
+import {Appointment, IAppointmentWriteModel} from '../../../core/models/Appointment';
 import {SelfAppointment} from '../../models/SelfAppointment';
-import {AppointmentService} from '../../../shared/services/appointment.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {DetailsComponent} from '../../../core/generics/components/DetailsComponent';
+import {IBaseAppointmentRead} from '../../../core/models/IBaseAppointmentRead';
+import * as moment from 'moment';
 
 @Component({
   selector: 'employee-appointment-event',
   templateUrl: './appointment-event-dialog.component.html',
   styleUrls: ['./appointment-event-dialog.component.css']
 })
-export class AppointmentEventDialogComponent implements OnInit {
-
-  @Input() showDate = false;
-  @Input() showButtons = false;
-
-  @Output() eventClicked = new EventEmitter<Moment>();
+export class AppointmentEventDialogComponent extends DetailsComponent<IBaseAppointmentRead> {
 
   appointment: Appointment;
   selfAppointment: SelfAppointment;
 
-  constructor(private appointmentsService: AppointmentService,
-              public dialogRef: MatDialogRef<AppointmentEventDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { id: string }) {
+  start = {date: '', time: ''};
+
+  constructor(public dialogRef: MatDialogRef<AppointmentEventDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { appointment: IBaseAppointmentRead }) {
+    super();
+    this.model = data.appointment;
+    this.start.date = data.appointment.start.toISOString();
+    this.start.time = data.appointment.start.format('HH:mm');
+
+    if (data.appointment instanceof Appointment) {
+      this.appointment = data.appointment;
+    }
+    if (data.appointment instanceof SelfAppointment) {
+      this.selfAppointment = data.appointment;
+    }
   }
 
-  ngOnInit() {
-    this.appointmentsService.getAppointment(this.data.id)
-      .toPromise()
-      .then(baseAppointment => {
-        if (baseAppointment instanceof Appointment) {
-          this.appointment = baseAppointment;
-        }
-        if (baseAppointment instanceof SelfAppointment) {
-          this.selfAppointment = baseAppointment;
-        }
-      });
+  save() {
+    const model = this.onUpdateEvent.model as IAppointmentWriteModel;
+    const start = moment.utc(this.start.date).startOf('day');
+    start.set('hour', +this.start.time.substr(0, 2));
+    start.set('minute', +this.start.time.substr(3));
+    model.start = start.toISOString();
+    super.save();
+  }
+
+  delete() {
+    super.delete();
+    this.close();
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

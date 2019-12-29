@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Appointment} from '../../../core/models/Appointment';
-import {AppointmentQParams, AppointmentService} from '../../../shared/services/appointment.service';
+import {IAppointmentReadModel} from '../../../core/models/Appointment';
+import {AppointmentService} from '../../../shared/services/appointment.service';
 import * as moment from 'moment';
 
 @Component({
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 })
 export class DashboardPageComponent implements OnInit {
 
-  appointments$: Observable<Appointment[]>;
+  appointments$: Observable<IAppointmentReadModel[]>;
   selectedPeriod = 'future';
   selectedStatus = 'all';
 
@@ -33,11 +33,11 @@ export class DashboardPageComponent implements OnInit {
   }
 
   loadAppointments() {
-    const params: AppointmentQParams = {};
+    const params = {to_date: '', from_date: '', status: ''};
     if (this.selectedPeriod === 'past') { params.to_date = moment.utc().toISOString(); }
     if (this.selectedPeriod === 'future') { params.from_date = moment.utc().toISOString(); }
     if (this.selectedStatus !== 'all') { params.status = this.selectedStatus; }
-    this.appointments$ = this.appointmentService.getAppointments(params);
+    this.appointments$ = this.appointmentService.get(params);
   }
 
 }

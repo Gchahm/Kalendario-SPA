@@ -62,6 +62,7 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     CustomerListDialogComponent,
     CreateEmployeeDialogComponent,
     CreateServiceDialogComponent,
+    CreateShiftDialogComponent,
     AppointmentEventDialogComponent,
     CreateAppointmentDialogComponent,
     CreateSelfAppointmentDialogComponent,

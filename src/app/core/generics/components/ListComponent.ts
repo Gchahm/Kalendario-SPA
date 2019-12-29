@@ -2,32 +2,68 @@ import {MatDialog} from '@angular/material';
 import {DjangoRWModelService} from '../services/DjangoRWModelService';
 import {ToastService} from '../../../shared/services/toast.service';
 import {IReadModel} from '../../models/interfaces/IReadModel';
-import {UpdateModelEvent} from './UpdateModelEvent';
+import {HTMLAction, UpdateModelEvent} from './UpdateModelEvent';
 import {IWriteModel} from '../../models/interfaces/IWriteModel';
 import {ComponentType} from '@angular/cdk/portal';
-import {Component, OnDestroy, TemplateRef} from '@angular/core';
+import {TemplateRef} from '@angular/core';
 import {CreateDialogComponent} from './CreateDialogComponent';
-import {Subscription} from 'rxjs';
 
-export abstract class ListComponent<TModel extends IReadModel> implements OnDestroy {
+export abstract class ListComponent<TModel extends IReadModel> {
 
-  protected constructor(private modelService: DjangoRWModelService<IReadModel, IWriteModel>,
-                        private dialog: MatDialog,
-                        private componentType: ComponentType<CreateDialogComponent> | TemplateRef<CreateDialogComponent>,
-                        private toast: ToastService) {
+  protected constructor(protected modelService: DjangoRWModelService<TModel, IWriteModel>,
+                        protected dialog: MatDialog,
+                        protected componentType: ComponentType<CreateDialogComponent> | TemplateRef<CreateDialogComponent>,
+                        protected toast: ToastService) {
   }
 
-  subscription: Subscription;
-  public modelList: TModel[];
+  public modelList: Array<TModel>;
   public selectedModel: TModel;
+
   abstract dialogData(): object;
 
-  updateModel(event: UpdateModelEvent) {
+  afterPatchEvent(model: TModel) {
+    this.modelList = this.modelList.map((m) => m.id === model.id ? model : m);
+  }
+
+  afterCreateEvent(model: TModel) {
+    this.modelList.push(model);
+  }
+
+  afterDeleteEvent(id) {
+    this.modelList = this.modelList.filter(m => m.id.toString() !== id);
+  }
+
+  handleUpdateModelEvent(event: UpdateModelEvent) {
+    switch (event.action) {
+      case HTMLAction.patch:
+        this.patchModel(event);
+        break;
+      case HTMLAction.delete:
+        this.deleteModel(event);
+    }
+  }
+
+  patchModel(event: UpdateModelEvent) {
     this.modelService.patch(event.model.id, event.model)
       .toPromise()
-      .then((model: TModel) => {
+      .then((model) => {
         event.onSuccess(model);
-        this.modelList = this.modelList.map((m) => m.id === model.id ? model : m);
+        this.afterPatchEvent(model);
+        this.toast.success('updated');
+      })
+      .catch(err => {
+        this.toast.error(err);
+        event.onFail(err);
+      });
+
+  }
+
+  deleteModel(event: UpdateModelEvent) {
+    this.modelService.delete(event.model.id)
+      .toPromise()
+      .then(() => {
+        this.afterDeleteEvent(event.model.id);
+        this.toast.success('deleted');
       })
       .catch(err => {
         this.toast.error(err);
@@ -46,7 +82,7 @@ export abstract class ListComponent<TModel extends IReadModel> implements OnDest
         if (createModel) {
           this.modelService.post(createModel).toPromise()
             .then((model: TModel) => {
-              this.modelList.push(model);
+              this.afterCreateEvent(model);
               this.toast.success('created');
             }).catch(error => this.toast.error(error.message));
         }
@@ -55,15 +91,10 @@ export abstract class ListComponent<TModel extends IReadModel> implements OnDest
 
   loadModels(models: TModel[]) {
     this.modelList = models;
-    this.selectedModel = models[0];
+    this.selectedModel = models.find(x => true) as TModel;
   }
 
   selectModel(id: number) {
-    this.selectedModel = this.modelList.find(m => m.id === id);
+    this.selectedModel = this.modelList.find<TModel>(value => value.id === id);
   }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
 }

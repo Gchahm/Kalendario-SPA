@@ -9,3 +9,21 @@
 .card-header {
   cursor: pointer;
 }
+
+mat-form-field {
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.event-container {
+  position: relative;
+}

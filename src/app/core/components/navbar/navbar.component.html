@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>Vintage Studio</span>
-    <button mat-stroked-button routerLink="/staff">
-      staff
+    <button mat-button routerLink="/staff">
+      <mat-icon matTooltip="staff">view_column</mat-icon>
     </button>
     <span class="nav-spacer"></span>
     <div *ngIf="isLoggedIn(); else loginTemplate">
       <ng-container *ngIf="globals.user as user">
-        <button mat-button [matMenuTriggerFor]="menu">Welcome {{user.firstName}}</button>
+        <a [matMenuTriggerFor]="menu"><mat-icon>dehaze</mat-icon></a>
         <mat-menu #menu="matMenu">
           <button *ngIf="user.can.view.employees()" mat-menu-item routerLink="admin/employees/">
             admin

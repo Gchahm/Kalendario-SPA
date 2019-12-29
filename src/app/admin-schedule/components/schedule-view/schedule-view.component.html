@@ -1,7 +1,6 @@
 <app-calendar [events]="events"
               [default-date]="date"
-              [hide-buttons]="true"
-              (dayRender)="handleDayRender($event)">
+              [hide-buttons]="true">
   {{emp.name}}
   <button mat-raised-button (click)="bookAppointment()">
     <mat-icon matTooltip="book appointment">calendar_today</mat-icon>

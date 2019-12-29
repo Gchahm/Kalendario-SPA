@@ -16,7 +16,7 @@
       <ng-container *ngIf="services">
         <employee-profile [(model)]="selectedModel"
                           [services]="services"
-                          (onUpdate)="updateModel($event)"></employee-profile>
+                          (onUpdate)="handleUpdateModelEvent($event)"></employee-profile>
       </ng-container>
     </div>
   </div>

@@ -6,6 +6,8 @@ import {AppointmentDashboardPageComponent} from './pages/appointment-dashboard/a
 import {CanViewEmployeesGuard} from './guards/can-view-employees.guard';
 import {CanViewServicesGuard} from './guards/can-view-services.guard';
 import {CanBookAppointments} from './guards/can-book-appointments.service';
+import {CanViewShiftsGuard} from './guards/can-view-shifts-guard.service';
+import {ShiftsPageComponent} from './pages/shifts-page/shifts-page.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,11 @@ const routes: Routes = [
     path: 'admin/services',
     component: ServicesPageComponent,
     canActivate: [CanViewServicesGuard]
+  },
+  {
+    path: 'admin/shifts',
+    component: ShiftsPageComponent,
+    canActivate: [CanViewShiftsGuard]
   }
 ];
 

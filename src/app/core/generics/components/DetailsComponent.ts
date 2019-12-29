@@ -1,6 +1,7 @@
 import {EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UpdateModelEvent} from './UpdateModelEvent';
+import {HTMLAction, UpdateModelEvent} from './UpdateModelEvent';
 import {IReadModel} from '../../models/interfaces/IReadModel';
+
 
 export abstract class DetailsComponent<R extends IReadModel> implements OnInit {
 
@@ -8,6 +9,7 @@ export abstract class DetailsComponent<R extends IReadModel> implements OnInit {
   @Output() onUpdate = new EventEmitter<UpdateModelEvent>();
 
   onUpdateEvent: UpdateModelEvent = {
+    action: HTMLAction.patch,
     model: null,
     onSuccess: (model: R) => {
       this.model = model;
@@ -25,7 +27,19 @@ export abstract class DetailsComponent<R extends IReadModel> implements OnInit {
 
   edit() {
     this.onUpdateEvent.model = this.model.writeModel();
+    this.onUpdateEvent.action = HTMLAction.patch;
     this.editMode = true;
+  }
+
+  cancel() {
+    this.onUpdateEvent.model = this.model.writeModel();
+    this.editMode = false;
+  }
+
+  delete() {
+    this.onUpdateEvent.model = this.model.writeModel();
+    this.onUpdateEvent.action = HTMLAction.delete;
+    this.onUpdate.emit(this.onUpdateEvent);
   }
 
   save() {

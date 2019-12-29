@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ServiceAdapter} from '../../core/models/Service';
 import {environment} from '../../../environments/environment';
 import {DjangoRWModelService} from '../../core/generics/services/DjangoRWModelService';
-import {IShiftReadModel, IShiftWriteModel} from '../../core/models/Shift';
+import {IShiftReadModel, IShiftWriteModel, ShiftAdapter} from '../../core/models/Shift';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ import {IShiftReadModel, IShiftWriteModel} from '../../core/models/Shift';
 export class ShiftService extends DjangoRWModelService<IShiftReadModel, IShiftWriteModel> {
 
   constructor(http: HttpClient,
-              serviceAdapter: ServiceAdapter) {
-    super(http, serviceAdapter, environment.apiUrl + 'admin/shifts/');
+              adapter: ShiftAdapter) {
+    super(http, adapter, environment.apiUrl + 'admin/shifts/');
   }
 }

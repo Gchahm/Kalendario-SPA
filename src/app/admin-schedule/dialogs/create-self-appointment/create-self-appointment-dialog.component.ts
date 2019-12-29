@@ -1,85 +1,46 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Employee} from '../../../core/models/Employee';
 import {Moment} from 'moment';
 import {ToastService} from '../../../shared/services/toast.service';
 import * as moment from 'moment';
-import {AppointmentService, CreateSelfAppointmentModel} from '../../../shared/services/appointment.service';
-import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {SelfAppointmentService} from '../../../shared/services/self-appointment.service';
+import {ISelfAppointmentWriteModel, SelfAppointment} from '../../models/SelfAppointment';
+import {CreateDialogComponent} from '../../../core/generics/components/CreateDialogComponent';
 
 @Component({
   selector: 'employee-form-self-appointment',
   templateUrl: './create-self-appointment-dialog.component.html',
   styleUrls: ['./create-self-appointment-dialog.component.css']
 })
-export class CreateSelfAppointmentDialogComponent implements OnInit {
-
-  private _employee: Employee;
-  get employee() {
-    return this._employee;
-  }
-
-  @Input() set employee(employee: Employee) {
-    this._employee = employee;
-    this.form.employeeId = employee.id.toString();
-  }
-
-  @Input() set date(value: Moment) {
-    this.form.startDate = value.format('YYYY-MM-DD');
-    this.form.endDate = value.format('YYYY-MM-DD');
-  }
-
-  @Output() dateChanged = new EventEmitter<Moment>();
+export class CreateSelfAppointmentDialogComponent implements CreateDialogComponent {
 
   minDate = new Date();
   form: CreateSelfAppointmentForm;
+  model: ISelfAppointmentWriteModel;
 
-  constructor(private employeeAppointment: AppointmentService,
-              private toast: ToastService,
-              dialogRef: MatDialogRef<CreateSelfAppointmentDialogComponent>) {
-    this.form = new CreateSelfAppointmentForm('', '', '', '', '', '');
-  }
-
-  ngOnInit() {
+  constructor(public dialogRef: MatDialogRef<CreateSelfAppointmentDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { employee: Employee, date: Moment }) {
+    this.form = new CreateSelfAppointmentForm();
+    this.form.startDate = data.date.format('YYYY-MM-DD');
+    this.form.endDate = data.date.format('YYYY-MM-DD');
+    this.model = SelfAppointment.CreateModel();
+    this.model.employee = data.employee.id.toString();
   }
 
   submit() {
-    this.employeeAppointment.createSelfAppointment(this.form.model())
-      .toPromise()
-      .then(success => {
-        this.dateChanged.emit(success.start);
-        this.form.clear();
-        this.toast.success('appointment booked');
-      })
-      .catch(error => this.toast.error(error));
+    this.model.start = moment.utc(this.form.startDate + ' ' + this.form.startTime).toISOString();
+    this.model.end = moment.utc(this.form.endDate + ' ' + this.form.endTime).toISOString();
+    this.dialogRef.close(this.model);
   }
 
-  emitDateChanged(date: string) {
-    this.dateChanged.emit(moment.utc(date));
+  onNoClick() {
   }
 }
 
 class CreateSelfAppointmentForm {
-  constructor(public startDate: string,
-              public endDate: string,
-              public startTime: string,
-              public endTime: string,
-              public reason: string,
-              public employeeId: string) {
-  }
-
-  model(): CreateSelfAppointmentModel {
-    return {
-      start: moment.utc(this.startDate + ' ' + this.startTime).toISOString(),
-      end: moment.utc(this.endDate + ' ' + this.endTime).toISOString(),
-      reason: this.reason,
-      employee: this.employeeId
-    };
-  }
-
-  clear() {
-    this.startTime = null;
-    this.endTime = null;
-    this.endDate = null;
-    this.reason = null;
-  }
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
 }
