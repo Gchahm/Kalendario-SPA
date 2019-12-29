@@ -26,7 +26,13 @@ export class SelfAppointment implements ISelfAppointmentReadModel {
   }
 
   writeModel(): ISelfAppointmentWriteModel {
-    return undefined;
+    return {
+      id: this.id.toString(),
+      employee: this.employee.id.toString(),
+      start: this.start.toISOString(),
+      end: this.end.toISOString(),
+      reason: this.reason
+    };
   }
 }
 

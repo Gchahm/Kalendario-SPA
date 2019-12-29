@@ -17,6 +17,7 @@ export class AppointmentEventDialogComponent extends DetailsComponent<IBaseAppoi
   selfAppointment: SelfAppointment;
 
   start = {date: '', time: ''};
+  end = {date: '', time: ''};
 
   constructor(public dialogRef: MatDialogRef<AppointmentEventDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { appointment: IBaseAppointmentRead }) {
@@ -24,12 +25,13 @@ export class AppointmentEventDialogComponent extends DetailsComponent<IBaseAppoi
     this.model = data.appointment;
     this.start.date = data.appointment.start.toISOString();
     this.start.time = data.appointment.start.format('HH:mm');
-
     if (data.appointment instanceof Appointment) {
       this.appointment = data.appointment;
     }
     if (data.appointment instanceof SelfAppointment) {
       this.selfAppointment = data.appointment;
+      this.end.date = this.selfAppointment.end.toISOString();
+      this.end.time = this.selfAppointment.end.format('HH:mm');
     }
   }
 
@@ -40,6 +42,7 @@ export class AppointmentEventDialogComponent extends DetailsComponent<IBaseAppoi
     start.set('minute', +this.start.time.substr(3));
     model.start = start.toISOString();
     super.save();
+    this.close();
   }
 
   delete() {
