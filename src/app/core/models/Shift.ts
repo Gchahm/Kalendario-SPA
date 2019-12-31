@@ -47,6 +47,9 @@ export interface IShiftWriteModel extends IWriteModel {
 })
 export class ShiftAdapter implements Adapter<Shift> {
   adapt(item: any): Shift {
+    if (item === null) {
+      return null;
+    }
     const shift = new Shift();
     shift.id = item.id;
     shift.name = item.name;

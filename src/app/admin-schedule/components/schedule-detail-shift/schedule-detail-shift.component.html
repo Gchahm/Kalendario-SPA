@@ -1,0 +1,5 @@
+<div *ngIf="shift" class="text-center">
+  <mat-list *ngFor="let frame of shift.frames">
+    <mat-list-item>{{frame.toString()}}</mat-list-item>
+  </mat-list>
+</div>

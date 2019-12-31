@@ -12,7 +12,8 @@ export class AdminDashboardComponent implements OnInit {
   options: MenuOption[] = [
     {name: 'Employee', link: '/admin/employees'},
     {name: 'Services', link: '/admin/services'},
-    {name: 'Shifts', link: '/admin/shifts'}
+    {name: 'Shifts', link: '/admin/shifts'},
+    {name: 'Schedules', link: '/admin/schedules'}
   ];
 
   constructor() {

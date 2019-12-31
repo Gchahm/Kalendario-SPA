@@ -22,6 +22,10 @@ import { ShiftDetailComponent } from './components/shift-detail/shift-detail.com
 import { CreateShiftDialogComponent } from './dialogs/create-shift/create-shift-dialog.component';
 import {CreateSelfAppointmentDialogComponent} from './dialogs/create-self-appointment/create-self-appointment-dialog.component';
 import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/create-appointment-dialog.component';
+import { SchedulePageComponent } from './pages/schedules/schedule-page.component';
+import { CreateScheduleDialogComponent } from './dialogs/create-schedule/create-schedule-dialog.component';
+import { ScheduleDetailComponent } from './components/schedule-detail/schedule-detail.component';
+import { ScheduleDetailShiftComponent } from './components/schedule-detail-shift/schedule-detail-shift.component';
 
 
 @NgModule({
@@ -43,6 +47,7 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     CreateCustomerDialogComponent,
     CreateEmployeeDialogComponent,
     CreateShiftDialogComponent,
+    CreateScheduleDialogComponent,
 
     ServicesPageComponent,
     EmployeesPageComponent,
@@ -50,6 +55,9 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     CreateServiceDialogComponent,
     ShiftsPageComponent,
     ShiftDetailComponent,
+    SchedulePageComponent,
+    ScheduleDetailComponent,
+    ScheduleDetailShiftComponent,
   ],
   imports: [
     SharedModule,
@@ -63,6 +71,7 @@ import {CreateAppointmentDialogComponent} from './dialogs/create-appointment/cre
     CreateEmployeeDialogComponent,
     CreateServiceDialogComponent,
     CreateShiftDialogComponent,
+    CreateScheduleDialogComponent,
     AppointmentEventDialogComponent,
     CreateAppointmentDialogComponent,
     CreateSelfAppointmentDialogComponent,

@@ -38,6 +38,7 @@ class PermissionChecker {
   services = () => this.hasPermission(this.type, 'service');
   appointments = () => this.hasPermission(this.type, 'appointment');
   shifts = () => this.hasPermission(this.type, 'shift');
+  schedules = () => this.hasPermission(this.type, 'schedule');
 
   private hasPermission(type, model): boolean {
     return this.user.permissions.includes(`scheduling.${type}_${model}`);

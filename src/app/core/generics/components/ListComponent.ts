@@ -95,6 +95,6 @@ export abstract class ListComponent<TModel extends IReadModel> {
   }
 
   selectModel(id: number) {
-    this.selectedModel = this.modelList.find<TModel>(value => value.id === id);
+    this.selectedModel = this.modelList.find(value => value.id === id);
   }
 }
