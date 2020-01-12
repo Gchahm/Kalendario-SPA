@@ -12,7 +12,16 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
+  <tr *ngIf="!editMode">
+    <td><schedule-detail-shift [shift]="model.mon"></schedule-detail-shift></td>
+    <td><schedule-detail-shift [shift]="model.tue"></schedule-detail-shift></td>
+    <td><schedule-detail-shift [shift]="model.wed"></schedule-detail-shift></td>
+    <td><schedule-detail-shift [shift]="model.thu"></schedule-detail-shift></td>
+    <td><schedule-detail-shift [shift]="model.fri"></schedule-detail-shift></td>
+    <td><schedule-detail-shift [shift]="model.sat"></schedule-detail-shift></td>
+    <td><schedule-detail-shift [shift]="model.sun"></schedule-detail-shift></td>
+  </tr>
+  <tr *ngIf="editMode">
     <td><schedule-detail-shift [shift]="model.mon"></schedule-detail-shift></td>
     <td><schedule-detail-shift [shift]="model.tue"></schedule-detail-shift></td>
     <td><schedule-detail-shift [shift]="model.wed"></schedule-detail-shift></td>
@@ -23,3 +32,5 @@
   </tr>
   </tbody>
 </table>
+
+<button mat-button (click)="edit()" color="primary">edit</button>

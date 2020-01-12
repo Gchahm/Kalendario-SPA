@@ -1,22 +1,7 @@
-<admin-dashboard>
-  <div class="row" *ngIf="modelList">
-    <div class="col-2">
-      <mat-list>
-        <button [hidden]="!globals.user.can.add.services()" mat-stroked-button class="model-create"
-                (click)="createModel()">new
-        </button>
-        <mat-list-item *ngFor="let service of modelList"
-                       (click)="selectModel(service.id)"
-                       [ngClass]="{'A400 active': service.id === selectedModel.id}">
-          {{service.name}}
-        </mat-list-item>
-      </mat-list>
-
-    </div>
-    <div class="col-10">
-      <div class="row m-0">
-        <admin-service-card (onUpdate)="handleUpdateModelEvent($event)" [model]="selectedModel"></admin-service-card>
-      </div>
-    </div>
-  </div>
+<admin-dashboard [(modelList)]="modelList"
+                 [(selectedModel)]="selectedModel"
+                 (createClicked)="createModel()">
+  <admin-service-card *ngIf="selectedModel"
+                      (onUpdate)="handleUpdateModelEvent($event)"
+                      [model]="selectedModel"></admin-service-card>
 </admin-dashboard>

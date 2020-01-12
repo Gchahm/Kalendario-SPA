@@ -24,6 +24,9 @@ export class Service implements ServiceReadModel {
     };
   }
 
+  toString() {
+    return this.name;
+  }
 }
 
 @Injectable({

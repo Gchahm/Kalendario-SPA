@@ -29,6 +29,10 @@ export class Employee implements EmployeeReadModel {
       services: this.services.map(s => s.id.toString())
     };
   }
+
+  toString() {
+    return this.name;
+  }
 }
 
 @Injectable({

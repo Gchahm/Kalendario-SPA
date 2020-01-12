@@ -18,6 +18,10 @@ export class Schedule implements IScheduleReadModel {
   writeModel(): IWriteModel {
     return undefined;
   }
+
+  toString(): string {
+    return this.name;
+  }
 }
 
 export interface IScheduleReadModel extends IReadModel {

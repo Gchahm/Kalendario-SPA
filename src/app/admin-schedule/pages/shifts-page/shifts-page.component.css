@@ -1,8 +1,0 @@
-.model-create {
-  width: 100%;
-}
-
-.model-list {
-  overflow-y: scroll;
-  max-height: 80vh;
-}

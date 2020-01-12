@@ -29,3 +29,13 @@
 }
 
 button:focus {outline:0;}
+
+.model-create {
+  width: 100%;
+}
+
+.model-list {
+  overflow-y: scroll;
+  min-height: 80vh;
+  max-height: 80vh;
+}

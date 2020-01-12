@@ -30,6 +30,10 @@ export class Shift implements IShiftReadModel {
       frames: this.frames.map(f => ({start: f.start.toString(), end: f.end.toString()}))
     };
   }
+
+  toString() {
+    return this.name;
+  }
 }
 
 export interface IShiftReadModel extends IReadModel {

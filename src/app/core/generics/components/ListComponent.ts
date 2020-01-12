@@ -94,6 +94,7 @@ export abstract class ListComponent<TModel extends IReadModel> {
     this.selectedModel = models.find(x => true) as TModel;
   }
 
+  // TODO: Remove this
   selectModel(id: number) {
     this.selectedModel = this.modelList.find(value => value.id === id);
   }
