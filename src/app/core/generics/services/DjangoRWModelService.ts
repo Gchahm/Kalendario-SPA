@@ -16,7 +16,7 @@ export class DjangoRWModelService<R extends IReadModel, W extends IWriteModel> {
   }
 
   post(model: W): Observable<R> {
-    return this.http.post<R>(this.baseUrl, model).pipe(map(this.adapter.adapt));
+    return this.http.post<R>(this.baseUrl, model).pipe(map(r => this.adapter.adapt(r)));
   }
 
   detail(id: number): Observable<R> {

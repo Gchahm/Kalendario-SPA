@@ -51,13 +51,18 @@ export interface IShiftWriteModel extends IWriteModel {
 })
 export class ShiftAdapter implements Adapter<Shift> {
   adapt(item: any): Shift {
-    if (item === null) {
-      return null;
-    }
-    const shift = new Shift();
-    shift.id = item.id;
-    shift.name = item.name;
-    shift.frames = item.frames.map(f => new TimeFrame(f.start, f.end));
-    return shift;
+    return adaptShift(item);
   }
+}
+
+export function adaptShift(item: any): Shift {
+  if (item === null) {
+    return null;
+  }
+  const shift = new Shift();
+  shift.id = item.id;
+  shift.name = item.name;
+  shift.frames = item.frames.map(f => new TimeFrame(f.start, f.end));
+  return shift;
+
 }

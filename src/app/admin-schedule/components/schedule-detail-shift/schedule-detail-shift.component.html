@@ -1,5 +1,13 @@
+<div *ngIf="shifts">
+  <mat-form-field>
+    <mat-select placeholder="Select" [(value)]="id" (selectionChange)="selectionChanged($event)">
+      <mat-option [value]="0">select a shift</mat-option>
+      <mat-option *ngFor="let s of shifts" [value]="s.id">{{s.toString()}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 <div *ngIf="shift" class="text-center">
-  <mat-list *ngFor="let frame of shift.frames">
-    <mat-list-item>{{frame.toString()}}</mat-list-item>
+  <mat-list>
+    <mat-list-item *ngFor="let frame of shift.frames">{{frame.toString()}}</mat-list-item>
   </mat-list>
 </div>

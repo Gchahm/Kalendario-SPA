@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Shift} from '../../../core/models/Shift';
+import {MatSelectChange} from '@angular/material';
 
 @Component({
   selector: 'schedule-detail-shift',
@@ -9,10 +10,23 @@ import {Shift} from '../../../core/models/Shift';
 export class ScheduleDetailShiftComponent implements OnInit {
 
   @Input() shift: Shift;
+  @Input() shifts: Shift[];
+  @Output() idChange = new EventEmitter<number>();
 
-  constructor() { }
+  id = 0;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    if (this.shift) {
+      this.id = this.shift.id;
+    }
+  }
+
+  selectionChanged(obj: MatSelectChange) {
+    this.shift = this.shifts.find(s => s.id === obj.value);
+    this.idChange.emit(obj.value);
   }
 
 }

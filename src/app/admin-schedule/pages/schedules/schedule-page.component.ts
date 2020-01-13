@@ -24,6 +24,8 @@ export class SchedulePageComponent extends ListComponent<IScheduleReadModel> imp
     super(service, dialog, CreateScheduleDialogComponent, toast);
   }
 
+  protected DIALOG_WIDTH = '1200px';
+
   dialogData(): object {
     return undefined;
   }

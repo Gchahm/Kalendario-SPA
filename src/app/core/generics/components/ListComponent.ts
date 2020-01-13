@@ -18,6 +18,7 @@ export abstract class ListComponent<TModel extends IReadModel> {
 
   public modelList: Array<TModel>;
   public selectedModel: TModel;
+  protected DIALOG_WIDTH = '800px';
 
   abstract dialogData(): object;
 
@@ -31,6 +32,7 @@ export abstract class ListComponent<TModel extends IReadModel> {
 
   afterDeleteEvent(id) {
     this.modelList = this.modelList.filter(m => m.id.toString() !== id);
+    this.selectedModel = this.modelList.find(t => true);
   }
 
   handleUpdateModelEvent(event: UpdateModelEvent) {
@@ -74,7 +76,7 @@ export abstract class ListComponent<TModel extends IReadModel> {
   createModel() {
     const dialogRef = this.dialog.open(this.componentType, {
       data: this.dialogData(),
-      width: '800px',
+      width: this.DIALOG_WIDTH,
     });
 
     dialogRef.afterClosed().toPromise()
@@ -92,10 +94,5 @@ export abstract class ListComponent<TModel extends IReadModel> {
   loadModels(models: TModel[]) {
     this.modelList = models;
     this.selectedModel = models.find(x => true) as TModel;
-  }
-
-  // TODO: Remove this
-  selectModel(id: number) {
-    this.selectedModel = this.modelList.find(value => value.id === id);
   }
 }

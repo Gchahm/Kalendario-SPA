@@ -1,5 +1,5 @@
 import {Adapter} from '../interfaces/adapter';
-import {Shift, ShiftAdapter} from './Shift';
+import {adaptShift, Shift, ShiftAdapter} from './Shift';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 import {Injectable} from '@angular/core';
@@ -15,8 +15,25 @@ export class Schedule implements IScheduleReadModel {
   sat: Shift;
   sun: Shift;
 
-  writeModel(): IWriteModel {
-    return undefined;
+  writeModel(): IScheduleWriteModel {
+    return {
+      id: this.id.toString(),
+      name: this.name,
+      mon: this.shiftId(this.mon),
+      tue: this.shiftId(this.tue),
+      wed: this.shiftId(this.wed),
+      thu: this.shiftId(this.thu),
+      fri: this.shiftId(this.fri),
+      sat: this.shiftId(this.sat),
+      sun: this.shiftId(this.sun)
+    };
+  }
+
+  public shiftId(shift: Shift): number {
+    if (shift) {
+      return shift.id;
+    }
+    return null;
   }
 
   toString(): string {
@@ -33,6 +50,8 @@ export interface IScheduleReadModel extends IReadModel {
   fri: Shift;
   sat: Shift;
   sun: Shift;
+
+  shiftId(shift: Shift): number;
 }
 
 export interface IScheduleWriteModel extends IWriteModel {
@@ -50,19 +69,17 @@ export interface IScheduleWriteModel extends IWriteModel {
   providedIn: 'root'
 })
 export class ScheduleAdapter implements Adapter<IScheduleReadModel> {
-  constructor(public sa: ShiftAdapter) {}
-
   adapt(item: any): IScheduleReadModel {
     const schedule = new Schedule();
     schedule.id = item.id;
     schedule.name = item.name;
-    schedule.mon = this.sa.adapt(item.mon);
-    schedule.tue = this.sa.adapt(item.tue);
-    schedule.wed = this.sa.adapt(item.wed);
-    schedule.thu = this.sa.adapt(item.thu);
-    schedule.fri = this.sa.adapt(item.fri);
-    schedule.sat = this.sa.adapt(item.sat);
-    schedule.sun = this.sa.adapt(item.sun);
+    schedule.mon = adaptShift(item.mon);
+    schedule.wed = adaptShift(item.tue);
+    schedule.tue = adaptShift(item.wed);
+    schedule.thu = adaptShift(item.thu);
+    schedule.fri = adaptShift(item.fri);
+    schedule.sat = adaptShift(item.sat);
+    schedule.sun = adaptShift(item.sun);
     return schedule;
   }
 }
