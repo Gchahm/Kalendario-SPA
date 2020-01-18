@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {forkJoin, Subscription} from 'rxjs';
-import {Employee} from '../../../core/models/Employee';
+import {Employee, EmployeeReadModel} from '../../../core/models/Employee';
 import {Globals} from '../../../core/services/Globals';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -15,7 +15,7 @@ import * as moment from 'moment';
 export class AppointmentDashboardPageComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  employees: Employee[];
+  employees: EmployeeReadModel[];
   selectedEmployees: Employee[] = [];
   date: Moment = moment.utc();
 
@@ -26,12 +26,12 @@ export class AppointmentDashboardPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.globals.user.isEmployee) {
       // TODO: Test this part of the statement
-      this.subscription = forkJoin(this.employeeService.current(), this.employeeService.getAll())
+      this.subscription = forkJoin(this.employeeService.current(), this.employeeService.get())
         .subscribe(([employee, employees]) => {
           this.employees = [employee];
         });
     } else {
-      this.subscription = this.employeeService.getAll().subscribe(employees => {
+      this.subscription = this.employeeService.get().subscribe(employees => {
         this.employees = employees;
       });
 

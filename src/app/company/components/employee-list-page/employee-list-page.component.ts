@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {Observable} from 'rxjs';
-import {Employee} from '../../../core/models/Employee';
+import {Employee, EmployeeReadModel} from '../../../core/models/Employee';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'customer-employee-list',
@@ -10,12 +11,15 @@ import {Employee} from '../../../core/models/Employee';
 })
 export class EmployeeListPageComponent implements OnInit {
 
-  public employees$: Observable<Employee[]>;
+  public employees$: Observable<EmployeeReadModel[]>;
+  public companyId;
 
-  constructor(private empService: EmployeeService) { }
+  constructor(private empService: EmployeeService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.employees$ = this.empService.getAll();
+    this.companyId = this.route.snapshot.paramMap.get('cid');
+    this.employees$ = this.empService.get({company: this.companyId});
   }
 
   services(employee: Employee): string {

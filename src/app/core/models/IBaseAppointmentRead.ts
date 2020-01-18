@@ -1,9 +1,9 @@
 import {IReadModel} from './interfaces/IReadModel';
-import {Employee} from './Employee';
+import {Employee, EmployeeReadModel} from './Employee';
 import {Moment} from 'moment';
 
 export interface IBaseAppointmentRead extends IReadModel {
-  employee: Employee;
+  employee: EmployeeReadModel;
   start: Moment;
   end: Moment;
 }

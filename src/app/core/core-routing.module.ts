@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [NotLoggedInGuard]
   },
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   },
 ];

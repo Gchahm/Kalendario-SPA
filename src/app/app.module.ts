@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
+import {CompanyModule} from './company/company.module';
 
 
 
@@ -25,6 +26,7 @@ import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
     CoreModule,
     CustomerModule,
     AdminScheduleModule,
+    CompanyModule,
     AppRoutingModule,
     LayoutModule,
     MatToolbarModule,

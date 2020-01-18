@@ -31,7 +31,7 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.queryParamSubscription = this.route.paramMap.subscribe(params => {
       this.appointment.start = moment.utc(params.get('date'));
-      this.empServiceSubscription = this.empService.get(params.get('employee')).subscribe((emp) => {
+      this.empServiceSubscription = this.empService.detail(+params.get('employee')).subscribe((emp) => {
         this.appointment.employee = emp;
         this.appointment.service = emp.services.find(s => s.id === +params.get('service'));
       });

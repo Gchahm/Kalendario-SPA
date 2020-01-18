@@ -1,4 +1,4 @@
-import {Employee} from './Employee';
+import {EmployeeReadModel} from './Employee';
 import {Customer} from './Customer';
 import {Service, ServiceAdapter} from './Service';
 import * as moment from 'moment';
@@ -11,7 +11,7 @@ import {IBaseAppointmentWrite} from './IBaseAppointmentWrite';
 export class Appointment implements IAppointmentReadModel {
   public id: number;
   public customer: Customer;
-  public employee: Employee;
+  public employee: EmployeeReadModel;
   public service: Service;
   public status: string;
   public start: Moment;

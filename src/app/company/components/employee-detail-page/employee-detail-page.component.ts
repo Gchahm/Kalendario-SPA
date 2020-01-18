@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Employee} from '../../../core/models/Employee';
+import {EmployeeReadModel} from '../../../core/models/Employee';
 import {Subscription} from 'rxjs';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Service} from '../../../core/models/Service';
 import {Moment} from 'moment';
 import * as moment from 'moment';
-import {Slot} from '../../models/Slot';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
 
@@ -17,11 +16,11 @@ import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
 })
 export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
 
-  employee: Employee;
+  employee: EmployeeReadModel;
   events: CalendarEvent[];
-  // slots: Slot[];
   empServiceSubscription: Subscription;
   queryParamSubscription: Subscription;
+  companyName: string;
 
   service: Service;
   date: Moment;
@@ -34,14 +33,14 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.date = moment.utc().add(1, 'days');
     this.queryParamSubscription = this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      this.empServiceSubscription = this.empService.get(id).subscribe(emp => {
+      const id = +params.get('id');
+      this.companyName = params.get('cid');
+      this.empServiceSubscription = this.empService.detail(id, {company: this.companyName}).subscribe(emp => {
         this.employee = emp;
         this.service = emp.services[0];
         this.loadSlots();
       });
     });
-
   }
 
   ngOnDestroy(): void {
@@ -87,8 +86,5 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
           };
         });
       });
-  }
-
-  handleEventClicked($event: Slot) {
   }
 }

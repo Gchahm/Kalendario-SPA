@@ -1,0 +1,7 @@
+.card {
+  max-width: 300px;
+}
+
+.card-body > * {
+  width: 100%;
+}

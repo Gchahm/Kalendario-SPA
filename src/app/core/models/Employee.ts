@@ -1,4 +1,4 @@
-import {Service, ServiceAdapter} from './Service';
+import {adaptService, Service, ServiceAdapter} from './Service';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
 import {IReadModel} from './interfaces/IReadModel';
@@ -11,6 +11,7 @@ export class Employee implements EmployeeReadModel {
   name: string;
   email: string;
   phone: string;
+  schedule: string;
   instagram: string;
   photoUrl: string;
   bio: string;
@@ -23,6 +24,7 @@ export class Employee implements EmployeeReadModel {
       last_name: this.lastName,
       email: this.email,
       phone: this.phone,
+      schedule: this.schedule,
       instagram: this.instagram,
       photoUrl: this.photoUrl,
       bio: this.bio,
@@ -47,10 +49,11 @@ export class EmployeeAdapter implements Adapter<Employee> {
     emp.name = item.name;
     emp.email = item.email;
     emp.phone = item.phone;
+    emp.schedule = item.schedule;
     emp.instagram = item.instagram;
     emp.photoUrl = item.profile_img ? 'https://res.cloudinary.com/gchahm/' + item.profile_img : null;
     emp.bio = item.bio;
-    emp.services = item.services;
+    emp.services = item.services.map(adaptService);
     return emp;
   }
 }
@@ -63,6 +66,7 @@ export interface EmployeeReadModel extends IReadModel {
   name: string;
   email: string;
   phone: string;
+  schedule: string;
   instagram: string;
   photoUrl: string;
   bio: string;
@@ -75,6 +79,7 @@ export interface EmployeeWriteModel extends IWriteModel {
   last_name: string;
   email: string;
   phone: string;
+  schedule: string;
   instagram: string;
   photoUrl: string;
   bio: string;

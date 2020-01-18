@@ -34,13 +34,17 @@ export class Service implements ServiceReadModel {
 })
 export class ServiceAdapter implements Adapter<Service> {
   adapt(item: any): Service {
-    const service = new Service();
-    service.id = item.id;
-    service.name = item.name;
-    service.duration = moment.duration(item.duration);
-    service.description = item.description;
-    return service;
+    return adaptService(item);
   }
+}
+
+export function adaptService(item: any): Service {
+  const service = new Service();
+  service.id = item.id;
+  service.name = item.name;
+  service.duration = moment.duration(item.duration);
+  service.description = item.description;
+  return service;
 }
 
 export interface ServiceReadModel extends IReadModel {

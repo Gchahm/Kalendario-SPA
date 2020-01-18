@@ -32,6 +32,7 @@ class CreateEmployeeForm {
   bio: string;
   photoUrl: string;
   services: string[];
+  schedule: string;
 
   createModel(): EmployeeWriteModel {
     return {
@@ -43,7 +44,8 @@ class CreateEmployeeForm {
       instagram: this.instagram,
       phone: this.phone,
       photoUrl: this.photoUrl,
-      services: this.services
+      services: this.services,
+      schedule: this.schedule
     };
   }
 }
