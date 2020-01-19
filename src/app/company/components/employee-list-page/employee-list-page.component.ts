@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Employee} from '../../../core/models/Employee';
+import {IAppState} from '../../../Store';
+import {select} from '@angular-redux/store';
 import {EmployeeService} from '../../../shared/services/employee.service';
-import {Observable} from 'rxjs';
-import {Employee, EmployeeReadModel} from '../../../core/models/Employee';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'customer-employee-list',
@@ -11,15 +11,13 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class EmployeeListPageComponent implements OnInit {
 
-  public employees$: Observable<EmployeeReadModel[]>;
-  public companyId;
+  employees$;
+  @select((s: IAppState) => s.company.companyName) companyName$;
 
-  constructor(private empService: EmployeeService,
-              private route: ActivatedRoute) { }
+  constructor(private empService: EmployeeService) { }
 
   ngOnInit() {
-    this.companyId = this.route.snapshot.paramMap.get('cid');
-    this.employees$ = this.empService.get({company: this.companyId});
+    this.employees$ = this.empService.get();
   }
 
   services(employee: Employee): string {

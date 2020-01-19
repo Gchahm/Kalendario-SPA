@@ -10,6 +10,7 @@ import { ToastsComponent } from './components/toasts/toasts.component';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
+import {NgReduxModule} from '@angular-redux/store';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import {TranslateModule} from '@ngx-translate/core';
     ReactiveFormsModule,
     AngularMaterialModule,
     FlexLayoutModule,
+    NgReduxModule,
     TranslateModule.forRoot(),
   ],
   providers: [
@@ -41,6 +43,7 @@ import {TranslateModule} from '@ngx-translate/core';
     AngularMaterialModule,
     FlexLayoutModule,
     TranslateModule,
+    NgReduxModule,
   ]
 })
 export class SharedModule { }

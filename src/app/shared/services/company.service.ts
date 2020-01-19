@@ -8,8 +8,10 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class CompanyService extends DjangoRWModelService<ICompanyReadModel, ICompanyWriteModel> {
+
   constructor(http: HttpClient,
-              private companyAdapter: CompanyAdapter) {
-    super(http, companyAdapter, environment.apiUrl + 'companies/');
+              adapter: CompanyAdapter,
+              ) {
+    super(http, adapter,  environment.apiUrl + 'companies/');
   }
 }

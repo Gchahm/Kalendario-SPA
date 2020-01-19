@@ -1,13 +1,6 @@
 <div class="container p-2">
   <div class="card m-auto mat-elevation-z5">
     <div class="card-body">
-      <!--<mat-form-field>-->
-        <!--<input id="company"-->
-               <!--matInput-->
-               <!--class="form-control"-->
-               <!--type="text"-->
-               <!--placeholder="find company">-->
-      <!--</mat-form-field>-->
       <mat-list>
         <mat-list-item *ngFor="let company of companies$ | async"><a routerLink="c/{{company.name}}/">{{company.name}}</a></mat-list-item>
       </mat-list>

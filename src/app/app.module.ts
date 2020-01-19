@@ -13,8 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
 import {CompanyModule} from './company/company.module';
-
-
+import {IAppState, INITIAL_STATE, rootReducer} from './Store';
+import {NgRedux} from '@angular-redux/store';
 
 @NgModule({
   declarations: [
@@ -39,4 +39,8 @@ import {CompanyModule} from './company/company.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  }
+}
