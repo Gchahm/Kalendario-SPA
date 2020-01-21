@@ -1,19 +1,21 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Globals} from '../../core/services/Globals';
-import {AuthService} from '../services/auth.service';
 import {map} from 'rxjs/operators';
+import {select} from '@angular-redux/store';
+import {IAppState} from '../../Store';
+import {User} from '../../core/models/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CanViewEmployeesGuard implements CanActivate {
 
-  constructor(private authService: AuthService) {}
+  @select((s: IAppState) => s.core.user) user$: Observable<User>;
+  constructor() {}
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authService.loadUser().pipe(map(user => user.can.view.employees()));
+    return this.user$.pipe(map(user => user.can.view.employees()));
   }
 }

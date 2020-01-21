@@ -1,5 +1,4 @@
 import {EmployeeReadModel} from './Employee';
-import {Customer} from './Customer';
 import {Service, ServiceAdapter} from './Service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
@@ -7,16 +6,21 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
 import {IBaseAppointmentRead} from './IBaseAppointmentRead';
 import {IBaseAppointmentWrite} from './IBaseAppointmentWrite';
+import {Person} from './Person';
 
 export class Appointment implements IAppointmentReadModel {
   public id: number;
-  public customer: Customer;
+  public customer: Person;
   public employee: EmployeeReadModel;
   public service: Service;
   public status: string;
   public start: Moment;
   public end: Moment;
   public customerNotes: string;
+
+  constructor() {
+    this.id = 0;
+  }
 
   static CreateModel(): IAppointmentWriteModel {
     return {
@@ -81,7 +85,7 @@ export class AppointmentAdapter implements Adapter<Appointment> {
 }
 
 export interface IAppointmentReadModel extends IBaseAppointmentRead {
-  customer: Customer;
+  customer: Person;
   service: Service;
   status: string;
   customerNotes: string;

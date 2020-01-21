@@ -125,8 +125,8 @@
           </tbody>
         </table>
       </div>
-      <div class="col-12 text-right">
-        <button [hidden]="!globals.user.can.change.employees()" (click)="edit()" color="accent" mat-flat-button>edit
+      <div class="col-12 text-right" *ngIf="user$ | async as user">
+        <button [hidden]="!user.can.change.employees()" (click)="edit()" color="accent" mat-flat-button>edit
         </button>
       </div>
     </div>

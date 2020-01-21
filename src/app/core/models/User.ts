@@ -21,13 +21,17 @@ export class User {
 }
 
 class PermissionChain {
-  constructor(private user: User) {
-  }
+  view: PermissionChecker;
+  add: PermissionChecker;
+  change: PermissionChecker;
+  delete: PermissionChecker;
 
-  view = new PermissionChecker(this.user, 'view');
-  add = new PermissionChecker(this.user, 'add');
-  change = new PermissionChecker(this.user, 'change');
-  delete = new PermissionChecker(this.user, 'delete');
+  constructor(user: User) {
+    this.view = new PermissionChecker(user, 'view');
+    this.add = new PermissionChecker(user, 'add');
+    this.change = new PermissionChecker(user, 'change');
+    this.delete = new PermissionChecker(user, 'delete');
+  }
 }
 
 class PermissionChecker {

@@ -6,7 +6,6 @@ import {ServiceService} from '../../services/service.service';
 import {ServiceReadModel} from '../../../core/models/Service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {MatDialog} from '@angular/material';
-import {Globals} from '../../../core/services/Globals';
 import {ListComponent} from '../../../core/generics/components/ListComponent';
 import {CreateEmployeeDialogComponent} from '../../dialogs/create-employee/create-employee-dialog.component';
 
@@ -21,7 +20,6 @@ export class EmployeesPageComponent extends ListComponent<Employee> implements O
   subscription: Subscription;
 
   constructor(private serviceService: ServiceService,
-              public globals: Globals,
               employeeService: AdminEmployeeService,
               toast: ToastService,
               dialog: MatDialog) {

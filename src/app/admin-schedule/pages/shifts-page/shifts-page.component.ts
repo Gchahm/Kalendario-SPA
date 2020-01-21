@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ListComponent} from '../../../core/generics/components/ListComponent';
-import {IShiftReadModel, Shift} from '../../../core/models/Shift';
-import {Globals} from '../../../core/services/Globals';
+import {IShiftReadModel} from '../../../core/models/Shift';
 import {ToastService} from '../../../shared/services/toast.service';
 import {MatDialog} from '@angular/material';
 import {ShiftService} from '../../services/shift.service';
@@ -18,7 +17,6 @@ export class ShiftsPageComponent extends ListComponent<IShiftReadModel> implemen
   subscription: Subscription;
 
   constructor(private shiftService: ShiftService,
-              public globals: Globals,
               toast: ToastService,
               dialog: MatDialog) {
     super(shiftService, dialog, CreateShiftDialogComponent, toast);

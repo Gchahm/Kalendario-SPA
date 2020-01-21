@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {Service} from '../../../core/models/Service';
-import {Globals} from '../../../core/services/Globals';
 import {DetailsComponent} from '../../../core/generics/components/DetailsComponent';
 import {EmployeeReadModel} from '../../../core/models/Employee';
 import {MatDialog} from '@angular/material';
 import {AdminEmployeeService} from '../../services/admin-employee.service';
 import {ToastService} from '../../../shared/services/toast.service';
+import {select} from '@angular-redux/store';
+import {IAppState} from '../../../Store';
 
 @Component({
   selector: 'employee-profile',
@@ -14,14 +15,14 @@ import {ToastService} from '../../../shared/services/toast.service';
 })
 export class EmployeePanelComponent extends DetailsComponent<EmployeeReadModel> {
 
-  constructor(public globals: Globals,
-              public dialog: MatDialog,
+  @Input() services: Service[];
+  @select((s: IAppState) => s.core.user) user$;
+
+  constructor(public dialog: MatDialog,
               private employeeService: AdminEmployeeService,
               private toast: ToastService) {
     super();
   }
-
-  @Input() services: Service[];
 
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];

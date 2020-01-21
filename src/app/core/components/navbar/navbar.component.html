@@ -5,19 +5,19 @@
       <mat-icon matTooltip="staff">view_column</mat-icon>
     </button>
     <span class="nav-spacer"></span>
-    <div *ngIf="isLoggedIn(); else loginTemplate">
-      <ng-container *ngIf="globals.user as user">
+    <div *ngIf="isLoggedIn | async; else loginTemplate">
+      <ng-container *ngIf="user$ | async as user">
         <a [matMenuTriggerFor]="menu"><mat-icon>dehaze</mat-icon></a>
         <mat-menu #menu="matMenu">
           <button *ngIf="user.can.view.employees()" mat-menu-item routerLink="admin/employees/">
             admin
           </button>
-            <button *ngIf="user.isEmployee || user.can.add.appointments()" mat-menu-item routerLink="/employee/schedule">
-              Schedule
-            </button>
-            <button *ngIf="user.isCustomer" mat-menu-item routerLink="/my-appointments">
-              My appointments
-            </button>
+          <button *ngIf="user.isEmployee || user.can.add.appointments()" mat-menu-item routerLink="/employee/schedule">
+            Schedule
+          </button>
+          <button mat-menu-item routerLink="/my-appointments">
+            My appointments
+          </button>
           <button mat-menu-item (click)="logout()">
             Logout
           </button>

@@ -7,7 +7,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FacebookAuthService} from '../../shared/services/facebook-auth.service';
 import {LoginModel} from '../../core/models/LoginModel';
 import {User, UserAdapter} from '../../core/models/User';
-import {Globals} from '../../core/services/Globals';
+import {NgRedux} from '@angular-redux/store';
+import {IAppState} from '../../Store';
+import {LOGIN_USER, LOGOUT_USER} from '../../core/CoreActions';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +23,9 @@ export class AuthService {
               private route: ActivatedRoute,
               private router: Router,
               private adapter: UserAdapter,
-              private globals: Globals,
-              private fbService: FacebookAuthService) {
-    if (!this.globals.user) {
-    }
+              private fbService: FacebookAuthService,
+              private redux: NgRedux<IAppState>) {
+
   }
 
   static setToken(token: string) {
@@ -47,7 +48,7 @@ export class AuthService {
     return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
       map(res => {
         AuthService.removeToken();
-        this.globals.user = User.AnonymousUser();
+        this.redux.dispatch({type: LOGOUT_USER, user: User.AnonymousUser()});
         this.router.navigate(['']);
         return res;
       })
@@ -58,7 +59,7 @@ export class AuthService {
     this.fbService.login(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.logUser();
+        return this.whoAmI();
       })
     );
   }
@@ -67,7 +68,7 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.logUser();
+        return this.whoAmI();
       })
     );
   }
@@ -76,32 +77,31 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'registration/', form).pipe(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.logUser();
-      })
+        return this.whoAmI();
+      }),
+      map(
+        user => {
+          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+          this.router.navigate([returnUrl]);
+          return user;
+        }
+      )
     );
   }
-
-  private logUser(): Observable<User> {
-    return this.loadUser().pipe(
-      map((project: User) => {
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        this.router.navigate([returnUrl]);
-        return project;
-      })
-    );
+  public loadUser() {
+    this.whoAmI().subscribe(user => {
+      this.redux.dispatch({type: LOGIN_USER, user});
+    });
   }
 
-  public loadUser(): Observable<User> {
+  private whoAmI(): Observable<User> {
     return this.http.get<User>(this.userUrl + 'current/').pipe(
       map(this.adapter.adapt),
       catchError(() => {
         return of(User.AnonymousUser());
-      }),
-      map(user => {
-        this.globals.user = user;
-        return user;
       })
     );
   }
+
 }
 

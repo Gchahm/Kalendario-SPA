@@ -8,7 +8,6 @@ import {Slot, SlotAdapter} from '../../customer/models/Slot';
 import {adaptList} from '../../core/interfaces/adapter';
 import {Moment} from 'moment';
 import {Service} from '../../core/models/Service';
-import {FETCH_EMPLOYEES_SUCCESS} from '../../company/actions';
 import {IAppState} from '../../Store';
 import {NgRedux} from '@angular-redux/store';
 

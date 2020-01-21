@@ -5,8 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import * as moment from 'moment';
-import {Globals} from '../../../core/services/Globals';
 import {Appointment} from '../../../core/models/Appointment';
+import {NgRedux} from '@angular-redux/store';
+import {IAppState} from '../../../Store';
 
 @Component({
   selector: 'customer-book-appointment-page',
@@ -22,10 +23,10 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
 
   constructor(private empService: EmployeeService,
               private appointmentService: AppointmentService,
-              private globals: Globals,
               private alertify: ToastService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private redux: NgRedux<IAppState>) {
   }
 
   ngOnInit() {
@@ -44,11 +45,12 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   }
 
   bookAppointment() {
+    this.appointment.customer = this.redux.getState().core.user.person;
     const model = this.appointment.writeModel();
-    model.customer = this.globals.user.person.id.toString();
     this.appointmentService.post(model)
       .toPromise()
       .then(res => this.alertify.success('appointment booked'))
+
       .catch(error => this.alertify.error(error))
       .finally(() => this.router.navigate(['/my-appointments']));
   }

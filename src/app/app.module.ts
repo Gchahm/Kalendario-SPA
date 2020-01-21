@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {isDevMode, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
@@ -14,7 +14,8 @@ import { MatListModule } from '@angular/material/list';
 import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
 import {CompanyModule} from './company/company.module';
 import {IAppState, INITIAL_STATE, rootReducer} from './Store';
-import {NgRedux} from '@angular-redux/store';
+import {DevToolsExtension, NgRedux} from '@angular-redux/store';
+import {AuthService} from './admin-schedule/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,11 @@ import {NgRedux} from '@angular-redux/store';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  constructor(ngRedux: NgRedux<IAppState>,
+              devTools: DevToolsExtension,
+              private authService: AuthService) {
+    const enhancers = isDevMode() ? [devTools.enhancer()] : [];
+    ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancers);
+    this.authService.loadUser();
   }
 }

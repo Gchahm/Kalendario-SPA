@@ -6,7 +6,6 @@ import {MatDialog} from '@angular/material';
 import {ToastService} from '../../../shared/services/toast.service';
 import {CreateScheduleDialogComponent} from '../../dialogs/create-schedule/create-schedule-dialog.component';
 import {Subscription} from 'rxjs';
-import {Globals} from '../../../core/services/Globals';
 
 @Component({
   selector: 'app-schedule-page',
@@ -17,8 +16,7 @@ export class SchedulePageComponent extends ListComponent<IScheduleReadModel> imp
 
   subscription: Subscription;
 
-  constructor(public globals: Globals,
-              service: ScheduleService,
+  constructor(service: ScheduleService,
               dialog: MatDialog,
               toast: ToastService) {
     super(service, dialog, CreateScheduleDialogComponent, toast);

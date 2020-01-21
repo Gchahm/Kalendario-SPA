@@ -1,30 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../../admin-schedule/services/auth.service';
-import {UserService} from '../../../shared/services/user.service';
-import {Globals} from '../../services/Globals';
 import {ToastService} from '../../../shared/services/toast.service';
+import {select} from '@angular-redux/store';
+import {IAppState} from '../../../Store';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor(private userService: UserService,
-              private authService: AuthService,
-              private toastService: ToastService,
-              public globals: Globals) {
-  }
+  @select((s: IAppState) => s.core.isLoggedIn) isLoggedIn;
+  @select((s: IAppState) => s.core.user) user$;
 
-  async ngOnInit() {
-    if (!this.globals.user) {
-      this.authService.loadUser().toPromise();
-    }
-  }
-
-  isLoggedIn() {
-    return AuthService.isLoggedIn();
+  constructor(private authService: AuthService,
+              private toastService: ToastService) {
   }
 
   logout() {

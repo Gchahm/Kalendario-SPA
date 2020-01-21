@@ -1,6 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Globals} from '../../../core/services/Globals';
-import {User} from '../../../core/models/User';
+import {Component, Input} from '@angular/core';
 import {MenuOption} from '../../models/MenuOption';
 
 @Component({
@@ -8,14 +6,10 @@ import {MenuOption} from '../../models/MenuOption';
   templateUrl: './dashboard-side-bar.component.html',
   styleUrls: ['./dashboard-side-bar.component.css']
 })
-export class DashboardSideBarComponent implements OnInit {
+export class DashboardSideBarComponent {
 
-  user: User;
   @Input() options: MenuOption[] = [];
 
-  constructor(public globals: Globals) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.user = this.globals.user;
-  }
 }

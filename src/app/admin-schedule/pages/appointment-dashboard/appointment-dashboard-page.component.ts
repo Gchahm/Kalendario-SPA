@@ -2,9 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {forkJoin, Subscription} from 'rxjs';
 import {Employee, EmployeeReadModel} from '../../../core/models/Employee';
-import {Globals} from '../../../core/services/Globals';
 import {Moment} from 'moment';
 import * as moment from 'moment';
+import {NgRedux} from '@angular-redux/store';
+import {IAppState} from '../../../Store';
 
 @Component({
   selector: 'admin-appointment-dashboard-page',
@@ -20,22 +21,24 @@ export class AppointmentDashboardPageComponent implements OnInit, OnDestroy {
   date: Moment = moment.utc();
 
   constructor(private employeeService: EmployeeService,
-              private globals: Globals) {
+              private redux: NgRedux<IAppState>) {
   }
 
   ngOnInit() {
-    if (this.globals.user.isEmployee) {
-      // TODO: Test this part of the statement
-      this.subscription = forkJoin(this.employeeService.current(), this.employeeService.get())
-        .subscribe(([employee, employees]) => {
-          this.employees = [employee];
+    this.redux.subscribe(() => {
+      if (this.redux.getState().core.user.isEmployee) {
+        // TODO: Test this part of the statement
+        this.subscription = forkJoin(this.employeeService.current(), this.employeeService.get())
+          .subscribe(([employee, employees]) => {
+            this.employees = [employee];
+          });
+      } else {
+        this.subscription = this.employeeService.get().subscribe(employees => {
+          this.employees = employees;
         });
-    } else {
-      this.subscription = this.employeeService.get().subscribe(employees => {
-        this.employees = employees;
-      });
+      }
+    });
 
-    }
   }
 
   isSelected(emp: Employee): boolean {
