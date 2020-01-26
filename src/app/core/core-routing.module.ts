@@ -4,6 +4,8 @@ import {RegisterComponent} from './components/register/register.component';
 import {NgModule} from '@angular/core';
 import {NotLoggedInGuard} from './guards/not-logged-in.guard';
 import {LoginComponent} from './components/login/login.component';
+import {DashboardPageComponent} from './components/dashboard-page/dashboard-page.component';
+import {AuthGuard} from '../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +21,11 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'my-appointments',
+    component: DashboardPageComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

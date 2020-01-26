@@ -4,7 +4,7 @@ import {Employee, EmployeeAdapter, EmployeeReadModel} from '../../core/models/Em
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Slot, SlotAdapter} from '../../customer/models/Slot';
+import {Slot, SlotAdapter} from '../../core/models/Slot';
 import {adaptList} from '../../core/interfaces/adapter';
 import {Moment} from 'moment';
 import {Service} from '../../core/models/Service';

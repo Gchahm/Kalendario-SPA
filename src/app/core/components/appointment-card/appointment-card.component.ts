@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Appointment} from '../../../core/models/Appointment';
+import {Appointment} from '../../models/Appointment';
 import {Duration} from 'moment';
 
 @Component({

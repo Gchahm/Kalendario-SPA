@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
-import {Adapter} from '../../core/interfaces/adapter';
+import {Adapter} from '../interfaces/adapter';
 
 export class Slot {
   constructor(public start: Moment, public end: Moment) {}

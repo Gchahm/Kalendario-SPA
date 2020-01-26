@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
-import {CustomerModule} from './customer/customer.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +24,6 @@ import {AuthService} from './admin-schedule/services/auth.service';
     BrowserModule,
     SharedModule,
     CoreModule,
-    CustomerModule,
     AdminScheduleModule,
     CompanyModule,
     AppRoutingModule,
