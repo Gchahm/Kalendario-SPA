@@ -2,7 +2,7 @@
   <div (empId)=employee.id class="row">
     <div class="col-sm-12 col-md-3">
       <div class="card mat-elevation-z5">
-        <button mat-stroked-button color="primary" routerLink="/c/{{companyName}}/staff">BACK TO STAFF</button>
+        <button mat-stroked-button color="primary" routerLink="/c/{{companyName$ | async}}/staff">BACK TO STAFF</button>
         <img src="{{employee.photoUrl}}" class="card-img-top d-none d-sm-none d-md-block" alt="...">
         <h5 class="card-title text-center">{{employee.name}}</h5>
         <p class="pl-2 pr-2">{{employee.bio}}</p>
@@ -16,8 +16,7 @@
       <app-calendar [default-date]="date"
                     [min-date]="date"
                     [events]="events"
-                    (dayRender)="handleDayRender($event)"
-                    (agendaEventClicked)="handleEventClicked($event)">
+                    (dayRender)="handleDayRender($event)">
       </app-calendar>
     </div>
   </div>

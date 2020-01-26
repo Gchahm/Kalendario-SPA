@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
 import {Subscription} from 'rxjs';
+import {NgRedux, select} from '@angular-redux/store';
+import {IAppState} from '../../../Store';
 
 @Component({
   selector: 'customer-employee-detail-page',
@@ -14,6 +16,8 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./employee-detail-page.component.css']
 })
 export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
+
+  @select((s: IAppState) => s.company.companyName) companyName$;
 
   employeeId;
   employee;
@@ -26,7 +30,8 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
 
   constructor(private empService: EmployeeService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private redux: NgRedux<IAppState>) {
   }
 
   ngOnInit() {
@@ -64,6 +69,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
   loadSlots() {
     const router = this.router;
     const serviceId = this.service.id;
+    const company = this.redux.getState().company.companyName;
 
     this.empService.slots(this.employeeId, this.service,
       this.date.clone().startOf('day'),
@@ -76,7 +82,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
             start: slot.start,
             end: slot.end,
             onClick: () => {
-              router.navigate(['booking/', this.employeeId, serviceId, slot.start.toISOString()]);
+              router.navigate([`c/${company}/booking/`, this.employeeId, serviceId, slot.start.toISOString()]);
             }
           };
         });

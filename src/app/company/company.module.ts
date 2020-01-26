@@ -5,6 +5,7 @@ import {EmployeeDetailPageComponent} from './components/employee-detail-page/emp
 import {SharedModule} from '../shared/shared.module';
 import {CalendarModule} from '../calendar/calendar.module';
 import {CompanyRoutingModule} from './company-routing.module';
+import {BookAppointmentPageComponent} from './components/book-appointment-page/book-appointment-page.component';
 
 
 
@@ -13,6 +14,7 @@ import {CompanyRoutingModule} from './company-routing.module';
     CompanyComponent,
     EmployeeListPageComponent,
     EmployeeDetailPageComponent,
+    BookAppointmentPageComponent,
   ],
   imports: [
     CompanyRoutingModule,

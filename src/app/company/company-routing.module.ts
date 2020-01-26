@@ -3,6 +3,8 @@ import {EmployeeDetailPageComponent} from './components/employee-detail-page/emp
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CompanyComponent} from './components/company/company.component';
+import {AuthGuard} from '../shared/guards/auth.guard';
+import {BookAppointmentPageComponent} from './components/book-appointment-page/book-appointment-page.component';
 
 const routes: Routes = [
   {
@@ -10,12 +12,21 @@ const routes: Routes = [
     component: CompanyComponent,
     children: [
       {
-        path: '',
+        path: 'staff',
         component: EmployeeListPageComponent
       },
       {
         path: 'staff/:id',
         component: EmployeeDetailPageComponent
+      },
+      {
+        path: 'booking/:employee/:service/:date',
+        component: BookAppointmentPageComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: '',
+        component: EmployeeListPageComponent
       },
     ]
   },
