@@ -64,11 +64,17 @@ export class AuthService {
     );
   }
 
+
   login(user: LoginModel): Observable<User> {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
         return this.whoAmI();
+      }),
+      map(project => {
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigate([returnUrl]);
+        return project;
       })
     );
   }
@@ -79,24 +85,25 @@ export class AuthService {
         AuthService.setToken(project.key);
         return this.whoAmI();
       }),
-      map(
-        user => {
-          const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-          this.router.navigate([returnUrl]);
-          return user;
-        }
-      )
+      map(project => {
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigate([returnUrl]);
+        return project;
+      })
     );
   }
+
   public loadUser() {
-    this.whoAmI().subscribe(user => {
-      this.redux.dispatch({type: LOGIN_USER, user});
-    });
+    this.whoAmI().toPromise();
   }
 
   private whoAmI(): Observable<User> {
     return this.http.get<User>(this.userUrl + 'current/').pipe(
       map(this.adapter.adapt),
+      map(user => {
+        this.redux.dispatch({type: LOGIN_USER, user});
+        return user;
+      }),
       catchError(() => {
         return of(User.AnonymousUser());
       })
@@ -104,4 +111,3 @@ export class AuthService {
   }
 
 }
-

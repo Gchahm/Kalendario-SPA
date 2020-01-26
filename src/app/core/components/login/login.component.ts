@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.toastService.success('logged in');
     }, error1 => {
       this.toastService.error(error1);
+      this.user.password = '';
     });
   }
 
