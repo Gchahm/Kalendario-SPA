@@ -18,7 +18,8 @@ export class TimeFrame {
   }
 }
 
-export class Shift implements IShiftReadModel {
+export class Shift implements IReadModel {
+  static modelType = 'shift';
   id = 0;
   name = '';
   frames = [];
@@ -34,11 +35,6 @@ export class Shift implements IShiftReadModel {
   toString() {
     return this.name;
   }
-}
-
-export interface IShiftReadModel extends IReadModel {
-  name: string;
-  frames: TimeFrame[];
 }
 
 export interface IShiftWriteModel extends IWriteModel {

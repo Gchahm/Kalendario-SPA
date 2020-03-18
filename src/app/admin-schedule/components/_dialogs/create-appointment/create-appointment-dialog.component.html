@@ -1,0 +1,14 @@
+<ng-container *ngIf="type==='SERVICE'">
+  <admin-appointment-form [model]="model"
+                          [htmlAction]="'CREATE'"
+                          (cancelClicked)="onNoClick()"
+                          (submitClicked)="onSubmitClicked($event)">
+  </admin-appointment-form>
+</ng-container>
+<ng-container *ngIf="type==='SELF'">
+  <admin-self-appointment-form [model]="model"
+                               [htmlAction]="'CREATE'"
+                               (cancelClicked)="onNoClick()"
+                               (submitClicked)="onSubmitClicked($event)">
+  </admin-self-appointment-form>
+</ng-container>

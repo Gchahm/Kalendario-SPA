@@ -5,7 +5,8 @@ import {Duration} from 'moment';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 
-export class Service implements ServiceReadModel {
+export class Service implements IReadModel {
+  static modelType = 'service';
   id = 0;
   name = '';
   duration: Duration = moment.duration(0);
@@ -45,13 +46,6 @@ export function adaptService(item: any): Service {
   service.duration = moment.duration(item.duration);
   service.description = item.description;
   return service;
-}
-
-export interface ServiceReadModel extends IReadModel {
-  id: number;
-  name: string;
-  duration: Duration;
-  description: string;
 }
 
 export interface ServiceWriteModel extends IWriteModel {

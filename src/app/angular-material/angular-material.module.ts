@@ -31,6 +31,7 @@ import {
   MatDialogModule,
   MatSnackBarModule,
 } from '@angular/material';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
 
@@ -67,6 +68,7 @@ import {
     MatBadgeModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatMomentDateModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -99,6 +101,7 @@ import {
     MatSortModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatMomentDateModule,
   ]
 })
 export class AngularMaterialModule { }

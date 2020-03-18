@@ -1,7 +1,0 @@
-<admin-dashboard [(modelList)]="modelList"
-                 [(selectedModel)]="selectedModel"
-                 (createClicked)="createModel()">
-  <admin-service-card *ngIf="selectedModel"
-                      (onUpdate)="handleUpdateModelEvent($event)"
-                      [model]="selectedModel"></admin-service-card>
-</admin-dashboard>

@@ -1,0 +1,24 @@
+<mat-card class="model-list-container">
+  <div class="row">
+    <div class="col-2 model-list pretty-scroll">
+      <button mat-stroked-button
+              color="accent"
+              (click)="createModelClicked()"
+              class="model-create">new
+      </button>
+      <mat-list *ngIf="selectedModel$ | async as selectedModel">
+        <!--[hidden]="!globals.user.can.add.schedules()"-->
+        <mat-list-item *ngFor="let model of modelList$ | async"
+                       (click)="selectModel(model)"
+                       [ngClass]="{'A400 active': model.id === selectedModel.id}">
+          {{model.toString()}}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-10 p-5">
+      <ng-content></ng-content>
+      <!--[hidden]="!user.can.change.employees()"-->
+      <button [hidden]="(editMode$ | async)" class="edit-button" (click)="editButtonClicked()" color="accent" mat-flat-button>edit</button>
+    </div>
+  </div>
+</mat-card>

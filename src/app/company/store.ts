@@ -1,10 +1,10 @@
-import {EmployeeReadModel} from '../core/models/Employee';
+import {Employee} from '../core/models/Employee';
 import {SET_COMPANY_NAME} from './actions';
 import {tassign} from 'tassign';
 
 export interface ICompanyState {
   companyName: string;
-  employees: EmployeeReadModel[];
+  employees: Employee[];
 }
 
 export const COMPANY_INITIAL_STATE: ICompanyState = {

@@ -1,6 +1,0 @@
-<admin-dashboard [(modelList)]="modelList"
-                 [(selectedModel)]="selectedModel"
-                 (createClicked)="createModel()">
-  <schedule-detail *ngIf="selectedModel" [(model)]="selectedModel" (onUpdate)="handleUpdateModelEvent($event)">
-  </schedule-detail>
-</admin-dashboard>

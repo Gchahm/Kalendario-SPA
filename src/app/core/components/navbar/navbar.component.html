@@ -1,22 +1,25 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>Vintage Studio</span>
+    <button *ngIf="(showLeftPane$ | async)" mat-button (click)="toggleLeftPane()">
+      <mat-icon>dehaze</mat-icon>
+    </button>
+    <span>{{companyName$ | async}}</span>
     <button mat-button routerLink="/">
       <mat-icon matTooltip="staff">view_column</mat-icon>
     </button>
     <span class="nav-spacer"></span>
-    <div *ngIf="isLoggedIn | async; else loginTemplate">
+    <div *ngIf="isLoggedIn$ | async; else loginTemplate">
       <ng-container *ngIf="user$ | async as user">
         <a [matMenuTriggerFor]="menu"><mat-icon>dehaze</mat-icon></a>
         <mat-menu #menu="matMenu">
-          <button *ngIf="user.can.view.employees()" mat-menu-item routerLink="admin/employees/">
-            admin
-          </button>
-          <button *ngIf="user.isEmployee || user.can.add.appointments()" mat-menu-item routerLink="/employee/schedule">
-            Schedule
-          </button>
           <button mat-menu-item routerLink="/my-appointments">
             My appointments
+          </button>
+          <button mat-menu-item routerLink="/create-company">
+            Create Company
+          </button>
+          <button mat-menu-item routerLink="/admin/home">
+            Company dashboard
           </button>
           <button mat-menu-item (click)="logout()">
             Logout

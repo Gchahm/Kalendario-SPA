@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {IAppointmentReadModel} from '../../../core/models/Appointment';
+import {Appointment} from '../../models/Appointment';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import * as moment from 'moment';
 
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 })
 export class DashboardPageComponent implements OnInit {
 
-  appointments$: Observable<IAppointmentReadModel[]>;
+  appointments$: Observable<Appointment[]>;
   selectedPeriod = 'future';
   selectedStatus = 'all';
 
@@ -39,5 +39,4 @@ export class DashboardPageComponent implements OnInit {
     if (this.selectedStatus !== 'all') { params.status = this.selectedStatus; }
     this.appointments$ = this.appointmentService.get(params);
   }
-
 }

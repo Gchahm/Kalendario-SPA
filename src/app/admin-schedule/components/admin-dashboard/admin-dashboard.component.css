@@ -28,14 +28,10 @@
   margin-right: 20px;
 }
 
-button:focus {outline:0;}
-
-.model-create {
-  width: 100%;
+mat-list {
+  width: 13em;
 }
 
-.model-list {
-  overflow-y: scroll;
-  min-height: 80vh;
-  max-height: 80vh;
+.active {
+  color: white;
 }

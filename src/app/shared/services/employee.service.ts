@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Employee, EmployeeAdapter, EmployeeReadModel} from '../../core/models/Employee';
+import {Employee, EmployeeAdapter} from '../../core/models/Employee';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -27,7 +27,7 @@ export class EmployeeService {
   get(params = {}) {
     const state = this.ngRedux.getState();
 
-    return this.http.get<EmployeeReadModel[]>(this.baseUrl,
+    return this.http.get<Employee[]>(this.baseUrl,
       {params: {...params, company: state.company.companyName}})
       .pipe(map(adaptList(this.adapter)));
   }
@@ -35,7 +35,7 @@ export class EmployeeService {
   detail(id: number, params = {}) {
     const state = this.ngRedux.getState();
 
-    return this.http.get<EmployeeReadModel>(this.baseUrl + id + '/',
+    return this.http.get<Employee>(this.baseUrl + id + '/',
       {params: {...params, company: state.company.companyName}})
       .pipe(map(this.adapter.adapt));
   }

@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Dashboard</span>
+    <button mat-button color="accent" [matMenuTriggerFor]="menu">select employee</button>
+    <mat-menu #menu="matMenu">
+      <button *ngFor="let emp of employees$ | async"
+              mat-menu-item
+              (click)="addPanel(emp)">
+        <mat-icon *ngIf="isSelected(emp)">done</mat-icon>
+        {{emp.name}}
+      </button>
+    </mat-menu>
+    <button mat-flat-button color="accent" (click)="today()">Today</button>
+    <button mat-stroked-button color="accent" (click)="previousDay()">
+      <mat-icon class="icon">chevron_left</mat-icon>
+    </button>
+    <button mat-stroked-button color="accent" (click)="nextDay()">
+      <mat-icon class="icon">chevron_right</mat-icon>
+    </button>
+    <span class="m-2">{{date.format('dddd')}}</span>
+    <mat-form-field>
+      <input matInput
+             [formControl]="fc"
+             [matDatepicker]="dp3"
+             (dateChange)="changeDate($event)">
+      <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker #dp3></mat-datepicker>
+    </mat-form-field>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" *ngFor="let emp of selectedEmployees$ | async">
+      <button mat-stroked-button color="accent" class="close-button" (click)="removePanel(emp)">
+        <mat-icon >close</mat-icon>
+      </button>
+      <employee-schedule-view [employee]="emp" [currentDate]="date"></employee-schedule-view>
+    </div>
+  </div>
+</div>

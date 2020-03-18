@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree} from '@angular/router';
-import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators';
-import {select} from '@angular-redux/store';
-import {IAppState} from '../../Store';
-import {User} from '../../core/models/User';
+import {PERMISSION_VIEW} from '../../core/models/User';
+import {BaseGuard} from './base-guard';
+import {AuthService} from '../services/auth.service';
+import {Shift} from '../../core/models/Shift';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CanViewShiftsGuard implements CanActivate {
+export class CanViewShiftsGuard  extends BaseGuard {
 
-  @select((s: IAppState) => s.core.user) user$: Observable<User>;
-  constructor() {}
-
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.user$.pipe(map(user => user.can.view.shifts()));
+  constructor(authService: AuthService) {
+    super(authService, PERMISSION_VIEW, Shift.modelType);
   }
 }
+

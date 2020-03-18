@@ -1,0 +1,36 @@
+<div class="event-container">
+  <button mat-stroked-button class="close-btn" color="warn" (click)="onNoClick()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <ng-container *ngIf="type==='SERVICE'">
+    <ng-container *ngIf="!editMode">
+      <admin-appointment-details [model]="model"></admin-appointment-details>
+    </ng-container>
+    <ng-container *ngIf="editMode">
+      <admin-appointment-form [model]="model"
+                              [htmlAction]="'PATCH'"
+                              (cancelClicked)="onNoClick()"
+                              (submitClicked)="onSubmitClicked($event)">
+      </admin-appointment-form>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="type=='SELF'">
+    <ng-container *ngIf="!editMode">
+      <admin-self-appointment-details [model]="model"></admin-self-appointment-details>
+    </ng-container>
+    <ng-container *ngIf="editMode">
+      <admin-self-appointment-form [model]="model"
+                                   [htmlAction]="'PATCH'"
+                                   (cancelClicked)="onNoClick()"
+                                   (submitClicked)="onSubmitClicked($event)">
+      </admin-self-appointment-form>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!editMode">
+    <button mat-raised-button color="primary" (click)="edit()">edit</button>
+    <button mat-flat-button color="warn" (click)="delete()">delete</button>
+  </ng-container>
+</div>

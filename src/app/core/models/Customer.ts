@@ -1,13 +1,45 @@
+import {IWriteModel} from './interfaces/IWriteModel';
+import {Injectable} from '@angular/core';
+import {Adapter} from '../interfaces/adapter';
 import {Person} from './Person';
 
-// TODO: Separate customer from user model
-export class Customer implements Person {
-  id: number;
-  firstName: string;
-  lastName: string;
-  name: string;
+export class Customer extends Person {
+  static modelType = 'customer';
+
+  writeModel(): ICustomerWriteModel {
+    return {
+      id: this.id.toString(),
+      first_name: this.firstName,
+      last_name: this.lastName,
+      email: this.email,
+      phone: this.phone,
+    };
+  }
+
+  toString() {
+    return this.name;
+  }
+}
+
+export interface ICustomerWriteModel extends IWriteModel {
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
-  password: string;
-  password2: string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CustomerAdapter implements Adapter<Customer> {
+  adapt(item: any): Customer {
+    const customer = new Customer();
+    customer.id = item.id;
+    customer.firstName = item.first_name;
+    customer.lastName = item.last_name;
+    customer.name = item.name;
+    customer.email = item.email;
+    customer.phone = item.phone;
+    return customer;
+  }
 }

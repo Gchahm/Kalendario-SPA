@@ -1,0 +1,17 @@
+<table class="table-borderless">
+  <tr>
+    <th>Name:</th>
+    <td>{{model.name}}</td>
+  </tr>
+  <tr>
+    <th>Times:</th>
+    <td>
+      <mat-list>
+        <mat-list-item *ngFor="let frame of model.frames">
+          {{frame.toString()}}
+        </mat-list-item>
+      </mat-list>
+    </td>
+  </tr>
+</table>
+

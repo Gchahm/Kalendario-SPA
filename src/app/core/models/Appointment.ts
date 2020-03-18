@@ -1,38 +1,24 @@
-import {EmployeeReadModel} from './Employee';
+import {Employee} from './Employee';
 import {Service, ServiceAdapter} from './Service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
-import {IBaseAppointmentRead} from './IBaseAppointmentRead';
-import {IBaseAppointmentWrite} from './IBaseAppointmentWrite';
-import {Person} from './Person';
+import {adaptPerson, Person} from './Person';
+import {IWriteModel} from './interfaces/IWriteModel';
+import {IReadModel, modelId} from './interfaces/IReadModel';
 
-export class Appointment implements IAppointmentReadModel {
-  public id: number;
-  public customer: Person;
-  public employee: EmployeeReadModel;
-  public service: Service;
-  public status: string;
-  public start: Moment;
-  public end: Moment;
+export class Appointment implements IReadModel {
+  static modelType = 'appointment';
+
+  public id = 0;
+  public customer = new Person();
+  public employee = new Employee();
+  public service = new Service();
+  public status = 'P';
+  public start: Moment = moment.utc();
+  public end: Moment = moment.utc();
   public customerNotes: string;
-
-  constructor() {
-    this.id = 0;
-  }
-
-  static CreateModel(): IAppointmentWriteModel {
-    return {
-      id: '',
-      customer: '',
-      employee: '',
-      service: '',
-      status: '',
-      start: '',
-      customer_notes: ''
-    };
-  }
 
   statusDescription() {
     switch (this.status) {
@@ -50,11 +36,11 @@ export class Appointment implements IAppointmentReadModel {
   writeModel(): IAppointmentWriteModel {
     return {
       id: this.id.toString(),
-      customer: this.customer.id.toString(),
-      employee: this.employee.id.toString(),
-      service: this.service.id.toString(),
-      status: this.status,
       start: this.start.toISOString(),
+      customer: modelId(this.customer),
+      employee: modelId(this.employee),
+      service: modelId(this.service),
+      status: this.status,
       customer_notes: this.customerNotes
     };
   }
@@ -72,7 +58,7 @@ export class AppointmentAdapter implements Adapter<Appointment> {
   adapt(item: any): Appointment {
     const apt = new Appointment();
     apt.id = item.id;
-    apt.customer = item.customer;
+    apt.customer = adaptPerson(item.customer);
     apt.employee = item.employee;
     apt.service = item.service;
     apt.status = item.status;
@@ -84,17 +70,11 @@ export class AppointmentAdapter implements Adapter<Appointment> {
 
 }
 
-export interface IAppointmentReadModel extends IBaseAppointmentRead {
-  customer: Person;
-  service: Service;
-  status: string;
-  customerNotes: string;
-}
-
-export interface IAppointmentWriteModel extends IBaseAppointmentWrite {
-  id: string;
-  customer: string;
-  service: string;
+export interface IAppointmentWriteModel extends IWriteModel {
+  start: string;
+  customer: number;
+  employee: number;
+  service: number;
   status: string;
   customer_notes: string;
 }

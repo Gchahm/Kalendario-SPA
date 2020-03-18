@@ -1,8 +1,0 @@
-<admin-dashboard [(modelList)]="modelList"
-                 [(selectedModel)]="selectedModel"
-                 (createClicked)="createModel()">
-  <employee-profile *ngIf="selectedModel"
-                    [(model)]="selectedModel"
-                    [services]="services"
-                    (onUpdate)="handleUpdateModelEvent($event)"></employee-profile>
-</admin-dashboard>

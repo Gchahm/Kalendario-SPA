@@ -1,21 +1,22 @@
-import {adaptService, Service, ServiceAdapter} from './Service';
+import {adaptService, Service} from './Service';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 
-export class Employee implements EmployeeReadModel {
-  id: number;
-  firstName: string;
-  lastName: string;
-  name: string;
-  email: string;
-  phone: string;
-  schedule: string;
-  instagram: string;
-  photoUrl: string;
-  bio: string;
-  services: Service[];
+export class Employee implements IReadModel {
+  static modelType = 'employee';
+  id = 0;
+  firstName = '';
+  lastName = '';
+  name = '';
+  email = '';
+  phone = '';
+  schedule = 0;
+  instagram = '';
+  photoUrl = '';
+  bio = '';
+  services: Service[] = [];
 
   writeModel() {
     return {
@@ -24,7 +25,7 @@ export class Employee implements EmployeeReadModel {
       last_name: this.lastName,
       email: this.email,
       phone: this.phone,
-      schedule: this.schedule,
+      schedule: this.schedule.toString(),
       instagram: this.instagram,
       photoUrl: this.photoUrl,
       bio: this.bio,
@@ -56,21 +57,6 @@ export class EmployeeAdapter implements Adapter<Employee> {
     emp.services = item.services.map(adaptService);
     return emp;
   }
-}
-
-
-export interface EmployeeReadModel extends IReadModel {
-  id: number;
-  firstName: string;
-  lastName: string;
-  name: string;
-  email: string;
-  phone: string;
-  schedule: string;
-  instagram: string;
-  photoUrl: string;
-  bio: string;
-  services: Service[];
 }
 
 export interface EmployeeWriteModel extends IWriteModel {

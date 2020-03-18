@@ -6,6 +6,7 @@ import {NotLoggedInGuard} from './guards/not-logged-in.guard';
 import {LoginComponent} from './components/login/login.component';
 import {DashboardPageComponent} from './components/dashboard-page/dashboard-page.component';
 import {AuthGuard} from '../shared/guards/auth.guard';
+import {CreateCompanyComponent} from './components/create-company/create-company.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'my-appointments',
     component: DashboardPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-company',
+    component: CreateCompanyComponent,
     canActivate: [AuthGuard]
   },
 ];

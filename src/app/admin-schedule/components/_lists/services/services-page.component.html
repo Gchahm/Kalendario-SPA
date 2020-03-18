@@ -1,0 +1,13 @@
+<model-list-container [modelList$]="modelList$"
+                      (createClicked)="onCreateClicked()">
+  <ng-container *ngIf="selectedModel$ | async as selectedModel">
+    <admin-service-details *ngIf="!(editMode$ | async)"
+                           [model]="selectedModel"></admin-service-details>
+    <admin-service-form *ngIf="editMode$ | async"
+                             [model]="selectedModel"
+                             [htmlAction]="'PATCH'"
+                             (cancelClicked)="toggleEdit()"
+                             (submitClicked)="handleModelEvent($event)">>
+    </admin-service-form>
+  </ng-container>
+</model-list-container>

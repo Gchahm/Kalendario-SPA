@@ -1,7 +1,0 @@
-<admin-dashboard [(modelList)]="modelList"
-                 [(selectedModel)]="selectedModel"
-                 (createClicked)="createModel()">
-  <shift-detail *ngIf="selectedModel"
-                [(model)]="selectedModel"
-                (onUpdate)="handleUpdateModelEvent($event)"></shift-detail>
-</admin-dashboard>

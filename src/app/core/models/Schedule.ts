@@ -1,11 +1,13 @@
 import {Adapter} from '../interfaces/adapter';
-import {adaptShift, Shift, ShiftAdapter} from './Shift';
-import {IReadModel} from './interfaces/IReadModel';
+import {adaptShift, Shift} from './Shift';
+import {IReadModel, modelId} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 import {Injectable} from '@angular/core';
 
-export class Schedule implements IScheduleReadModel {
-  id: number;
+export class Schedule implements IReadModel {
+  static modelType = 'schedule';
+  id = 0;
+  owner: string;
   name: string;
   mon: Shift;
   tue: Shift;
@@ -19,39 +21,19 @@ export class Schedule implements IScheduleReadModel {
     return {
       id: this.id.toString(),
       name: this.name,
-      mon: this.shiftId(this.mon),
-      tue: this.shiftId(this.tue),
-      wed: this.shiftId(this.wed),
-      thu: this.shiftId(this.thu),
-      fri: this.shiftId(this.fri),
-      sat: this.shiftId(this.sat),
-      sun: this.shiftId(this.sun)
+      mon: modelId(this.mon),
+      tue: modelId(this.tue),
+      wed: modelId(this.wed),
+      thu: modelId(this.thu),
+      fri: modelId(this.fri),
+      sat: modelId(this.sat),
+      sun: modelId(this.sun)
     };
-  }
-
-  public shiftId(shift: Shift): number {
-    if (shift) {
-      return shift.id;
-    }
-    return null;
   }
 
   toString(): string {
     return this.name;
   }
-}
-
-export interface IScheduleReadModel extends IReadModel {
-  name: string;
-  mon: Shift;
-  tue: Shift;
-  wed: Shift;
-  thu: Shift;
-  fri: Shift;
-  sat: Shift;
-  sun: Shift;
-
-  shiftId(shift: Shift): number;
 }
 
 export interface IScheduleWriteModel extends IWriteModel {
@@ -68,8 +50,8 @@ export interface IScheduleWriteModel extends IWriteModel {
 @Injectable({
   providedIn: 'root'
 })
-export class ScheduleAdapter implements Adapter<IScheduleReadModel> {
-  adapt(item: any): IScheduleReadModel {
+export class ScheduleAdapter implements Adapter<Schedule> {
+  adapt(item: any): Schedule {
     const schedule = new Schedule();
     schedule.id = item.id;
     schedule.name = item.name;

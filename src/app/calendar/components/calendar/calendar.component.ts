@@ -3,6 +3,7 @@ import {Moment} from 'moment';
 import {DateChangedEvent} from '../../events/DateChangedEvent';
 import * as moment from 'moment';
 import {CalendarEvent} from '../../models/CalendarEvent';
+import {Slot} from '../../models/Slot';
 
 @Component({
   selector: 'app-calendar',
@@ -11,22 +12,23 @@ import {CalendarEvent} from '../../models/CalendarEvent';
 })
 export class CalendarComponent implements OnInit {
 
-  minDate: Moment;
 
   @Input('min-time') minStart = 6;
   @Input('max-time') maxStart = 23;
   @Input('default-date') currentDate;
   @Input('max-date') maxDate: Moment;
+  @Input('events') events: CalendarEvent[] = [];
+  @Input('availability') availability: Slot[] = [];
+  @Input('hide-buttons') hideButtons = false;
   @Input('min-date') set date(value: Moment) {
     if (!this.minDate) {
       this.minDate = value.clone();
     }
   }
-  @Input('events') events: CalendarEvent[] = [];
-  @Input('hide-buttons') hideButtons = false;
 
   @Output() dayRender = new EventEmitter<DateChangedEvent>();
 
+  minDate: Moment;
   calendarHours: number[];
 
   constructor() {

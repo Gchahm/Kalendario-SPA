@@ -59,7 +59,7 @@ export class AuthService {
     this.fbService.login(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.whoAmI();
+        return this.dispatchUser();
       })
     );
   }
@@ -69,7 +69,7 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login/', user).pipe(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.whoAmI();
+        return this.dispatchUser();
       }),
       map(project => {
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
@@ -83,7 +83,7 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'registration/', form).pipe(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.whoAmI();
+        return this.dispatchUser();
       }),
       map(project => {
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
@@ -93,18 +93,20 @@ export class AuthService {
     );
   }
 
-  public loadUser() {
-    this.whoAmI().toPromise();
+  public whoAmI(): Observable<User> {
+    return this.http.get<User>(this.userUrl + 'current/').pipe(
+      map( this.adapter.adapt)
+    );
   }
 
-  private whoAmI(): Observable<User> {
-    return this.http.get<User>(this.userUrl + 'current/').pipe(
-      map(this.adapter.adapt),
+  public dispatchUser(): Observable<User> {
+    return this.whoAmI().pipe(
       map(user => {
         this.redux.dispatch({type: LOGIN_USER, user});
         return user;
       }),
       catchError(() => {
+        AuthService.removeToken();
         return of(User.AnonymousUser());
       })
     );
