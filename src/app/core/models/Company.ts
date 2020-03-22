@@ -4,8 +4,8 @@ import {Adapter} from '../interfaces/adapter';
 import {Injectable} from '@angular/core';
 
 export class Company implements IReadModel {
+  static modelType = 'company';
   id: number;
-  public readonly modelType = 'company';
   name: string;
 
   writeModel(): IWriteModel {

@@ -30,15 +30,14 @@
 
     <div class="calendar-table">
       <ng-container *ngFor="let hour of calendarHours">
-        <tr>
+        <tr [style.background-color]="backGroundColor(hour, 0)">
           <th width="60px">{{hour}}:00</th>
           <td class="w-100 top-line"></td>
         </tr>
-        <tr>
+        <tr [style.background-color]="backGroundColor(hour, 30)">
           <th class="bottom-line"></th>
           <td class="w-100 bottom-line"></td>
         </tr>
-
       </ng-container>
     </div>
 

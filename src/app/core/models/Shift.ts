@@ -5,7 +5,7 @@ import {Adapter} from '../interfaces/adapter';
 import {TimeOfDay} from './TimeOfDay';
 
 export class TimeFrame {
-  start: TimeOfDay;
+    start: TimeOfDay;
   end: TimeOfDay;
 
   constructor(start: string, end: string) {
@@ -22,7 +22,7 @@ export class Shift implements IReadModel {
   static modelType = 'shift';
   id = 0;
   name = '';
-  frames = [];
+  frames: TimeFrame[] = [];
 
   writeModel(): IShiftWriteModel {
     return {
@@ -52,13 +52,12 @@ export class ShiftAdapter implements Adapter<Shift> {
 }
 
 export function adaptShift(item: any): Shift {
-  if (item === null) {
-    return null;
-  }
   const shift = new Shift();
+  if (item === null) {
+    return shift;
+  }
   shift.id = item.id;
   shift.name = item.name;
   shift.frames = item.frames.map(f => new TimeFrame(f.start, f.end));
   return shift;
-
 }

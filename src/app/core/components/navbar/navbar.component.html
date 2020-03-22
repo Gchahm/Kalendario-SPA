@@ -3,9 +3,8 @@
     <button *ngIf="(showLeftPane$ | async)" mat-button (click)="toggleLeftPane()">
       <mat-icon>dehaze</mat-icon>
     </button>
-    <span>{{companyName$ | async}}</span>
-    <button mat-button routerLink="/">
-      <mat-icon matTooltip="staff">view_column</mat-icon>
+    <button mat-button routerLink="/c/{{companyName}}" *ngIf="companyName$ | async as companyName">
+      <span>{{companyName}}</span>
     </button>
     <span class="nav-spacer"></span>
     <div *ngIf="isLoggedIn$ | async; else loginTemplate">
@@ -15,10 +14,10 @@
           <button mat-menu-item routerLink="/my-appointments">
             My appointments
           </button>
-          <button mat-menu-item routerLink="/create-company">
+          <button *ngIf="canCreateCompany() | async" mat-menu-item routerLink="/create-company">
             Create Company
           </button>
-          <button mat-menu-item routerLink="/admin/home">
+          <button *ngIf="canManageCompany() | async" mat-menu-item routerLink="/admin/home">
             Company dashboard
           </button>
           <button mat-menu-item (click)="logout()">

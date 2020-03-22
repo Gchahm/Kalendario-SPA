@@ -1,6 +1,6 @@
-import {Moment} from 'moment';
+import {TimeOfDay} from '../../core/models/TimeOfDay';
 
 export interface Slot {
-  start: Moment;
-  end: Moment;
+  start: TimeOfDay;
+  end: TimeOfDay;
 }

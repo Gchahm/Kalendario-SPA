@@ -1,6 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {APP_DATE_FORMATS, AppDateAdapter} from '../../../../shared/helpers/format-datepicker';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Appointment} from '../../../../core/models/Appointment';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
 import {Employee} from '../../../../core/models/Employee';
@@ -10,10 +9,6 @@ import {Moment} from 'moment';
   selector: 'employee-form-appointment',
   templateUrl: './create-appointment-dialog.component.html',
   styleUrls: ['./create-appointment-dialog.component.css'],
-  providers: [
-    {provide: DateAdapter, useClass: AppDateAdapter},
-    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
-  ]
 })
 export class CreateAppointmentDialogComponent extends CreateDialogComponent {
 

@@ -8,6 +8,7 @@ import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, TOGGLE_LEFT_PANE} from '../../../core/CoreActions';
 import {AdminCustomerReduxService} from '../../services/admin-customer-redux.service';
+import {SET_COMPANY_NAME} from '../../../company/actions';
 
 @Component({
   selector: 'admin-dashboard',
@@ -43,6 +44,8 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.customerService.loadAll();
     this.redux.dispatch({type: TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, isVisible: true});
     this.redux.dispatch({type: TOGGLE_LEFT_PANE});
+    const user = this.redux.getState().core.user;
+    this.redux.dispatch({type: SET_COMPANY_NAME, name: user.company.name});
   }
 
   ngOnDestroy(): void {

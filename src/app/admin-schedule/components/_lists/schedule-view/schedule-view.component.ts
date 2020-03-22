@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Moment} from 'moment';
 import {Employee} from '../../../../core/models/Employee';
 import {CalendarEvent} from '../../../../calendar/models/CalendarEvent';
@@ -9,13 +9,18 @@ import {Appointment} from '../../../../core/models/Appointment';
 import {AppointmentRequestsDialogComponent} from '../../_dialogs/appointment-requests/appointment-requests-dialog.component';
 import {AppointmentService} from '../../../../shared/services/appointment.service';
 import {CreateAppointmentDialogComponent} from '../../_dialogs/create-appointment/create-appointment-dialog.component';
+import {Slot} from '../../../../calendar/models/Slot';
+import {select} from '@angular-redux/store';
+import {IAppState} from '../../../../Store';
+import {Observable, Subscription} from 'rxjs';
+import {Schedule} from '../../../../core/models/Schedule';
 
 @Component({
   selector: 'employee-schedule-view',
   templateUrl: './schedule-view.component.html',
   styleUrls: ['./schedule-view.component.css']
 })
-export class ScheduleViewComponent implements OnInit {
+export class ScheduleViewComponent implements OnInit, OnDestroy {
 
   @Input() set employee(employee: Employee) {
     this.emp = employee;
@@ -29,10 +34,14 @@ export class ScheduleViewComponent implements OnInit {
     this.loadModels();
   }
 
+  @select((s: IAppState) => s.admin.schedules) schedules$: Observable<Schedule[]>;
+  sub: Subscription;
   date: Moment;
   emp: Employee;
+  schedule: Schedule;
   requests: Appointment[];
   events: CalendarEvent[];
+  availability: Slot[] = [];
   public modelList: Appointment[];
   protected DIALOG_WIDTH = '800px';
   public editMode = false;
@@ -46,6 +55,13 @@ export class ScheduleViewComponent implements OnInit {
   ngOnInit() {
     this.loadModels();
     this.loadRequests();
+    this.sub = this.schedules$.subscribe( schedules => {
+      this.schedule = schedules.find(s => s.id === this.emp.schedule);
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   handleModelEvent(event) {
@@ -128,11 +144,16 @@ export class ScheduleViewComponent implements OnInit {
       status: 'A'
     };
 
+
     this.appointmentService.get(params)
-      .toPromise().then(appointments => {
-      this.modelList = appointments;
-      this.events = this.modelList.map(apt => this.event(apt));
-    });
+      .toPromise()
+      .then((value: Appointment[]) => {
+        this.availability = this.schedule.getShift(this.date).frames.map(f => {
+          return {start: f.start, end: f.end};
+        });
+        this.modelList = value;
+        this.events = this.modelList.map(apt => this.event(apt));
+      });
   }
 
   private event(apt: Appointment): CalendarEvent {

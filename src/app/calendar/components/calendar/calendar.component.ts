@@ -4,6 +4,7 @@ import {DateChangedEvent} from '../../events/DateChangedEvent';
 import * as moment from 'moment';
 import {CalendarEvent} from '../../models/CalendarEvent';
 import {Slot} from '../../models/Slot';
+import {TimeOfDay} from '../../../core/models/TimeOfDay';
 
 @Component({
   selector: 'app-calendar',
@@ -33,7 +34,7 @@ export class CalendarComponent implements OnInit {
 
   constructor() {
     this.calendarHours = [];
-    for (let i = this.minStart; i <= this.maxStart; i++){
+    for (let i = this.minStart; i <= this.maxStart; i++) {
       this.calendarHours.push(i);
     }
   }
@@ -86,5 +87,15 @@ export class CalendarComponent implements OnInit {
     const topOffset = el.getBoundingClientRect().top;
     const value = (window.innerHeight - topOffset - 10);
     return value.toString() + 'px';
+  }
+
+  backGroundColor(hour: number, minute: number) {
+    const hr =  new TimeOfDay({hour, minute});
+    for (const slot of this.availability) {
+      if (slot.start.hashCode() <= hr.hashCode() && slot.end.hashCode() > hr.hashCode()) {
+        return 'white';
+      }
+    }
+    return '#cccccc';
   }
 }

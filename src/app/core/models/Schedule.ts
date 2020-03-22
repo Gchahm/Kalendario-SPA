@@ -3,6 +3,7 @@ import {adaptShift, Shift} from './Shift';
 import {IReadModel, modelId} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 import {Injectable} from '@angular/core';
+import {Moment} from 'moment';
 
 export class Schedule implements IReadModel {
   static modelType = 'schedule';
@@ -29,6 +30,25 @@ export class Schedule implements IReadModel {
       sat: modelId(this.sat),
       sun: modelId(this.sun)
     };
+  }
+
+  getShift(date: Moment) {
+    switch (date.isoWeekday()) {
+      case 1:
+        return this.mon;
+      case 2:
+        return this.tue;
+      case 3:
+        return this.wed;
+      case 4:
+        return this.thu;
+      case 5:
+        return this.fri;
+      case 6:
+        return this.sat;
+      case 7:
+        return this.sun;
+    }
   }
 
   toString(): string {
