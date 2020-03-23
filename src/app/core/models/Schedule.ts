@@ -76,8 +76,8 @@ export class ScheduleAdapter implements Adapter<Schedule> {
     schedule.id = item.id;
     schedule.name = item.name;
     schedule.mon = adaptShift(item.mon);
-    schedule.wed = adaptShift(item.tue);
-    schedule.tue = adaptShift(item.wed);
+    schedule.tue = adaptShift(item.tue);
+    schedule.wed = adaptShift(item.wed);
     schedule.thu = adaptShift(item.thu);
     schedule.fri = adaptShift(item.fri);
     schedule.sat = adaptShift(item.sat);

@@ -5,11 +5,12 @@ import {CreateDialogComponent} from '../../../core/generics/components/CreateDia
 import {TemplateRef} from '@angular/core';
 import {IReadModel} from '../../../core/models/interfaces/IReadModel';
 import {ModelEvent} from '../../events/ModelEvent';
-import {ReduxDjangoRWModelService} from '../../../core/generics/services/ReduxDjangoRWModelService';
+import {AdminModelService} from '../../../core/generics/services/AdminModelService';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {TOGGLE_EDIT} from '../../AdminActions';
 import {Observable} from 'rxjs';
+import {ToastService} from '../../../shared/services/toast.service';
 
 export abstract class BaseListComponent<TModel extends IReadModel> {
 
@@ -19,7 +20,7 @@ export abstract class BaseListComponent<TModel extends IReadModel> {
   abstract modelList$: Observable<IReadModel[]>;
 
 
-  protected constructor(protected modelService: ReduxDjangoRWModelService<TModel, IWriteModel>,
+  protected constructor(protected modelService: AdminModelService<TModel, IWriteModel>,
                         protected dialog: MatDialog,
                         protected componentType: ComponentType<CreateDialogComponent> | TemplateRef<CreateDialogComponent>,
                         protected redux: NgRedux<IAppState>) {
@@ -28,13 +29,13 @@ export abstract class BaseListComponent<TModel extends IReadModel> {
   handleModelEvent(event: ModelEvent) {
     switch (event.action) {
       case 'PATCH':
-        this.modelService.patchUpdate(event.model.id, event.model);
+        this.modelService.patchUpdate(event.model.id, event.model).toPromise();
         break;
       case 'DELETE':
-        this.modelService.delete(event.model.id);
+        this.modelService.delete(event.model.id).toPromise();
         break;
       case 'CREATE':
-        this.modelService.create(event.model);
+        this.modelService.post(event.model).toPromise();
         break;
     }
   }

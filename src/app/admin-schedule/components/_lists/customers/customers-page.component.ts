@@ -4,8 +4,8 @@ import {Customer} from '../../../../core/models/Customer';
 import {MatDialog} from '@angular/material';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../../Store';
-import {AdminCustomerReduxService} from '../../../services/admin-customer-redux.service';
 import {CreateCustomerDialogComponent} from '../../_dialogs/create-customer/create-customer-dialog.component';
+import {CustomerService} from '../../../services/customer.service';
 
 @Component({
   selector: 'admin-customers-page',
@@ -16,7 +16,7 @@ export class CustomersPageComponent extends BaseListComponent<Customer> {
 
   @select((store: IAppState) => store.admin.customers) modelList$;
 
-  constructor(service: AdminCustomerReduxService,
+  constructor(service: CustomerService,
               dialog: MatDialog,
               redux: NgRedux<IAppState>) {
     super(service, dialog, CreateCustomerDialogComponent, redux);

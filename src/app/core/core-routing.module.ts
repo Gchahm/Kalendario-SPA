@@ -7,6 +7,7 @@ import {LoginComponent} from './components/login/login.component';
 import {DashboardPageComponent} from './components/dashboard-page/dashboard-page.component';
 import {AuthGuard} from '../shared/guards/auth.guard';
 import {CreateCompanyComponent} from './components/create-company/create-company.component';
+import {ConfirmEmailComponent} from './components/confirm-email/confirm-email.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [NotLoggedInGuard]
+  },
+  {
+    path: 'account-confirm-email/:emailKey',
+    component: ConfirmEmailComponent,
+    // canActivate: [AuthGuard]
   },
   {
     path: '',

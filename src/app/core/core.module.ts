@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import {DashboardPageComponent} from './components/dashboard-page/dashboard-page.component';
 import {AppointmentCardComponent} from './components/appointment-card/appointment-card.component';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
+import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
 
 
 
@@ -22,6 +23,7 @@ import { CreateCompanyComponent } from './components/create-company/create-compa
     DashboardPageComponent,
     AppointmentCardComponent,
     CreateCompanyComponent,
+    ConfirmEmailComponent,
   ],
   imports: [
     SharedModule,

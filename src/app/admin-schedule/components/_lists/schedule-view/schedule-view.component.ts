@@ -161,7 +161,8 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
       this.editAppointment(apt);
     };
     return {
-      title: apt.start.format('DD/MM/YYYY HH:mm') + ' - ' + apt.end.format('HH:mm'),
+      // title: apt.start.format('DD/MM/YYYY HH:mm') + ' - ' + apt.end.format('HH:mm'),
+      title: apt.customer.firstName + ' - ' + apt.service.name,
       start: apt.start,
       end: apt.end,
       onClick: fn

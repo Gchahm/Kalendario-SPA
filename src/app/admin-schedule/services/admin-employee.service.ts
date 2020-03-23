@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Employee, EmployeeAdapter, EmployeeWriteModel} from '../../core/models/Employee';
 import {environment} from '../../../environments/environment';
-import {ReduxDjangoRWModelService} from '../../core/generics/services/ReduxDjangoRWModelService';
+import {AdminModelService} from '../../core/generics/services/AdminModelService';
 import {NgRedux} from '@angular-redux/store';
 import {IAppState} from '../../Store';
 import {ToastService} from '../../shared/services/toast.service';
@@ -11,7 +11,7 @@ import {UPDATE_EMPLOYEE_PHOTO} from '../AdminActions';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminEmployeeService extends ReduxDjangoRWModelService<Employee, EmployeeWriteModel> {
+export class AdminEmployeeService extends AdminModelService<Employee, EmployeeWriteModel> {
 
   constructor(http: HttpClient,
               adapter: EmployeeAdapter,
@@ -23,7 +23,7 @@ export class AdminEmployeeService extends ReduxDjangoRWModelService<Employee, Em
   uploadProfilePicture(id: number, image: File) {
     const formData = new FormData();
     formData.append('image', image);
-    formData.append('owner', this.companyId());
+    formData.append('owner', this.companyId().toString());
     this.http.post<{url}>(this.baseUrl + id + '/photo/', formData)
       .toPromise()
       .then((res) => {

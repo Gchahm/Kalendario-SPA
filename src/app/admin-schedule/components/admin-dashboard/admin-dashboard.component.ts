@@ -7,8 +7,9 @@ import {ShiftService} from '../../services/shift.service';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, TOGGLE_LEFT_PANE} from '../../../core/CoreActions';
-import {AdminCustomerReduxService} from '../../services/admin-customer-redux.service';
 import {SET_COMPANY_NAME} from '../../../company/actions';
+import {forkJoin} from 'rxjs';
+import {CustomerService} from '../../services/customer.service';
 
 @Component({
   selector: 'admin-dashboard',
@@ -33,15 +34,19 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
               private serviceService: ServiceService,
               private scheduleService: ScheduleService,
               private shiftService: ShiftService,
-              private customerService: AdminCustomerReduxService,
+              private customerService: CustomerService,
               private redux: NgRedux<IAppState>) {
   }
+
   ngOnInit(): void {
-    this.employeeService.loadAll();
-    this.serviceService.loadAll();
-    this.scheduleService.loadAll();
-    this.shiftService.loadAll();
-    this.customerService.loadAll();
+    forkJoin(
+      this.employeeService.get(),
+      this.serviceService.get(),
+      this.scheduleService.get(),
+      this.shiftService.get(),
+      this.customerService.get()
+    ).toPromise();
+
     this.redux.dispatch({type: TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, isVisible: true});
     this.redux.dispatch({type: TOGGLE_LEFT_PANE});
     const user = this.redux.getState().core.user;

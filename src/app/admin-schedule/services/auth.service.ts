@@ -44,6 +44,10 @@ export class AuthService {
     return !!AuthService.getToken();
   }
 
+  verifyEmail(key: string) {
+    return this.http.post(this.baseUrl + 'registration/verify-email/', {key});
+  }
+
   logout() {
     return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
       map(res => {

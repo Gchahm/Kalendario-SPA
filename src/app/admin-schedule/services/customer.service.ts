@@ -5,31 +5,21 @@ import {Customer, CustomerAdapter} from '../../core/models/Customer';
 import {Observable} from 'rxjs';
 import {DjangoRWModelService} from '../../core/generics/services/DjangoRWModelService';
 import {IWriteModel} from '../../core/models/interfaces/IWriteModel';
+import {ToastService} from '../../shared/services/toast.service';
+import {NgRedux} from '@angular-redux/store';
+import {IAppState} from '../../Store';
+import {AdminModelService} from '../../core/generics/services/AdminModelService';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService extends DjangoRWModelService<Customer, IWriteModel> {
+export class CustomerService extends AdminModelService<Customer, IWriteModel> {
 
   constructor(http: HttpClient,
-              customerAdapter: CustomerAdapter) {
-    super(http, customerAdapter, environment.apiUrl + 'admin/customers/');
-  }
-
-  getPage(params: CustomerQParams): Observable<CustomerListResult> {
-    return this.http.get<CustomerListResult>(this.baseUrl, {params: {...params}});
+              adapter: CustomerAdapter,
+              toast: ToastService,
+              redux: NgRedux<IAppState>) {
+    super(http, adapter, environment.apiUrl + 'admin/customers/', redux, toast, 'customer');
   }
 }
 
-export interface CustomerQParams {
-  search?: string;
-  page?: string;
-  page_size?: string;
-}
-
-interface CustomerListResult {
-  count: number;
-  next: string;
-  previous: string;
-  results: Customer[];
-}

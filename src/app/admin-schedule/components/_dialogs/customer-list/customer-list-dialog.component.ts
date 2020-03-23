@@ -7,6 +7,7 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import {ToastService} from '../../../../shared/services/toast.service';
 import {CreateCustomerDialogComponent} from '../create-customer/create-customer-dialog.component';
 import {ModelEvent} from '../../../events/ModelEvent';
+import {ListResult} from '../../../../core/generics/services/AdminModelService';
 
 @Component({
   selector: 'admin-customer-list-dialog',
@@ -43,9 +44,9 @@ export class CustomerListDialogComponent implements AfterViewInit {
           this.isLoadingResults = true;
           const page = (this.paginator.pageIndex + 1).toString();
           const pageSize = this.paginator.pageSize.toString();
-          return this.customerService.getPage({search: searchBox.value, page, page_size: pageSize});
+          return this.customerService.get({search: searchBox.value, page, page_size: pageSize});
         }),
-        map(data => {
+        map((data: ListResult<Customer>) => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.errorOccurred = false;
@@ -73,8 +74,7 @@ export class CustomerListDialogComponent implements AfterViewInit {
         this.customerService.post(createModel.model).toPromise()
           .then(customer => {
             this.data = [customer].concat(this.data);
-            this.toast.success('customer created');
-          }).catch(error => this.toast.error(error.message));
+          });
       }
     });
   }
