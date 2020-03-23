@@ -22,8 +22,8 @@ export class CustomerListDialogComponent implements AfterViewInit {
   isLoadingResults = true;
   errorOccurred = false;
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private customerService: CustomerService,
               private toast: ToastService,
