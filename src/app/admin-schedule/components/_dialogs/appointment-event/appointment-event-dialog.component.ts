@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {Appointment} from '../../../../core/models/Appointment';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ModelEvent} from '../../../events/ModelEvent';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'employee-appointment-event',

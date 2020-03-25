@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
 import {Customer} from '../../../../core/models/Customer';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'admin-create-customer-dialog',

@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {ServiceService} from '../../../services/service.service';
 import {Service} from '../../../../core/models/Service';
-import {MatDialog} from '@angular/material';
 import {CreateServiceDialogComponent} from '../../_dialogs/create-service/create-service-dialog.component';
 import {BaseListComponent} from '../BaseListComponent';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../../Store';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-services-admin-page',

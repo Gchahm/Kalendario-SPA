@@ -1,0 +1,14 @@
+<input matInput
+       placeholder="color"
+       class="color-picker-container"
+       [(colorPicker)]="color"
+       [cpPosition]="'bottom'"
+       [cpPositionOffset]="'50%'"
+       [cpPositionRelativeToArrow]="true"
+       (colorPickerChange)="colorChanged($event)"
+       [value]="color"/>
+  <span class="color-picker-button">
+    <app-color-icon [color]="color"></app-color-icon>
+    <mat-icon>colorize</mat-icon>
+  </span>
+

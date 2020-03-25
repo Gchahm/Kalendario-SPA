@@ -79,6 +79,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
         this.events = slots.map(slot => {
           return {
             title: slot.start.format('HH:mm') + ' - ' + slot.end.format('HH:mm'),
+            color: '#FFFFFF',
             start: slot.start,
             end: slot.end,
             onClick: () => {

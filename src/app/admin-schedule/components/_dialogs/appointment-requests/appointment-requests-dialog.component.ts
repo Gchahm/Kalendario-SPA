@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Appointment} from '../../../../core/models/Appointment';
 import {AppointmentService} from '../../../../shared/services/appointment.service';
 import {ToastService} from '../../../../shared/services/toast.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'employee-appointment-requests',

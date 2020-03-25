@@ -8,14 +8,18 @@ import {ErrorInterceptorProvider} from './interceptors/error.interceptor';
 import {ToastService} from './services/toast.service';
 import { ToastsComponent } from './components/toasts/toasts.component';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgReduxModule} from '@angular-redux/store';
+import {ColorPickerModule} from 'ngx-color-picker';
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { ColorIconComponent } from './components/color-icon/color-icon.component';
 
 
 @NgModule({
   declarations: [
-  ToastsComponent
+  ToastsComponent,
+  ColorPickerComponent,
+  ColorIconComponent
   ],
   imports: [
     CommonModule,
@@ -24,9 +28,9 @@ import {NgReduxModule} from '@angular-redux/store';
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
-    FlexLayoutModule,
-    NgReduxModule,
     TranslateModule.forRoot(),
+    NgReduxModule,
+    ColorPickerModule,
   ],
   providers: [
     ErrorInterceptorProvider,
@@ -41,9 +45,11 @@ import {NgReduxModule} from '@angular-redux/store';
     ReactiveFormsModule,
     ToastsComponent,
     AngularMaterialModule,
-    FlexLayoutModule,
     TranslateModule,
     NgReduxModule,
+    ColorPickerModule,
+    ColorPickerComponent,
+    ColorIconComponent,
   ]
 })
 export class SharedModule { }

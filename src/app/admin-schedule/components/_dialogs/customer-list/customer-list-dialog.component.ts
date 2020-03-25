@@ -2,12 +2,14 @@ import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {CustomerService} from '../../../services/customer.service';
 import {Customer} from '../../../../core/models/Customer';
 import {fromEvent, merge, of} from 'rxjs';
-import {MatDialog, MatDialogRef, MatPaginator, MatSort} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import {ToastService} from '../../../../shared/services/toast.service';
 import {CreateCustomerDialogComponent} from '../create-customer/create-customer-dialog.component';
 import {ModelEvent} from '../../../events/ModelEvent';
 import {ListResult} from '../../../../core/generics/services/AdminModelService';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'admin-customer-list-dialog',

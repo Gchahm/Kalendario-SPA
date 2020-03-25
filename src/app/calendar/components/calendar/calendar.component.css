@@ -29,7 +29,6 @@ th {
 .calendar-event {
   display: table;
   box-sizing: border-box;
-  background-color: white;
   border: 1px solid lightgray;
   position: absolute;
   left: 60px;

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Service} from '../../../../core/models/Service';
-import {MatDialogRef} from '@angular/material';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-service',

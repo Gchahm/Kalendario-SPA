@@ -4,23 +4,22 @@ import * as moment from 'moment';
 import {Duration} from 'moment';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
+import {TimeOfDay} from './TimeOfDay';
 
 export class Service implements IReadModel {
   static modelType = 'service';
   id = 0;
   name = '';
-  duration: Duration = moment.duration(0);
+  duration: TimeOfDay  = TimeOfDay.zero();
+  color = '#FFFFFF';
   description = '';
 
-  formatDuration() {
-    return this.duration.hours() + ':' + this.duration.minutes();
-  }
-
-  writeModel() {
+  writeModel(): IServiceWriteModel {
     return {
       id: this.id.toString(),
       name: this.name,
-      duration: this.duration.toISOString(),
+      duration: this.duration.toString(),
+      color: this.color,
       description: this.description
     };
   }
@@ -43,14 +42,16 @@ export function adaptService(item: any): Service {
   const service = new Service();
   service.id = item.id;
   service.name = item.name;
-  service.duration = moment.duration(item.duration);
+  service.duration = TimeOfDay.fromString(item.duration);
   service.description = item.description;
+  service.color = item.color;
   return service;
 }
 
-export interface ServiceWriteModel extends IWriteModel {
+export interface IServiceWriteModel extends IWriteModel {
   id: string;
   name: string;
   duration: string;
   description: string;
+  color: string;
 }

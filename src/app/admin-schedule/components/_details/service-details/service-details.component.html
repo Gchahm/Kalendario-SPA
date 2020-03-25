@@ -9,6 +9,13 @@
   </tr>
   <tr>
     <th>Duration</th>
-    <td>{{model.duration}}</td>
+    <td>{{model.duration.toString("HH:mm")}}</td>
+  </tr>
+  <tr>
+    <th>Color</th>
+    <td>
+      <app-color-icon [color]="model.color"></app-color-icon>
+      {{model.color}}
+    </td>
   </tr>
 </table>

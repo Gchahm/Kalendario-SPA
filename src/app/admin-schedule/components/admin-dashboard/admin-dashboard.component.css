@@ -1,37 +1,30 @@
-.drawer-container {
+.admin-dashboard-container {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 64px;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #eee;
 }
-
-.mat-drawer-side {
-    border: 0;
-}
-
-.toggle {
-  position: fixed;
-  top: 64px;
-  height: 64px;
-  width: 30px;
-  border: 0;
-  border-top-right-radius: 100%;
-  border-bottom-right-radius: 100%;
-  padding: auto;
-}
-
-.admin-dashboard-content {
-  margin-left: 60px;
-  margin-top: 20px;
-  margin-right: 20px;
-}
-
-mat-list {
-  width: 13em;
-}
-
 .active {
   color: white;
+}
+
+.admin-is-mobile {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.admin-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.admin-is-mobile .admin-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Shift} from '../../../core/models/Shift';
-import {MatSelectChange} from '@angular/material';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
   selector: 'schedule-detail-shift',

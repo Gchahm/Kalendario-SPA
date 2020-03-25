@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
-import {MatDialogRef} from '@angular/material';
 import {Schedule} from '../../../../core/models/Schedule';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-schedule-dialog',

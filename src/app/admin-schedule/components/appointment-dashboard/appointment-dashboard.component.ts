@@ -5,8 +5,8 @@ import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {ADD_EMPLOYEE, REMOVE_EMPLOYEE} from '../../SchedulingActions';
 import {FormControl} from '@angular/forms';
-import {MatDatepickerInputEvent} from '@angular/material';
 import {Employee} from '../../../core/models/Employee';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'admin-appointment-dashboard',

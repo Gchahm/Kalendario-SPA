@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Moment} from 'moment';
 import {Employee} from '../../../../core/models/Employee';
 import {CalendarEvent} from '../../../../calendar/models/CalendarEvent';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {AppointmentEventDialogComponent} from '../../_dialogs/appointment-event/appointment-event-dialog.component';
 import {ToastService} from '../../../../shared/services/toast.service';
 import {Appointment} from '../../../../core/models/Appointment';
@@ -163,6 +163,7 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
     return {
       // title: apt.start.format('DD/MM/YYYY HH:mm') + ' - ' + apt.end.format('HH:mm'),
       title: apt.customer.firstName + ' - ' + apt.service.name,
+      color: apt.service.color,
       start: apt.start,
       end: apt.end,
       onClick: fn

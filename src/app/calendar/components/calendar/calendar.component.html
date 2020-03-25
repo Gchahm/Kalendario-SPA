@@ -42,6 +42,7 @@
     </div>
 
     <div class="calendar-event mat-elevation-z1" *ngFor="let event of events"
+         [style.background-color]="event.color"
          [style.top]="topPosition(event)"
          [style.height]="eventHeight(event)"
          (click)="event.onClick()">

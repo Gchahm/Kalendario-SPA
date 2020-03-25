@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {CustomerListDialogComponent} from '../../_dialogs/customer-list/customer-list-dialog.component';
-import {MatDialog} from '@angular/material';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Appointment} from '../../../../core/models/Appointment';
 import * as moment from 'moment';
 import {CustomValidators} from '../../../../shared/Validators/Custom.validators';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'admin-appointment-form',

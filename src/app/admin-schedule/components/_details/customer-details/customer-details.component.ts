@@ -4,7 +4,7 @@ import {Customer} from '../../../../core/models/Customer';
 import {AppointmentService} from '../../../../shared/services/appointment.service';
 import {Appointment} from '../../../../core/models/Appointment';
 import {AppointmentEventDialogComponent} from '../../_dialogs/appointment-event/appointment-event-dialog.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'admin-customer-details',

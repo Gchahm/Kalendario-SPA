@@ -1,5 +1,5 @@
 import {ModelEvent} from '../../../admin-schedule/events/ModelEvent';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 
 export abstract class CreateDialogComponent {
 

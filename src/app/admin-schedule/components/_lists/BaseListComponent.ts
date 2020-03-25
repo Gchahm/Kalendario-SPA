@@ -1,5 +1,4 @@
 import {IWriteModel} from '../../../core/models/interfaces/IWriteModel';
-import {MatDialog} from '@angular/material';
 import {ComponentType} from '@angular/cdk/portal';
 import {CreateDialogComponent} from '../../../core/generics/components/CreateDialogComponent';
 import {TemplateRef} from '@angular/core';
@@ -10,7 +9,7 @@ import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {TOGGLE_EDIT} from '../../AdminActions';
 import {Observable} from 'rxjs';
-import {ToastService} from '../../../shared/services/toast.service';
+import {MatDialog} from '@angular/material/dialog';
 
 export abstract class BaseListComponent<TModel extends IReadModel> {
 

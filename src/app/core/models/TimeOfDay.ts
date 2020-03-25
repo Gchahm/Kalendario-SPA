@@ -1,7 +1,14 @@
 
+function stringfy(value: number): string {
+  if (value < 10) {
+    return '0' + value.toString();
+  }
+  return value.toString();
+}
+
 export class TimeOfDay {
-  public hour: number;
-  public minute: number;
+  public hour = 0;
+  public minute = 0;
 
   constructor(inp?: TimeOfDayInput) {
     if (inp && inp.hour) {
@@ -19,20 +26,18 @@ export class TimeOfDay {
     return timeOfDay;
   }
 
+  static zero(): TimeOfDay {
+    return new TimeOfDay();
+  }
+
   toString(): string {
-    return this.stringfy(this.hour) + ':' + this.stringfy(this.minute);
+    return stringfy(this.hour) + ':' + stringfy(this.minute);
   }
 
   hashCode(): number {
     return this.hour + this.minute / 60;
   }
 
-  private stringfy(value: number): string {
-    if (value < 10) {
-      return '0' + value.toString();
-    }
-    return value.toString();
-  }
 }
 
 interface TimeOfDayInput {

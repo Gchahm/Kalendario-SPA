@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Service, ServiceWriteModel} from '../../../../core/models/Service';
+import {Service} from '../../../../core/models/Service';
 import {BaseFormComponent} from '../BaseFormComponent';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'admin-service-form',
@@ -9,21 +10,35 @@ import {BaseFormComponent} from '../BaseFormComponent';
 })
 export class ServiceFormComponent extends BaseFormComponent<Service> implements OnInit {
 
-  duration = {hours: 0, minutes: 0};
+  form;
+  color;
 
-  constructor() {
+  constructor(public fb: FormBuilder) {
     super();
   }
 
   submitModel() {
-    const model = this.onUpdateEvent.model as ServiceWriteModel;
-    model.duration = this.duration.hours + ':' + this.duration.minutes;
-    return model;
+    this.form.patchValue({
+      duration: this.formDuration(),
+      color: this.color
+    });
+    return this.form.value;
   }
 
   createForm() {
-    this.duration.hours = this.model.duration.hours();
-    this.duration.minutes = this.model.duration.minutes();
+    this.color = this.model.color;
+    this.form = this.fb.group({
+      id: [this.model.id, Validators.required],
+      name: [this.model.name, Validators.required],
+      duration: [this.model.duration.toString(), ],
+      durationHours: [this.model.duration.hour, Validators.required],
+      durationMinutes: [this.model.duration.minute, Validators.required],
+      color: [this.model.color, Validators.required],
+      description: [this.model.description, ],
+    });
   }
 
+  formDuration() {
+    return this.form.get('durationHours').value + ':' + this.form.get('durationMinutes').value;
+  }
 }
