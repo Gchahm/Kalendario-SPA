@@ -26,6 +26,7 @@ export class EmployeeDetailsComponent extends BaseDetailsComponent<Employee> imp
   }
 
   ngOnInit() {
+    console.log(this.model);
     this.schedule = null;
     this.sub = combineLatest(
       this.schedules,

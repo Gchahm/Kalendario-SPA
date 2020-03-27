@@ -11,11 +11,11 @@ button:focus {outline:0;}
 
 .model-list-container {
   min-height: 80vh;
-  max-height: 80vh;
 }
 
-.edit-button {
+.edit-desktop {
   position: absolute;
   bottom: 10px;
   right: 20px;
 }
+

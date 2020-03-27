@@ -33,6 +33,15 @@ export class Employee implements IReadModel {
     };
   }
 
+  details(): {name: string, value: string}[] {
+    return [
+      {name: 'name', value: this.name},
+      {name: 'email', value: this.email},
+      {name: 'phone', value: this.phone},
+      {name: 'instagram', value: this.instagram}
+    ];
+  }
+
   toString() {
     return this.name;
   }

@@ -14,10 +14,13 @@ export class ModelListContainerComponent implements OnInit, OnDestroy {
 
   @select((s: IAppState) => s.admin.selectedModel) selectedModel$;
   @select((s: IAppState) => s.admin.dashboardState.editMode) editMode$;
+  @select((s: IAppState) => s.core.isMobileView) mobileView$;
   @Input() modelList$: Observable<IReadModel[]>;
   @Output() createClicked = new EventEmitter();
   subscription: Subscription;
+  tabIndex = 0;
 
+  // TODO: Desirable that when on mobile view the mat tab header stays on tob when scrolling down
   constructor(public redux: NgRedux<IAppState>) {}
 
   ngOnInit() {
@@ -36,6 +39,7 @@ export class ModelListContainerComponent implements OnInit, OnDestroy {
 
   selectModel(model: IReadModel) {
     this.redux.dispatch({type: SELECT_MODEL, model});
+    this.tabIndex = 1;
   }
 
   createModelClicked() {

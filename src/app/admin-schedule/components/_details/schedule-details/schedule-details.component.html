@@ -1,38 +1,30 @@
-<table class="table table-bordered">
+<table class="table table-bordered" *ngIf="!(isMobile$ | async); else mobileView">
   <thead>
-  <tr class="text-center">
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
-    <th>Saturday</th>
-    <th>Sunday</th>
+  <tr>
+    <th *ngFor="let item of model.shifts()">
+      {{item.day}}
+    </th>
   </tr>
   </thead>
-  <tbody>
   <tr>
-    <td>
-      <schedule-detail-shift [shift]="model.mon"></schedule-detail-shift>
-    </td>
-    <td>
-      <schedule-detail-shift [shift]="model.tue"></schedule-detail-shift>
-    </td>
-    <td>
-      <schedule-detail-shift [shift]="model.wed"></schedule-detail-shift>
-    </td>
-    <td>
-      <schedule-detail-shift [shift]="model.thu"></schedule-detail-shift>
-    </td>
-    <td>
-      <schedule-detail-shift [shift]="model.fri"></schedule-detail-shift>
-    </td>
-    <td>
-      <schedule-detail-shift [shift]="model.sat"></schedule-detail-shift>
-    </td>
-    <td>
-      <schedule-detail-shift [shift]="model.sun"></schedule-detail-shift>
+    <td *ngFor="let item of model.shifts()">
+      <schedule-detail-shift [shift]="item.shift"></schedule-detail-shift>
     </td>
   </tr>
-  </tbody>
 </table>
+
+<ng-template #mobileView>
+  <mat-divider></mat-divider>
+  <mat-list>
+    <mat-list-item class="p500">
+      <span class="mat-list-header">SCHEDULE</span>
+    </mat-list-item>
+    <ng-container *ngFor="let item of model.shifts()">
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <span class="mat-list-title">{{item.abv}}</span>
+        <span class="mat-list-value"><schedule-detail-shift [shift]="item.shift"></schedule-detail-shift></span>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</ng-template>

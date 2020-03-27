@@ -7,7 +7,7 @@
   $accent: map-get($theme, accent);
   $foreground: map-get($theme, background);
 
-  div, mat-toolbar, button, mat-list, mat-drawer, mat-list-item, a {
+  div, mat-toolbar, button, mat-list, mat-drawer, mat-list-item, a, tr {
     &.p900{
       color: white;
       background-color: mat-color($primary, 900);

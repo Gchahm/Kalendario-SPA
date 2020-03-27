@@ -1,21 +1,25 @@
-<table class="table table-borderless">
-  <tr>
-    <th>Name</th>
-    <td>{{model.name}}</td>
-  </tr>
-  <tr>
-    <th>Description</th>
-    <td>{{model.description}}</td>
-  </tr>
-  <tr>
-    <th>Duration</th>
-    <td>{{model.duration.toString("HH:mm")}}</td>
-  </tr>
-  <tr>
-    <th>Color</th>
-    <td>
-      <app-color-icon [color]="model.color"></app-color-icon>
-      {{model.color}}
-    </td>
-  </tr>
-</table>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-borderless">
+      <tr>
+        <th>Name</th>
+        <td>{{model.name}}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{model.description}}</td>
+      </tr>
+      <tr>
+        <th>Duration</th>
+        <td>{{model.duration.toString()}}</td>
+      </tr>
+      <tr>
+        <th>Color</th>
+        <td>
+          <app-color-icon [color]="model.color"></app-color-icon>
+          {{model.color}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

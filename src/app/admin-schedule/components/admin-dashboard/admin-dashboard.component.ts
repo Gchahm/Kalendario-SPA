@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MenuOption} from '../../models/MenuOption';
 import {AdminEmployeeService} from '../../services/admin-employee.service';
 import {ServiceService} from '../../services/service.service';
@@ -10,7 +10,6 @@ import {TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, TOGGLE_LEFT_PANE} from '../../../cor
 import {SET_COMPANY_NAME} from '../../../company/actions';
 import {forkJoin} from 'rxjs';
 import {CustomerService} from '../../services/customer.service';
-import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'admin-dashboard',
@@ -20,10 +19,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 export class AdminDashboardComponent implements OnInit, OnDestroy {
 
   @select((s: IAppState) => s.core.leftPaneOpen) sideOpen;
-
-  mobileQuery: MediaQueryList;
-
-  private _mobileQueryListener: () => void;
+  @select((s: IAppState) => s.core.isMobileView) isMobile;
 
   options: MenuOption[] = [
     {name: 'Home', link: '/admin/home'},
@@ -40,11 +36,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
               private scheduleService: ScheduleService,
               private shiftService: ShiftService,
               private customerService: CustomerService,
-              private redux: NgRedux<IAppState>,
-              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
+              private redux: NgRedux<IAppState>) {
   }
 
   ngOnInit(): void {
@@ -60,11 +52,9 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     this.redux.dispatch({type: TOGGLE_LEFT_PANE});
     const user = this.redux.getState().core.user;
     this.redux.dispatch({type: SET_COMPANY_NAME, name: user.company.name});
-    console.log(this.mobileQuery)
   }
 
   ngOnDestroy(): void {
     this.redux.dispatch({type: TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, isVisible: false});
-    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
   }
 }

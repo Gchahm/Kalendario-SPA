@@ -125,5 +125,10 @@
       }
     }
   },
-  "defaultProject": "appointment-manager-SPA"
+  "defaultProject": "appointment-manager-SPA",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

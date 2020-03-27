@@ -1,24 +1,41 @@
-<mat-card class="model-list-container">
-  <div class="row">
-    <div class="col-2 model-list pretty-scroll">
-      <button mat-stroked-button
-              color="accent"
-              (click)="createModelClicked()"
-              class="model-create">new
-      </button>
-      <mat-list *ngIf="selectedModel$ | async as selectedModel">
-        <!--[hidden]="!globals.user.can.add.schedules()"-->
-        <mat-list-item *ngFor="let model of modelList$ | async"
-                       (click)="selectModel(model)"
-                       [ngClass]="{'A400 active': model.id === selectedModel.id}">
-          {{model.toString()}}
-        </mat-list-item>
-      </mat-list>
-    </div>
-    <div class="col-10 p-5">
-      <ng-content></ng-content>
-      <!--[hidden]="!user.can.change.employees()"-->
-      <button [hidden]="(editMode$ | async)" class="edit-button" (click)="editButtonClicked()" color="accent" mat-flat-button>edit</button>
-    </div>
+<div class="row" *ngIf="!(mobileView$ | async); else mobileContainer">
+  <div class="col-md-3 col-lg-2 model-list pretty-scroll">
+    <ng-container *ngTemplateOutlet="list"></ng-container>
   </div>
-</mat-card>
+  <div class="col-md-9 col-lg-10">
+    <ng-container *ngTemplateOutlet="details"></ng-container>
+  </div>
+</div>
+
+<ng-template #mobileContainer>
+  <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="center">
+    <mat-tab label="List">
+      <ng-container *ngTemplateOutlet="list"></ng-container>
+    </mat-tab>
+    <mat-tab label="Details">
+      <ng-container *ngTemplateOutlet="details"></ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<ng-template #list>
+  <button mat-stroked-button
+          color="accent"
+          (click)="createModelClicked()"
+          class="model-create">new
+  </button>
+  <mat-list *ngIf="selectedModel$ | async as selectedModel">
+    <mat-list-item *ngFor="let model of modelList$ | async"
+                   (click)="selectModel(model)"
+                   [ngClass]="{'A400 active': model.id === selectedModel.id}">
+      {{model.toString()}}
+    </mat-list-item>
+  </mat-list>
+</ng-template>
+
+<ng-template #details>
+  <ng-content></ng-content>
+  <button [hidden]="(editMode$ | async)" class="{{(mobileView$ | async) ? 'btn-block' : 'edit-desktop'}}"
+          (click)="editButtonClicked()" color="accent" mat-flat-button>edit
+  </button>
+</ng-template>

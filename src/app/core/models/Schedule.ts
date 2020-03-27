@@ -32,6 +32,18 @@ export class Schedule implements IReadModel {
     };
   }
 
+  shifts(): {day: string, abv: string, shift: Shift}[] {
+    return [
+      {day: 'Monday', abv: 'MON', shift: this.mon},
+      {day: 'Tuesday', abv: 'TUE', shift: this.tue},
+      {day: 'Wednesday', abv: 'WED', shift: this.wed},
+      {day: 'Thursday', abv: 'THU', shift: this.thu},
+      {day: 'Friday', abv: 'FRI', shift: this.fri},
+      {day: 'Saturday', abv: 'SAT', shift: this.sat},
+      {day: 'Sunday', abv: 'SUN', shift: this.sun},
+    ];
+  }
+
   getShift(date: Moment) {
     switch (date.isoWeekday()) {
       case 1:
