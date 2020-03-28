@@ -9,15 +9,13 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'admin-customer-details',
   templateUrl: './customer-details.component.html',
-  styleUrls: ['./customer-details.component.css']
+  styleUrls: ['./customer-details.component.scss']
 })
 export class CustomerDetailsComponent extends BaseDetailsComponent<Customer> implements OnInit {
 
   displayedColumns: string[] = ['start', 'employee', 'service'];
   appointmentData: AppointmentData[];
   appointments: Appointment[];
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  // dataSource = ELEMENT_DATA;
 
   constructor(private appointmentService: AppointmentService,
               private dialog: MatDialog) {

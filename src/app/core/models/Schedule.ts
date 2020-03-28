@@ -20,7 +20,7 @@ export class Schedule implements IReadModel {
 
   writeModel(): IScheduleWriteModel {
     return {
-      id: this.id.toString(),
+      id: this.id,
       name: this.name,
       mon: modelId(this.mon),
       tue: modelId(this.tue),
@@ -32,16 +32,8 @@ export class Schedule implements IReadModel {
     };
   }
 
-  shifts(): {day: string, abv: string, shift: Shift}[] {
-    return [
-      {day: 'Monday', abv: 'MON', shift: this.mon},
-      {day: 'Tuesday', abv: 'TUE', shift: this.tue},
-      {day: 'Wednesday', abv: 'WED', shift: this.wed},
-      {day: 'Thursday', abv: 'THU', shift: this.thu},
-      {day: 'Friday', abv: 'FRI', shift: this.fri},
-      {day: 'Saturday', abv: 'SAT', shift: this.sat},
-      {day: 'Sunday', abv: 'SUN', shift: this.sun},
-    ];
+  shifts(): string[] {
+    return ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
   }
 
   getShift(date: Moment) {

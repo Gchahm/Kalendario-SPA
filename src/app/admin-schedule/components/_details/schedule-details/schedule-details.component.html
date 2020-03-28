@@ -1,30 +1,12 @@
-<table class="table table-bordered" *ngIf="!(isMobile$ | async); else mobileView">
-  <thead>
-  <tr>
-    <th *ngFor="let item of model.shifts()">
-      {{item.day}}
-    </th>
-  </tr>
-  </thead>
-  <tr>
-    <td *ngFor="let item of model.shifts()">
-      <schedule-detail-shift [shift]="item.shift"></schedule-detail-shift>
-    </td>
-  </tr>
-</table>
+<mat-grid-list [cols]="7" rowHeight="8em" [gutterSize]="0" *ngIf="!(isTablet$ | async); else tabletView">
+  <mat-grid-tile [colspan]="1" *ngFor="let item of shifts()">
+    <mat-grid-tile-header class="p400">{{item.name}}</mat-grid-tile-header>
+    {{item.value}}
+  </mat-grid-tile>
+</mat-grid-list>
 
-<ng-template #mobileView>
-  <mat-divider></mat-divider>
-  <mat-list>
-    <mat-list-item class="p500">
-      <span class="mat-list-header">SCHEDULE</span>
-    </mat-list-item>
-    <ng-container *ngFor="let item of model.shifts()">
-      <mat-divider></mat-divider>
-      <mat-list-item>
-        <span class="mat-list-title">{{item.abv}}</span>
-        <span class="mat-list-value"><schedule-detail-shift [shift]="item.shift"></schedule-detail-shift></span>
-      </mat-list-item>
-    </ng-container>
-  </mat-list>
+<ng-template #tabletView>
+  <app-mat-list-table title="SCHEDULE" [items]="shifts()">
+  </app-mat-list-table>
 </ng-template>
+

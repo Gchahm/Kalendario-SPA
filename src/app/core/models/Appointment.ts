@@ -35,7 +35,7 @@ export class Appointment implements IReadModel {
 
   writeModel(): IAppointmentWriteModel {
     return {
-      id: this.id.toString(),
+      id: this.id,
       start: this.start.toISOString(),
       customer: modelId(this.customer),
       employee: modelId(this.employee),

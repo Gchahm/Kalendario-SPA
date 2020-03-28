@@ -27,7 +27,7 @@
               {
                 "input": "src/theme/custom-ng-material.scss"
               },
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "./node_modules/moment/min/moment.min.js"

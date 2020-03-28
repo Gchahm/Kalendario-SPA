@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'admin-customers-page',
   templateUrl: './customers-page.component.html',
-  styleUrls: ['./customers-page.component.css']
+  styleUrls: ['./customers-page.component.scss']
 })
 export class CustomersPageComponent extends BaseListComponent<Customer> {
 

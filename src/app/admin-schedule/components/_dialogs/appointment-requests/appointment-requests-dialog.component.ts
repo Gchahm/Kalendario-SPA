@@ -7,7 +7,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'employee-appointment-requests',
   templateUrl: './appointment-requests-dialog.component.html',
-  styleUrls: ['./appointment-requests-dialog.component.css']
+  styleUrls: ['./appointment-requests-dialog.component.scss']
 })
 export class AppointmentRequestsDialogComponent {
 

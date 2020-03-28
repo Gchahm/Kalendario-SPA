@@ -5,7 +5,7 @@ import {Appointment} from '../../../../core/models/Appointment';
 @Component({
   selector: 'admin-appointment-details',
   templateUrl: './appointment-details.component.html',
-  styleUrls: ['./appointment-details.component.css']
+  styleUrls: ['./appointment-details.component.scss']
 })
 export class AppointmentDetailsComponent extends BaseDetailsComponent<Appointment> {
 

@@ -5,7 +5,7 @@ import {Adapter} from '../interfaces/adapter';
 import {TimeOfDay} from './TimeOfDay';
 
 export class TimeFrame {
-    start: TimeOfDay;
+  start: TimeOfDay;
   end: TimeOfDay;
 
   constructor(start: string, end: string) {
@@ -20,16 +20,23 @@ export class TimeFrame {
 
 export class Shift implements IReadModel {
   static modelType = 'shift';
-  id = 0;
+  id: number = null;
   name = '';
   frames: TimeFrame[] = [];
 
   writeModel(): IShiftWriteModel {
     return {
-      id: this.id.toString(),
+      id: this.id,
       name: this.name,
       frames: this.frames.map(f => ({start: f.start.toString(), end: f.end.toString()}))
     };
+  }
+
+  details(): {name: string, value: string}[] {
+    return [
+      {name: 'name', value: this.name},
+      {name: 'times', value: this.frames.map(s => s.toString()).toString()},
+    ];
   }
 
   toString() {
@@ -39,7 +46,7 @@ export class Shift implements IReadModel {
 
 export interface IShiftWriteModel extends IWriteModel {
   name: string;
-  frames: {start: string, end: string}[];
+  frames: { start: string, end: string }[];
 }
 
 @Injectable({

@@ -7,7 +7,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'customer-appointments',
   templateUrl: './dashboard-page.component.html',
-  styleUrls: ['./dashboard-page.component.css']
+  styleUrls: ['./dashboard-page.component.scss']
 })
 export class DashboardPageComponent implements OnInit {
 

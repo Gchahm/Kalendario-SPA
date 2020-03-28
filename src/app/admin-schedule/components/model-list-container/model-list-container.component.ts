@@ -8,7 +8,7 @@ import {SELECT_MODEL, TOGGLE_EDIT} from '../../AdminActions';
 @Component({
   selector: 'model-list-container',
   templateUrl: './model-list-container.component.html',
-  styleUrls: ['./model-list-container.component.css']
+  styleUrls: ['./model-list-container.component.scss']
 })
 export class ModelListContainerComponent implements OnInit, OnDestroy {
 

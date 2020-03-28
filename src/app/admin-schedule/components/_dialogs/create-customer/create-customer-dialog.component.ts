@@ -2,11 +2,12 @@ import {Component} from '@angular/core';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
 import {Customer} from '../../../../core/models/Customer';
 import {MatDialogRef} from '@angular/material/dialog';
+import {CustomerFormComponent} from '../../_forms/customer-form/customer-form.component';
 
 @Component({
   selector: 'admin-create-customer-dialog',
   templateUrl: './create-customer-dialog.component.html',
-  styleUrls: ['./create-customer-dialog.component.css']
+  styleUrls: ['./create-customer-dialog.component.scss']
 })
 export class CreateCustomerDialogComponent extends CreateDialogComponent {
 

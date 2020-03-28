@@ -5,7 +5,7 @@ import {BaseDetailsComponent} from '../BaseDetailsComponent';
 @Component({
   selector: 'admin-shift-details',
   templateUrl: './shift-details.component.html',
-  styleUrls: ['./shift-details.component.css']
+  styleUrls: ['./shift-details.component.scss']
 })
 export class ShiftDetailsComponent extends BaseDetailsComponent<Shift> {
   constructor() {

@@ -11,7 +11,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 @Component({
   selector: 'admin-appointment-dashboard',
   templateUrl: './appointment-dashboard.component.html',
-  styleUrls: ['./appointment-dashboard.component.css'],
+  styleUrls: ['./appointment-dashboard.component.scss'],
 })
 
 export class AppointmentDashboardComponent {

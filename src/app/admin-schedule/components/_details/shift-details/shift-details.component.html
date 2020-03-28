@@ -1,17 +1,2 @@
-<table class="table-borderless">
-  <tr>
-    <th>Name:</th>
-    <td>{{model.name}}</td>
-  </tr>
-  <tr>
-    <th>Times:</th>
-    <td>
-      <mat-list>
-        <mat-list-item *ngFor="let frame of model.frames">
-          {{frame.toString()}}
-        </mat-list-item>
-      </mat-list>
-    </td>
-  </tr>
-</table>
-
+<app-mat-list-table class="col-sm-12 col-md-4 col-lg-4" title="DETAILS" [items]="model.details()">
+</app-mat-list-table>

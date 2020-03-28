@@ -6,7 +6,7 @@ import {NgControl} from '@angular/forms';
 @Component({
   selector: 'app-color-picker',
   templateUrl: './color-picker.component.html',
-  styleUrls: ['./color-picker.component.css'],
+  styleUrls: ['./color-picker.component.scss'],
   providers: [{provide: MatFormFieldControl, useExisting: ColorPickerComponent}],
 })
 export class ColorPickerComponent implements MatFormFieldControl<string> {

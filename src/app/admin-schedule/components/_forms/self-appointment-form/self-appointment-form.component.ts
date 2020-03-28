@@ -7,7 +7,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'admin-self-appointment-form',
   templateUrl: './self-appointment-form.component.html',
-  styleUrls: ['./self-appointment-form.component.css']
+  styleUrls: ['./self-appointment-form.component.scss']
 })
 export class SelfAppointmentFormComponent extends BaseFormComponent<Appointment> {
 

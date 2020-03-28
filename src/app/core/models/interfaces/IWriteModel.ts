@@ -1,3 +1,3 @@
 export interface IWriteModel {
-  id: string;
+  id: number;
 }

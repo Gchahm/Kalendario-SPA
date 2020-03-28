@@ -13,13 +13,15 @@ import {NgReduxModule} from '@angular-redux/store';
 import {ColorPickerModule} from 'ngx-color-picker';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { ColorIconComponent } from './components/color-icon/color-icon.component';
+import { MatListTableComponent } from './components/mat-list-table/mat-list-table.component';
 
 
 @NgModule({
   declarations: [
   ToastsComponent,
   ColorPickerComponent,
-  ColorIconComponent
+  ColorIconComponent,
+  MatListTableComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +52,7 @@ import { ColorIconComponent } from './components/color-icon/color-icon.component
     ColorPickerModule,
     ColorPickerComponent,
     ColorIconComponent,
+    MatListTableComponent
   ]
 })
 export class SharedModule { }

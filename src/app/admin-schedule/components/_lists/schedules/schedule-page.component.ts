@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-schedule-page',
   templateUrl: './schedule-page.component.html',
-  styleUrls: ['./schedule-page.component.css']
+  styleUrls: ['./schedule-page.component.scss']
 })
 export class SchedulePageComponent extends BaseListComponent<Schedule> {
 

@@ -1,10 +1,18 @@
 import {User} from './models/User';
-import {LOGIN_USER, LOGOUT_USER, TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, TOGGLE_LEFT_PANE, SET_IS_MOBILE_VIEW_FLAG} from './CoreActions';
+import {
+  LOGIN_USER,
+  LOGOUT_USER,
+  TOGGLE_LEFT_PANE_BUTTON_VISIBILITY,
+  TOGGLE_LEFT_PANE,
+  SET_IS_MOBILE_VIEW_FLAG,
+  SET_IS_TABLET_VIEW_FLAG
+} from './CoreActions';
 import {tassign} from 'tassign';
 
 export interface ICoreStore {
   isLoggedIn: boolean;
   isMobileView: boolean;
+  isTabletView: boolean;
   leftPaneOpen: boolean;
   showLeftPane: boolean;
   user: User;
@@ -12,6 +20,7 @@ export interface ICoreStore {
 
 export const CORE_INITIAL_STATE: ICoreStore = {
   isMobileView: false,
+  isTabletView: false,
   isLoggedIn: false,
   leftPaneOpen: false,
   showLeftPane: false,
@@ -52,6 +61,12 @@ function setIsMobileViewFlag(state: ICoreStore, action) {
   });
 }
 
+function setIsTabletViewFlag(state: ICoreStore, action) {
+  return tassign(state, {
+    isTabletView: action.value
+  });
+}
+
 export function coreReducer(state: ICoreStore = CORE_INITIAL_STATE, action): ICoreStore {
   switch (action.type) {
     case LOGIN_USER: return loginUser(state, action);
@@ -59,6 +74,7 @@ export function coreReducer(state: ICoreStore = CORE_INITIAL_STATE, action): ICo
     case TOGGLE_LEFT_PANE: return toggleLeftPane(state, action);
     case TOGGLE_LEFT_PANE_BUTTON_VISIBILITY: return showHideLeftPaneButton(state, action);
     case SET_IS_MOBILE_VIEW_FLAG: return setIsMobileViewFlag(state, action);
+    case SET_IS_TABLET_VIEW_FLAG: return setIsTabletViewFlag(state, action);
   }
   return state;
 }

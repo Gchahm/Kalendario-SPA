@@ -5,7 +5,7 @@ import {Duration} from 'moment';
 @Component({
   selector: 'app-appointment-card',
   templateUrl: './appointment-card.component.html',
-  styleUrls: ['./appointment-card.component.css']
+  styleUrls: ['./appointment-card.component.scss']
 })
 export class AppointmentCardComponent implements OnInit {
 

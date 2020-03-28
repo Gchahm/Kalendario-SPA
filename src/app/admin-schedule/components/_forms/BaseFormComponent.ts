@@ -1,13 +1,17 @@
 import {IReadModel} from '../../../core/models/interfaces/IReadModel';
 import {EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModelEvent} from '../../events/ModelEvent';
+import {FormGroup} from '@angular/forms';
 
 export abstract class BaseFormComponent <R extends IReadModel>  implements OnInit {
 
   @Input() htmlAction: string;
   @Input() model: R;
+  @Input() showButtons = true;
   @Output() submitClicked = new EventEmitter<ModelEvent>();
   @Output() cancelClicked = new EventEmitter();
+
+  form: FormGroup;
 
   onUpdateEvent: ModelEvent = {
     model: null,

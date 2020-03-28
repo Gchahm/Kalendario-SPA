@@ -8,7 +8,7 @@ export class Customer extends Person {
 
   writeModel(): ICustomerWriteModel {
     return {
-      id: this.id.toString(),
+      id: this.id,
       first_name: this.firstName,
       last_name: this.lastName,
       email: this.email,
@@ -16,6 +16,13 @@ export class Customer extends Person {
     };
   }
 
+  details(): {name: string, value: string}[] {
+    return [
+      {name: 'name', value: this.name},
+      {name: 'email', value: this.email},
+      {name: 'phone', value: this.phone},
+    ];
+  }
   toString() {
     return this.name;
   }

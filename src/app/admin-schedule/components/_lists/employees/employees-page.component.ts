@@ -11,7 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'admin-employees-page',
   templateUrl: './employees-page.component.html',
-  styleUrls: ['./employees-page.component.css']
+  styleUrls: ['./employees-page.component.scss']
 })
 export class EmployeesPageComponent extends BaseListComponent<Employee> {
 

@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-shift-page',
   templateUrl: './shifts-page.component.html',
-  styleUrls: ['./shifts-page.component.css']
+  styleUrls: ['./shifts-page.component.scss']
 })
 export class ShiftsPageComponent extends BaseListComponent<Shift> {
 

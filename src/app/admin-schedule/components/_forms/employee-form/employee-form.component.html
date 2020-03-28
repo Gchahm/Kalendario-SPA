@@ -1,90 +1,53 @@
-<form #EmployeeForm="ngForm" *ngIf="onUpdateEvent.model as writeModel">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row">
-    <div class="col-4">
+    <div class="col-sm-12 col-md-4">
       <img src="{{model.photoUrl != null ? model.photoUrl : 'assets/img/default-avatar.jpg'}}"
            class="profile-img">
 
     </div>
-    <div class="col-4">
+    <div class="col-sm-6 col-md-4">
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.first_name"
-               placeholder="first name"
-               #firstName="ngModel"
-               name="firstName"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="first name" formControlName="first_name">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.last_name"
-               placeholder="last name"
-               #lastName="ngModel"
-               name="lastName"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="last name" formControlName="last_name">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.instagram"
-               placeholder="instagram"
-               #instagram="ngModel"
-               name="instagram"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="instagram" formControlName="instagram">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.email"
-               placeholder="email"
-               #email="ngModel"
-               name="email"
-               type="email"
-               matInput
-               required>
+        <input matInput placeholder="email" type="email" formControlName="email">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.phone"
-               placeholder="phone"
-               #email="ngModel"
-               name="phone"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="phone" type="tel" formControlName="phone">
       </mat-form-field>
 
       <mat-form-field>
-            <textarea [(ngModel)]="writeModel.bio"
-                      placeholder="bio"
-                      #bio="ngModel"
-                      name="bio"
-                      type="text"
-                      matInput
-                      required></textarea>
+            <textarea matInput placeholder="bio" formControlName="bio"></textarea>
       </mat-form-field>
 
     </div>
-    <div class="col-4">
+    <div class="col-sm-6 col-md-4">
       <mat-form-field>
-        <mat-select placeholder="services"
-                    multiple
-                    [(value)]="writeModel.services">
-          <mat-option *ngFor="let service of services$ | async" [value]="service.id.toString()">{{service.name}}</mat-option>
+        <mat-select placeholder="services" multiple formArrayName="services" [value]="selectedServices()">
+          <mat-option *ngFor="let service of (services$ | async)"
+                      (onSelectionChange)="logEvent($event)"
+                      [value]="service.id">{{service.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select placeholder="schedule"
-                    [(value)]="writeModel.schedule">
+        <mat-select placeholder="schedule" formControlName="schedule">
           <mat-option *ngFor="let schedule of schedules$ | async" [value]="schedule.id.toString()">{{schedule.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-12 text-right">
-      <button (click)="submit()" [disabled]="!EmployeeForm.valid" color="accent" mat-flat-button>confirm</button>
+    <div class="col-sm-12 col-md-12 text-right" *ngIf="showButtons">
+      <button [disabled]="!form.valid" color="accent" mat-flat-button>confirm</button>
       <button (click)="cancel()" color="warn" mat-flat-button>cancel</button>
     </div>
   </div>

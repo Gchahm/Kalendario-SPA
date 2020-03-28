@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
-import * as moment from 'moment';
-import {Duration} from 'moment';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 import {TimeOfDay} from './TimeOfDay';
@@ -16,12 +14,21 @@ export class Service implements IReadModel {
 
   writeModel(): IServiceWriteModel {
     return {
-      id: this.id.toString(),
+      id: this.id,
       name: this.name,
       duration: this.duration.toString(),
       color: this.color,
       description: this.description
     };
+  }
+
+  details(): {name: string, value: string}[] {
+    return [
+      {name: 'name', value: this.name},
+      {name: 'duration', value: this.duration.toString()},
+      {name: 'color', value: this.color},
+      {name: 'description', value: this.description}
+    ];
   }
 
   toString() {
@@ -49,7 +56,6 @@ export function adaptService(item: any): Service {
 }
 
 export interface IServiceWriteModel extends IWriteModel {
-  id: string;
   name: string;
   duration: string;
   description: string;

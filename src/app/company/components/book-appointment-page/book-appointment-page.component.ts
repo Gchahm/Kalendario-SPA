@@ -12,7 +12,7 @@ import {IAppState} from '../../../Store';
 @Component({
   selector: 'customer-book-appointment-page',
   templateUrl: './book-appointment-page.component.html',
-  styleUrls: ['./book-appointment-page.component.css']
+  styleUrls: ['./book-appointment-page.component.scss']
 })
 export class BookAppointmentPageComponent implements OnInit, OnDestroy {
 

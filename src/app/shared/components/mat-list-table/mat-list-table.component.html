@@ -1,0 +1,10 @@
+<mat-list class="mat-list-container">
+  <mat-list-item class="p500">
+    <span class="mat-list-header">{{title}}</span>
+  </mat-list-item>
+  <mat-list-item *ngFor="let item of items">
+    <mat-divider></mat-divider>
+    <span class="mat-list-title">{{item.name}}</span>
+    <span class="mat-list-value">{{item.value}}</span>
+  </mat-list-item>
+</mat-list>

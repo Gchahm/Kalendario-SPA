@@ -18,9 +18,9 @@ export class Employee implements IReadModel {
   bio = '';
   services: Service[] = [];
 
-  writeModel() {
+  writeModel(): EmployeeWriteModel {
     return {
-      id: this.id.toString(),
+      id: this.id,
       first_name: this.firstName,
       last_name: this.lastName,
       email: this.email,
@@ -29,7 +29,7 @@ export class Employee implements IReadModel {
       instagram: this.instagram,
       photoUrl: this.photoUrl,
       bio: this.bio,
-      services: this.services.map(s => s.id.toString())
+      services: this.services.map(s => s.id)
     };
   }
 
@@ -69,7 +69,7 @@ export class EmployeeAdapter implements Adapter<Employee> {
 }
 
 export interface EmployeeWriteModel extends IWriteModel {
-  id: string;
+  id: number;
   first_name: string;
   last_name: string;
   email: string;
@@ -78,5 +78,5 @@ export interface EmployeeWriteModel extends IWriteModel {
   instagram: string;
   photoUrl: string;
   bio: string;
-  services: string[];
+  services: number[];
 }

@@ -19,7 +19,6 @@ import { CreateShiftDialogComponent } from './components/_dialogs/create-shift/c
 import {CreateAppointmentDialogComponent} from './components/_dialogs/create-appointment/create-appointment-dialog.component';
 import { SchedulePageComponent } from './components/_lists/schedules/schedule-page.component';
 import { CreateScheduleDialogComponent } from './components/_dialogs/create-schedule/create-schedule-dialog.component';
-import { ScheduleDetailShiftComponent } from './components/schedule-detail-shift/schedule-detail-shift.component';
 import { HomeComponent } from './components/home/home.component';
 import { ModelListContainerComponent } from './components/model-list-container/model-list-container.component';
 import { EmployeeFormComponent } from './components/_forms/employee-form/employee-form.component';
@@ -57,7 +56,6 @@ import { CustomerFormComponent } from './components/_forms/customer-form/custome
     ShiftDetailsComponent,
     ScheduleDetailsComponent,
     EmployeeDetailsComponent,
-    ScheduleDetailShiftComponent,
     CustomerDetailsComponent,
     SelfAppointmentDetailsComponent,
     AppointmentDetailsComponent,

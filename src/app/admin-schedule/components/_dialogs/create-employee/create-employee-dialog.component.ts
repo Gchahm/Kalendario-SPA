@@ -6,7 +6,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'admin-create-employee-dialog',
   templateUrl: './create-employee-dialog.component.html',
-  styleUrls: ['./create-employee-dialog.component.css']
+  styleUrls: ['./create-employee-dialog.component.scss']
 })
 export class CreateEmployeeDialogComponent extends CreateDialogComponent {
 

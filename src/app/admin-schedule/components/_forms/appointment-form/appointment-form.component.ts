@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'admin-appointment-form',
   templateUrl: './appointment-form.component.html',
-  styleUrls: ['./appointment-form.component.css']
+  styleUrls: ['./appointment-form.component.scss']
 })
 export class AppointmentFormComponent extends BaseFormComponent<Appointment> {
 

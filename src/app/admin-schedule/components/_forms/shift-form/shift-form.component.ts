@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Shift, TimeFrame} from '../../../../core/models/Shift';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../BaseFormComponent';
@@ -6,11 +6,9 @@ import {BaseFormComponent} from '../BaseFormComponent';
 @Component({
   selector: 'admin-shift-form',
   templateUrl: './shift-form.component.html',
-  styleUrls: ['./shift-form.component.css']
+  styleUrls: ['./shift-form.component.scss']
 })
-export class ShiftFormComponent extends BaseFormComponent<Shift> implements OnInit {
-
-  form;
+export class ShiftFormComponent extends BaseFormComponent<Shift> {
 
   constructor(private fb: FormBuilder) {
     super();
@@ -22,14 +20,14 @@ export class ShiftFormComponent extends BaseFormComponent<Shift> implements OnIn
 
   createForm() {
     this.form = this.fb.group({
-      id: [this.model.id, Validators.required],
+      id: [this.model.id, ],
       name: [this.model.name, Validators.required],
       frames: this.fb.array(this.model.frames.map(f => this.frameForm(f)))
     });
   }
 
   frames(): FormArray {
-    return this.form.get('frames');
+    return this.form.get('frames') as FormArray;
   }
 
   addFrame() {

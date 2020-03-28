@@ -1,0 +1,21 @@
+.mat-list-container {
+  max-width: 600px;
+}
+
+.mat-list-header {
+  display: inline-block;
+  margin: auto;
+  font-weight: bold;
+  color: white;
+}
+
+.mat-list-title {
+  margin: 0;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.mat-list-value {
+  display: inline-block;
+  margin: auto;
+}

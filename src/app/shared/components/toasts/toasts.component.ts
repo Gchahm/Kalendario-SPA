@@ -4,7 +4,7 @@ import {ToastService} from '../../services/toast.service';
 @Component({
   selector: 'app-toasts',
   templateUrl: './toasts.component.html',
-  styleUrls: ['./toasts.component.css']
+  styleUrls: ['./toasts.component.scss']
 })
 export class ToastsComponent implements OnInit {
 

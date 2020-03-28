@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Service} from '../../../../core/models/Service';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {FormBuilder, Validators} from '@angular/forms';
@@ -6,11 +6,10 @@ import {FormBuilder, Validators} from '@angular/forms';
 @Component({
   selector: 'admin-service-form',
   templateUrl: './service-form.component.html',
-  styleUrls: ['./service-form.component.css']
+  styleUrls: ['./service-form.component.scss']
 })
-export class ServiceFormComponent extends BaseFormComponent<Service> implements OnInit {
+export class ServiceFormComponent extends BaseFormComponent<Service> {
 
-  form;
   color;
 
   constructor(public fb: FormBuilder) {

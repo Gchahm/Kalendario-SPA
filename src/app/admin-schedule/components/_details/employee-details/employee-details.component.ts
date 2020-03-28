@@ -10,7 +10,7 @@ import {IReadModel} from '../../../../core/models/interfaces/IReadModel';
 @Component({
   selector: 'admin-employee-details',
   templateUrl: './employee-details.component.html',
-  styleUrls: ['./employee-details.component.css']
+  styleUrls: ['./employee-details.component.scss']
 })
 export class EmployeeDetailsComponent extends BaseDetailsComponent<Employee> implements OnInit, OnDestroy {
 
@@ -26,7 +26,6 @@ export class EmployeeDetailsComponent extends BaseDetailsComponent<Employee> imp
   }
 
   ngOnInit() {
-    console.log(this.model);
     this.schedule = null;
     this.sub = combineLatest(
       this.schedules,
@@ -51,6 +50,10 @@ export class EmployeeDetailsComponent extends BaseDetailsComponent<Employee> imp
     });
 
     reader.readAsDataURL(file);
+  }
+
+  services() {
+    return this.model.services.map(s => ({name: s.name, value: s.duration}));
   }
 }
 

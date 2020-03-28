@@ -18,7 +18,7 @@ import {Schedule} from '../../../../core/models/Schedule';
 @Component({
   selector: 'employee-schedule-view',
   templateUrl: './schedule-view.component.html',
-  styleUrls: ['./schedule-view.component.css']
+  styleUrls: ['./schedule-view.component.scss']
 })
 export class ScheduleViewComponent implements OnInit, OnDestroy {
 

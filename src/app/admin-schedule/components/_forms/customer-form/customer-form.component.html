@@ -1,49 +1,26 @@
-<form #CustomerForm="ngForm" *ngIf="onUpdateEvent.model as writeModel">
-  <div class="form-row">
+<form [formGroup]="form" class="form-100">
+  <div class="row">
     <div class="col-12">
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.first_name"
-               placeholder="first name"
-               #firstName="ngModel"
-               name="firstName"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="first name" formControlName="first_name">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.last_name"
-               placeholder="last name"
-               #lastName="ngModel"
-               name="lastName"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="last name" formControlName="last_name">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.email"
-               placeholder="email"
-               #email="ngModel"
-               name="email"
-               type="email"
-               matInput>
+        <input matInput placeholder="email" type="email" formControlName="email">
       </mat-form-field>
 
       <mat-form-field>
-        <input [(ngModel)]="writeModel.phone"
-               placeholder="phone"
-               #email="ngModel"
-               name="phone"
-               type="text"
-               matInput
-               required>
+        <input matInput placeholder="phone" type="tel" formControlName="phone">
       </mat-form-field>
 
     </div>
-    <div class="col-12 text-right">
-      <button (click)="submit()" [disabled]="!CustomerForm.valid" color="accent" mat-flat-button>confirm</button>
+    <div class="col-12 text-right" *ngIf="showButtons">
+      <button (click)="submit()" [disabled]="!form.valid" color="accent" mat-flat-button>confirm</button>
       <button (click)="cancel()" color="warn" mat-flat-button>cancel</button>
     </div>
   </div>

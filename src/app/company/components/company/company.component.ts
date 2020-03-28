@@ -7,7 +7,7 @@ import {SET_COMPANY_NAME} from '../../actions';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent {
 

@@ -1,4 +1,13 @@
-<admin-shift-form (cancelClicked)="onNoClick()"
-                  [model]="model"
-                  [htmlAction]="'CREATE'"
-                  (submitClicked)="onSubmitClicked($event)"></admin-shift-form>
+<mat-dialog-content>
+  <admin-shift-form #formComponent
+                    [showButtons]="false"
+                    [model]="model"
+                    [htmlAction]="'CREATE'"
+                    (submitClicked)="onSubmitClicked($event)"
+                    (cancelClicked)="onNoClick()">
+  </admin-shift-form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="submit()" [disabled]="!formComponent.form.valid" color="accent" mat-flat-button>confirm</button>
+  <button (click)="onNoClick()" color="warn" mat-flat-button>cancel</button>
+</mat-dialog-actions>

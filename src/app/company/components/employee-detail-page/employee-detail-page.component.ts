@@ -13,7 +13,7 @@ import {IAppState} from '../../../Store';
 @Component({
   selector: 'customer-employee-detail-page',
   templateUrl: './employee-detail-page.component.html',
-  styleUrls: ['./employee-detail-page.component.css']
+  styleUrls: ['./employee-detail-page.component.scss']
 })
 export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
 

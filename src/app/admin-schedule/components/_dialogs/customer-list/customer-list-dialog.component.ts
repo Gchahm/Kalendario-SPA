@@ -14,7 +14,7 @@ import {MatSort} from '@angular/material/sort';
 @Component({
   selector: 'admin-customer-list-dialog',
   templateUrl: './customer-list-dialog.component.html',
-  styleUrls: ['./customer-list-dialog.component.css']
+  styleUrls: ['./customer-list-dialog.component.scss']
 })
 export class CustomerListDialogComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'phone'];

@@ -14,7 +14,7 @@ import {CustomerService} from '../../services/customer.service';
 @Component({
   selector: 'admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit, OnDestroy {
 

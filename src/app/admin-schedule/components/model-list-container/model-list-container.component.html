@@ -1,11 +1,13 @@
-<div class="row" *ngIf="!(mobileView$ | async); else mobileContainer">
-  <div class="col-md-3 col-lg-2 model-list pretty-scroll">
-    <ng-container *ngTemplateOutlet="list"></ng-container>
+<mat-card class="card-container" *ngIf="!(mobileView$ | async); else mobileContainer">
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-2 model-list pretty-scroll">
+      <ng-container *ngTemplateOutlet="list"></ng-container>
+    </div>
+    <div class="col-sm-8 col-md-9 col-lg-10">
+      <ng-container *ngTemplateOutlet="details"></ng-container>
+    </div>
   </div>
-  <div class="col-md-9 col-lg-10">
-    <ng-container *ngTemplateOutlet="details"></ng-container>
-  </div>
-</div>
+</mat-card>
 
 <ng-template #mobileContainer>
   <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="center">
@@ -35,7 +37,9 @@
 
 <ng-template #details>
   <ng-content></ng-content>
-  <button [hidden]="(editMode$ | async)" class="{{(mobileView$ | async) ? 'btn-block' : 'edit-desktop'}}"
-          (click)="editButtonClicked()" color="accent" mat-flat-button>edit
-  </button>
+  <div class="{{(mobileView$ | async) ? 'edit-mobile-container' : 'edit-desktop-container'}}">
+    <button class="edit-button" [hidden]="(editMode$ | async)" (click)="editButtonClicked()" color="accent" mat-raised-button>
+      edit
+    </button>
+  </div>
 </ng-template>

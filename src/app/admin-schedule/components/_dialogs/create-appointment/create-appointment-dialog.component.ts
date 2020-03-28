@@ -4,11 +4,12 @@ import {Appointment} from '../../../../core/models/Appointment';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
 import {Employee} from '../../../../core/models/Employee';
 import {Moment} from 'moment';
+import {AppointmentFormComponent} from '../../_forms/appointment-form/appointment-form.component';
 
 @Component({
   selector: 'employee-form-appointment',
   templateUrl: './create-appointment-dialog.component.html',
-  styleUrls: ['./create-appointment-dialog.component.css'],
+  styleUrls: ['./create-appointment-dialog.component.scss'],
 })
 export class CreateAppointmentDialogComponent extends CreateDialogComponent {
 
