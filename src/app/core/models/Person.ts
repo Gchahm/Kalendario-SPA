@@ -9,21 +9,25 @@ export class Person implements IReadModel {
   email = '';
   phone = '';
 
+  static fromJS(data: any): Person {
+    data = typeof data === 'object' ? data : {};
+    const result = new Person();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.name = data.name;
+      this.email = data.email;
+      this.phone = data.phone;
+    }
+  }
+
   writeModel(): IWriteModel {
     return undefined;
   }
-}
-
-export function adaptPerson(item: any): Person {
-  if (item === null) {
-    return null;
-  }
-  const person = new Person();
-  person.id = item.id;
-  person.firstName = item.first_name;
-  person.lastName = item.last_name;
-  person.name = item.name;
-  person.email = item.email;
-  person.phone = item.phone;
-  return person;
 }

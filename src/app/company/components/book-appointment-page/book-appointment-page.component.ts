@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import * as moment from 'moment';
 import {Appointment} from '../../../core/models/Appointment';
-import {NgRedux} from '@angular-redux/store';
+import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 
 @Component({
@@ -20,6 +20,8 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
   empServiceSubscription: Subscription;
   queryParamSubscription: Subscription;
   appointment: Appointment = new Appointment();
+
+  @select((s: IAppState) => s.company.companyName) companyName$;
 
   constructor(private empService: EmployeeService,
               private appointmentService: AppointmentService,

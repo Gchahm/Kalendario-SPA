@@ -1,0 +1,13 @@
+<div [formGroup]="colorParts">
+  <input class="color-picker-container"
+         [(colorPicker)]="value"
+         [cpPosition]="'bottom'"
+         [cpPositionOffset]="'50%'"
+         [cpPositionRelativeToArrow]="true"
+         formControlName="color"
+         (input)="_handleInput()"/>
+  <span class="color-picker-button">
+    <app-color-icon [color]="value"></app-color-icon>
+    <mat-icon>colorize</mat-icon>
+  </span>
+</div>

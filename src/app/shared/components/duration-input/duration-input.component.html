@@ -1,0 +1,5 @@
+<div [formGroup]="durationParts">
+  <input type="number" formControlName="hour" (input)="_handleInput()">
+  <span>:</span>
+  <input type="number" formControlName="minute" (input)="_handleInput()">
+</div>

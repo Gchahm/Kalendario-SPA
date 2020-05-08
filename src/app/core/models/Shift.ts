@@ -19,10 +19,26 @@ export class TimeFrame {
 }
 
 export class Shift implements IReadModel {
-  static modelType = 'shift';
+  static modelType = 'service';
   id: number = null;
   name = '';
   frames: TimeFrame[] = [];
+
+
+  static fromJs(data: any): Shift {
+    data = typeof data === 'object' ? data : {};
+    const result = new Shift();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+    this.id = data.id;
+    this.name = data.name;
+    this.frames = data.frames.map(f => new TimeFrame(f.start, f.end));
+    }
+  }
 
   writeModel(): IShiftWriteModel {
     return {
@@ -32,7 +48,7 @@ export class Shift implements IReadModel {
     };
   }
 
-  details(): {name: string, value: string}[] {
+  details(): { name: string, value: string }[] {
     return [
       {name: 'name', value: this.name},
       {name: 'times', value: this.frames.map(s => s.toString()).toString()},
@@ -53,18 +69,7 @@ export interface IShiftWriteModel extends IWriteModel {
   providedIn: 'root'
 })
 export class ShiftAdapter implements Adapter<Shift> {
-  adapt(item: any): Shift {
-    return adaptShift(item);
+  adapt(data: any): Shift {
+    return data === null ? null : Shift.fromJs(data);
   }
-}
-
-export function adaptShift(item: any): Shift {
-  const shift = new Shift();
-  if (item === null) {
-    return shift;
-  }
-  shift.id = item.id;
-  shift.name = item.name;
-  shift.frames = item.frames.map(f => new TimeFrame(f.start, f.end));
-  return shift;
 }

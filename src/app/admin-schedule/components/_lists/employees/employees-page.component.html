@@ -7,7 +7,6 @@
     <admin-employee-form *ngIf="editMode$ | async"
                          [model]="selectedModel"
                          [htmlAction]="'PATCH'"
-                         (cancelClicked)="toggleEdit()"
-                         (submitClicked)="handleModelEvent($event)"></admin-employee-form>
+                         (cancelClicked)="toggleEdit()"></admin-employee-form>
   </ng-container>
 </model-list-container>

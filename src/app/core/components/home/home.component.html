@@ -2,7 +2,7 @@
   <div class="card m-auto mat-elevation-z5">
     <div class="card-body">
       <mat-list>
-        <mat-list-item *ngFor="let company of companies$ | async"><a routerLink="c/{{company.name}}/">{{company.name}}</a></mat-list-item>
+        <mat-list-item *ngFor="let company of (companies$ | async).results"><a routerLink="c/{{company.name}}/">{{company.name}}</a></mat-list-item>
       </mat-list>
     </div>
   </div>

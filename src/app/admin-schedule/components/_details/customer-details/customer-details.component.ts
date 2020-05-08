@@ -25,15 +25,14 @@ export class CustomerDetailsComponent extends BaseDetailsComponent<Customer> imp
   ngOnInit() {
     this.appointmentService.get({customer: this.model.id})
       .toPromise()
-      .then(appointments => {
-        this.appointmentData = appointments.map(a => transformAppointment(a));
-        this.appointments = appointments;
+      .then(result => {
+        this.appointmentData = result.results.map(a => transformAppointment(a));
+        this.appointments = result.results;
       });
   }
 
   onLineClick(row: AppointmentData) {
     const appointment = this.appointments.find(m => m.id === row.id);
-    console.log(appointment)
     const dialogRef = this.dialog.open(AppointmentEventDialogComponent, {
       width: '400px',
       data: {appointment}

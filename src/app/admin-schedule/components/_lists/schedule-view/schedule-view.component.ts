@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Moment} from 'moment';
 import {Employee} from '../../../../core/models/Employee';
 import {CalendarEvent} from '../../../../calendar/models/CalendarEvent';
@@ -14,6 +14,7 @@ import {select} from '@angular-redux/store';
 import {IAppState} from '../../../../Store';
 import {Observable, Subscription} from 'rxjs';
 import {Schedule} from '../../../../core/models/Schedule';
+import {ListResult} from '../../../../core/generics/services/AdminModelService';
 
 @Component({
   selector: 'employee-schedule-view',
@@ -35,6 +36,9 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
   }
 
   @select((s: IAppState) => s.admin.schedules) schedules$: Observable<Schedule[]>;
+
+  @Output() closeClicked = new EventEmitter<Employee>();
+
   sub: Subscription;
   date: Moment;
   emp: Employee;
@@ -62,6 +66,10 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  onCloseClicked() {
+    this.closeClicked.emit(this.emp);
   }
 
   handleModelEvent(event) {
@@ -133,7 +141,7 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
   private loadRequests() {
     this.appointmentService.get({employee: this.emp.id.toString(), status: 'P'})
       .toPromise()
-      .then(appointments => this.requests = appointments);
+      .then(result => this.requests = result.results);
   }
 
   public loadModels() {
@@ -147,11 +155,11 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
 
     this.appointmentService.get(params)
       .toPromise()
-      .then((value: Appointment[]) => {
+      .then((result: ListResult<Appointment>) => {
         this.availability = this.schedule.getShift(this.date).frames.map(f => {
           return {start: f.start, end: f.end};
         });
-        this.modelList = value;
+        this.modelList = result.results;
         this.events = this.modelList.map(apt => this.event(apt));
       });
   }

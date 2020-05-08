@@ -1,27 +1,31 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptorProvider} from './interceptors/token.interceptor';
 import {ErrorInterceptorProvider} from './interceptors/error.interceptor';
 import {ToastService} from './services/toast.service';
-import { ToastsComponent } from './components/toasts/toasts.component';
+import {ToastsComponent} from './components/toasts/toasts.component';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {NgReduxModule} from '@angular-redux/store';
 import {ColorPickerModule} from 'ngx-color-picker';
-import { ColorPickerComponent } from './components/color-picker/color-picker.component';
-import { ColorIconComponent } from './components/color-icon/color-icon.component';
-import { MatListTableComponent } from './components/mat-list-table/mat-list-table.component';
+import {ColorIconComponent} from './components/color-icon/color-icon.component';
+import {MatListTableComponent} from './components/mat-list-table/mat-list-table.component';
+import {DurationInputComponent} from './components/duration-input/duration-input.component';
+import {ColorInputComponent} from './components/color-input/color-input.component';
+import {DateTimeInputComponent} from './components/date-time-input/date-time-input.component';
 
 
 @NgModule({
   declarations: [
-  ToastsComponent,
-  ColorPickerComponent,
-  ColorIconComponent,
-  MatListTableComponent
+    ToastsComponent,
+    ColorInputComponent,
+    ColorIconComponent,
+    MatListTableComponent,
+    DateTimeInputComponent,
+    DurationInputComponent,
   ],
   imports: [
     CommonModule,
@@ -50,9 +54,12 @@ import { MatListTableComponent } from './components/mat-list-table/mat-list-tabl
     TranslateModule,
     NgReduxModule,
     ColorPickerModule,
-    ColorPickerComponent,
+    ColorInputComponent,
     ColorIconComponent,
-    MatListTableComponent
+    MatListTableComponent,
+    DateTimeInputComponent,
+    DurationInputComponent,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

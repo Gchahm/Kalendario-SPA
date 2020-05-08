@@ -1,5 +1,5 @@
 import {Adapter} from '../interfaces/adapter';
-import {adaptShift, Shift} from './Shift';
+import {Shift} from './Shift';
 import {IReadModel, modelId} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
 import {Injectable} from '@angular/core';
@@ -17,6 +17,27 @@ export class Schedule implements IReadModel {
   fri: Shift;
   sat: Shift;
   sun: Shift;
+
+  static fromJs(data: any): Schedule {
+    data = typeof data === 'object' ? data : {};
+    const result = new Schedule();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.name = data.name;
+      this.mon = Shift.fromJs(data.mon);
+      this.tue = Shift.fromJs(data.tue);
+      this.wed = Shift.fromJs(data.wed);
+      this.thu = Shift.fromJs(data.thu);
+      this.fri = Shift.fromJs(data.fri);
+      this.sat = Shift.fromJs(data.sat);
+      this.sun = Shift.fromJs(data.sun);
+    }
+  }
 
   writeModel(): IScheduleWriteModel {
     return {
@@ -75,17 +96,7 @@ export interface IScheduleWriteModel extends IWriteModel {
   providedIn: 'root'
 })
 export class ScheduleAdapter implements Adapter<Schedule> {
-  adapt(item: any): Schedule {
-    const schedule = new Schedule();
-    schedule.id = item.id;
-    schedule.name = item.name;
-    schedule.mon = adaptShift(item.mon);
-    schedule.tue = adaptShift(item.tue);
-    schedule.wed = adaptShift(item.wed);
-    schedule.thu = adaptShift(item.thu);
-    schedule.fri = adaptShift(item.fri);
-    schedule.sat = adaptShift(item.sat);
-    schedule.sun = adaptShift(item.sun);
-    return schedule;
+  adapt(data: any): Schedule {
+    return Schedule.fromJs(data);
   }
 }

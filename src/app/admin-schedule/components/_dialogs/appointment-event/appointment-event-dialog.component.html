@@ -11,7 +11,7 @@
       <admin-appointment-form [model]="model"
                               [htmlAction]="'PATCH'"
                               (cancelClicked)="onNoClick()"
-                              (submitClicked)="onSubmitClicked($event)">
+                              (submitConcluded)="onSubmitClicked($event)">
       </admin-appointment-form>
     </ng-container>
   </ng-container>
@@ -24,7 +24,7 @@
       <admin-self-appointment-form [model]="model"
                                    [htmlAction]="'PATCH'"
                                    (cancelClicked)="onNoClick()"
-                                   (submitClicked)="onSubmitClicked($event)">
+                                   (submitConcluded)="onSubmitClicked($event)">
       </admin-self-appointment-form>
     </ng-container>
   </ng-container>

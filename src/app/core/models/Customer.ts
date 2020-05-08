@@ -6,11 +6,30 @@ import {Person} from './Person';
 export class Customer extends Person {
   static modelType = 'customer';
 
+  static fromJs(data: any): Customer {
+    data = typeof data === 'object' ? data : {};
+    const result = new Customer();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.name = data.name;
+      this.email = data.email;
+      this.phone = data.phone;
+    }
+  }
+
+
   writeModel(): ICustomerWriteModel {
     return {
       id: this.id,
-      first_name: this.firstName,
-      last_name: this.lastName,
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
       phone: this.phone,
     };
@@ -29,8 +48,8 @@ export class Customer extends Person {
 }
 
 export interface ICustomerWriteModel extends IWriteModel {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
 }
@@ -39,14 +58,7 @@ export interface ICustomerWriteModel extends IWriteModel {
   providedIn: 'root'
 })
 export class CustomerAdapter implements Adapter<Customer> {
-  adapt(item: any): Customer {
-    const customer = new Customer();
-    customer.id = item.id;
-    customer.firstName = item.first_name;
-    customer.lastName = item.last_name;
-    customer.name = item.name;
-    customer.email = item.email;
-    customer.phone = item.phone;
-    return customer;
+  adapt(data: any): Customer {
+    return Customer.fromJs(data);
   }
 }

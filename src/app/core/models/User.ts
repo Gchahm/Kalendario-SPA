@@ -1,7 +1,8 @@
 import {Adapter} from '../interfaces/adapter';
 import {Injectable} from '@angular/core';
-import {adaptPerson, Person} from './Person';
-import {adaptCompany, Company} from './Company';
+import {Person} from './Person';
+import {Company} from './Company';
+import {TimeFrame} from './Shift';
 
 export const PERMISSION_VIEW = 'view';
 export const PERMISSION_ADD = 'add';
@@ -17,7 +18,26 @@ export class User {
   public company: Company;
 
   public static AnonymousUser(): User {
-    return AnonymousUser;
+    return ANONYMOUS_USER;
+  }
+
+  static fromJs(data: any): User {
+    data = typeof data === 'object' ? data : {};
+    const result = new User();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.email = data.email;
+      this.person = Person.fromJS(data.person);
+      this.permissions = data.permissions;
+      this.company = Company.fromJs(data.company);
+    }
   }
 
   hasPermission(type, model) {
@@ -29,19 +49,10 @@ export class User {
   providedIn: 'root'
 })
 export class UserAdapter implements Adapter<User> {
-
-  adapt(item: any): User {
-    const user = new User();
-    user.id = item.id;
-    user.firstName = item.first_name;
-    user.lastName = item.last_name;
-    user.email = item.email;
-    user.person = adaptPerson(item.person);
-    user.permissions = item.permissions;
-    user.company = adaptCompany(item.company);
-    return user;
+  adapt(data: any): User {
+    return User.fromJs(data);
   }
 }
 
 
-const AnonymousUser = new User();
+const ANONYMOUS_USER = new User();

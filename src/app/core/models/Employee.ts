@@ -1,8 +1,10 @@
-import {adaptService, Service} from './Service';
+import {Service} from './Service';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
+import {Person} from './Person';
+import {Company} from './Company';
 
 export class Employee implements IReadModel {
   static modelType = 'employee';
@@ -18,16 +20,40 @@ export class Employee implements IReadModel {
   bio = '';
   services: Service[] = [];
 
+  static fromJs(data: any): Employee {
+    data = typeof data === 'object' ? data : {};
+    const result = new Employee();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.firstName = data.firstName;
+      this.lastName = data.lastName;
+      this.name = data.name;
+      this.email = data.email;
+      this.phone = data.phone;
+      this.schedule = data.schedule;
+      this.instagram = data.instagram;
+      this.photoUrl = data.profile_img ? 'https://res.cloudinary.com/gchahm/' + data.profile_img : null;
+      this.bio = data.bio;
+      this.services = data.services.map(Service.fromJs);
+    }
+  }
+
+
   writeModel(): EmployeeWriteModel {
     return {
       id: this.id,
-      first_name: this.firstName,
-      last_name: this.lastName,
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
       phone: this.phone,
       schedule: this.schedule.toString(),
       instagram: this.instagram,
-      photoUrl: this.photoUrl,
+      // photoUrl: this.photoUrl,
       bio: this.bio,
       services: this.services.map(s => s.id)
     };
@@ -51,32 +77,20 @@ export class Employee implements IReadModel {
   providedIn: 'root'
 })
 export class EmployeeAdapter implements Adapter<Employee> {
-  adapt(item: any): Employee {
-    const emp = new Employee();
-    emp.id = item.id;
-    emp.firstName = item.first_name;
-    emp.lastName = item.last_name;
-    emp.name = item.name;
-    emp.email = item.email;
-    emp.phone = item.phone;
-    emp.schedule = item.schedule;
-    emp.instagram = item.instagram;
-    emp.photoUrl = item.profile_img ? 'https://res.cloudinary.com/gchahm/' + item.profile_img : null;
-    emp.bio = item.bio;
-    emp.services = item.services.map(adaptService);
-    return emp;
+  adapt(data: any): Employee {
+    return Employee.fromJs(data);
   }
 }
 
 export interface EmployeeWriteModel extends IWriteModel {
   id: number;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   schedule: string;
   instagram: string;
-  photoUrl: string;
+  // photoUrl: string;
   bio: string;
   services: number[];
 }

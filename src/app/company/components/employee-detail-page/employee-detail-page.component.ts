@@ -1,30 +1,36 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {EmployeeService} from '../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Service} from '../../../core/models/Service';
 import {Moment} from 'moment';
 import * as moment from 'moment';
-import {DateChangedEvent} from '../../../calendar/events/DateChangedEvent';
 import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
 import {Subscription} from 'rxjs';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
+import {FormControl} from '@angular/forms';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'customer-employee-detail-page',
   templateUrl: './employee-detail-page.component.html',
   styleUrls: ['./employee-detail-page.component.scss']
 })
-export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
+export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @select((s: IAppState) => s.company.companyName) companyName$;
+  @select((s: IAppState) => s.core.isMobileView) isMobile$;
+  @ViewChild('empCard') cardEl: HTMLElement;
 
   employeeId;
   employee;
   events: CalendarEvent[];
 
   service: Service;
-  date: Moment;
+
+  date: Moment = moment.utc();
+  fc = new FormControl(moment.utc());
 
   subscription: Subscription;
 
@@ -49,11 +55,36 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  handleDayRender($event: DateChangedEvent) {
-    this.date = $event.date;
+  ngAfterViewInit(): void {
+    console.log(this.cardEl);
+  }
+
+  cardWidth(): string {
+    return '60px';
+  }
+
+  today() {
+    this.fc.patchValue(moment.utc());
+    this.date = this.fc.value;
+    this.loadSlots();
+
+  }
+
+  previousDay() {
+    this.fc.patchValue(this.fc.value.subtract(1, 'days').clone());
+    this.date = this.fc.value;
     this.loadSlots();
   }
 
+  nextDay() {
+    this.fc.patchValue(this.fc.value.add(1, 'days').clone());
+    this.date = this.fc.value;
+    this.loadSlots();
+  }
+
+  changeDate(event: MatDatepickerInputEvent<Moment>) {
+    this.date = event.value;
+  }
   handleServiceClick(service: Service) {
     this.service = service;
     this.loadSlots();
@@ -61,7 +92,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy {
 
   selectedServiceColor(service: Service) {
     if (this.service.id === service.id) {
-      return 'accent';
+      return 'A400';
     }
     return '';
   }

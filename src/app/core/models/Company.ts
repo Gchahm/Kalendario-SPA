@@ -8,6 +8,20 @@ export class Company implements IReadModel {
   id: number;
   name: string;
 
+  static fromJs(data: any): Company {
+    data = typeof data === 'object' ? data : {};
+    const result = new Company();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.name = data.name;
+    }
+  }
+
   writeModel(): IWriteModel {
     return undefined;
   }
@@ -21,15 +35,7 @@ export interface ICompanyWriteModel extends IWriteModel {
   providedIn: 'root'
 })
 export class CompanyAdapter implements Adapter<Company> {
-  adapt(item: any): Company {
-    return adaptCompany(item);
+  adapt(data: any): Company {
+    return data === null ? null : Company.fromJs(data);
   }
-}
-
-export function adaptCompany(item: any): Company {
-  if (item === null) return null;
-  const company = new Company();
-  company.id = item.id;
-  company.name = item.name;
-  return company;
 }

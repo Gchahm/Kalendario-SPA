@@ -1,10 +1,10 @@
 import {Employee} from './Employee';
-import {Service, ServiceAdapter} from './Service';
+import {Service} from './Service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
-import {adaptPerson, Person} from './Person';
+import { Person} from './Person';
 import {IWriteModel} from './interfaces/IWriteModel';
 import {IReadModel, modelId} from './interfaces/IReadModel';
 
@@ -19,6 +19,13 @@ export class Appointment implements IReadModel {
   public start: Moment = moment.utc();
   public end: Moment = moment.utc();
   public customerNotes: string;
+
+  static fromJS(data: any): Appointment {
+    data = typeof data === 'object' ? data : {};
+    const result = new Appointment();
+    result.init(data);
+    return result;
+  }
 
   statusDescription() {
     switch (this.status) {
@@ -36,8 +43,9 @@ export class Appointment implements IReadModel {
   writeModel(): IAppointmentWriteModel {
     return {
       id: this.id,
-      start: this.start.toISOString(),
+      start: this.start,
       customer: modelId(this.customer),
+      customerName: this.customer.name,
       employee: modelId(this.employee),
       service: modelId(this.service),
       status: this.status,
@@ -45,34 +53,33 @@ export class Appointment implements IReadModel {
     };
   }
 
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.customer = Person.fromJS(data.customer);
+      this.employee = data.employee;
+      this.service = data.service;
+      this.status = data.status;
+      this.start = moment.utc(data.start);
+      this.end = moment.utc(data.end);
+      this.customerNotes = data.customer_notes;
+    }
+  }
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentAdapter implements Adapter<Appointment> {
-
-  constructor(private serviceAdapter: ServiceAdapter) {
-  }
-
   adapt(item: any): Appointment {
-    const apt = new Appointment();
-    apt.id = item.id;
-    apt.customer = adaptPerson(item.customer);
-    apt.employee = item.employee;
-    apt.service = item.service;
-    apt.status = item.status;
-    apt.start = moment.utc(item.start);
-    apt.end = moment.utc(item.end);
-    apt.customerNotes = item.customer_notes;
-    return apt;
+    return Appointment.fromJS(item);
   }
-
 }
 
 export interface IAppointmentWriteModel extends IWriteModel {
-  start: string;
+  start: Moment;
   customer: number;
+  customerName: string;
   employee: number;
   service: number;
   status: string;

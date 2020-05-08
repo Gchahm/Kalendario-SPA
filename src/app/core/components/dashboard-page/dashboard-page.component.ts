@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Appointment} from '../../models/Appointment';
 import {AppointmentService} from '../../../shared/services/appointment.service';
 import * as moment from 'moment';
+import {ListResult} from '../../generics/services/AdminModelService';
 
 @Component({
   selector: 'customer-appointments',
@@ -11,7 +12,7 @@ import * as moment from 'moment';
 })
 export class DashboardPageComponent implements OnInit {
 
-  appointments$: Observable<Appointment[]>;
+  appointments$: Observable<ListResult<Appointment>>;
   selectedPeriod = 'future';
   selectedStatus = 'all';
 

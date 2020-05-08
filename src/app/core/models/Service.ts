@@ -12,6 +12,23 @@ export class Service implements IReadModel {
   color = '#FFFFFF';
   description = '';
 
+  static fromJs(data: any): Service {
+    data = typeof data === 'object' ? data : {};
+    const result = new Service();
+    result.init(data);
+    return result;
+  }
+
+  init(data: any) {
+    if (data) {
+      this.id = data.id;
+      this.name = data.name;
+      this.duration = TimeOfDay.fromString(data.duration);
+      this.description = data.description;
+      this.color = data.color;
+    }
+  }
+
   writeModel(): IServiceWriteModel {
     return {
       id: this.id,
@@ -40,19 +57,9 @@ export class Service implements IReadModel {
   providedIn: 'root'
 })
 export class ServiceAdapter implements Adapter<Service> {
-  adapt(item: any): Service {
-    return adaptService(item);
+  adapt(data: any): Service {
+    return Service.fromJs(data);
   }
-}
-
-export function adaptService(item: any): Service {
-  const service = new Service();
-  service.id = item.id;
-  service.name = item.name;
-  service.duration = TimeOfDay.fromString(item.duration);
-  service.description = item.description;
-  service.color = item.color;
-  return service;
 }
 
 export interface IServiceWriteModel extends IWriteModel {

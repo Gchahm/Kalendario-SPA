@@ -1,53 +1,27 @@
-<div class="card mat-elevation-z6">
-  <div class="card-header">
-    <div class="row text-center">
-      <div *ngIf="!hideButtons"
-           class="col-sm-12 font-italic align-self-center"
-           [class.col-md-4]="hideButtons"
-           [class.col-md-6]="!hideButtons">
-        <mat-icon class="icon">calendar_today</mat-icon>
-        {{currentDate.format('dddd DD MMMM YYYY')}}
-      </div>
-      <div *ngIf="hideButtons" class="col-sm-12 col-md-12">
-        <ng-content></ng-content>
-      </div>
-      <div *ngIf="!hideButtons"
-           class="col-sm-12 col-md-4"
-           [class.col-md-4]="hideButtons"
-           [class.col-md-6]="!hideButtons">
-        <button mat-flat-button [disabled]="prevDisabled()" color="accent" (click)="previousDay()">
-          <mat-icon class="icon">chevron_left</mat-icon>
-        </button>
-        <button mat-stroked-button color="accent" (click)="today()">Today</button>
-        <button mat-flat-button color="accent" (click)="nextDay()">
-          <mat-icon class="icon">chevron_right</mat-icon>
-        </button>
-      </div>
-    </div>
+
+
+<div id="calendar-table-container" [style.height]="calendarHeight()">
+
+  <div class="calendar-table">
+    <ng-container *ngFor="let hour of calendarHours">
+      <tr [style.background-color]="backGroundColor(hour, 0)">
+        <th width="60px">{{hour}}:00</th>
+        <td class="top-line"></td>
+      </tr>
+      <tr [style.background-color]="backGroundColor(hour, 30)">
+        <th class="bottom-line"></th>
+        <td class="bottom-line"></td>
+      </tr>
+    </ng-container>
   </div>
 
-  <div id="calendar-table-container" [style.height]="calendarHeight()">
-
-    <div class="calendar-table">
-      <ng-container *ngFor="let hour of calendarHours">
-        <tr [style.background-color]="backGroundColor(hour, 0)">
-          <th width="60px">{{hour}}:00</th>
-          <td class="w-100 top-line"></td>
-        </tr>
-        <tr [style.background-color]="backGroundColor(hour, 30)">
-          <th class="bottom-line"></th>
-          <td class="w-100 bottom-line"></td>
-        </tr>
-      </ng-container>
-    </div>
-
-    <div class="calendar-event mat-elevation-z1" *ngFor="let event of events"
-         [style.background-color]="event.color"
-         [style.top]="topPosition(event)"
-         [style.height]="eventHeight(event)"
-         (click)="event.onClick()">
-      <p>{{event.title}}</p>
-    </div>
-
+  <div class="calendar-event mat-elevation-z1" *ngFor="let event of events"
+       [style.background-color]="event.color"
+       [style.top]="topPosition(event)"
+       [style.height]="eventHeight(event)"
+       (click)="event.onClick()">
+    <p>{{event.title}}</p>
   </div>
+
 </div>
+

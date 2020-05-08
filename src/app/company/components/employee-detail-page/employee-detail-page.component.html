@@ -1,23 +1,52 @@
-<div *ngIf="employee" class="container pt-2">
-  <div (empId)=employee.id class="row">
-    <div class="col-sm-12 col-md-3">
-      <div class="card mat-elevation-z5">
-        <button mat-stroked-button color="primary" routerLink="/c/{{companyName$ | async}}/staff">BACK TO STAFF</button>
-        <img src="{{employee.photoUrl}}" class="card-img-top d-none d-sm-none d-md-block" alt="...">
-        <h5 class="card-title text-center">{{employee.name}}</h5>
-        <p class="pl-2 pr-2">{{employee.bio}}</p>
-        <button [color]="selectedServiceColor(s)" mat-flat-button *ngFor="let s of employee.services" (click)="handleServiceClick(s)">
+<div *ngIf="employee" (empId)=employee.id class="row">
+  <div class="col-sm-12 col-md-3">
+    <mat-card #empCard>
+      <img [width]="cardWidth()" src="{{employee.photoUrl}}" class="emp-card-img d-none d-sm-none d-md-block">
+      <mat-card-content>
+        <h5>{{employee.name}}</h5>
+        <p>{{employee.bio}}</p>
+      </mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let s of employee.services"
+                       [ngClass]="selectedServiceColor(s)" (click)="handleServiceClick(s)">
           {{s.name}}
+        </mat-list-item>
+      </mat-list>
+
+      <mat-card-actions>
+        <button mat-button color="primary" routerLink="/c/{{companyName$ | async}}/staff">BACK TO STAFF</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="col-sm-12 col-md-9">
+    <mat-card class="card-container mat-elevation-z6">
+      <mat-card-content>
+
+        <button mat-flat-button color="accent" (click)="today()">
+          today
         </button>
-        <div class="card-body"></div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <app-calendar [default-date]="date"
-                    [min-date]="date"
-                    [events]="events"
-                    (dayRender)="handleDayRender($event)">
-      </app-calendar>
-    </div>
+        <button mat-icon-button color="accent" (click)="previousDay()">
+          <mat-icon class="icon">chevron_left</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="nextDay()">
+          <mat-icon class="icon">chevron_right</mat-icon>
+        </button>
+
+        <span class="m-2" (click)="dpApointmentDashboard.open()">{{date.format('ddd')}}</span>
+        <mat-form-field>
+          <input matInput
+                 [formControl]="fc"
+                 [matDatepicker]="dpApointmentDashboard"
+                 (dateChange)="changeDate($event)">
+          <mat-datepicker-toggle matSuffix [for]="dpApointmentDashboard"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="{{isMobile$ | async}}" #dpApointmentDashboard></mat-datepicker>
+        </mat-form-field>
+
+        <app-calendar [default-date]="date"
+                      [min-date]="date"
+                      [events]="events">
+        </app-calendar>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

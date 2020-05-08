@@ -3,7 +3,7 @@
                        [showButtons]="false"
                        [model]="model"
                        [htmlAction]="'CREATE'"
-                       (submitClicked)="onSubmitClicked($event)"
+                       (submitConcluded)="onSubmitClicked($event)"
                        (cancelClicked)="onNoClick()">
   </admin-customer-form>
 </mat-dialog-content>
@@ -11,4 +11,3 @@
   <button (click)="submit()" [disabled]="!formComponent.form.valid" color="accent" mat-flat-button>confirm</button>
   <button (click)="onNoClick()" color="warn" mat-flat-button>cancel</button>
 </mat-dialog-actions>
-git

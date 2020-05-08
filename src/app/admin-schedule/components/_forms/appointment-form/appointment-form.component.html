@@ -1,11 +1,22 @@
 <form class="appointment-form" [formGroup]="form" (ngSubmit)="submit()">
 
+  <mat-error>
+    <mat-list *ngFor="let error of form.errors">
+      <mat-icon>priority_high</mat-icon> {{error}}
+    </mat-list>
+  </mat-error>
+
 <mat-form-field>
     <input matInput
            formControlName="customerName"
            placeholder="customer name"
            type="text">
-    <button mat-mini-fab
+
+  <mat-error *ngIf="form.get('customer').errors?.serverError">
+    {{form.get('customer').errors?.serverError}}
+  </mat-error>
+
+  <button mat-mini-fab
             type="button"
             (click)="openCustomerList()">
       select
@@ -13,24 +24,13 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput
-           formControlName="startDate"
-           [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error>
-      Please enter a date
+    <date-time-input placeholder="start datetime" formControlName="start" name="scheduled date"></date-time-input>
+
+    <mat-error *ngIf="form.get('start').errors?.serverError">
+      {{form.get('start').errors?.serverError}}
     </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
-    <input matInput
-           formControlName="startTime"
-           type="time">
-    <mat-error>
-      Please enter a time
-    </mat-error>
-  </mat-form-field>
   <mat-form-field>
     <mat-label>Service</mat-label>
     <mat-select formControlName="service"
@@ -39,17 +39,11 @@
         {{service.name}}
       </mat-option>
     </mat-select>
-    <mat-error>
-      service is required
+    <mat-error *ngIf="form.get('service').errors?.serverError">
+      {{form.get('service').errors?.serverError}}
     </mat-error>
   </mat-form-field>
 
-  <button type="submit"
-          color="primary"
-          mat-flat-button
-          (click)="submit()"
-          [disabled]="!form.valid">
-    book appointment
-  </button>
+  <button type="submit" color="primary" mat-flat-button [disabled]="!form.valid">book appointment</button>
   <button type="button" mat-flat-button color="warn" (click)="cancel()">cancel</button>
 </form>

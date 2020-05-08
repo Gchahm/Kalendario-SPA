@@ -1,7 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, Output} from '@angular/core';
 import {Moment} from 'moment';
-import {DateChangedEvent} from '../../events/DateChangedEvent';
-import * as moment from 'moment';
 import {CalendarEvent} from '../../models/CalendarEvent';
 import {Slot} from '../../models/Slot';
 import {TimeOfDay} from '../../../core/models/TimeOfDay';
@@ -11,23 +9,20 @@ import {TimeOfDay} from '../../../core/models/TimeOfDay';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent {
 
-
-  @Input('min-time') minStart = 6;
-  @Input('max-time') maxStart = 23;
   @Input('default-date') currentDate;
   @Input('max-date') maxDate: Moment;
-  @Input('events') events: CalendarEvent[] = [];
-  @Input('availability') availability: Slot[] = [];
-  @Input('hide-buttons') hideButtons = false;
   @Input('min-date') set date(value: Moment) {
     if (!this.minDate) {
       this.minDate = value.clone();
     }
   }
+  @Input('min-time') minStart = 6;
+  @Input('max-time') maxStart = 23;
 
-  @Output() dayRender = new EventEmitter<DateChangedEvent>();
+  @Input('events') events: CalendarEvent[] = [];
+  @Input('availability') availability: Slot[] = [];
 
   minDate: Moment;
   calendarHours: number[];
@@ -37,39 +32,6 @@ export class CalendarComponent implements OnInit {
     for (let i = this.minStart; i <= this.maxStart; i++) {
       this.calendarHours.push(i);
     }
-  }
-
-  ngOnInit() {
-  }
-
-  today() {
-    this.currentDate = moment.utc();
-    this.emitDayRender();
-  }
-
-  previousDay() {
-    if (!this.minDate || this.minDate && this.currentDate > this.minDate) {
-      this.currentDate.subtract(1, 'days');
-      this.emitDayRender();
-    }
-  }
-
-  nextDay() {
-    if (!this.maxDate || this.maxDate && this.currentDate < this.maxDate) {
-      this.currentDate.add(1, 'days');
-      this.emitDayRender();
-    }
-  }
-
-  prevDisabled(): boolean {
-    return this.minDate && this.minDate.toISOString() === this.currentDate.toISOString();
-  }
-
-  emitDayRender() {
-    const event = {
-      date: this.currentDate
-    };
-    this.dayRender.emit(event);
   }
 
   topPosition(event: CalendarEvent): string {
@@ -85,12 +47,12 @@ export class CalendarComponent implements OnInit {
   calendarHeight() {
     const el = document.getElementById('calendar-table-container');
     const topOffset = el.getBoundingClientRect().top;
-    const value = (window.innerHeight - topOffset - 10);
+    const value = (window.innerHeight - topOffset - 100);
     return value.toString() + 'px';
   }
 
   backGroundColor(hour: number, minute: number) {
-    const hr =  new TimeOfDay({hour, minute});
+    const hr =  new TimeOfDay(hour, minute);
     for (const slot of this.availability) {
       if (slot.start.hashCode() <= hr.hashCode() && slot.end.hashCode() > hr.hashCode()) {
         return 'white';

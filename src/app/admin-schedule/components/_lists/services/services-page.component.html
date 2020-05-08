@@ -6,8 +6,7 @@
     <admin-service-form *ngIf="editMode$ | async"
                              [model]="selectedModel"
                              [htmlAction]="'PATCH'"
-                             (cancelClicked)="toggleEdit()"
-                             (submitClicked)="handleModelEvent($event)">>
+                             (cancelClicked)="toggleEdit()">
     </admin-service-form>
   </ng-container>
 </model-list-container>

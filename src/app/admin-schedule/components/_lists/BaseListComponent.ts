@@ -25,31 +25,10 @@ export abstract class BaseListComponent<TModel extends IReadModel> {
                         protected redux: NgRedux<IAppState>) {
   }
 
-  handleModelEvent(event: ModelEvent) {
-    switch (event.action) {
-      case 'PATCH':
-        this.modelService.patchUpdate(event.model.id, event.model).toPromise();
-        break;
-      case 'DELETE':
-        this.modelService.delete(event.model.id).toPromise();
-        break;
-      case 'CREATE':
-        this.modelService.post(event.model).toPromise();
-        break;
-    }
-  }
-
   onCreateClicked() {
-    const dialogRef = this.dialog.open(this.componentType, {
+    this.dialog.open(this.componentType, {
       width: this.DIALOG_WIDTH,
     });
-
-    dialogRef.afterClosed().toPromise()
-      .then(event => {
-        if (event) {
-          this.handleModelEvent(event);
-        }
-      });
   }
 
   toggleEdit() {

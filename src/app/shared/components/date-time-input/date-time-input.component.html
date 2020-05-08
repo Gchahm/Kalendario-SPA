@@ -1,0 +1,6 @@
+<div [formGroup]="datetimeParts">
+  <input formControlName="date" (input)="_handleInput()" [matDatepicker]="dp">
+  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp></mat-datepicker>
+  <input type="time" formControlName="time" (input)="_handleInput()">
+</div>

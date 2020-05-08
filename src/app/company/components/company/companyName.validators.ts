@@ -17,7 +17,7 @@ export class CompanyNameValidators {
       return companyService.get({name})
         .pipe(
           map(value => {
-            if (value.length === 0) {
+            if (value.results.length === 0) {
               return null;
             }
             return {shouldBeUnique: true};

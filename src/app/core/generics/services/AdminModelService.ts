@@ -7,8 +7,9 @@ import {Observable, throwError} from 'rxjs';
 import {NgRedux} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {ToastService} from '../../../shared/services/toast.service';
+import {IDjangoService} from '../../../shared/common/IDjangoService';
 
-export class AdminModelService<R extends IReadModel, W extends IWriteModel> {
+export class AdminModelService<R extends IReadModel, W extends IWriteModel> implements IDjangoService<R, W> {
 
   public actionSufix: string;
 
@@ -57,7 +58,7 @@ export class AdminModelService<R extends IReadModel, W extends IWriteModel> {
       );
   }
 
-  patchUpdate(id, command): Observable<R> {
+  patch(id, command): Observable<R> {
     return this.http.patch<R>(this.baseUrl + id + '/', {...command, owner: this.companyId()})
       .pipe(
         map((value => {

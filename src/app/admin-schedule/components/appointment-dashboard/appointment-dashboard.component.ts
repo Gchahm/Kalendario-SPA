@@ -18,6 +18,7 @@ export class AppointmentDashboardComponent {
 
   @select((s: IAppState) => s.admin.employees) employees$;
   @select((s: IAppState) => s.scheduling.employees) selectedEmployees$;
+  @select((s: IAppState) => s.core.isMobileView) isMobile$;
 
   date: Moment = moment.utc();
   fc = new FormControl(moment.utc());

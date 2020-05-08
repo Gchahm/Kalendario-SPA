@@ -3,6 +3,7 @@ import {Appointment} from '../../../../core/models/Appointment';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment';
+import {AppointmentService} from '../../../../shared/services/appointment.service';
 
 @Component({
   selector: 'admin-self-appointment-form',
@@ -13,16 +14,16 @@ export class SelfAppointmentFormComponent extends BaseFormComponent<Appointment>
 
   form;
 
-  constructor(private fb: FormBuilder) {
-    super();
+  constructor(private fb: FormBuilder,
+              service: AppointmentService) {
+    super(service);
   }
 
-  submitModel() {
+  beforeSubmit() {
     this.form.patchValue({
       start: this.formDatetime('startDate', 'startTime'),
       end: this.formDatetime('endDate', 'endTime')
     });
-    return this.form.value;
   }
 
   createForm() {

@@ -6,7 +6,6 @@
     <admin-shift-form *ngIf="editMode$ | async"
                          [model]="selectedModel"
                          [htmlAction]="'PATCH'"
-                         (cancelClicked)="toggleEdit()"
-                         (submitClicked)="handleModelEvent($event)">></admin-shift-form>
+                         (cancelClicked)="toggleEdit()"></admin-shift-form>
   </ng-container>
 </model-list-container>

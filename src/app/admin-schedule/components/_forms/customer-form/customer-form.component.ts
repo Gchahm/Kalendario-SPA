@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Customer} from '../../../../core/models/Customer';
 import {BaseFormComponent} from '../BaseFormComponent';
-import {FormBuilder, Validators} from '@angular/forms';
+import {CustomerService} from '../../../services/customer.service';
 
 @Component({
   selector: 'admin-customer-form',
@@ -9,23 +9,7 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./customer-form.component.scss']
 })
 export class CustomerFormComponent extends BaseFormComponent<Customer> {
-
-  constructor(private fb: FormBuilder) {
-    super();
-  }
-
-  submitModel() {
-    return this.onUpdateEvent.model;
-  }
-
-  createForm() {
-    const model = this.model.writeModel();
-    this.form = this.fb.group({
-      id: [model.id, Validators.required],
-      first_name: [model.first_name, Validators.required],
-      last_name: [model.last_name, Validators.required],
-      email: [model.email, Validators.required],
-      phone: [model.phone, Validators.required],
-    });
+  constructor(service: CustomerService) {
+    super(service);
   }
 }

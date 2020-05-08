@@ -13,6 +13,6 @@
         <mat-button-toggle (click)="updateStatus('R')">canceled</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
-    <app-appointment-card class="col-12 m-1" *ngFor="let appointment of appointments$ | async" [appointment]="appointment"></app-appointment-card>
+    <app-appointment-card class="col-12 m-1" *ngFor="let appointment of (appointments$ | async).results" [appointment]="appointment"></app-appointment-card>
   </div>
 </div>

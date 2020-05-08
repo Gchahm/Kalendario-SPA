@@ -1,0 +1,38 @@
+div {
+  display: flex;
+}
+input {
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  font: inherit;
+  text-align: center;
+}
+
+//span {
+//  opacity: 0;
+//  transition: opacity 200ms;
+//}
+//:host.floating span {
+//  opacity: 1;
+//}
+
+.color-picker-container {
+  position: relative;
+  width: 100%;
+}
+
+.color-picker-box {
+  min-height: 2em;
+  min-width: 5em;
+  border: black 1px solid;
+  border-radius: 2px;
+}
+
+.color-picker-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+

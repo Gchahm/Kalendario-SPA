@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {Shift, TimeFrame} from '../../../../core/models/Shift';
+import {IShiftWriteModel, Shift, TimeFrame} from '../../../../core/models/Shift';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../BaseFormComponent';
+import {ShiftService} from '../../../services/shift.service';
 
 @Component({
   selector: 'admin-shift-form',
@@ -10,12 +11,9 @@ import {BaseFormComponent} from '../BaseFormComponent';
 })
 export class ShiftFormComponent extends BaseFormComponent<Shift> {
 
-  constructor(private fb: FormBuilder) {
-    super();
-  }
-
-  submitModel() {
-    return this.form.value;
+  constructor(private fb: FormBuilder,
+              service: ShiftService) {
+    super(service);
   }
 
   createForm() {
