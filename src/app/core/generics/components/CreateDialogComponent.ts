@@ -1,4 +1,3 @@
-import {ModelEvent} from '../../../admin-schedule/events/ModelEvent';
 import {MatDialogRef} from '@angular/material/dialog';
 import {ViewChild} from '@angular/core';
 import {BaseFormComponent} from '../../../admin-schedule/components/_forms/BaseFormComponent';
@@ -10,7 +9,7 @@ export abstract class CreateDialogComponent {
 
   protected constructor(private dialogRef: MatDialogRef<CreateDialogComponent>) {}
 
-  onSubmitClicked(event: ModelEvent) {
+  onSubmitClicked(event: IReadModel) {
     this.dialogRef.close(event);
   }
 

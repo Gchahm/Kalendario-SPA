@@ -1,11 +1,10 @@
-import {Component, DoCheck, ElementRef, HostBinding, Input, OnDestroy, Optional, Self} from '@angular/core';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, Optional, Self} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormGroup, NgControl, Validators} from '@angular/forms';
 import {Moment} from 'moment';
 import {MatFormFieldControl} from '@angular/material/form-field';
 import {Subject} from 'rxjs';
 import {FocusMonitor} from '@angular/cdk/a11y';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {TimeOfDay} from '../../../core/models/TimeOfDay';
 import * as moment from 'moment';
 
 @Component({
@@ -25,7 +24,7 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
   datetimeParts: FormGroup;
   stateChanges = new Subject<void>();
   focused = false;
-  controlType = 'duration-input';
+  controlType = 'datetime-input';
   id = `example-tel-input-${DateTimeInputComponent.nextId++}`;
   describedBy = '';
   onChange = (_: any) => {

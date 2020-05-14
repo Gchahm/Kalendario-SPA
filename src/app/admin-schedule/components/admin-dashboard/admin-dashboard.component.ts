@@ -39,14 +39,17 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
               private redux: NgRedux<IAppState>) {
   }
 
+
   ngOnInit(): void {
-    forkJoin(
+    const observables = [
       this.employeeService.get(),
       this.serviceService.get(),
       this.scheduleService.get(),
       this.shiftService.get(),
       this.customerService.get()
-    ).toPromise();
+    ];
+    forkJoin(...observables)
+      .toPromise();
 
     this.redux.dispatch({type: TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, isVisible: true});
     this.redux.dispatch({type: TOGGLE_LEFT_PANE});

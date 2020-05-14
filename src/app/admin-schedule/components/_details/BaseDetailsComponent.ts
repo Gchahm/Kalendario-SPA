@@ -4,7 +4,20 @@ import {select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 
 export abstract class BaseDetailsComponent<R extends IReadModel> {
-  @Input() model: R;
+  @Input()
+  get model(): R {
+    return this._model;
+  };
+  set model(m: R) {
+    this.beforeSetModel();
+    this._model = m;
+    this.afterSetModel();
+  }
+  protected _model: R;
+
+  beforeSetModel() {}
+  afterSetModel() {}
+  
   @select((s: IAppState) => s.core.isMobileView) isMobile$;
   @select((s: IAppState) => s.core.isTabletView) isTablet$;
 }

@@ -3,8 +3,6 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../interfaces/adapter';
 import {IReadModel} from './interfaces/IReadModel';
 import {IWriteModel} from './interfaces/IWriteModel';
-import {Person} from './Person';
-import {Company} from './Company';
 
 export class Employee implements IReadModel {
   static modelType = 'employee';
@@ -37,7 +35,7 @@ export class Employee implements IReadModel {
       this.phone = data.phone;
       this.schedule = data.schedule;
       this.instagram = data.instagram;
-      this.photoUrl = data.profile_img ? 'https://res.cloudinary.com/gchahm/' + data.profile_img : null;
+      this.photoUrl = data.profileImg ? 'https://res.cloudinary.com/gchahm/' + data.profileImg : null;
       this.bio = data.bio;
       this.services = data.services.map(Service.fromJs);
     }

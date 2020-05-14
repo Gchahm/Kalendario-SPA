@@ -10,6 +10,7 @@ import {Moment} from 'moment';
 import {Service} from '../../core/models/Service';
 import {IAppState} from '../../Store';
 import {NgRedux} from '@angular-redux/store';
+import {ListResult} from '../../core/generics/services/AdminModelService';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,15 @@ export class EmployeeService {
               private ngRedux: NgRedux<IAppState>) {
   }
 
-  get(params = {}) {
+  get(params = {}): Observable<ListResult<Employee>> {
     const state = this.ngRedux.getState();
 
-    return this.http.get<Employee[]>(this.baseUrl,
+    return this.http.get<ListResult<Employee>>(this.baseUrl,
       {params: {...params, company: state.company.companyName}})
-      .pipe(map(adaptList(this.adapter)));
+      .pipe(map(res => {
+        res.results = res.results.map(data => this.adapter.adapt(data));
+        return res;
+      }));
   }
 
   detail(id: number, params = {}) {

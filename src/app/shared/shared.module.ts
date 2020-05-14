@@ -16,6 +16,7 @@ import {MatListTableComponent} from './components/mat-list-table/mat-list-table.
 import {DurationInputComponent} from './components/duration-input/duration-input.component';
 import {ColorInputComponent} from './components/color-input/color-input.component';
 import {DateTimeInputComponent} from './components/date-time-input/date-time-input.component';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {DateTimeInputComponent} from './components/date-time-input/date-time-inp
     TranslateModule.forRoot(),
     NgReduxModule,
     ColorPickerModule,
+    MatMomentDateModule,
   ],
   providers: [
     ErrorInterceptorProvider,
@@ -59,6 +61,7 @@ import {DateTimeInputComponent} from './components/date-time-input/date-time-inp
     MatListTableComponent,
     DateTimeInputComponent,
     DurationInputComponent,
+    MatMomentDateModule,
   ]
 })
 export class SharedModule {

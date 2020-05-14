@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {CustomerListDialogComponent} from '../../_dialogs/customer-list/customer-list-dialog.component';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {Appointment} from '../../../../core/models/Appointment';
-import * as moment from 'moment';
-import {CustomValidators} from '../../../../shared/Validators/Custom.validators';
 import {MatDialog} from '@angular/material/dialog';
 import {AppointmentService} from '../../../../shared/services/appointment.service';
 

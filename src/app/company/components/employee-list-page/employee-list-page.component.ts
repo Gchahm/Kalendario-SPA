@@ -3,6 +3,7 @@ import {Employee} from '../../../core/models/Employee';
 import {IAppState} from '../../../Store';
 import {select} from '@angular-redux/store';
 import {EmployeeService} from '../../../shared/services/employee.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'customer-employee-list',
@@ -17,7 +18,10 @@ export class EmployeeListPageComponent implements OnInit {
   constructor(private empService: EmployeeService) { }
 
   ngOnInit() {
-    this.employees$ = this.empService.get();
+    this.employees$ = this.empService.get()
+      .pipe(
+        map(res => res.results)
+      );
   }
 
   services(employee: Employee): string {

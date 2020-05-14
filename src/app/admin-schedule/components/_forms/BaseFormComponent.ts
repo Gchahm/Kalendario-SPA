@@ -1,12 +1,6 @@
 import {IReadModel} from '../../../core/models/interfaces/IReadModel';
 import {EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ModelEvent} from '../../events/ModelEvent';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
-import {Observable} from 'rxjs';
-import {CustomerService} from '../../services/customer.service';
-import {AdminModelService} from '../../../core/generics/services/AdminModelService';
+import {FormControl, FormGroup} from '@angular/forms';
 import {IDjangoService} from '../../../shared/common/IDjangoService';
 import {IWriteModel} from '../../../core/models/interfaces/IWriteModel';
 
@@ -15,11 +9,10 @@ export abstract class BaseFormComponent<R extends IReadModel> implements OnInit 
   @Input() htmlAction: string;
   @Input() model: R;
   @Input() showButtons = true;
-  @Output() submitConcluded = new EventEmitter();
+  @Output() submitConcluded = new EventEmitter<IReadModel>();
   @Output() cancelClicked = new EventEmitter();
 
   form: FormGroup;
-  error: any;
 
   protected constructor(private service: IDjangoService<R, IWriteModel>) {
   }
@@ -44,16 +37,19 @@ export abstract class BaseFormComponent<R extends IReadModel> implements OnInit 
   submit() {
     this.beforeSubmit();
     this.action().toPromise()
-      .then(res => {
-        this.submitConcluded.emit();
+      .then((res: R) => {
+        this.submitConcluded.emit(res);
       })
       .catch(err => {
-        this.error = err;
         if (err && err.status === 422) {
           const validationErrors = err.detail;
+          // If the error comes from the server in an array form it doesn't belong to the form
           if (Array.isArray(validationErrors)) {
             this.form.setErrors(validationErrors);
           } else {
+            // Other error should be dictionaries with keys for the field name a a string for what the error is about
+            // The key will match with the formControl name and this will ensure that the error will be raised against
+            // the correct form
             Object.keys(validationErrors).forEach(prop => {
               const formControl = this.form.get(prop);
               if (formControl) {

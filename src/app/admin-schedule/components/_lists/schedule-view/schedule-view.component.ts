@@ -1,10 +1,9 @@
-import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Moment} from 'moment';
 import {Employee} from '../../../../core/models/Employee';
 import {CalendarEvent} from '../../../../calendar/models/CalendarEvent';
 import {MatDialog} from '@angular/material/dialog';
 import {AppointmentEventDialogComponent} from '../../_dialogs/appointment-event/appointment-event-dialog.component';
-import {ToastService} from '../../../../shared/services/toast.service';
 import {Appointment} from '../../../../core/models/Appointment';
 import {AppointmentRequestsDialogComponent} from '../../_dialogs/appointment-requests/appointment-requests-dialog.component';
 import {AppointmentService} from '../../../../shared/services/appointment.service';
@@ -26,13 +25,13 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
   @Input() set employee(employee: Employee) {
     this.emp = employee;
     if (this.date) {
-      this.loadModels();
+      this.loadAppointments();
     }
   }
 
   @Input() set currentDate(date: Moment) {
     this.date = date;
-    this.loadModels();
+    this.loadAppointments();
   }
 
   @select((s: IAppState) => s.admin.schedules) schedules$: Observable<Schedule[]>;
@@ -52,12 +51,11 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
 
 
   public constructor(private appointmentService: AppointmentService,
-                     private dialog: MatDialog,
-                     private toast: ToastService) {
+                     private dialog: MatDialog) {
   }
 
   ngOnInit() {
-    this.loadModels();
+    this.loadAppointments();
     this.loadRequests();
     this.sub = this.schedules$.subscribe( schedules => {
       this.schedule = schedules.find(s => s.id === this.emp.schedule);
@@ -72,29 +70,6 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
     this.closeClicked.emit(this.emp);
   }
 
-  handleModelEvent(event) {
-    switch (event.action) {
-      case 'PATCH':
-        this.runFunction(this.appointmentService.patch(event.model.id, event.model), 'updated');
-        break;
-      case 'DELETE':
-        this.runFunction(this.appointmentService.delete(event.model.id), 'deleted');
-        break;
-      case 'CREATE':
-        this.runFunction(this.appointmentService.post(event.model), 'created');
-        break;
-    }
-  }
-
-  runFunction(func, successMessage) {
-    func.toPromise().then(() => {
-      this.loadModels();
-      this.toast.success(successMessage);
-    }).catch(err => {
-      this.toast.error(err);
-    });
-  }
-
   onCreateClicked(appointmentType) {
     const dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
       data: {employee: this.emp, date: this.date, type: appointmentType},
@@ -104,13 +79,13 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().toPromise()
       .then(event => {
         if (event) {
-          this.handleModelEvent(event);
+          this.loadAppointments();
         }
       });
   }
 
   openRequests() {
-    const dialogRef = this.dialog.open(AppointmentRequestsDialogComponent, {
+    this.dialog.open(AppointmentRequestsDialogComponent, {
       width: '400px',
       data: {requests: this.requests}
     });
@@ -131,9 +106,9 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().toPromise()
-      .then(event => {
-        if (event) {
-          this.handleModelEvent(event);
+      .then((appointment: Appointment) => {
+        if (appointment) {
+          this.loadAppointments();
         }
       });
   }
@@ -144,7 +119,7 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
       .then(result => this.requests = result.results);
   }
 
-  public loadModels() {
+  public loadAppointments() {
     const params = {
       employee: this.emp.id.toString(),
       from_date: this.date.startOf('day').toISOString(),

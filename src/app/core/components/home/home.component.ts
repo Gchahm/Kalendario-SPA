@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CompanyService} from '../../../shared/services/company.service';
 import {Observable} from 'rxjs';
 import {Company} from '../../models/Company';
-import {ListResult} from '../../generics/services/AdminModelService';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +11,15 @@ import {ListResult} from '../../generics/services/AdminModelService';
 })
 export class HomeComponent implements OnInit {
 
-  companies$: Observable<ListResult<Company>>;
+  companies$: Observable<Company[]>;
 
   constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
-    this.companies$ = this.companyService.get();
+    this.companies$ = this.companyService.get()
+      .pipe(
+        map(res => res.results)
+      );
   }
 
 }

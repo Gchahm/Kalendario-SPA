@@ -4,7 +4,6 @@ import {Appointment} from '../../../../core/models/Appointment';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
 import {Employee} from '../../../../core/models/Employee';
 import {Moment} from 'moment';
-import {AppointmentFormComponent} from '../../_forms/appointment-form/appointment-form.component';
 
 @Component({
   selector: 'employee-form-appointment',
