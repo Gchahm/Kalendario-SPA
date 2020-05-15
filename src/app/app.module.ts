@@ -1,25 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
 import {isDevMode, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
-import {CompanyModule} from './company/company.module';
 import {IAppState, INITIAL_STATE, rootReducer} from './Store';
 import {DevToolsExtension, NgRedux} from '@angular-redux/store';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgReduxModule} from '@angular-redux/store';
+import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
+import {CompanyModule} from './company/company.module';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
+    NgReduxModule,
     SharedModule,
     CoreModule,
-    AdminScheduleModule,
-    CompanyModule,
+    // AdminScheduleModule,
+    // CompanyModule,
     AppRoutingModule,
     LayoutModule,
   ],

@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
@@ -37,7 +35,6 @@ import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [],
   imports: [
-    BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatMenuModule,
     MatToolbarModule,
@@ -70,7 +67,6 @@ import {MatButtonModule} from '@angular/material/button';
     MatMomentDateModule,
   ],
   exports: [
-    BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatMenuModule,
     MatToolbarModule,

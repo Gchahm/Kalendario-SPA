@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateServiceDialogComponent } from './create-service-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('CreateServiceDialogComponent', () => {
   let component: CreateServiceDialogComponent;
@@ -8,6 +9,7 @@ describe('CreateServiceDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       declarations: [ CreateServiceDialogComponent ]
     })
     .compileComponents();

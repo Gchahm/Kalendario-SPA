@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from './admin-schedule/services/auth.service';
+import {AuthService} from './shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {NgRedux} from '@angular-redux/store';

@@ -9,7 +9,6 @@ import {ToastService} from './services/toast.service';
 import {ToastsComponent} from './components/toasts/toasts.component';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
 import {TranslateModule} from '@ngx-translate/core';
-import {NgReduxModule} from '@angular-redux/store';
 import {ColorPickerModule} from 'ngx-color-picker';
 import {ColorIconComponent} from './components/color-icon/color-icon.component';
 import {MatListTableComponent} from './components/mat-list-table/mat-list-table.component';
@@ -36,7 +35,6 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     ReactiveFormsModule,
     AngularMaterialModule,
     TranslateModule.forRoot(),
-    NgReduxModule,
     ColorPickerModule,
     MatMomentDateModule,
   ],
@@ -54,7 +52,6 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     ToastsComponent,
     AngularMaterialModule,
     TranslateModule,
-    NgReduxModule,
     ColorPickerModule,
     ColorInputComponent,
     ColorIconComponent,

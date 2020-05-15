@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateAppointmentDialogComponent } from './create-appointment-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('CreateAppointmentDialogComponent', () => {
   let component: CreateAppointmentDialogComponent;
@@ -8,6 +9,7 @@ describe('CreateAppointmentDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       declarations: [ CreateAppointmentDialogComponent ]
     })
     .compileComponents();

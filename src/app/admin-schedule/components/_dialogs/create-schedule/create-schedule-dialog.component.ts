@@ -2,7 +2,6 @@ import { Component} from '@angular/core';
 import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
 import {Schedule} from '../../../../core/models/Schedule';
 import {MatDialogRef} from '@angular/material/dialog';
-import {ScheduleFormComponent} from '../../_forms/schedule-form/schedule-form.component';
 
 @Component({
   selector: 'app-create-schedule-dialog',

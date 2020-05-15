@@ -17,7 +17,7 @@ import {CanViewCustomersGuard} from './guards/can-view-customers.guard';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: AdminDashboardComponent,
     children: [
       {

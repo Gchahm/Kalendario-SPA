@@ -8,7 +8,7 @@ import {BookAppointmentPageComponent} from './components/book-appointment-page/b
 
 const routes: Routes = [
   {
-    path: 'c/:cid',
+    path: ':cid',
     component: CompanyComponent,
     children: [
       {

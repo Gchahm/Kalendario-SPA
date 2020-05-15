@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateShiftDialogComponent } from './create-shift-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('CreateShiftDialogComponent', () => {
   let component: CreateShiftDialogComponent;
@@ -8,6 +9,7 @@ describe('CreateShiftDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       declarations: [ CreateShiftDialogComponent ]
     })
     .compileComponents();

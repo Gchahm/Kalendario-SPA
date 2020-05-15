@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../../shared/services/auth.service';
 import {Appointment} from '../../core/models/Appointment';
 import {BaseGuard} from './base-guard';
 import {PERMISSION_ADD} from '../../core/models/User';

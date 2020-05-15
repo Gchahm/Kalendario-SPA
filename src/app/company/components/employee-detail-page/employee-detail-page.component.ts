@@ -60,6 +60,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterView
   }
 
   cardWidth(): string {
+    // TODO: get correct width
     return '60px';
   }
 
@@ -92,7 +93,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterView
 
   selectedServiceColor(service: Service) {
     if (this.service.id === service.id) {
-      return 'A400';
+      return 'p100';
     }
     return '';
   }

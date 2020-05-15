@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {PERMISSION_VIEW} from '../../core/models/User';
 import {BaseGuard} from './base-guard';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../../shared/services/auth.service';
 import {Shift} from '../../core/models/Shift';
 
 @Injectable({

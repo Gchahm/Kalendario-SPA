@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../../admin-schedule/services/auth.service';
+import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
 import {LoginModel} from '../../models/LoginModel';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   user: LoginModel = {email: '', password: ''};
 
   constructor(private authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute,
               private toastService: ToastService) { }
 
   ngOnInit() {
@@ -29,6 +32,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
     this.loginSubscription = this.authService.login(this.user).subscribe(next => {
+      const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+      this.router.navigate([returnUrl]);
       this.toastService.success('logged in');
     }, error1 => {
       this.toastService.error(error1);

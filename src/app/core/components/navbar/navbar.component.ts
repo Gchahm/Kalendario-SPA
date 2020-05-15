@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../../../admin-schedule/services/auth.service';
+import {AuthService} from '../../../shared/services/auth.service';
 import {ToastService} from '../../../shared/services/toast.service';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
-import {TOGGLE_LEFT_PANE} from '../../CoreActions';
+import {LOGOUT_USER, TOGGLE_LEFT_PANE} from '../../CoreActions';
 import {PERMISSION_ADD, PERMISSION_VIEW, User} from '../../models/User';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Company} from '../../models/Company';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +23,7 @@ export class NavbarComponent {
   @select((s: IAppState) => s.core.user) user$: Observable<User>;
 
   constructor(private authService: AuthService,
+              private router: Router,
               private toastService: ToastService,
               private redux: NgRedux<IAppState>) {
   }
@@ -29,7 +31,10 @@ export class NavbarComponent {
   logout() {
     this.authService.logout()
       .toPromise()
-      .then( res => this.toastService.message(res.detail));
+      .then( res => {
+        this.router.navigate(['']);
+        this.toastService.message(res.detail)
+      });
   }
 
   toggleLeftPane() {

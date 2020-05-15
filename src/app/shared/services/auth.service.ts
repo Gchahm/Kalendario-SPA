@@ -3,8 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, switchMap, map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FacebookAuthService} from '../../shared/services/facebook-auth.service';
+import {FacebookAuthService} from './facebook-auth.service';
 import {LoginModel} from '../../core/models/LoginModel';
 import {User, UserAdapter} from '../../core/models/User';
 import {NgRedux} from '@angular-redux/store';
@@ -20,8 +19,6 @@ export class AuthService {
   private userUrl = environment.apiUrl + 'users/';
 
   constructor(private http: HttpClient,
-              private route: ActivatedRoute,
-              private router: Router,
               private adapter: UserAdapter,
               private fbService: FacebookAuthService,
               private redux: NgRedux<IAppState>) {
@@ -49,11 +46,11 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
+    return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {})
+      .pipe(
       map(res => {
         AuthService.removeToken();
         this.redux.dispatch({type: LOGOUT_USER, user: User.AnonymousUser()});
-        this.router.navigate(['']);
         return res;
       })
     );
@@ -68,17 +65,12 @@ export class AuthService {
     );
   }
 
-
   login(user: LoginModel): Observable<User> {
-    return this.http.post(this.baseUrl + 'login/', user).pipe(
+    return this.http.post(this.baseUrl + 'login/', user)
+      .pipe(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
         return this.dispatchUser();
-      }),
-      map(project => {
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        this.router.navigate([returnUrl]);
-        return project;
       })
     );
   }
@@ -90,8 +82,6 @@ export class AuthService {
         return this.dispatchUser();
       }),
       map(project => {
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        this.router.navigate([returnUrl]);
         return project;
       })
     );

@@ -5,7 +5,7 @@ import {CompanyService} from '../../../shared/services/company.service';
 import {Router} from '@angular/router';
 import {NgRedux} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
-import {AuthService} from '../../../admin-schedule/services/auth.service';
+import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 

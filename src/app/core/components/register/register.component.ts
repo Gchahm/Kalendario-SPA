@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../admin-schedule/services/auth.service';
-import {Router} from '@angular/router';
+import {AuthService} from '../../../shared/services/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService,
               private router: Router,
+              private route: ActivatedRoute,
               private alertify: ToastService) {
   }
 
@@ -46,6 +47,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       const validatedForm = Object.assign({}, this.registerForm.value);
       this.registerSubscription = this.authService.register(validatedForm).subscribe(next => {
         this.alertify.success('User registered');
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigate([returnUrl]);
       }, error1 => {
         this.alertify.error(error1);
       });
