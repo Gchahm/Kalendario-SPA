@@ -4,6 +4,9 @@ import {Observable, Subscription} from 'rxjs';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {SELECT_MODEL, TOGGLE_EDIT} from '../../AdminActions';
+import {ToastService} from '../../../shared/services/toast.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {AlerterService} from '../../../shared/services/alerter.service';
 
 @Component({
   selector: 'model-list-container',
@@ -16,18 +19,21 @@ export class ModelListContainerComponent implements OnInit, OnDestroy {
   @select((s: IAppState) => s.admin.dashboardState.editMode) editMode$;
   @select((s: IAppState) => s.core.isMobileView) mobileView$;
   @Input() modelList$: Observable<IReadModel[]>;
-  @Output() createClicked = new EventEmitter();
+  @Output() create = new EventEmitter();
+  @Output() delete = new EventEmitter<IReadModel>();
   subscription: Subscription;
   tabIndex = 0;
 
   // TODO: Desirable that when on mobile view the mat tab header stays on tob when scrolling down
-  constructor(public redux: NgRedux<IAppState>) {}
+  constructor(public redux: NgRedux<IAppState>,
+              public alerter: AlerterService) {}
 
   ngOnInit() {
     this.subscription = this.modelList$.subscribe(l => {
       if (l.length > 0) {
         this.redux.dispatch({type: SELECT_MODEL, model: l[0]});
-      } else {
+      } else
+        {
         this.redux.dispatch({type: SELECT_MODEL, model: null});
       }
     });
@@ -42,11 +48,23 @@ export class ModelListContainerComponent implements OnInit, OnDestroy {
     this.tabIndex = 1;
   }
 
-  createModelClicked() {
-    this.createClicked.emit();
+  onCreate() {
+    this.create.emit();
   }
 
-  editButtonClicked() {
+  onEdit() {
     this.redux.dispatch({type: TOGGLE_EDIT});
   }
+
+  onDelete() {
+    const model = this.redux.getState().admin.selectedModel;
+    this.alerter.warn('Are you sure?', `this will permanently delete ${model}`)
+      .toPromise()
+      .then(res => {
+        if (res) {
+          this.delete.emit(model);
+        }
+      })
+  }
+
 }

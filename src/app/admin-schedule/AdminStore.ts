@@ -4,14 +4,27 @@ import {Schedule} from '../core/models/Schedule';
 import {Shift} from '../core/models/Shift';
 import {
   CREATE_CUSTOMER,
-  CREATE_EMPLOYEE, CREATE_SCHEDULE, CREATE_SERVICE, CREATE_SHIFT, LOAD_CUSTOMERS,
+  CREATE_EMPLOYEE,
+  CREATE_SCHEDULE,
+  CREATE_SERVICE,
+  CREATE_SHIFT, DELETE_CUSTOMER,
+  DELETE_EMPLOYEE,
+  DELETE_SCHEDULE,
+  DELETE_SERVICE,
+  DELETE_SHIFT,
+  LOAD_CUSTOMERS,
   LOAD_EMPLOYEES,
   LOAD_SCHEDULES,
   LOAD_SERVICES,
   LOAD_SHIFTS,
   SELECT_MODEL,
-  TOGGLE_EDIT, UPDATE_CUSTOMER,
-  UPDATE_EMPLOYEE, UPDATE_EMPLOYEE_PHOTO, UPDATE_SCHEDULE, UPDATE_SERVICE, UPDATE_SHIFT
+  TOGGLE_EDIT,
+  UPDATE_CUSTOMER,
+  UPDATE_EMPLOYEE,
+  UPDATE_EMPLOYEE_PHOTO,
+  UPDATE_SCHEDULE,
+  UPDATE_SERVICE,
+  UPDATE_SHIFT
 } from './AdminActions';
 import {tassign} from 'tassign';
 import {IReadModel} from '../core/models/interfaces/IReadModel';
@@ -78,6 +91,12 @@ function createEmployee(state: IAdminStore, action): IAdminStore {
   });
 }
 
+function deleteEmployee(state: IAdminStore, action): IAdminStore {
+  return tassign(state, {
+    employees: state.employees.filter((m) => m.id !== action.id)
+  });
+}
+
 // TODO: Check why this action is triggering a selectModel action
 function updateEmployeePhoto(state: IAdminStore, action): IAdminStore {
   let selectedEmp = state.selectedModel;
@@ -96,7 +115,6 @@ function updateEmployeePhoto(state: IAdminStore, action): IAdminStore {
     dashboardState: tassign(state.dashboardState, {editMode: false})
   });
 }
-
 
 function loadServices(state: IAdminStore, action): IAdminStore {
   return tassign(state, {
@@ -117,6 +135,12 @@ function createService(state: IAdminStore, action): IAdminStore {
     services: state.services.concat([action.model]),
     selectedModel: action.model,
     dashboardState: tassign(state.dashboardState, {editMode: false})
+  });
+}
+
+function deleteService(state: IAdminStore, action): IAdminStore {
+  return tassign(state, {
+    services: state.services.filter((m) => m.id !== action.id)
   });
 }
 
@@ -142,6 +166,12 @@ function createShift(state: IAdminStore, action): IAdminStore {
   });
 }
 
+function deleteShift(state: IAdminStore, action): IAdminStore {
+  return tassign(state, {
+    shifts: state.shifts.filter((m) => m.id !== action.id)
+  });
+}
+
 function loadSchedules(state: IAdminStore, action): IAdminStore {
   return tassign(state, {
     schedules: action.modelList
@@ -161,6 +191,12 @@ function createSchedule(state: IAdminStore, action): IAdminStore {
     schedules: state.schedules.concat([action.model]),
     selectedModel: action.model,
     dashboardState: tassign(state.dashboardState, {editMode: false})
+  });
+}
+
+function deleteSchedule(state: IAdminStore, action): IAdminStore {
+  return tassign(state, {
+    schedules: state.schedules.filter((m) => m.id !== action.id)
   });
 }
 
@@ -186,6 +222,11 @@ function createCustomer(state: IAdminStore, action): IAdminStore {
   });
 }
 
+function deleteCustomer(state: IAdminStore, action): IAdminStore {
+  return tassign(state, {
+    customers: state.customers.filter((m) => m.id !== action.id)
+  });
+}
 
 export function adminReducer(state: IAdminStore = ADMIN_INITIAL_STATE, action): IAdminStore {
   switch (action.type) {
@@ -199,30 +240,40 @@ export function adminReducer(state: IAdminStore = ADMIN_INITIAL_STATE, action): 
       return createEmployee(state, action);
     case UPDATE_EMPLOYEE_PHOTO:
       return updateEmployeePhoto(state, action);
+    case DELETE_EMPLOYEE:
+      return deleteEmployee(state, action)
     case LOAD_SERVICES:
       return loadServices(state, action);
     case UPDATE_SERVICE:
       return updateService(state, action);
     case CREATE_SERVICE:
       return createService(state, action);
+    case DELETE_SERVICE:
+      return deleteService(state, action);
     case LOAD_SHIFTS:
       return loadShifts(state, action);
     case UPDATE_SHIFT:
       return updateShift(state, action);
     case CREATE_SHIFT:
       return createShift(state, action);
+    case DELETE_SHIFT:
+      return deleteShift(state, action);
     case LOAD_SCHEDULES:
       return loadSchedules(state, action);
     case UPDATE_SCHEDULE:
       return updateSchedule(state, action);
     case CREATE_SCHEDULE:
       return createSchedule(state, action);
+    case DELETE_SCHEDULE:
+      return deleteSchedule(state, action);
     case LOAD_CUSTOMERS:
       return loadCustomers(state, action);
     case UPDATE_CUSTOMER:
       return updateCustomer(state, action);
     case CREATE_CUSTOMER:
       return createCustomer(state, action);
+    case DELETE_CUSTOMER:
+      return deleteCustomer(state, action);
     case SELECT_MODEL:
       return selectModel(state, action);
   }

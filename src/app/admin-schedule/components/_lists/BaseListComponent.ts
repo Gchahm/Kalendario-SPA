@@ -25,10 +25,14 @@ export abstract class BaseListComponent<TModel extends IReadModel> {
                         protected redux: NgRedux<IAppState>) {
   }
 
-  onCreateClicked() {
+  openCreateDialog() {
     this.dialog.open(this.componentType, {
       width: this.DIALOG_WIDTH,
     });
+  }
+
+  deleteModel(model: TModel) {
+    this.modelService.delete(model.id).toPromise();
   }
 
   toggleEdit() {

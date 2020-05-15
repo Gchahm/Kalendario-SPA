@@ -1,5 +1,6 @@
 <model-list-container [modelList$]="modelList$"
-                      (createClicked)="onCreateClicked()">
+                      (create)="openCreateDialog()"
+                      (delete)="deleteModel($event)">
   <ng-container *ngIf="selectedModel$ | async as selectedModel">
     <admin-shift-details *ngIf="!(editMode$ | async)"
                             [model]="selectedModel"></admin-shift-details>

@@ -23,7 +23,7 @@
 <ng-template #list>
   <button mat-stroked-button
           color="accent"
-          (click)="createModelClicked()"
+          (click)="onCreate()"
           class="model-create">new
   </button>
   <mat-list *ngIf="selectedModel$ | async as selectedModel">
@@ -38,8 +38,11 @@
 <ng-template #details>
   <ng-content></ng-content>
   <div class="{{(mobileView$ | async) ? 'edit-mobile-container' : 'edit-desktop-container'}}">
-    <button class="edit-button" [hidden]="(editMode$ | async)" (click)="editButtonClicked()" color="accent" mat-raised-button>
+    <button class="edit-button" [hidden]="(editMode$ | async)" (click)="onEdit()" color="accent" mat-raised-button>
       edit
+    </button>
+    <button class="delete-button" [hidden]="(editMode$ | async)" (click)="onDelete()" color="warn" mat-raised-button>
+      delete
     </button>
   </div>
 </ng-template>

@@ -84,7 +84,7 @@ export class AdminModelService<R extends IReadModel, W extends IWriteModel> impl
       .pipe(
         map(() => {
           this.toast.success(`${this.modelName} deleted`);
-          this.redux.dispatch({type: `DELETE_${this.actionSufix}`,});
+          this.redux.dispatch({type: `DELETE_${this.actionSufix}`, id: id});
         }),
         catchError((err, caught) => {
           this.toast.error(err);

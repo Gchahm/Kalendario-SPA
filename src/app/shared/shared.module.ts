@@ -6,7 +6,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptorProvider} from './interceptors/token.interceptor';
 import {ErrorInterceptorProvider} from './interceptors/error.interceptor';
 import {ToastService} from './services/toast.service';
-import {ToastsComponent} from './components/toasts/toasts.component';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ColorPickerModule} from 'ngx-color-picker';
@@ -16,16 +15,17 @@ import {DurationInputComponent} from './components/duration-input/duration-input
 import {ColorInputComponent} from './components/color-input/color-input.component';
 import {DateTimeInputComponent} from './components/date-time-input/date-time-input.component';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import { WarningDialogComponent } from './components/warning-dialog/warning-dialog.component';
 
 
 @NgModule({
   declarations: [
-    ToastsComponent,
     ColorInputComponent,
     ColorIconComponent,
     MatListTableComponent,
     DateTimeInputComponent,
     DurationInputComponent,
+    WarningDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +49,6 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastsComponent,
     AngularMaterialModule,
     TranslateModule,
     ColorPickerModule,
