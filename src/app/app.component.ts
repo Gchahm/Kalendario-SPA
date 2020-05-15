@@ -22,10 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
               private redux: NgRedux<IAppState>,
               media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this.mobileQuery.addEventListener('change', () => this.setMobileViewFlag());
+    // this.mobileQuery.addEventListener('change', () => this.setMobileViewFlag());
 
     this.tableQuery = media.matchMedia('(max-width: 959px)');
-    this.tableQuery.addEventListener('change', () => this.setTabletViewFlag());
+    // this.tableQuery.addEventListener('change', () => this.setTabletViewFlag());
 
     this.setMobileViewFlag();
     this.setTabletViewFlag();
@@ -37,8 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.mobileQuery.removeEventListener('change', () => this.setMobileViewFlag());
-    this.tableQuery.removeEventListener('change', () => this.setTabletViewFlag());
+    // this.mobileQuery.removeEventListener('change', () => this.setMobileViewFlag());
+    // this.tableQuery.removeEventListener('change', () => this.setTabletViewFlag());
   }
 
   setMobileViewFlag() {

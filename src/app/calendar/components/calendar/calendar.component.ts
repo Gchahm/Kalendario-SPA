@@ -47,7 +47,8 @@ export class CalendarComponent {
   calendarHeight() {
     const el = document.getElementById('calendar-table-container');
     const topOffset = el.getBoundingClientRect().top;
-    const value = (window.innerHeight - topOffset - 100);
+    let value = (window.innerHeight - topOffset - 100);
+    value = value < 400 ? 400 : value;
     return value.toString() + 'px';
   }
 

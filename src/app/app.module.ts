@@ -8,8 +8,6 @@ import {IAppState, INITIAL_STATE, rootReducer} from './Store';
 import {DevToolsExtension, NgRedux} from '@angular-redux/store';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgReduxModule} from '@angular-redux/store';
-import {AdminScheduleModule} from './admin-schedule/admin-schedule.module';
-import {CompanyModule} from './company/company.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +18,6 @@ import {CompanyModule} from './company/company.module';
     NgReduxModule,
     SharedModule,
     CoreModule,
-    // AdminScheduleModule,
-    // CompanyModule,
     AppRoutingModule,
     LayoutModule,
   ],
