@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
-import {ToastService} from '../../../shared/services/toast.service';
-import {LoginModel} from '../../models/LoginModel';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, Validators} from '@angular/forms';
+import {errorAttacher} from '../../../shared/common/Util';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +13,18 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent implements OnInit, OnDestroy {
 
   private loginSubscription: Subscription;
-  user: LoginModel = {email: '', password: ''};
+  form;
 
   constructor(private authService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private toastService: ToastService) { }
+              private fb: FormBuilder) { }
 
   ngOnInit() {
-
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    })
   }
 
   ngOnDestroy(): void {
@@ -31,13 +34,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.loginSubscription = this.authService.login(this.user).subscribe(next => {
+    this.loginSubscription = this.authService.login(this.form.value).subscribe(next => {
       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
       this.router.navigate([returnUrl]);
-      this.toastService.success('logged in');
-    }, error1 => {
-      this.toastService.error(error1);
-      this.user.password = '';
+    }, error => {
+      if (error.status = 422) {
+        errorAttacher(this.form, error.detail);
+      }
+      this.form.patchValue({password: ''});
     });
   }
 

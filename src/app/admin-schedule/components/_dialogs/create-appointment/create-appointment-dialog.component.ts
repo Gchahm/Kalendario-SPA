@@ -12,16 +12,19 @@ import {Moment} from 'moment';
 })
 export class CreateAppointmentDialogComponent extends CreateDialogComponent {
 
-  model = new Appointment();
+  model: Appointment;
   type: string;
 
   constructor(dialogRef: MatDialogRef<CreateAppointmentDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: { employee: Employee, date: Moment, type: string }) {
     super(dialogRef);
-    this.model.employee = data.employee;
-    this.model.start = data.date;
-    this.model.end = data.date;
-    this.model.status = 'A';
+    const appointment = new Appointment();
+    appointment.employee = data.employee;
+    appointment.start = data.date.clone();
+    appointment.end = data.date.clone();
+    appointment.status = 'A';
+
+    this.model = appointment;
     this.type = data.type;
   }
 }

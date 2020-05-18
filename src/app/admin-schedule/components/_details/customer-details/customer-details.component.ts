@@ -35,8 +35,8 @@ export class CustomerDetailsComponent extends BaseDetailsComponent<Customer> imp
 
   ngOnInit() {
     this.form = this.fb.group({
-      from_date: moment.utc(),
-      to_date: moment.utc().add(3, 'd'),
+      from_date: [{value: moment.utc(), disabled: true},],
+      to_date: [{value: moment.utc().add(3, 'd'), disabled: true},],
       employees: [[]],
       services: [[]],
     });

@@ -45,7 +45,6 @@ export class Appointment implements IReadModel {
       id: this.id,
       start: this.start,
       customer: modelId(this.customer),
-      customerName: this.customer.name,
       employee: modelId(this.employee),
       service: modelId(this.service),
       status: this.status,
@@ -79,7 +78,6 @@ export class AppointmentAdapter implements Adapter<Appointment> {
 export interface IAppointmentWriteModel extends IWriteModel {
   start: Moment;
   customer: number;
-  customerName: string;
   employee: number;
   service: number;
   status: string;

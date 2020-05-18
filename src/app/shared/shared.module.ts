@@ -14,8 +14,11 @@ import {MatListTableComponent} from './components/mat-list-table/mat-list-table.
 import {DurationInputComponent} from './components/duration-input/duration-input.component';
 import {ColorInputComponent} from './components/color-input/color-input.component';
 import {DateTimeInputComponent} from './components/date-time-input/date-time-input.component';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule} from '@angular/material-moment-adapter';
 import { WarningDialogComponent } from './components/warning-dialog/warning-dialog.component';
+import { CustomerInputComponent } from './components/customer-input/customer-input.component';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MomentUtcDateAdapter} from './adapters/MomentUtcDateAdapter';
 
 
 @NgModule({
@@ -26,6 +29,7 @@ import { WarningDialogComponent } from './components/warning-dialog/warning-dial
     DateTimeInputComponent,
     DurationInputComponent,
     WarningDialogComponent,
+    CustomerInputComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,9 @@ import { WarningDialogComponent } from './components/warning-dialog/warning-dial
     ErrorInterceptorProvider,
     AuthInterceptorProvider,
     ToastService,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter },
   ],
   exports: [
     CommonModule,
@@ -58,6 +65,7 @@ import { WarningDialogComponent } from './components/warning-dialog/warning-dial
     DateTimeInputComponent,
     DurationInputComponent,
     MatMomentDateModule,
+    CustomerInputComponent,
   ]
 })
 export class SharedModule {

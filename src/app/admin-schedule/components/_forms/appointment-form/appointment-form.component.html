@@ -7,20 +7,7 @@
   </mat-error>
 
 <mat-form-field>
-    <input matInput
-           formControlName="customerName"
-           placeholder="customer name"
-           type="text">
-
-  <mat-error *ngIf="form.get('customer').errors?.serverError">
-    {{form.get('customer').errors?.serverError}}
-  </mat-error>
-
-  <button mat-mini-fab
-            type="button"
-            (click)="openCustomerList()">
-      select
-    </button>
+  <app-customer-input placeholder="customer" formControlName="customer"></app-customer-input>
   </mat-form-field>
 
   <mat-form-field>

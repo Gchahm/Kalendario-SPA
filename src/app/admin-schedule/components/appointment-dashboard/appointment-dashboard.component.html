@@ -28,9 +28,8 @@
     <span class="m-2" (click)="dpApointmentDashboard.open()">{{date.format('ddd')}}</span>
     <mat-form-field>
       <input matInput
-             [formControl]="fc"
-             [matDatepicker]="dpApointmentDashboard"
-             (dateChange)="changeDate($event)">
+             [(ngModel)]="date"
+             [matDatepicker]="dpApointmentDashboard">
       <mat-datepicker-toggle matSuffix [for]="dpApointmentDashboard"></mat-datepicker-toggle>
       <mat-datepicker touchUi="{{isMobile$ | async}}" #dpApointmentDashboard></mat-datepicker>
     </mat-form-field>

@@ -60,4 +60,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.redux.dispatch({type: TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, isVisible: false});
   }
+
+  optionClick() {
+    if (this.redux.getState().core.isMobileView) {
+      this.redux.dispatch({type: TOGGLE_LEFT_PANE});
+    }
+  }
 }

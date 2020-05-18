@@ -2,6 +2,14 @@
 <mat-card class="card-container mat-elevation-z6">
 
   <mat-card-header>
+    <mat-menu #appMenu="matMenu" >
+      <ng-container *ngTemplateOutlet="buttons"></ng-container>
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="(matActions.offsetWidth < 240); else buttons">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
     <div class="row no-gutters">
       <div class="col-6">
         {{emp.name}}
@@ -22,13 +30,6 @@
   </mat-card-content>
 
   <mat-card-actions #matActions>
-    <mat-menu #appMenu="matMenu" >
-      <ng-container *ngTemplateOutlet="buttons"></ng-container>
-    </mat-menu>
-
-    <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="(matActions.offsetWidth < 240); else buttons">
-      <mat-icon>more_vert</mat-icon>
-    </button>
 
   </mat-card-actions>
 </mat-card>

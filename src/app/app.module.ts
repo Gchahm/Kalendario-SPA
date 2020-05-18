@@ -8,6 +8,7 @@ import {IAppState, INITIAL_STATE, rootReducer} from './Store';
 import {DevToolsExtension, NgRedux} from '@angular-redux/store';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgReduxModule} from '@angular-redux/store';
+import {MediaMatcherService} from './shared/services/media-matcher.service';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,11 @@ import {NgReduxModule} from '@angular-redux/store';
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>,
-              devTools: DevToolsExtension) {
-    const enhancers = isDevMode() ? [devTools.enhancer()] : [];
+              devTools: DevToolsExtension,
+              mediaMatcher: MediaMatcherService) {
+    // Can't have the isDevMode on my mobile as it won't load the website,
+    // the matcher service blocks enhancers when the website is loaded on mobile view.
+    const enhancers = isDevMode() && !mediaMatcher.isMobile ? [devTools.enhancer()] : [];
     ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancers);
   }
 }

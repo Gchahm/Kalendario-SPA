@@ -4,9 +4,7 @@ import * as moment from 'moment';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '../../../Store';
 import {ADD_EMPLOYEE, REMOVE_EMPLOYEE} from '../../SchedulingActions';
-import {FormControl} from '@angular/forms';
 import {Employee} from '../../../core/models/Employee';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'admin-appointment-dashboard',
@@ -21,7 +19,6 @@ export class AppointmentDashboardComponent {
   @select((s: IAppState) => s.core.isMobileView) isMobile$;
 
   date: Moment = moment.utc();
-  fc = new FormControl(moment.utc());
 
   constructor(private redux: NgRedux<IAppState>) {
   }
@@ -38,23 +35,17 @@ export class AppointmentDashboardComponent {
   }
 
   today() {
-    this.fc.patchValue(moment.utc());
-    this.date = this.fc.value;
+    this.date = moment.utc();
   }
 
   previousDay() {
-    this.fc.patchValue(this.fc.value.subtract(1, 'days').clone());
-    this.date = this.fc.value;
+    this.date = this.date.subtract(1, 'd').clone();
   }
 
   nextDay() {
-    this.fc.patchValue(this.fc.value.add(1, 'days').clone());
-    this.date = this.fc.value;
+    this.date = this.date.add(1, 'd').clone();
   }
 
-  changeDate(event: MatDatepickerInputEvent<Moment>) {
-    this.date = event.value;
-  }
 
   isSelected(emp: Employee): boolean {
     return this.redux.getState().scheduling.employees.findIndex(e => e.id === emp.id) !== -1;

@@ -4,7 +4,7 @@
                  [fixedInViewport]="(isMobile | async)" fixedTopGap="56" [opened]="(sideOpen | async)">
       <mat-nav-list>
         <a mat-list-item *ngFor="let option of options"
-           routerLink="{{option.link}}" routerLinkActive="p900 active">
+           routerLink="{{option.link}}" routerLinkActive="p900 active" (click)="optionClick()">
           {{option.name}}
         </a>
       </mat-nav-list>

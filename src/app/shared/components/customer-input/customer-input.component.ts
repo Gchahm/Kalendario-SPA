@@ -1,31 +1,36 @@
-import {Component, DoCheck, ElementRef, Input, OnDestroy, Optional, Self} from '@angular/core';
-import {ControlValueAccessor, FormBuilder, FormGroup, NgControl, Validators} from '@angular/forms';
-import {Moment} from 'moment';
+import {Component, DoCheck, ElementRef, Input, OnDestroy, OnInit, Optional, Self} from '@angular/core';
 import {MatFormFieldControl} from '@angular/material/form-field';
-import {Subject} from 'rxjs';
-import {FocusMonitor} from '@angular/cdk/a11y';
+import {ControlValueAccessor, FormBuilder, FormGroup, NgControl, Validators} from '@angular/forms';
+import {Observable, Subject} from 'rxjs';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import * as moment from 'moment';
+import {FocusMonitor} from '@angular/cdk/a11y';
+import {CustomerService} from '../../../admin-schedule/services/customer.service';
+import {Customer} from '../../../core/models/Customer';
+import {debounceTime, finalize, map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
-  selector: 'date-time-input',
-  templateUrl: './date-time-input.component.html',
-  styleUrls: ['./date-time-input.component.css'],
-  providers: [{provide: MatFormFieldControl, useExisting: DateTimeInputComponent}],
+  selector: 'app-customer-input',
+  templateUrl: './customer-input.component.html',
+  styleUrls: ['./customer-input.component.css'],
+  providers: [{provide: MatFormFieldControl, useExisting: CustomerInputComponent}],
   host: {
     '[class.example-floating]': 'shouldLabelFloat',
     '[id]': 'id',
     '[attr.aria-describedby]': 'describedBy',
   }
 })
-export class DateTimeInputComponent implements MatFormFieldControl<Moment>, ControlValueAccessor, DoCheck, OnDestroy {
+export class CustomerInputComponent implements MatFormFieldControl<number>, ControlValueAccessor, DoCheck, OnInit, OnDestroy {
   static nextId = 0;
 
-  datetimeParts: FormGroup;
+  form: FormGroup;
   stateChanges = new Subject<void>();
   focused = false;
-  controlType = 'datetime-input';
-  id = `example-tel-input-${DateTimeInputComponent.nextId++}`;
+  controlType = 'customer-input';
+
+  customers$: Observable<Customer[]>;
+  isLoading = false;
+
+  id = `customer-input-${CustomerInputComponent.nextId++}`;
   describedBy = '';
   onChange = (_: any) => {
   };
@@ -33,9 +38,9 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
   };
 
   get empty() {
-    const {value: {date, time}} = this.datetimeParts;
+    const {value: {id, name}} = this.form;
 
-    return !date && !time;
+    return !id && !name;
   }
 
   get shouldLabelFloat() {
@@ -73,36 +78,32 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
 
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
-    this._disabled ? this.datetimeParts.disable() : this.datetimeParts.enable();
+    this._disabled ? this.form.disable() : this.form.enable();
     this.stateChanges.next();
   }
 
   private _disabled = false;
 
   @Input()
-  get value(): Moment | null {
-    if (this.datetimeParts.valid) {
-      const {value: {date, time}} = this.datetimeParts;
-      date.set({
-        hours: time ? +time.substr(0, 2) : 0,
-        minutes: time ? +time.substr(3, 2) : 0
-      });
-      return date;
+  get value(): number | null {
+    if (this.form.valid) {
+      const {value: {id, name}} = this.form;
+      return id;
     }
     return null;
   }
 
-  set value(date: Moment | null) {
-    date = date || moment.utc();
-    const time = date.format('HH:mm');
-    this.datetimeParts.setValue({date, time});
+  set value(id: number | null) {
+    id = id || 0;
+    this.form.patchValue({id: id});
     this.stateChanges.next();
+    this.onChange(id);
   }
 
   errorState: boolean;
 
   ngDoCheck(): void {
-    if(this.ngControl) {
+    if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
       this.stateChanges.next();
     }
@@ -110,13 +111,14 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
 
   constructor(
     formBuilder: FormBuilder,
+    private customerService: CustomerService,
     private _focusMonitor: FocusMonitor,
     private _elementRef: ElementRef<HTMLElement>,
     @Optional() @Self() public ngControl: NgControl) {
 
-    this.datetimeParts = formBuilder.group({
-      date: [{value: moment.utc(), disabled: true}, [Validators.required]],
-      time: [0, [Validators.required]],
+    this.form = formBuilder.group({
+      id: [0, [Validators.required]],
+      name: ''
     });
 
     _focusMonitor.monitor(_elementRef, true).subscribe(origin => {
@@ -130,6 +132,34 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
     }
+  }
+
+  ngOnInit() {
+    this.customers$ = this.form
+      .get('name')
+      .valueChanges
+      .pipe(
+        debounceTime(300),
+        tap(() => this.isLoading = true),
+        switchMap(value => this.customerService.get({search: value})
+          .pipe(
+            map(res => res.results),
+            finalize(() => this.isLoading = false)
+          )
+        )
+      );
+  }
+
+  onKeyPress(key: KeyboardEvent) {
+    if (key.code === 'Backspace') {
+      this.form.patchValue({id: 0, name: ''})
+    }
+  }
+
+  selected(customer: Customer) {
+    // TODO: Remove focus from input when a customer is selected
+    this.form.patchValue({id: customer.id});
+    this.onChange(this.value);
   }
 
   ngOnDestroy() {
@@ -147,8 +177,15 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
     }
   }
 
-  writeValue(time: Moment | null): void {
-    this.value = time;
+  writeValue(id: number | null): void {
+    if (!isNaN(id) && id > 0) {
+      this.customerService.detail(id)
+        .toPromise()
+        .then(res => {
+          this.form.patchValue({name: res.name})
+        })
+    }
+    this.value = id;
   }
 
   registerOnChange(fn: any): void {
@@ -163,12 +200,6 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
     this.disabled = isDisabled;
   }
 
-  _handleInput(): void {
-    this.onChange(this.value);
-  }
-
   static ngAcceptInputType_disabled: boolean | string | null | undefined;
   static ngAcceptInputType_required: boolean | string | null | undefined;
-
 }
-

@@ -29,6 +29,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
+import {MatBottomSheet, MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 
@@ -65,6 +66,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatDialogModule,
     MatSnackBarModule,
     MatMomentDateModule,
+    MatBottomSheetModule,
   ],
   exports: [
     MatProgressSpinnerModule,
@@ -97,6 +99,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatDialogModule,
     MatSnackBarModule,
     MatMomentDateModule,
+    MatBottomSheetModule,
   ]
 })
 export class AngularMaterialModule { }

@@ -3,6 +3,7 @@ import {EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IDjangoService} from '../../../shared/common/IDjangoService';
 import {IWriteModel} from '../../../core/models/interfaces/IWriteModel';
+import {errorAttacher} from '../../../shared/common/Util';
 
 export abstract class BaseFormComponent<R extends IReadModel> implements OnInit {
 
@@ -47,17 +48,7 @@ export abstract class BaseFormComponent<R extends IReadModel> implements OnInit 
           if (Array.isArray(validationErrors)) {
             this.form.setErrors(validationErrors);
           } else {
-            // Other error should be dictionaries with keys for the field name a a string for what the error is about
-            // The key will match with the formControl name and this will ensure that the error will be raised against
-            // the correct form
-            Object.keys(validationErrors).forEach(prop => {
-              const formControl = this.form.get(prop);
-              if (formControl) {
-                formControl.setErrors({
-                  serverError: validationErrors[prop]
-                });
-              }
-            });
+            errorAttacher(this.form, validationErrors);
           }
         }
       });

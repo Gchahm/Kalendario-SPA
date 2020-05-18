@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, switchMap, map} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {FacebookAuthService} from './facebook-auth.service';
 import {LoginModel} from '../../core/models/LoginModel';
 import {User, UserAdapter} from '../../core/models/User';
 import {NgRedux} from '@angular-redux/store';
 import {IAppState} from '../../Store';
 import {LOGIN_USER, LOGOUT_USER} from '../../core/CoreActions';
+import {ToastService} from './toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class AuthService {
   constructor(private http: HttpClient,
               private adapter: UserAdapter,
               private fbService: FacebookAuthService,
-              private redux: NgRedux<IAppState>) {
+              private redux: NgRedux<IAppState>,
+              private toastService: ToastService) {
 
   }
 
@@ -48,12 +50,12 @@ export class AuthService {
   logout() {
     return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {})
       .pipe(
-      map(res => {
-        AuthService.removeToken();
-        this.redux.dispatch({type: LOGOUT_USER, user: User.AnonymousUser()});
-        return res;
-      })
-    );
+        map(res => {
+          AuthService.removeToken();
+          this.redux.dispatch({type: LOGOUT_USER, user: User.AnonymousUser()});
+          return res;
+        })
+      );
   }
 
   FBLogin() {
@@ -68,11 +70,18 @@ export class AuthService {
   login(user: LoginModel): Observable<User> {
     return this.http.post(this.baseUrl + 'login/', user)
       .pipe(
-      switchMap((project: any) => {
-        AuthService.setToken(project.key);
-        return this.dispatchUser();
-      })
-    );
+        switchMap((project: any) => {
+          this.toastService.success('logged in');
+          AuthService.setToken(project.key);
+          return this.dispatchUser();
+        }),
+        catchError(error => {
+          if (error['detail'] && error['detail']['nonFieldErrors']) {
+            this.toastService.error(error['detail']['nonFieldErrors']);
+          }
+          return throwError(error);
+        })
+      );
   }
 
   register(form: any) {
@@ -89,7 +98,7 @@ export class AuthService {
 
   public whoAmI(): Observable<User> {
     return this.http.get<User>(this.userUrl + 'current/').pipe(
-      map( this.adapter.adapt)
+      map(this.adapter.adapt)
     );
   }
 

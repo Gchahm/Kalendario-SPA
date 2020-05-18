@@ -7,13 +7,13 @@
 
     <form [formGroup]="form" class="form-inline">
       <mat-form-field>
-        <input formControlName="from_date" placeholder="from date" matInput [matDatepicker]="startDt" disabled>
+        <input formControlName="from_date" placeholder="from date" matInput [matDatepicker]="startDt">
         <mat-datepicker-toggle matSuffix [for]="startDt"></mat-datepicker-toggle>
         <mat-datepicker #startDt disabled="false"></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
-        <input formControlName="to_date" placeholder="to date" matInput [matDatepicker]="endDt" disabled>
+        <input formControlName="to_date" placeholder="to date" matInput [matDatepicker]="endDt">
         <mat-datepicker-toggle matSuffix [for]="endDt"></mat-datepicker-toggle>
         <mat-datepicker #endDt disabled="false"></mat-datepicker>
       </mat-form-field>
