@@ -48,7 +48,7 @@ export class CreateCompanyComponent implements OnInit, OnDestroy {
     const company = this.form.value;
     company.owner = this.redux.getState().core.user.person.id;
     this.subscription = this.companyService.post(company).pipe(
-      switchMap(p => this.authService.dispatchUser())
+      switchMap(p => this.authService.whoAmI())
     ).subscribe( u => {
         this.router.navigate(['admin/home']);
       }

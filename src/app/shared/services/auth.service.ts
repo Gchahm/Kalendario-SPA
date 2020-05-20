@@ -17,7 +17,6 @@ import {ToastService} from './toast.service';
 export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth/';
-  private userUrl = environment.apiUrl + 'users/';
 
   constructor(private http: HttpClient,
               private adapter: UserAdapter,
@@ -62,7 +61,7 @@ export class AuthService {
     this.fbService.login(
       switchMap((project: any) => {
         AuthService.setToken(project.key);
-        return this.dispatchUser();
+        return this.whoAmI();
       })
     );
   }
@@ -73,7 +72,7 @@ export class AuthService {
         switchMap((project: any) => {
           this.toastService.success('logged in');
           AuthService.setToken(project.key);
-          return this.dispatchUser();
+          return this.whoAmI();
         }),
         catchError(error => {
           if (error['detail'] && error['detail']['nonFieldErrors']) {
@@ -84,26 +83,30 @@ export class AuthService {
       );
   }
 
-  register(form: any) {
-    return this.http.post(this.baseUrl + 'registration/', form).pipe(
-      switchMap((project: any) => {
-        AuthService.setToken(project.key);
-        return this.dispatchUser();
-      }),
-      map(project => {
-        return project;
-      })
-    );
+  register(form: any): Observable<User> {
+    return this.http.post(this.baseUrl + 'registration/', form)
+      .pipe(
+        switchMap((project: any) => {
+          AuthService.setToken(project.key);
+          return this.whoAmI();
+        })
+      );
+  }
+
+  public resendConfirmationEmail() {
+    return this.http.post(this.baseUrl + 'resend/', {});
   }
 
   public whoAmI(): Observable<User> {
-    return this.http.get<User>(this.userUrl + 'current/').pipe(
-      map(this.adapter.adapt)
-    );
+    if (AuthService.isLoggedIn()) {
+      return this.getUser();
+    }
+    return of(User.AnonymousUser());
   }
 
-  public dispatchUser(): Observable<User> {
-    return this.whoAmI().pipe(
+  private getUser(): Observable<User> {
+    return this.http.get<User>(this.baseUrl + 'current/').pipe(
+      map(this.adapter.adapt),
       map(user => {
         this.redux.dispatch({type: LOGIN_USER, user});
         return user;
@@ -114,5 +117,4 @@ export class AuthService {
       })
     );
   }
-
 }

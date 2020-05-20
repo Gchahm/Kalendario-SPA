@@ -3,7 +3,9 @@ import {EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {IDjangoService} from '../../../shared/common/IDjangoService';
 import {IWriteModel} from '../../../core/models/interfaces/IWriteModel';
-import {errorAttacher} from '../../../shared/common/Util';
+import {reactiveFormErrorHandler} from '../../../shared/common/Util';
+import {ValidationError} from '../../../shared/common/Errors';
+import {error} from 'selenium-webdriver';
 
 export abstract class BaseFormComponent<R extends IReadModel> implements OnInit {
 
@@ -42,14 +44,16 @@ export abstract class BaseFormComponent<R extends IReadModel> implements OnInit 
         this.submitConcluded.emit(res);
       })
       .catch(err => {
-        if (err && err.status === 422) {
-          const validationErrors = err.detail;
-          // If the error comes from the server in an array form it doesn't belong to the form
-          if (Array.isArray(validationErrors)) {
-            this.form.setErrors(validationErrors);
-          } else {
-            errorAttacher(this.form, validationErrors);
-          }
+        // if (err && err.status === 422) {
+        if (err instanceof ValidationError) {
+          reactiveFormErrorHandler(this.form, err);
+          // const validationErrors = err.detail;
+          // // If the error comes from the server in an array form it doesn't belong to the form
+          // if (Array.isArray(validationErrors)) {
+          //   this.form.setErrors(validationErrors);
+          // } else {
+          //   reactiveFormErrorHandler(this.form, validationErrors);
+          // }
         }
       });
   }

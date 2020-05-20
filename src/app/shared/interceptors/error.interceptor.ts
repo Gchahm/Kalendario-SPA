@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {ValidationError} from '../common/Errors';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -13,7 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             return throwError(error.statusText);
           }
           if (error.status === 422) {
-            return throwError(error.error);
+            return throwError(ValidationError.fromJS(error.error));
           }
           const applicationError = error.headers.get('Application-Error');
           if (applicationError) {

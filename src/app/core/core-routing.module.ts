@@ -8,6 +8,7 @@ import {DashboardPageComponent} from './components/dashboard-page/dashboard-page
 import {AuthGuard} from '../shared/guards/auth.guard';
 import {CreateCompanyComponent} from './components/create-company/create-company.component';
 import {ConfirmEmailComponent} from './components/confirm-email/confirm-email.component';
+import {ResendConfirmationComponent} from './components/resend-confirmation/resend-confirmation.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,11 @@ const routes: Routes = [
   {
     path: 'account-confirm-email/:emailKey',
     component: ConfirmEmailComponent,
-    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'resend-confirm-email/:when',
+    component: ResendConfirmationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',

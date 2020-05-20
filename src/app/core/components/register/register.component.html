@@ -1,10 +1,9 @@
 <div class="container">
-
-  <mat-card class="register-card m-auto mat-elevation-z5">
+  <mat-card class="card-400 m-auto mat-elevation-z5">
     <mat-card-content>
       <h4 class="card-title">Register</h4>
-      <form [formGroup]="registerForm" (submit)="register()" class="form-register">
-        <mat-form-field *ngIf="registerForm.get('firstName') as firstName">
+      <form [formGroup]="form" (submit)="register()" class="form-register">
+        <mat-form-field *ngIf="form.get('firstName') as firstName">
           <input type="text"
                  matInput
                  placeholder="first name"
@@ -12,15 +11,15 @@
           <mat-error>first name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="registerForm.get('lastName') as lastName">
+        <mat-form-field *ngIf="form.get('lastName') as lastName">
           <input type="text"
                  matInput
                  placeholder="last name"
-                 formControlName="last_name">
+                 formControlName="lastName">
           <mat-error>last name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="registerForm.get('email') as email">
+        <mat-form-field *ngIf="form.get('email') as email">
           <input type="email"
                  matInput
                  placeholder="Email address"
@@ -31,7 +30,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="registerForm.get('password1') as password1">
+        <mat-form-field *ngIf="form.get('password1') as password1">
           <input type="password"
                  matInput
                  placeholder="Password"
@@ -44,19 +43,19 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="registerForm.get('password2') as password2">
+        <mat-form-field *ngIf="form.get('password2') as password2">
           <input type="password"
                  matInput
                  placeholder="Confirm Password"
                  formControlName="password2">
           <mat-error>
-            <div *ngIf="registerForm.hasError('mismatch') && password2.touched">
+            <div *ngIf="form.hasError('mismatch') && password2.touched">
               password must match
             </div>
           </mat-error>
         </mat-form-field>
 
-        <button mat-flat-button color="accent" [disabled]="!registerForm.valid" type="submit">Sign in</button>
+        <button mat-flat-button color="accent" [disabled]="!form.valid" type="submit">Sign in</button>
 
       </form>
     </mat-card-content>

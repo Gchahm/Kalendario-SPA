@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
-import {errorAttacher} from '../../../shared/common/Util';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {reactiveFormErrorHandler} from '../../../shared/common/Util';
+import {ValidationError} from '../../../shared/common/Errors';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import {errorAttacher} from '../../../shared/common/Util';
 export class LoginComponent implements OnInit, OnDestroy {
 
   private loginSubscription: Subscription;
-  form;
+  form: FormGroup;
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
   }
@@ -34,14 +35,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.loginSubscription = this.authService.login(this.form.value).subscribe(next => {
+    this.loginSubscription = this.authService.login(this.form.value)
+      .subscribe(next => {
       const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
       this.router.navigate([returnUrl]);
     }, error => {
-      if (error.status = 422) {
-        errorAttacher(this.form, error.detail);
-      }
       this.form.patchValue({password: ''});
+      if (error instanceof ValidationError) {
+        reactiveFormErrorHandler(this.form, error);
+      }
     });
   }
 

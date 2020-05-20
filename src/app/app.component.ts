@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.authService.dispatchUser().subscribe();
+    this.subscription = this.authService.whoAmI().subscribe();
   }
 
   ngOnDestroy(): void {

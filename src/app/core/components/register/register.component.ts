@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ToastService} from '../../../shared/services/toast.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../shared/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -13,23 +13,25 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class RegisterComponent implements OnInit, OnDestroy {
 
   registerSubscription: Subscription;
-  registerForm: FormGroup;
+  form;
 
   constructor(private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute,
-              private alertify: ToastService) {
+              private alertify: ToastService,
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.registerForm = new FormGroup({
-      first_name: new FormControl('', Validators.required),
-      last_name: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password1: new FormControl('',
-        [Validators.required, Validators.minLength(8)]),
-      password2: new FormControl('', Validators.required),
-    }, this.passwordMatchValidator);
+    this.form = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password1: ['', [Validators.required, Validators.minLength(8)]],
+      password2: ['', [Validators.required]],
+    },
+      {
+      validators: [this.passwordMatchValidator]
+    });
   }
 
   passwordMatchValidator(g: FormGroup) {
@@ -43,12 +45,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register() {
-    if (this.registerForm.valid) {
-      const validatedForm = Object.assign({}, this.registerForm.value);
-      this.registerSubscription = this.authService.register(validatedForm).subscribe(next => {
+    if (this.form.valid) {
+      this.registerSubscription = this.authService.register(this.form.value)
+        .subscribe(next => {
         this.alertify.success('User registered');
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        this.router.navigate([returnUrl]);
+        this.router.navigate(['account-confirm-email']);
       }, error1 => {
         this.alertify.error(error1);
       });

@@ -1,12 +1,16 @@
 <div class="container">
   <!--<a class="btn-connect-option facebook" (click)="FBLogin()"></a>-->
   <!--<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with"-->
-       <!--data-auto-logout-link="false" data-use-continue-as="false"></div>-->
+  <!--data-auto-logout-link="false" data-use-continue-as="false"></div>-->
   <mat-card class="login-card m-auto mat-elevation-z5">
 
     <mat-card-content>
       <h4 class="card-title">Login</h4>
       <form [formGroup]="form" class="form-signin" (submit)="login()">
+        <mat-error *ngIf="form.errors">
+          <mat-list *ngFor="let error of form.errors">{{error}}</mat-list>
+        </mat-error>
+
         <mat-form-field>
           <input id="inputEmail"
                  matInput

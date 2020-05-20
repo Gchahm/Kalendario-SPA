@@ -84,6 +84,9 @@ body {
 }
 
 .container {
-  position: absolute;
-  top: 64px;
+  padding-top: 64px;
+}
+
+.card-400 {
+  max-width: 400px;
 }

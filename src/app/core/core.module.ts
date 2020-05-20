@@ -10,6 +10,7 @@ import {DashboardPageComponent} from './components/dashboard-page/dashboard-page
 import {AppointmentCardComponent} from './components/appointment-card/appointment-card.component';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
 import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.component';
+import { ResendConfirmationComponent } from './components/resend-confirmation/resend-confirmation.component';
 
 
 
@@ -24,6 +25,7 @@ import { ConfirmEmailComponent } from './components/confirm-email/confirm-email.
     AppointmentCardComponent,
     CreateCompanyComponent,
     ConfirmEmailComponent,
+    ResendConfirmationComponent,
   ],
   imports: [
     SharedModule,
