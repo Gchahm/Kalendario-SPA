@@ -44,16 +44,8 @@ export abstract class BaseFormComponent<R extends IReadModel> implements OnInit 
         this.submitConcluded.emit(res);
       })
       .catch(err => {
-        // if (err && err.status === 422) {
         if (err instanceof ValidationError) {
           reactiveFormErrorHandler(this.form, err);
-          // const validationErrors = err.detail;
-          // // If the error comes from the server in an array form it doesn't belong to the form
-          // if (Array.isArray(validationErrors)) {
-          //   this.form.setErrors(validationErrors);
-          // } else {
-          //   reactiveFormErrorHandler(this.form, validationErrors);
-          // }
         }
       });
   }

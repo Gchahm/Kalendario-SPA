@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-card class="card-400 m-auto mat-elevation-z5">
+    <mat-card-content>
+      <ng-container *ngIf="sent; else notSent">
+        <p>An email has been sent to your inbox</p>
+        <p>
+          If you didn't receive the email please type your email in the box please check your spam box.
+          Click resend to receive another email
+        </p>
+      </ng-container>
+
+      <ng-template #notSent>
+        <h4 class="card-title">Resend email</h4>
+        Please click the button bellow if you wish to resend your verification email
+      </ng-template>
+    </mat-card-content>
+    <button mat-flat-button color="primary" (click)="resendEmail()">resend</button>
+
+  </mat-card>
+</div>

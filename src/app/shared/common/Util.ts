@@ -8,7 +8,9 @@ const NON_FIELD_ERRORS = 'nonFieldErrors';
 // the correct form
 export function reactiveFormErrorHandler(form: FormGroup, error: ValidationError) {
   Object.keys(error.detail).forEach(prop => {
-    if (prop = NON_FIELD_ERRORS) {
+    console.log(error);
+    if (prop === NON_FIELD_ERRORS) {
+      console.log(prop);
       form.setErrors(error.detail[prop]);
     } else {
       const formControl = form.get(prop);
