@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateEmployeeDialogComponent } from './create-employee-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRefMock} from '@shared/test/stubs';
 
 describe('CreateEmployeeDialogComponent', () => {
   let component: CreateEmployeeDialogComponent;
@@ -10,7 +11,10 @@ describe('CreateEmployeeDialogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [ CreateEmployeeDialogComponent ]
+      declarations: [ CreateEmployeeDialogComponent ],
+      providers: [
+        {provide: MatDialogRef, useClass: MatDialogRefMock},
+      ]
     })
     .compileComponents();
   }));

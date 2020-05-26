@@ -5,9 +5,9 @@ import {ServiceService} from '../../services/service.service';
 import {ScheduleService} from '../../services/schedule.service';
 import {ShiftService} from '../../services/shift.service';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
-import {TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, TOGGLE_LEFT_PANE} from '../../../core/CoreActions';
-import {SET_COMPANY_NAME} from '../../../company/actions';
+import {IAppState} from '@app/Store';
+import {TOGGLE_LEFT_PANE_BUTTON_VISIBILITY, TOGGLE_LEFT_PANE} from '@core/CoreActions';
+import {SET_COMPANY_NAME} from '@app/company/actions';
 import {forkJoin} from 'rxjs';
 import {CustomerService} from '../../services/customer.service';
 

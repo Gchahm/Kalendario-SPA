@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CompanyService} from '../../../shared/services/company.service';
+import {CompanyService} from '@shared/services/company.service';
 import {Observable} from 'rxjs';
 import {Company} from '../../models/Company';
 import {map} from 'rxjs/operators';

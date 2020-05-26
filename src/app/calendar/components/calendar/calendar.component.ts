@@ -1,8 +1,8 @@
-import {Component, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Moment} from 'moment';
 import {CalendarEvent} from '../../models/CalendarEvent';
 import {Slot} from '../../models/Slot';
-import {TimeOfDay} from '../../../core/models/TimeOfDay';
+import {TimeOfDay} from '@core/models/TimeOfDay';
 
 @Component({
   selector: 'app-calendar',
@@ -11,20 +11,12 @@ import {TimeOfDay} from '../../../core/models/TimeOfDay';
 })
 export class CalendarComponent {
 
-  @Input('default-date') currentDate;
-  @Input('max-date') maxDate: Moment;
-  @Input('min-date') set date(value: Moment) {
-    if (!this.minDate) {
-      this.minDate = value.clone();
-    }
-  }
   @Input('min-time') minStart = 6;
   @Input('max-time') maxStart = 23;
 
   @Input('events') events: CalendarEvent[] = [];
   @Input('availability') availability: Slot[] = [];
 
-  minDate: Moment;
   calendarHours: number[];
 
   constructor() {

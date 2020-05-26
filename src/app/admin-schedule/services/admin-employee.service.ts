@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Employee, EmployeeAdapter, EmployeeWriteModel} from '../../core/models/Employee';
+import {Employee, EmployeeAdapter, EmployeeWriteModel} from '@core/models/Employee';
 import {environment} from '../../../environments/environment';
-import {AdminModelService} from '../../core/generics/services/AdminModelService';
+import {AdminModelService} from './AdminModelService';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../Store';
-import {ToastService} from '../../shared/services/toast.service';
+import {IAppState} from '@app/Store';
+import {ToastService} from '@shared/services/toast.service';
 import {UPDATE_EMPLOYEE_PHOTO} from '../AdminActions';
 
 @Injectable({

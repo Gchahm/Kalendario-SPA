@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Shift} from '../../../../core/models/Shift';
+import {Shift} from '@core/models/Shift';
 import {BaseDetailsComponent} from '../BaseDetailsComponent';
 
 @Component({

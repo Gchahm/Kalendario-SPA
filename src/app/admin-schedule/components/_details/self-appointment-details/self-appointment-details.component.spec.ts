@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelfAppointmentDetailsComponent } from './self-appointment-details.component';
+import {Appointment} from '@core/models/Appointment';
 
 describe('SelfAppointmentDetailsComponent', () => {
   let component: SelfAppointmentDetailsComponent;
@@ -16,6 +17,7 @@ describe('SelfAppointmentDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SelfAppointmentDetailsComponent);
     component = fixture.componentInstance;
+    component.model = new Appointment();
     fixture.detectChanges();
   });
 

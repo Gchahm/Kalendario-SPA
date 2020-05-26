@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateServiceDialogComponent } from './create-service-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRefMock} from '@shared/test/stubs';
 
 describe('CreateServiceDialogComponent', () => {
   let component: CreateServiceDialogComponent;
@@ -10,7 +11,10 @@ describe('CreateServiceDialogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [ CreateServiceDialogComponent ]
+      declarations: [ CreateServiceDialogComponent ],
+      providers: [
+        {provide: MatDialogRef, useClass: MatDialogRefMock},
+      ]
     })
     .compileComponents();
   }));

@@ -1,7 +1,7 @@
-import {Employee} from '../core/models/Employee';
-import {Service} from '../core/models/Service';
-import {Schedule} from '../core/models/Schedule';
-import {Shift} from '../core/models/Shift';
+import {Employee} from '@core/models/Employee';
+import {Service} from '@core/models/Service';
+import {Schedule} from '@core/models/Schedule';
+import {Shift} from '@core/models/Shift';
 import {
   CREATE_CUSTOMER,
   CREATE_EMPLOYEE,
@@ -27,8 +27,8 @@ import {
   UPDATE_SHIFT
 } from './AdminActions';
 import {tassign} from 'tassign';
-import {IReadModel} from '../core/models/interfaces/IReadModel';
-import {Customer} from '../core/models/Customer';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
+import {Customer} from '@core/models/Customer';
 
 interface DashboardState {
   editMode: boolean;
@@ -241,7 +241,7 @@ export function adminReducer(state: IAdminStore = ADMIN_INITIAL_STATE, action): 
     case UPDATE_EMPLOYEE_PHOTO:
       return updateEmployeePhoto(state, action);
     case DELETE_EMPLOYEE:
-      return deleteEmployee(state, action)
+      return deleteEmployee(state, action);
     case LOAD_SERVICES:
       return loadServices(state, action);
     case UPDATE_SERVICE:

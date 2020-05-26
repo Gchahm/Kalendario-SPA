@@ -1,6 +1,6 @@
 import {MatDialogRef} from '@angular/material/dialog';
 import {ViewChild} from '@angular/core';
-import {BaseFormComponent} from '../../../admin-schedule/components/_forms/BaseFormComponent';
+import {BaseFormComponent} from '@admin-schedule/components/_forms/BaseFormComponent';
 import {IReadModel} from '../../models/interfaces/IReadModel';
 
 export abstract class CreateDialogComponent {

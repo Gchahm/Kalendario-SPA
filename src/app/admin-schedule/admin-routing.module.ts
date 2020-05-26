@@ -11,7 +11,7 @@ import {ShiftsPageComponent} from './components/_lists/shifts/shifts-page.compon
 import {SchedulePageComponent} from './components/_lists/schedules/schedule-page.component';
 import {CanViewSchedulesGuard} from './guards/can-view-schedules.guard';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
-import {HomeComponent} from './components/home/home.component';
+import {AdminHomeComponent} from './components/home/admin-home.component';
 import {CustomersPageComponent} from './components/_lists/customers/customers-page.component';
 import {CanViewCustomersGuard} from './guards/can-view-customers.guard';
 
@@ -47,7 +47,7 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        component: HomeComponent,
+        component: AdminHomeComponent,
       },
       {
         path: 'appointments',

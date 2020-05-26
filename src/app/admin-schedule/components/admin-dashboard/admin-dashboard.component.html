@@ -1,6 +1,6 @@
 <div class="admin-dashboard-container" [class.admin-dashboard-is-mobile]="(isMobile | async)">
   <mat-sidenav-container class="admin-dashboard-sidenav-container">
-    <mat-sidenav #snav [mode]="(isMobile | async) ? 'over' : 'side'"
+    <mat-sidenav [mode]="(isMobile | async) ? 'over' : 'side'"
                  [fixedInViewport]="(isMobile | async)" fixedTopGap="56" [opened]="(sideOpen | async)">
       <mat-nav-list>
         <a mat-list-item *ngFor="let option of options"

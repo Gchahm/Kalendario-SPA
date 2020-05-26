@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {CreateEmployeeDialogComponent} from '../../_dialogs/create-employee/create-employee-dialog.component';
-import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
-import {BaseListComponent} from '../BaseListComponent';
-import {AdminEmployeeService} from '../../../services/admin-employee.service';
-import {Employee} from '../../../../core/models/Employee';
-import {ImageSnippet} from '../../_details/employee-details/employee-details.component';
 import {MatDialog} from '@angular/material/dialog';
+import {NgRedux, select} from '@angular-redux/store';
+import {IAppState} from '@app/Store';
+import {Employee} from '@core/models/Employee';
+import {AdminEmployeeService} from '@admin-schedule/services/admin-employee.service';
+import {BaseListComponent} from '@admin-schedule/components/_lists/BaseListComponent';
+import {CreateEmployeeDialogComponent} from '@admin-schedule/components/_dialogs/create-employee/create-employee-dialog.component';
+import {ImageSnippet} from '@admin-schedule/components/_details/employee-details/employee-details.component';
 
 @Component({
   selector: 'admin-employees-page',

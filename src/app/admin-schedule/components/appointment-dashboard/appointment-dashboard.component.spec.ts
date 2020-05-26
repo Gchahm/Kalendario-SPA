@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppointmentDashboardComponent } from './appointment-dashboard.component';
+import {NgReduxTestingModule} from '@angular-redux/store/testing';
+import {MatMenuModule} from '@angular/material/menu';
 
 describe('AppointmentDashboardComponent', () => {
   let component: AppointmentDashboardComponent;
@@ -8,6 +10,10 @@ describe('AppointmentDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        NgReduxTestingModule,
+        MatMenuModule,
+      ],
       declarations: [ AppointmentDashboardComponent ]
     })
     .compileComponents();

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Schedule} from '../../../../core/models/Schedule';
+import {Schedule} from '@core/models/Schedule';
 import {BaseFormComponent} from '../BaseFormComponent';
-import {IAppState} from '../../../../Store';
+import {IAppState} from '@app/Store';
 import {select} from '@angular-redux/store';
 import {ScheduleService} from '../../../services/schedule.service';
 

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
-import {Shift} from '../../../../core/models/Shift';
+import {CreateDialogComponent} from '@core/generics/components/CreateDialogComponent';
+import {Shift} from '@core/models/Shift';
 import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({

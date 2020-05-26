@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {CreateDialogComponent} from '../../../../core/generics/components/CreateDialogComponent';
-import {Customer} from '../../../../core/models/Customer';
+import {CreateDialogComponent} from '@core/generics/components/CreateDialogComponent';
+import {Customer} from '@core/models/Customer';
 import {MatDialogRef} from '@angular/material/dialog';
-import {CustomerFormComponent} from '../../_forms/customer-form/customer-form.component';
 
 @Component({
   selector: 'admin-create-customer-dialog',

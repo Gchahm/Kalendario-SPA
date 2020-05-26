@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Schedule, IScheduleWriteModel, ScheduleAdapter} from '../../core/models/Schedule';
+import {Schedule, IScheduleWriteModel, ScheduleAdapter} from '@core/models/Schedule';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {AdminModelService} from '../../core/generics/services/AdminModelService';
-import {ToastService} from '../../shared/services/toast.service';
+import {AdminModelService} from './AdminModelService';
+import {ToastService} from '@shared/services/toast.service';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../Store';
+import {IAppState} from '@app/Store';
 
 @Injectable({
   providedIn: 'root'

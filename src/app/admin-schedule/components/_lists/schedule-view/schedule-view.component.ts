@@ -1,19 +1,19 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Moment} from 'moment';
-import {Employee} from '../../../../core/models/Employee';
-import {CalendarEvent} from '../../../../calendar/models/CalendarEvent';
-import {MatDialog} from '@angular/material/dialog';
-import {AppointmentEventDialogComponent} from '../../_dialogs/appointment-event/appointment-event-dialog.component';
-import {Appointment} from '../../../../core/models/Appointment';
-import {AppointmentRequestsDialogComponent} from '../../_dialogs/appointment-requests/appointment-requests-dialog.component';
-import {AppointmentService} from '../../../../shared/services/appointment.service';
-import {CreateAppointmentDialogComponent} from '../../_dialogs/create-appointment/create-appointment-dialog.component';
-import {Slot} from '../../../../calendar/models/Slot';
-import {select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
 import {Observable, Subscription} from 'rxjs';
-import {Schedule} from '../../../../core/models/Schedule';
-import {ListResult} from '../../../../core/generics/services/AdminModelService';
+import {select} from '@angular-redux/store';
+import {MatDialog} from '@angular/material/dialog';
+import {Moment} from 'moment';
+import {Employee} from '@core/models/Employee';
+import {Schedule} from '@core/models/Schedule';
+import {Appointment} from '@core/models/Appointment';
+import {CalendarEvent} from '@app/calendar/models/CalendarEvent';
+import {Slot} from '@app/calendar/models/Slot';
+import {IAppState} from '@app/Store';
+import {AppointmentService} from '@shared/services/appointment.service';
+import {AppointmentEventDialogComponent} from '@admin-schedule/components/_dialogs/appointment-event/appointment-event-dialog.component';
+import {AppointmentRequestsDialogComponent} from '@admin-schedule/components/_dialogs/appointment-requests/appointment-requests-dialog.component';
+import {CreateAppointmentDialogComponent} from '@admin-schedule/components/_dialogs/create-appointment/create-appointment-dialog.component';
+import {ListResult} from '@admin-schedule/services/AdminModelService';
 
 @Component({
   selector: 'employee-schedule-view',
@@ -47,7 +47,6 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
   availability: Slot[] = [];
   public modelList: Appointment[];
   protected DIALOG_WIDTH = '800px';
-  public editMode = false;
 
 
   public constructor(private appointmentService: AppointmentService,
@@ -55,11 +54,11 @@ export class ScheduleViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadAppointments();
-    this.loadRequests();
     this.sub = this.schedules$.subscribe( schedules => {
       this.schedule = schedules.find(s => s.id === this.emp.schedule);
     });
+    this.loadAppointments();
+    this.loadRequests();
   }
 
   ngOnDestroy() {

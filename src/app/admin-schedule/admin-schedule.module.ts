@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
-import {SharedModule} from '../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 import {AdminRoutingModule} from './admin-routing.module';
 import {CalendarModule} from '../calendar/calendar.module';
 import { AppointmentEventDialogComponent } from './components/_dialogs/appointment-event/appointment-event-dialog.component';
 import { AppointmentRequestsDialogComponent } from './components/_dialogs/appointment-requests/appointment-requests-dialog.component';
-import { CancelModalComponent } from './components/cancel-modal/cancel-modal.component';
 import {ScheduleViewComponent} from './components/_lists/schedule-view/schedule-view.component';
 import {ServicesPageComponent} from './components/_lists/services/services-page.component';
 import {EmployeesPageComponent} from './components/_lists/employees/employees-page.component';
-import {CustomerListDialogComponent} from './components/_dialogs/customer-list/customer-list-dialog.component';
 import {CreateCustomerDialogComponent} from './components/_dialogs/create-customer/create-customer-dialog.component';
 import {CreateEmployeeDialogComponent} from './components/_dialogs/create-employee/create-employee-dialog.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -19,7 +17,7 @@ import { CreateShiftDialogComponent } from './components/_dialogs/create-shift/c
 import {CreateAppointmentDialogComponent} from './components/_dialogs/create-appointment/create-appointment-dialog.component';
 import { SchedulePageComponent } from './components/_lists/schedules/schedule-page.component';
 import { CreateScheduleDialogComponent } from './components/_dialogs/create-schedule/create-schedule-dialog.component';
-import { HomeComponent } from './components/home/home.component';
+import { AdminHomeComponent } from './components/home/admin-home.component';
 import { ModelListContainerComponent } from './components/model-list-container/model-list-container.component';
 import { EmployeeFormComponent } from './components/_forms/employee-form/employee-form.component';
 import { EmployeeDetailsComponent } from './components/_details/employee-details/employee-details.component';
@@ -40,7 +38,6 @@ import { CustomerFormComponent } from './components/_forms/customer-form/custome
 
 @NgModule({
   declarations: [
-    CancelModalComponent,
     AppointmentDashboardComponent,
     ScheduleViewComponent,
     AppointmentEventDialogComponent,
@@ -74,11 +71,10 @@ import { CustomerFormComponent } from './components/_forms/customer-form/custome
 
     CreateAppointmentDialogComponent,
 
-    CustomerListDialogComponent,
     CreateCustomerDialogComponent,
 
     AdminDashboardComponent,
-    HomeComponent,
+    AdminHomeComponent,
     ModelListContainerComponent,
     CustomerFormComponent,
   ],
@@ -90,9 +86,7 @@ import { CustomerFormComponent } from './components/_forms/customer-form/custome
   providers: [
   ],
   bootstrap: [
-    CancelModalComponent,
     CreateCustomerDialogComponent,
-    CustomerListDialogComponent,
     CreateEmployeeDialogComponent,
     CreateServiceDialogComponent,
     CreateShiftDialogComponent,

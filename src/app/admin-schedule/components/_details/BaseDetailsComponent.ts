@@ -1,7 +1,7 @@
-import {IReadModel} from '../../../core/models/interfaces/IReadModel';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
 import {Input} from '@angular/core';
 import {select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 
 export abstract class BaseDetailsComponent<R extends IReadModel> {
   @Input()
@@ -17,7 +17,7 @@ export abstract class BaseDetailsComponent<R extends IReadModel> {
 
   beforeSetModel() {}
   afterSetModel() {}
-  
+
   @select((s: IAppState) => s.core.isMobileView) isMobile$;
   @select((s: IAppState) => s.core.isTabletView) isTablet$;
 }

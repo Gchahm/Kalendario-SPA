@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {BaseDetailsComponent} from '../BaseDetailsComponent';
-import {Employee} from '../../../../core/models/Employee';
+import {Employee} from '@core/models/Employee';
 import {select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
-import {combineLatest, Observable, Subscription} from 'rxjs';
-import {Schedule} from '../../../../core/models/Schedule';
-import {IReadModel} from '../../../../core/models/interfaces/IReadModel';
+import {IAppState} from '@app/Store';
+import {forkJoin, Observable, Subscription} from 'rxjs';
+import {Schedule} from '@core/models/Schedule';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
 
 @Component({
   selector: 'admin-employee-details',
@@ -27,10 +27,8 @@ export class EmployeeDetailsComponent extends BaseDetailsComponent<Employee> imp
 
   ngOnInit() {
     this.schedule = null;
-    this.sub = combineLatest(
-      this.schedules,
-      this.selectedModel
-    ).subscribe((value: [Schedule[], IReadModel]) => {
+    const obs = [this.schedules, this.selectedModel];
+    this.sub = forkJoin(...obs).subscribe((value: [Schedule[], IReadModel]) => {
       this.schedule = value[0].find(m => this.model.schedule === m.id);
     });
   }

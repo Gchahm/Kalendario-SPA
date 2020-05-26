@@ -1,16 +1,23 @@
 import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import {AuthService} from '@shared/services/auth.service';
+import {AuthServiceMock, MediaMatcherServiceMock} from '@shared/test/stubs';
+import {MediaMatcherService} from '@shared/services/media-matcher.service';
+import {NgReduxTestingModule} from '@angular-redux/store/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        NgReduxTestingModule,
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        {provide: AuthService, useClass: AuthServiceMock},
+        {provide: MediaMatcherService, useClass: MediaMatcherServiceMock },
+      ]
     }).compileComponents();
   }));
 
@@ -20,16 +27,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'appointment-manager-SPA'`, () => {
+  it(`should have as title 'Kalendario'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('appointment-manager-SPA');
+    expect(app.title).toEqual('Kalendario');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to appointment-manager-SPA!');
-  });
 });

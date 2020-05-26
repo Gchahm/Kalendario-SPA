@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 declare const FB;
 
@@ -10,7 +9,7 @@ export class FacebookAuthService {
 
   private baseUrl = environment.apiUrl + 'auth/facebook/';
 
-  constructor(private http: HttpClient) {
+  constructor() {
     // FB.init({
     //   appId      : '483082579154147',
     //   cookie     : true,                     // Enable cookies to allow the server to access the session.

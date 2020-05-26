@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from './shared/services/auth.service';
+import {AuthService} from '@shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {NgRedux} from '@angular-redux/store';
 import {IAppState} from './Store';
-import {SET_IS_MOBILE_VIEW_FLAG, SET_IS_TABLET_VIEW_FLAG} from './core/CoreActions';
-import {MediaMatcherService} from './shared/services/media-matcher.service';
+import {SET_IS_MOBILE_VIEW_FLAG, SET_IS_TABLET_VIEW_FLAG} from '@core/CoreActions';
+import {MediaMatcherService} from '@shared/services/media-matcher.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import {MediaMatcherService} from './shared/services/media-matcher.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  title = 'appointment-manager-SPA';
+  title = 'Kalendario';
   subscription: Subscription;
 
   constructor(private authService: AuthService,
@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.mediaMatcher.addTabletQueryListener(this.setTabletViewFlag());
     }
   }
+
 
   ngOnInit(): void {
     this.subscription = this.authService.whoAmI().subscribe();

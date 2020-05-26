@@ -1,12 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {IReadModel} from '../../../core/models/interfaces/IReadModel';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
 import {Observable, Subscription} from 'rxjs';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 import {SELECT_MODEL, TOGGLE_EDIT} from '../../AdminActions';
-import {ToastService} from '../../../shared/services/toast.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {AlerterService} from '../../../shared/services/alerter.service';
+import {AlerterService} from '@shared/services/alerter.service';
 
 @Component({
   selector: 'model-list-container',

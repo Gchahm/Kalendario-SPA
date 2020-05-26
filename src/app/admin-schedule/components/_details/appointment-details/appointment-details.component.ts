@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {BaseDetailsComponent} from '../BaseDetailsComponent';
-import {Appointment} from '../../../../core/models/Appointment';
+import {Appointment} from '@core/models/Appointment';
 
 @Component({
   selector: 'admin-appointment-details',

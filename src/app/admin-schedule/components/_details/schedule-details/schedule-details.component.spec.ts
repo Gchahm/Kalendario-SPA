@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScheduleDetailsComponent } from './schedule-details.component';
+import {Schedule} from '@core/models/Schedule';
 
 describe('ScheduleDetailsComponent', () => {
   let component: ScheduleDetailsComponent;
@@ -16,6 +17,7 @@ describe('ScheduleDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ScheduleDetailsComponent);
     component = fixture.componentInstance;
+    component.model = new Schedule();
     fixture.detectChanges();
   });
 

@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import {COMPANY_INITIAL_STATE, companyReducer, ICompanyState} from './company/store';
-import {CORE_INITIAL_STATE, coreReducer, ICoreStore} from './core/CoreStore';
-import {ADMIN_INITIAL_STATE, adminReducer, IAdminStore} from './admin-schedule/AdminStore';
-import {ISchedulingStore, SCHEDULING_INITIAL_STATE, schedulingReducer} from './admin-schedule/SchedulingStore';
+import {CORE_INITIAL_STATE, coreReducer, ICoreStore} from '@core/CoreStore';
+import {ADMIN_INITIAL_STATE, adminReducer, IAdminStore} from '@admin-schedule/AdminStore';
+import {ISchedulingStore, SCHEDULING_INITIAL_STATE, schedulingReducer} from '@admin-schedule/SchedulingStore';
 
 export interface IAppState {
   core: ICoreStore;

@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {AuthService} from '../../../shared/services/auth.service';
-import {ToastService} from '../../../shared/services/toast.service';
+import {AuthService} from '@shared/services/auth.service';
+import {ToastService} from '@shared/services/toast.service';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
-import {LOGOUT_USER, TOGGLE_LEFT_PANE} from '../../CoreActions';
+import {IAppState} from '@app/Store';
+import {TOGGLE_LEFT_PANE} from '../../CoreActions';
 import {PERMISSION_ADD, PERMISSION_VIEW, User} from '../../models/User';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';

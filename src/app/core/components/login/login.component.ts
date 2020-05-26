@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '../../../shared/services/auth.service';
+import {AuthService} from '@shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {reactiveFormErrorHandler} from '../../../shared/common/Util';
-import {ValidationError} from '../../../shared/common/Errors';
+import {reactiveFormErrorHandler} from '@shared/common/Util';
+import {ValidationError} from '@shared/common/Errors';
 
 @Component({
   selector: 'app-login',
@@ -45,9 +45,5 @@ export class LoginComponent implements OnInit, OnDestroy {
         reactiveFormErrorHandler(this.form, error);
       }
     });
-  }
-
-  FBLogin() {
-    this.authService.FBLogin();
   }
 }

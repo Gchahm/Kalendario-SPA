@@ -29,7 +29,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonModule} from '@angular/material/button';
-import {MatBottomSheet, MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 
 

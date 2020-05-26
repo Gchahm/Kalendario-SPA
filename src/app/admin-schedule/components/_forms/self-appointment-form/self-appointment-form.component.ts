@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {Appointment} from '../../../../core/models/Appointment';
+import {Appointment} from '@core/models/Appointment';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment';
-import {AppointmentService} from '../../../../shared/services/appointment.service';
+import {AppointmentService} from '@shared/services/appointment.service';
 
 @Component({
   selector: 'admin-self-appointment-form',

@@ -4,7 +4,7 @@
       <mat-card class="mat-elevation-z5">
         <mat-card-content>
           <h4 class="card-title text-center">create company</h4>
-          <form #loginForm="ngForm" class="form-100" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <form class="form-100" [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-form-field>
               <input matInput
                      class="form-control"
@@ -22,7 +22,7 @@
                 this name has already been taken
               </mat-error>
             </mat-form-field>
-            <button mat-flat-button color="accent" [disabled]="!loginForm.valid" type="submit">create</button>
+            <button mat-flat-button color="accent" [disabled]="!form.valid" type="submit">create</button>
           </form>
         </mat-card-content>
       </mat-card>

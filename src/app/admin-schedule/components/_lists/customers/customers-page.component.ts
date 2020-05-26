@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
 import {BaseListComponent} from '../BaseListComponent';
-import {Customer} from '../../../../core/models/Customer';
+import {Customer} from '@core/models/Customer';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
+import {IAppState} from '@app/Store';
 import {CreateCustomerDialogComponent} from '../../_dialogs/create-customer/create-customer-dialog.component';
 import {CustomerService} from '../../../services/customer.service';
 import {MatDialog} from '@angular/material/dialog';

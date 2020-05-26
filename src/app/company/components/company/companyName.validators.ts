@@ -1,5 +1,5 @@
 import {AbstractControl, AsyncValidatorFn, ValidationErrors} from '@angular/forms';
-import {CompanyService} from '../../../shared/services/company.service';
+import {CompanyService} from '@shared/services/company.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 

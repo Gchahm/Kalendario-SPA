@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import {AuthService} from '@shared/services/auth.service';
+import {AuthServiceMock, RouterMock, ToastServiceMock} from '@shared/test/stubs';
+import {Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
+import {ToastService} from '@shared/services/toast.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -8,7 +13,14 @@ describe('RegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [ RegisterComponent ],
+      providers: [
+        {provide: AuthService, useClass: AuthServiceMock},
+        {provide: Router, useClass: RouterMock},
+        {provide: ToastService, useClass: ToastServiceMock},
+        FormBuilder,
+
+      ]
     })
     .compileComponents();
   }));

@@ -4,8 +4,8 @@ import {map} from 'rxjs/operators';
 import {IReadModel} from '../../models/interfaces/IReadModel';
 import {IWriteModel} from '../../models/interfaces/IWriteModel';
 import {Observable} from 'rxjs';
-import {IDjangoService} from '../../../shared/common/IDjangoService';
-import {ListResult} from './AdminModelService';
+import {IDjangoService} from '@shared/common/IDjangoService';
+import {ListResult} from '@admin-schedule/services/AdminModelService';
 import * as moment from 'moment';
 
 export class DjangoRWModelService<R extends IReadModel, W extends IWriteModel> implements IDjangoService<R, W> {

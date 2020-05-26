@@ -1,16 +1,13 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {EmployeeService} from '../../../shared/services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Service} from '../../../core/models/Service';
-import {Moment} from 'moment';
+import {Service} from '@core/models/Service';
 import * as moment from 'moment';
-import {CalendarEvent} from '../../../calendar/models/CalendarEvent';
+import {CalendarEvent} from '@app/calendar/models/CalendarEvent';
 import {Subscription} from 'rxjs';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 import {FormControl} from '@angular/forms';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-import {MatCard} from '@angular/material/card';
+import {EmployeeService} from '@app/company/services/employee.service';
 
 @Component({
   selector: 'customer-employee-detail-page',
@@ -29,8 +26,7 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterView
 
   service: Service;
 
-  date: Moment = moment.utc();
-  fc = new FormControl(moment.utc());
+  fc: FormControl;
 
   subscription: Subscription;
 
@@ -41,13 +37,15 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterView
   }
 
   ngOnInit() {
-    this.date = moment.utc().add(1, 'days');
+    this.fc = new FormControl(moment.utc().add(1, 'days'));
     this.employeeId = +this.route.snapshot.paramMap.get('id');
     this.subscription = this.empService.detail(this.employeeId)
       .subscribe(emp => {
         this.employee = emp;
         this.service = this.employee.services[0];
-        this.loadSlots();
+        if (!!this.service) {
+          this.loadSlots();
+        }
       });
   }
 
@@ -66,26 +64,20 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterView
 
   today() {
     this.fc.patchValue(moment.utc());
-    this.date = this.fc.value;
     this.loadSlots();
 
   }
 
   previousDay() {
     this.fc.patchValue(this.fc.value.subtract(1, 'days').clone());
-    this.date = this.fc.value;
     this.loadSlots();
   }
 
   nextDay() {
     this.fc.patchValue(this.fc.value.add(1, 'days').clone());
-    this.date = this.fc.value;
     this.loadSlots();
   }
 
-  changeDate(event: MatDatepickerInputEvent<Moment>) {
-    this.date = event.value;
-  }
   handleServiceClick(service: Service) {
     this.service = service;
     this.loadSlots();
@@ -98,14 +90,18 @@ export class EmployeeDetailPageComponent implements OnInit, OnDestroy, AfterView
     return '';
   }
 
+  currentDate() {
+    return this.fc.value;
+  }
+
   loadSlots() {
     const router = this.router;
     const serviceId = this.service.id;
     const company = this.redux.getState().company.companyName;
 
     this.empService.slots(this.employeeId, this.service,
-      this.date.clone().startOf('day'),
-      this.date.clone().endOf('day'))
+      this.fc.value.clone().startOf('day'),
+      this.fc.value.clone().endOf('day'))
       .toPromise()
       .then(slots => {
         this.events = slots.map(slot => {

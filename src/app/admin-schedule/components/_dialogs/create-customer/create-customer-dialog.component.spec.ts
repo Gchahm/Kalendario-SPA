@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateCustomerDialogComponent } from './create-customer-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRefMock} from '@shared/test/stubs';
 
 describe('CreateCustomerDialogComponent', () => {
   let component: CreateCustomerDialogComponent;
@@ -9,8 +10,11 @@ describe('CreateCustomerDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatDialogModule],
-      declarations: [ CreateCustomerDialogComponent ]
+      declarations: [ CreateCustomerDialogComponent ],
+      providers: [
+        {provide: MatDialogRef, useClass: MatDialogRefMock},
+      ]
+
     })
     .compileComponents();
   }));

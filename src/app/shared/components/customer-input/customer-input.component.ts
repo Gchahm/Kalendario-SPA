@@ -4,8 +4,8 @@ import {ControlValueAccessor, FormBuilder, FormGroup, NgControl, Validators} fro
 import {Observable, Subject} from 'rxjs';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {FocusMonitor} from '@angular/cdk/a11y';
-import {CustomerService} from '../../../admin-schedule/services/customer.service';
-import {Customer} from '../../../core/models/Customer';
+import {CustomerService} from '@admin-schedule/services/customer.service';
+import {Customer} from '@core/models/Customer';
 import {debounceTime, finalize, map, switchMap, tap} from 'rxjs/operators';
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IShiftWriteModel, Shift, TimeFrame} from '../../../../core/models/Shift';
+import {Shift, TimeFrame} from '@core/models/Shift';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {ShiftService} from '../../../services/shift.service';

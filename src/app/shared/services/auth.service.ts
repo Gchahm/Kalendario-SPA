@@ -3,12 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {catchError, switchMap, map} from 'rxjs/operators';
 import {Observable, of, throwError} from 'rxjs';
-import {FacebookAuthService} from './facebook-auth.service';
-import {LoginModel} from '../../core/models/LoginModel';
-import {User, UserAdapter} from '../../core/models/User';
+import {LoginModel} from '@core/models/LoginModel';
+import {User, UserAdapter} from '@core/models/User';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../Store';
-import {LOGIN_USER, LOGOUT_USER} from '../../core/CoreActions';
+import {IAppState} from '@app/Store';
+import {LOGIN_USER, LOGOUT_USER} from '@core/CoreActions';
 import {ToastService} from './toast.service';
 
 @Injectable({
@@ -20,7 +19,6 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private adapter: UserAdapter,
-              private fbService: FacebookAuthService,
               private redux: NgRedux<IAppState>,
               private toastService: ToastService) {
 
@@ -55,15 +53,6 @@ export class AuthService {
           return res;
         })
       );
-  }
-
-  FBLogin() {
-    this.fbService.login(
-      switchMap((project: any) => {
-        AuthService.setToken(project.key);
-        return this.whoAmI();
-      })
-    );
   }
 
   login(user: LoginModel): Observable<User> {
@@ -105,7 +94,8 @@ export class AuthService {
   }
 
   private getUser(): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'current/').pipe(
+    return this.http.get<User>(this.baseUrl + 'current/')
+      .pipe(
       map(this.adapter.adapt),
       map(user => {
         this.redux.dispatch({type: LOGIN_USER, user});

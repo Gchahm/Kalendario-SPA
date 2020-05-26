@@ -68,7 +68,7 @@
     <div class="col-sm-6 col-md-4">
 
       <mat-form-field>
-        <mat-select placeholder="services" multiple formControlName="services">
+        <mat-select placeholder="services" multiple [formControlName]="'services'">
           <mat-option *ngFor="let service of (services$ | async)"
                       [value]="service.id">{{service.name}}
           </mat-option>

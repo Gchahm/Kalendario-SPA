@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
-import {Appointment} from '../../../../core/models/Appointment';
-import {AppointmentService} from '../../../../shared/services/appointment.service';
-import {ToastService} from '../../../../shared/services/toast.service';
+import {Appointment} from '@core/models/Appointment';
+import {AppointmentService} from '@shared/services/appointment.service';
+import {ToastService} from '@shared/services/toast.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({

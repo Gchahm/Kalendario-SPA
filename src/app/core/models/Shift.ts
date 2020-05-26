@@ -19,7 +19,7 @@ export class TimeFrame {
 }
 
 export class Shift implements IReadModel {
-  static modelType = 'service';
+  static modelType = 'shift';
   id: number = null;
   name = '';
   frames: TimeFrame[] = [];

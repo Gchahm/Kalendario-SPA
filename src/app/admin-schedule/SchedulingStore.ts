@@ -1,4 +1,4 @@
-import {Employee} from '../core/models/Employee';
+import {Employee} from '@core/models/Employee';
 import {tassign} from 'tassign';
 import {ADD_EMPLOYEE, REMOVE_EMPLOYEE, SELECT_DATE} from './SchedulingActions';
 

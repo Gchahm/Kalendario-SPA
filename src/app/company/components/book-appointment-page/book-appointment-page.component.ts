@@ -1,13 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EmployeeService} from '../../../shared/services/employee.service';
-import {ToastService} from '../../../shared/services/toast.service';
+import {ToastService} from '@shared/services/toast.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {AppointmentService} from '../../../shared/services/appointment.service';
+import {AppointmentService} from '@shared/services/appointment.service';
 import * as moment from 'moment';
-import {Appointment} from '../../../core/models/Appointment';
+import {Appointment} from '@core/models/Appointment';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
+import {EmployeeService} from '@app/company/services/employee.service';
+import {concatMap} from 'rxjs/operators';
 
 @Component({
   selector: 'customer-book-appointment-page',
@@ -17,33 +18,37 @@ import {IAppState} from '../../../Store';
 export class BookAppointmentPageComponent implements OnInit, OnDestroy {
 
 
-  empServiceSubscription: Subscription;
-  queryParamSubscription: Subscription;
+  subscription: Subscription;
   appointment: Appointment = new Appointment();
 
   @select((s: IAppState) => s.company.companyName) companyName$;
 
   constructor(private empService: EmployeeService,
               private appointmentService: AppointmentService,
-              private alertify: ToastService,
+              private toast: ToastService,
               private route: ActivatedRoute,
               private router: Router,
               private redux: NgRedux<IAppState>) {
   }
 
   ngOnInit() {
-    this.queryParamSubscription = this.route.paramMap.subscribe(params => {
-      this.appointment.start = moment.utc(params.get('date'));
-      this.empServiceSubscription = this.empService.detail(+params.get('employee')).subscribe((emp) => {
-        this.appointment.employee = emp;
-        this.appointment.service = emp.services.find(s => s.id === +params.get('service'));
-      });
+    let serviceId;
+    this.subscription = this.route.paramMap
+      .pipe(
+        concatMap(params => {
+          serviceId = +params.get('service');
+          this.appointment.start = moment.utc(params.get('date'));
+          return this.empService.detail(+params.get('employee'));
+        })
+      ).subscribe((emp) => {
+      this.appointment.employee = emp;
+      this.appointment.service = emp.services.find(s => s.id === serviceId);
     });
+
   }
 
   ngOnDestroy(): void {
-    this.queryParamSubscription.unsubscribe();
-    this.empServiceSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   bookAppointment() {
@@ -51,9 +56,10 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
     const model = this.appointment.writeModel();
     this.appointmentService.post(model)
       .toPromise()
-      .then(res => this.alertify.success('appointment booked'))
+      .then(res => this.toast.success('appointment booked'))
 
-      .catch(error => this.alertify.error(error))
+      .catch(error => this.toast.error(error))
       .finally(() => this.router.navigate(['/my-appointments']));
   }
+
 }

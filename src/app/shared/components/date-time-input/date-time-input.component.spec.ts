@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DateTimeInputComponent } from './date-time-input.component';
+import {FormBuilder} from '@angular/forms';
 
 describe('DateTimeInputComponent', () => {
   let component: DateTimeInputComponent;
@@ -8,7 +9,10 @@ describe('DateTimeInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateTimeInputComponent ]
+      declarations: [ DateTimeInputComponent ],
+      providers: [
+        FormBuilder
+      ]
     })
     .compileComponents();
   }));

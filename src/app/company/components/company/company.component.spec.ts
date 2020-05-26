@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CompanyComponent } from './company.component';
+import {CompanyComponent} from './company.component';
+import {NgReduxTestingModule} from '@angular-redux/store/testing';
+import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
 describe('CompanyComponent', () => {
   let component: CompanyComponent;
@@ -8,9 +10,15 @@ describe('CompanyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyComponent ]
+      imports: [
+        NgReduxTestingModule
+      ],
+      declarations: [CompanyComponent],
+      providers: [
+        {provide: ActivatedRoute, useValue: {snapshot: {paramMap: convertToParamMap({cid: 1})}}},
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

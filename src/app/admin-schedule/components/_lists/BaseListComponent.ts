@@ -1,12 +1,11 @@
-import {IWriteModel} from '../../../core/models/interfaces/IWriteModel';
+import {IWriteModel} from '@core/models/interfaces/IWriteModel';
 import {ComponentType} from '@angular/cdk/portal';
-import {CreateDialogComponent} from '../../../core/generics/components/CreateDialogComponent';
+import {CreateDialogComponent} from '@core/generics/components/CreateDialogComponent';
 import {TemplateRef} from '@angular/core';
-import {IReadModel} from '../../../core/models/interfaces/IReadModel';
-import {ModelEvent} from '../../events/ModelEvent';
-import {AdminModelService} from '../../../core/generics/services/AdminModelService';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
+import {AdminModelService} from '../../services/AdminModelService';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 import {TOGGLE_EDIT} from '../../AdminActions';
 import {Observable} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {BaseGuard} from './base-guard';
-import {AuthService} from '../../shared/services/auth.service';
-import {PERMISSION_VIEW} from '../../core/models/User';
-import {Customer} from '../../core/models/Customer';
+import {AuthService} from '@shared/services/auth.service';
+import {PERMISSION_VIEW} from '@core/models/User';
+import {Customer} from '@core/models/Customer';
 
 @Injectable({
   providedIn: 'root'

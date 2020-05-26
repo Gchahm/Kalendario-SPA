@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {AuthService} from '../../../shared/services/auth.service';
-import {ToastService} from '../../../shared/services/toast.service';
+import {AuthService} from '@shared/services/auth.service';
+import {ToastService} from '@shared/services/toast.service';
 import {select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 
 @Component({
   selector: 'app-confirm-email',
@@ -18,8 +18,7 @@ export class ConfirmEmailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
-              private toast: ToastService
-              ) {
+              private toast: ToastService) {
   }
 
   ngOnInit(): void {

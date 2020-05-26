@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ServiceFormComponent } from './service-form.component';
+import {AdminServiceMock} from '../../../test/stubs';
+import {ServiceService} from '@admin-schedule/services/service.service';
+import {Service} from '@core/models/Service';
 
 describe('ServiceFormComponent', () => {
   let component: ServiceFormComponent;
@@ -8,7 +11,10 @@ describe('ServiceFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServiceFormComponent ]
+      declarations: [ ServiceFormComponent ],
+      providers: [
+        {provide: ServiceService, useClass: AdminServiceMock}
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +22,7 @@ describe('ServiceFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ServiceFormComponent);
     component = fixture.componentInstance;
+    component.model = new Service();
     fixture.detectChanges();
   });
 

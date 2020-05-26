@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Appointment} from '../../models/Appointment';
-import {AppointmentService} from '../../../shared/services/appointment.service';
+import {AppointmentService} from '@shared/services/appointment.service';
 import * as moment from 'moment';
-import {ListResult} from '../../generics/services/AdminModelService';
+import {ListResult} from '@admin-schedule/services/AdminModelService';
 
 @Component({
   selector: 'customer-appointments',

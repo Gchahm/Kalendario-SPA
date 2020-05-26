@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 import {ActivatedRoute} from '@angular/router';
 import {SET_COMPANY_NAME} from '../../actions';
 

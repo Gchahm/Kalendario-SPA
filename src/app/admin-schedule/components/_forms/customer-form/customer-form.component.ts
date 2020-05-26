@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Customer} from '../../../../core/models/Customer';
+import {Customer} from '@core/models/Customer';
 import {BaseFormComponent} from '../BaseFormComponent';
 import {CustomerService} from '../../../services/customer.service';
 

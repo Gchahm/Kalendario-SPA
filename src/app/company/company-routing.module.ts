@@ -3,7 +3,7 @@ import {EmployeeDetailPageComponent} from './components/employee-detail-page/emp
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {CompanyComponent} from './components/company/company.component';
-import {AuthGuard} from '../shared/guards/auth.guard';
+import {AuthGuard} from '@shared/guards/auth.guard';
 import {BookAppointmentPageComponent} from './components/book-appointment-page/book-appointment-page.component';
 
 const routes: Routes = [

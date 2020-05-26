@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import {CompanyNameValidators} from '../../../company/components/company/companyName.validators';
-import {CompanyService} from '../../../shared/services/company.service';
+import {CompanyNameValidators} from '@app/company/components/company/companyName.validators';
+import {CompanyService} from '@shared/services/company.service';
 import {Router} from '@angular/router';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
-import {AuthService} from '../../../shared/services/auth.service';
+import {IAppState} from '@app/Store';
+import {AuthService} from '@shared/services/auth.service';
 import {Subscription} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 

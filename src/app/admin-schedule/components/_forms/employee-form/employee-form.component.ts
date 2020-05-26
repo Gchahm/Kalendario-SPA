@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
-import {Service} from '../../../../core/models/Service';
+import {Service} from '@core/models/Service';
 import {select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
+import {IAppState} from '@app/Store';
 import {Observable} from 'rxjs';
 import {BaseFormComponent} from '../BaseFormComponent';
-import {Schedule} from '../../../../core/models/Schedule';
-import {Employee} from '../../../../core/models/Employee';
-import {FormBuilder} from '@angular/forms';
+import {Schedule} from '@core/models/Schedule';
+import {Employee} from '@core/models/Employee';
 import {AdminEmployeeService} from '../../../services/admin-employee.service';
 
 @Component({

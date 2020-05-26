@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
+import {IAppState} from '@app/Store';
 import {ADD_EMPLOYEE, REMOVE_EMPLOYEE} from '../../SchedulingActions';
-import {Employee} from '../../../core/models/Employee';
+import {Employee} from '@core/models/Employee';
 
 @Component({
   selector: 'admin-appointment-dashboard',

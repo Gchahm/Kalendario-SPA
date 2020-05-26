@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../../shared/services/auth.service';
-import {ToastService} from '../../../shared/services/toast.service';
+import {AuthService} from '@shared/services/auth.service';
+import {ToastService} from '@shared/services/toast.service';
 
 @Component({
   selector: 'app-resend-confirmation',

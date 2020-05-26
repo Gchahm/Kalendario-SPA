@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateShiftDialogComponent } from './create-shift-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRefMock} from '@shared/test/stubs';
 
 describe('CreateShiftDialogComponent', () => {
   let component: CreateShiftDialogComponent;
@@ -10,7 +11,10 @@ describe('CreateShiftDialogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MatDialogModule],
-      declarations: [ CreateShiftDialogComponent ]
+      declarations: [ CreateShiftDialogComponent ],
+      providers: [
+        {provide: MatDialogRef, useClass: MatDialogRefMock},
+      ]
     })
     .compileComponents();
   }));

@@ -1,4 +1,4 @@
-import {Employee} from '../core/models/Employee';
+import {Employee} from '@core/models/Employee';
 import {SET_COMPANY_NAME} from './actions';
 import {tassign} from 'tassign';
 

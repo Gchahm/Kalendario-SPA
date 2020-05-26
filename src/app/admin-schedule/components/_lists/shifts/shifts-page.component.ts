@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {ShiftService} from '../../../services/shift.service';
 import {CreateShiftDialogComponent} from '../../_dialogs/create-shift/create-shift-dialog.component';
 import {BaseListComponent} from '../BaseListComponent';
-import {Shift} from '../../../../core/models/Shift';
-import {IAppState} from '../../../../Store';
+import {Shift} from '@core/models/Shift';
+import {IAppState} from '@app/Store';
 import {NgRedux, select} from '@angular-redux/store';
 import {MatDialog} from '@angular/material/dialog';
 

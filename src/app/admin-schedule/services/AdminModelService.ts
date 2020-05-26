@@ -1,13 +1,13 @@
 import {HttpClient} from '@angular/common/http';
-import {Adapter} from '../../interfaces/adapter';
+import {Adapter} from '@core/interfaces/adapter';
 import {catchError, map} from 'rxjs/operators';
-import {IReadModel} from '../../models/interfaces/IReadModel';
-import {IWriteModel} from '../../models/interfaces/IWriteModel';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
+import {IWriteModel} from '@core/models/interfaces/IWriteModel';
 import {Observable, throwError} from 'rxjs';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../../Store';
-import {ToastService} from '../../../shared/services/toast.service';
-import {IDjangoService} from '../../../shared/common/IDjangoService';
+import {IAppState} from '@app/Store';
+import {ToastService} from '@shared/services/toast.service';
+import {IDjangoService} from '@shared/common/IDjangoService';
 
 export class AdminModelService<R extends IReadModel, W extends IWriteModel> implements IDjangoService<R, W> {
 

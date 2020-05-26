@@ -1,16 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateAppointmentDialogComponent } from './create-appointment-dialog.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRefMock} from '@shared/test/stubs';
+import * as moment from 'moment';
+import {Employee} from '@core/models/Employee';
 
 describe('CreateAppointmentDialogComponent', () => {
   let component: CreateAppointmentDialogComponent;
   let fixture: ComponentFixture<CreateAppointmentDialogComponent>;
+  const data = {employee: new Employee(), date: moment.utc(), type: ''};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [MatDialogModule],
-      declarations: [ CreateAppointmentDialogComponent ]
+      declarations: [ CreateAppointmentDialogComponent ],
+      providers: [
+        {provide: MatDialogRef, useClass: MatDialogRefMock},
+        {provide: MAT_DIALOG_DATA, useValue: data}
+      ]
     })
     .compileComponents();
   }));

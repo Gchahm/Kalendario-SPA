@@ -1,11 +1,10 @@
-import {IReadModel} from '../../../core/models/interfaces/IReadModel';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
 import {EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {IDjangoService} from '../../../shared/common/IDjangoService';
-import {IWriteModel} from '../../../core/models/interfaces/IWriteModel';
-import {reactiveFormErrorHandler} from '../../../shared/common/Util';
-import {ValidationError} from '../../../shared/common/Errors';
-import {error} from 'selenium-webdriver';
+import {IDjangoService} from '@shared/common/IDjangoService';
+import {IWriteModel} from '@core/models/interfaces/IWriteModel';
+import {reactiveFormErrorHandler} from '@shared/common/Util';
+import {ValidationError} from '@shared/common/Errors';
 
 export abstract class BaseFormComponent<R extends IReadModel> implements OnInit {
 

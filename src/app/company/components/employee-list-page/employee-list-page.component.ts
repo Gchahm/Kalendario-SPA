@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Employee} from '../../../core/models/Employee';
-import {IAppState} from '../../../Store';
+import {Employee} from '@core/models/Employee';
+import {IAppState} from '@app/Store';
 import {select} from '@angular-redux/store';
-import {EmployeeService} from '../../../shared/services/employee.service';
 import {map} from 'rxjs/operators';
+import {EmployeeService} from '@app/company/services/employee.service';
 
 @Component({
   selector: 'customer-employee-list',

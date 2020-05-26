@@ -14,7 +14,6 @@ export class ToastService {
       duration: 2000,
       panelClass: 'bg-success'
     });
-    // this.toasts.push({ message, header, class: 'bg-success text-light' });
   }
 
   error(message: string, header?: string) {
@@ -22,7 +21,6 @@ export class ToastService {
       duration: 2000,
       panelClass: 'bg-danger'
     });
-    // this.toasts.push({ message, header, class: 'bg-danger text-light' });
   }
 
   warning(message: string, header?: string) {
@@ -30,7 +28,6 @@ export class ToastService {
       duration: 2000,
       panelClass: 'bg-warning'
     });
-    // this.toasts.push({ message, header, class: 'bg-warning text-light' });
   }
 
   message(message: string, header?: string) {
@@ -38,6 +35,5 @@ export class ToastService {
       duration: 2000,
       panelClass: 'bg-light'
     });
-    // this.toasts.push({ message, header, class: 'bg-info text-light' });
   }
 }

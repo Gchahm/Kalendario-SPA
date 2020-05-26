@@ -3,8 +3,8 @@ import {ScheduleService} from '../../../services/schedule.service';
 import {CreateScheduleDialogComponent} from '../../_dialogs/create-schedule/create-schedule-dialog.component';
 import {BaseListComponent} from '../BaseListComponent';
 import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
-import {Schedule} from '../../../../core/models/Schedule';
+import {IAppState} from '@app/Store';
+import {Schedule} from '@core/models/Schedule';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({

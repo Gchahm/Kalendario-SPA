@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {ServiceAdapter, Service, IServiceWriteModel} from '../../core/models/Service';
-import {AdminModelService} from '../../core/generics/services/AdminModelService';
-import {ToastService} from '../../shared/services/toast.service';
+import {ServiceAdapter, Service, IServiceWriteModel} from '@core/models/Service';
+import {AdminModelService} from './AdminModelService';
+import {ToastService} from '@shared/services/toast.service';
 import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '../../Store';
+import {IAppState} from '@app/Store';
 
 @Injectable({
   providedIn: 'root'

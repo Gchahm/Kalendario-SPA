@@ -3,7 +3,7 @@
     <mat-card-content>
       <h4 class="card-title">Register</h4>
       <form [formGroup]="form" (submit)="register()" class="form-register">
-        <mat-form-field *ngIf="form.get('firstName') as firstName">
+        <mat-form-field>
           <input type="text"
                  matInput
                  placeholder="first name"
@@ -11,7 +11,7 @@
           <mat-error>first name is required</mat-error>
         </mat-form-field>
 
-        <mat-form-field *ngIf="form.get('lastName') as lastName">
+        <mat-form-field>
           <input type="text"
                  matInput
                  placeholder="last name"

@@ -6,7 +6,7 @@ describe('FacebookAuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FacebookAuthService = TestBed.get(FacebookAuthService);
+    const service: FacebookAuthService = TestBed.inject(FacebookAuthService);
     expect(service).toBeTruthy();
   });
 });

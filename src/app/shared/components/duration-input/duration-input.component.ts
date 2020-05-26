@@ -2,7 +2,7 @@ import {Component, DoCheck, ElementRef, Input, OnDestroy, Optional, Self} from '
 import {Subject} from 'rxjs';
 import {ControlValueAccessor, FormBuilder, FormGroup, NgControl, Validators} from '@angular/forms';
 import {MatFormFieldControl} from '@angular/material/form-field';
-import {TimeOfDay} from '../../../core/models/TimeOfDay';
+import {TimeOfDay} from '@core/models/TimeOfDay';
 import {FocusMonitor} from '@angular/cdk/a11y';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
 

@@ -11,7 +11,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <date-time-input placeholder="start datetime" formControlName="start" name="scheduled date"></date-time-input>
+    <date-time-input placeholder="start datetime" formControlName="start"></date-time-input>
 
     <mat-error *ngIf="form.get('start').errors?.serverError">
       {{form.get('start').errors?.serverError}}

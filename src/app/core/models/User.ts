@@ -2,7 +2,6 @@ import {Adapter} from '../interfaces/adapter';
 import {Injectable} from '@angular/core';
 import {Person} from './Person';
 import {Company} from './Company';
-import {TimeFrame} from './Shift';
 
 export const PERMISSION_VIEW = 'view';
 export const PERMISSION_ADD = 'add';
@@ -14,7 +13,7 @@ export class User {
   public email: string;
   public person: Person;
   public isEmployee: boolean;
-  public permissions: string[];
+  public permissions: string[] = [];
   public company: Company;
 
   public static AnonymousUser(): User {

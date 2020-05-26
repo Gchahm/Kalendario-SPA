@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModelListContainerComponent } from './model-list-container.component';
+import {AlerterService} from '@shared/services/alerter.service';
+import {AlerterServiceMock} from '@shared/test/stubs';
+import {NgReduxTestingModule} from '@angular-redux/store/testing';
+import {of} from 'rxjs';
 
 describe('ModelListContainerComponent', () => {
   let component: ModelListContainerComponent;
@@ -8,7 +12,13 @@ describe('ModelListContainerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModelListContainerComponent ]
+      imports: [
+        NgReduxTestingModule
+      ],
+      declarations: [ ModelListContainerComponent ],
+      providers: [
+        {provide: AlerterService, useClass: AlerterServiceMock}
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +26,7 @@ describe('ModelListContainerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ModelListContainerComponent);
     component = fixture.componentInstance;
+    component.modelList$ = of([]);
     fixture.detectChanges();
   });
 

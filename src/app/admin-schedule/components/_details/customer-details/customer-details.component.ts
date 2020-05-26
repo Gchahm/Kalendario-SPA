@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseDetailsComponent} from '../BaseDetailsComponent';
-import {Customer} from '../../../../core/models/Customer';
-import {AppointmentService} from '../../../../shared/services/appointment.service';
-import {Appointment} from '../../../../core/models/Appointment';
+import {Customer} from '@core/models/Customer';
+import {AppointmentService} from '@shared/services/appointment.service';
+import {Appointment} from '@core/models/Appointment';
 import {AppointmentEventDialogComponent} from '../../_dialogs/appointment-event/appointment-event-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {select} from '@angular-redux/store';
-import {IAppState} from '../../../../Store';
+import {IAppState} from '@app/Store';
 import {Observable} from 'rxjs';
-import {Service} from '../../../../core/models/Service';
-import {Employee} from '../../../../core/models/Employee';
+import {Service} from '@core/models/Service';
+import {Employee} from '@core/models/Employee';
 import {FormBuilder} from '@angular/forms';
 import * as moment from 'moment';
 

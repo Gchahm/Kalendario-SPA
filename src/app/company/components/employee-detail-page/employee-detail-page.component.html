@@ -1,4 +1,4 @@
-<div *ngIf="employee" (empId)=employee.id class="row">
+<div *ngIf="employee" class="row">
   <div class="col-sm-12 col-md-3">
     <mat-card #empCard>
       <img [width]="cardWidth()" src="{{employee.photoUrl}}" class="emp-card-img d-none d-sm-none d-md-block">
@@ -32,20 +32,14 @@
           <mat-icon class="icon">chevron_right</mat-icon>
         </button>
 
-        <span class="m-2" (click)="dpApointmentDashboard.open()">{{date.format('ddd')}}</span>
+        <span class="m-2" (click)="dpAppointmentDashboard.open()">{{currentDate().format('ddd')}}</span>
         <mat-form-field>
-          <input matInput
-                 [formControl]="fc"
-                 [matDatepicker]="dpApointmentDashboard"
-                 (dateChange)="changeDate($event)">
-          <mat-datepicker-toggle matSuffix [for]="dpApointmentDashboard"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="{{isMobile$ | async}}" #dpApointmentDashboard></mat-datepicker>
+          <input matInput [formControl]="fc" [matDatepicker]="dpAppointmentDashboard">
+          <mat-datepicker-toggle matSuffix [for]="dpAppointmentDashboard"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="{{isMobile$ | async}}" #dpAppointmentDashboard></mat-datepicker>
         </mat-form-field>
 
-        <app-calendar [default-date]="date"
-                      [min-date]="date"
-                      [events]="events">
-        </app-calendar>
+        <app-calendar [events]="events"></app-calendar>
       </mat-card-content>
     </mat-card>
   </div>

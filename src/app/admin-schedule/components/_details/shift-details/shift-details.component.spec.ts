@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { ShiftDetailsComponent } from './shift-details.component';
+import {Shift} from '@core/models/Shift';
 
 describe('ShiftDetailsComponent', () => {
   let component: ShiftDetailsComponent;
@@ -10,12 +11,13 @@ describe('ShiftDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ShiftDetailsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ShiftDetailsComponent);
     component = fixture.componentInstance;
+    component.model = new Shift();
     fixture.detectChanges();
   });
 

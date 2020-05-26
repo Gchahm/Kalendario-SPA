@@ -1,7 +1,8 @@
 import {Component, Inject} from '@angular/core';
-import {Appointment} from '../../../../core/models/Appointment';
+import {Appointment} from '@core/models/Appointment';
 import {ModelEvent} from '../../../events/ModelEvent';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {IReadModel} from '@core/models/interfaces/IReadModel';
 
 @Component({
   selector: 'employee-appointment-event',
@@ -24,7 +25,7 @@ export class AppointmentEventDialogComponent {
     }
   }
 
-  onSubmitClicked(event: ModelEvent) {
+  onSubmitClicked(event: IReadModel) {
     this.dialogRef.close(event);
   }
 
