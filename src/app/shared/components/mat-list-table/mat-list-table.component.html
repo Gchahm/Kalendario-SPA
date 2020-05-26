@@ -5,6 +5,9 @@
   <mat-list-item *ngFor="let item of items">
     <mat-divider></mat-divider>
     <span class="mat-list-title">{{item.name}}</span>
-    <span [class]="'mat-list-value mat-list-value-' + item.name">{{item.value}}</span>
+    <span class="mat-list-value color-box" *ngIf="isColor(item.value); else notColor" [style.backgroundColor]="item.value"></span>
+    <ng-template #notColor>
+      <span  class="mat-list-value">{{item.value}}</span >
+    </ng-template>
   </mat-list-item>
 </mat-list>

@@ -8,4 +8,8 @@ import {Component, Input} from '@angular/core';
 export class MatListTableComponent {
   @Input() title: string;
   @Input() items: {name: string, value: string}[];
+
+  isColor(value: string): boolean {
+    return value.match(/^#[0-9a-f]{3,6}$/i) !== null;
+  }
 }
