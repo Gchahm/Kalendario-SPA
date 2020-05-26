@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { DateTimeInputComponent } from './date-time-input.component';
 import {FormBuilder} from '@angular/forms';
+import * as moment from 'moment';
 
 describe('DateTimeInputComponent', () => {
   let component: DateTimeInputComponent;
@@ -26,4 +27,11 @@ describe('DateTimeInputComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('get value should return a moment object', () => {
+    let value = moment.utc();
+    component.writeValue(value);
+
+    expect(component.value).toEqual(value);
+  })
 });

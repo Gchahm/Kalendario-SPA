@@ -82,7 +82,7 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
   @Input()
   get value(): Moment | null {
     if (this.datetimeParts.valid) {
-      const {value: {date, time}} = this.datetimeParts;
+      const {date, time} = this.datetimeParts.getRawValue();
       date.set({
         hours: time ? +time.substr(0, 2) : 0,
         minutes: time ? +time.substr(3, 2) : 0
