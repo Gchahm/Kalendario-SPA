@@ -1,5 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {Moment} from 'moment';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {CalendarEvent} from '../../models/CalendarEvent';
 import {Slot} from '../../models/Slot';
 import {TimeOfDay} from '@core/models/TimeOfDay';
@@ -17,6 +16,8 @@ export class CalendarComponent {
   @Input('events') events: CalendarEvent[] = [];
   @Input('availability') availability: Slot[] = [];
 
+  @ViewChild('calendarTable') calendarTable: ElementRef;
+
   calendarHours: number[];
 
   constructor() {
@@ -32,8 +33,13 @@ export class CalendarComponent {
   }
 
   eventHeight(event: CalendarEvent): string {
-    const value = (event.end.hour() * 60 + event.end.minute()) - (event.start.hour() * 60 + event.start.minute() );
-    return value.toString() + 'px';
+    const eventHeight = (event.end.hour() * 60 + event.end.minute()) - (event.start.hour() * 60 + event.start.minute());
+    return `${eventHeight}px`;
+  }
+
+  eventWidth(): string {
+    const div: HTMLElement = this.calendarTable.nativeElement;
+    return `${div.offsetWidth - 60}px`;
   }
 
   calendarHeight() {

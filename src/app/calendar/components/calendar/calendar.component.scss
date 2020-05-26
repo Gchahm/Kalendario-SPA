@@ -30,17 +30,20 @@ th {
 }
 
 .calendar-event {
-  //display: table;
   box-sizing: border-box;
   border: 1px solid lightgray;
   position: absolute;
   left: 60px;
-  max-width: 70%;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
-.calendar-event > p {
-  display: table-cell;
+.calendar-event-text {
+  position: absolute;
   text-align: center;
-  vertical-align: middle;
+  left: 0;
+  /* make the top edge of .inner appear in the vertical center of .outer */
+  top: 50%;
+  /* move .inner up by half of its height so that its middle is in the middle of .outer */
+  transform: translateY(-50%);
+  width: 100%;
 }

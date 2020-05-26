@@ -2,7 +2,7 @@
 
 <div id="calendar-table-container" class="pretty-scroll" [style.height]="calendarHeight()">
 
-  <div class="calendar-table">
+  <div #calendarTable class="calendar-table">
     <ng-container *ngFor="let hour of calendarHours">
       <tr [style.background-color]="backGroundColor(hour, 0)">
         <th width="60px">{{hour}}:00</th>
@@ -19,8 +19,9 @@
        [style.background-color]="event.color"
        [style.top]="topPosition(event)"
        [style.height]="eventHeight(event)"
+       [style.width]="eventWidth()"
        (click)="event.onClick()">
-    <p>{{event.title}}</p>
+    <div class="calendar-event-text">{{event.title}}</div>
   </div>
 
 </div>
