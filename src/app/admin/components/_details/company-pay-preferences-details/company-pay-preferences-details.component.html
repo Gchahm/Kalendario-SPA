@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-6">
+    <h3>Payment Details</h3>
+  </div>
+  <div class="col-6 text-right">
+  </div>
+  <div class="col-12">
+    <table *ngIf="model" class="table table-hover">
+      <tbody>
+      <tr>
+        <th>Payment Currency</th>
+        <td>{{model.config.allowUnpaidRequest}}</td>
+      </tr>
+      <tr>
+        <th>Details Submitted</th>
+        <td>{{model.config.allowCardPayment}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+

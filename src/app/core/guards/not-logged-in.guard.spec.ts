@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { NotLoggedInGuard } from './not-logged-in.guard';
+import {NotLoggedInGuard} from './not-logged-in.guard';
 
 describe('NotLoggedInGuard', () => {
   beforeEach(() => {

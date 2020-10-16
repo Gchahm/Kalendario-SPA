@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+      <app-toggle-field showName="Hide Page"
+                        formControlName="private"
+                        toolTip="Hide the web page from users">
+      </app-toggle-field>
+
+      <app-toggle-field showName="Allow Card Payments"
+                        toolTip="Show pay with card button in cart"
+                        formControlName="allowCardPayment">
+      </app-toggle-field>
+
+      <app-toggle-field showName="Allow Unpaid Requests"
+                        toolTip="Show pay with cash in cart"
+                        formControlName="allowUnpaidRequest">
+      </app-toggle-field>
+</form>
+<div *ngIf="editMode">
+  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
+  <button class="btn btn-admin btn-danger" type="button" (click)="edit.emit(false)">Cancel</button>
+</div>
+

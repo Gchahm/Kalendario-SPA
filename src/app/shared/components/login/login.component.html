@@ -1,0 +1,48 @@
+<app-kalendario-card class="login-card mat-elevation-z5">
+
+    <div class="fb-login-container" *ngIf="showFbLogin">
+      <div id="fb-root"></div>
+      <script async defer
+              crossorigin="anonymous"
+              src="https://connect.facebook.net/pt_PT/sdk.js#xfbml=1&version=v7.0&appId=269698107486371&autoLogAppEvents=1"></script>
+      <div class="fb-login-button" data-size="small" data-button-type="login_with"
+           data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+    </div>
+
+
+    <h4 class="card-title mb-3">Login</h4>
+    <form [formGroup]="form" class="form-signin" (submit)="loginClick()">
+      <mat-error *ngIf="form.errors">
+        <mat-list *ngFor="let error of form.errors">{{error}}</mat-list>
+      </mat-error>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input id="inputEmail"
+               matInput
+               type="email"
+               placeholder="Email"
+               formControlName="email">
+
+        <mat-error *ngIf="form.get('email').errors?.serverError">
+          {{form.get('email').errors?.serverError}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input id="inputPassword"
+               matInput
+               type="password"
+               placeholder="Password"
+               formControlName="password">
+
+        <mat-error *ngIf="form.get('password').errors?.serverError">
+          {{form.get('password').errors?.serverError}}
+        </mat-error>
+      </mat-form-field>
+
+      <button class="btn btn-primary mb-2" [disabled]="!form.valid" type="submit">Login</button>
+      <button class="btn btn-accent-dark" (click)="registerClick()">Register</button>
+    </form>
+</app-kalendario-card>

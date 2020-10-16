@@ -1,0 +1,7 @@
+<div *ngIf="config$ | async as config" class="m-4">
+  <admin-config-rw [model]="config"
+                   [editMode]="editMode$ | async"
+                   [apiError]="apiError$ | async"
+                   (edit)="toggleEdit($event)"
+                   (update)="save($event)"></admin-config-rw>
+</div>

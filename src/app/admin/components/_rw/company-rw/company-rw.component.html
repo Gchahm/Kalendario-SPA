@@ -1,0 +1,26 @@
+<form [formGroup]="form">
+  <admin-input-rw formControlName="name" showName="Name"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+
+  <admin-input-rw formControlName="phoneNumber" showName="Phone Number"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+
+  <admin-input-rw formControlName="whatsapp" showName="WhatsApp"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+
+  <admin-input-rw formControlName="instagram" showName="Instagram"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+
+  <admin-input-rw formControlName="facebook" showName="Facebook"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+
+  <admin-input-rw formControlName="address" showName="Address" inputType="textarea"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+
+  <admin-input-rw formControlName="about" showName="About" inputType="textarea"
+                  (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+</form>
+<div *ngIf="editMode">
+  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
+  <button class="btn btn-admin btn-danger" type="button" (click)="edit.emit(false)">Cancel</button>
+</div>

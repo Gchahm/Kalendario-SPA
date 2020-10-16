@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row mt-4" *ngIf="request$ | async as request">
+    <div class="col-sm-12 col-md-6">
+      <company-request [request]="request"
+                       [checkoutMode]="checkoutMode$ | async"
+                       (remove)="removeItem($event)"></company-request>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <company-cart-summary [request]="request"
+                            [company]="company$ | async"
+                            [preBookMessage]="preBookMessage$ | async"
+                            [paymentDetails]="paymentDetails$ | async"
+                            [checkoutMode]="checkoutMode$ | async"
+                            (requestPaymentDetails)="requestPaymentDetails($event)"
+                            (checkout)="setCheckoutMode($event)"
+                            (confirm)="confirm($event)"></company-cart-summary>
+    </div>
+  </div>
+</div>
+
+

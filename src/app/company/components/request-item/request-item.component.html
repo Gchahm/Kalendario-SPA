@@ -1,0 +1,22 @@
+<div class="r-i-container">
+  <img src="{{requestItem.employee.photoUrl}}" class="mt-3 company-circle-img-7">
+  <div class="row w-100 ml-2">
+    <div class="col-12">
+      <h4>{{requestItem.employee.name}}</h4>
+    </div>
+    <ng-container [@slideOutLeftOnLeave] *ngFor="let appointment of requestItem.appointments">
+      <div class="col-9">
+        <h6>{{appointment.service.name}}</h6>
+        <p>
+          {{appointment.start.format('DD/MM/YYYY - HH:mm')}} (duration: {{appointment.service.duration}})
+        </p>
+      </div>
+      <div class="col-3 text-right c-primary">
+        <h6>{{appointment.service.price}}</h6>
+        <button *ngIf="showBin" (click)="remove.emit(appointment.id)" class="btn btn-outline-danger">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

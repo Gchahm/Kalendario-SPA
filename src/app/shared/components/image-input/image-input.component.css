@@ -1,0 +1,25 @@
+.image-holder {
+  position: relative;
+  display: inline-block;
+}
+
+.semi-circle {
+  position: absolute;
+  background-image: linear-gradient(to top, gray 0, gray 25%, transparent 25%, transparent 100%);
+  opacity: 50%;
+  z-index: 10;
+}
+
+.edit-button-wrapper {
+  position: absolute;
+  z-index: 11;
+}
+
+.edit-button-content {
+  position: absolute;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  bottom: 0.5rem;
+  width: 100%;
+}

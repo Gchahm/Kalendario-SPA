@@ -1,0 +1,79 @@
+<form *ngIf="form" [formGroup]="form">
+  <div class="row">
+    <div class="col-12">
+      <admin-input-rw formControlName="name"
+                      showName="Name"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw formControlName="private"
+                      showName="Hide in Web"
+                      inputType="toggle"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw formControlName="duration"
+                      showName="Duration"
+                      inputType="duration"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+
+    </div>
+
+    <div class="col-12 d-flex">
+      <admin-input-rw formControlName="cost"
+                      showName="Price"
+                      inputType="number"
+                      class="mr-5"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+
+      <admin-input-rw formControlName="color"
+                      showName="Color"
+                      inputType="color"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw [value]="model.categoryModel?.name"
+                      showName="Category"
+                      inputType="none"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError">
+        <admin-service-category-input placeholder="category"
+                                      formControlName="category"></admin-service-category-input>
+        <mat-error *ngIf="form.get('category').errors?.serverError">
+          {{form.get('category').errors?.serverError}}
+        </mat-error>
+      </admin-input-rw>
+
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw formControlName="description"
+                      showName="Description"
+                      inputType="textarea"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+  </div>
+
+
+</form>
+<div *ngIf="editMode">
+  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
+  <button class="btn btn-admin btn-danger" type="button" (click)="cancel()">Cancel</button>
+</div>

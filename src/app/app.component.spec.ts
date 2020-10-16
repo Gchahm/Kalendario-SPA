@@ -1,5 +1,5 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {async, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
 import {AuthService} from '@shared/services/auth.service';
 import {AuthServiceMock, MediaMatcherServiceMock} from '@shared/test/stubs';
 import {MediaMatcherService} from '@shared/services/media-matcher.service';
@@ -16,7 +16,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         {provide: AuthService, useClass: AuthServiceMock},
-        {provide: MediaMatcherService, useClass: MediaMatcherServiceMock },
+        {provide: MediaMatcherService, useClass: MediaMatcherServiceMock},
       ]
     }).compileComponents();
   }));

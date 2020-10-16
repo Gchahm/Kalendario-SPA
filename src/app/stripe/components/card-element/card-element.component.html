@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-12 stripe-card-container">
+    <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
+    <div class="c-warn">
+      {{error?.message}}
+    </div>
+  </div>
+  <div class="col-12 text-right">
+    <button class="btn btn-danger">Cancel</button>
+    <button class="btn btn-primary-gradient" (click)="emitPay()">
+      <span class="pay-container">Pay</span><span class="ammount-container">{{total}}</span>
+    </button>
+  </div>
+</div>
+

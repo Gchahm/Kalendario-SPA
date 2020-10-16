@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
-import {CompanyService} from '@shared/services/company.service';
-import {DjangoRWModelServiceMock} from '@core/test/stubs';
+import {HomeComponent} from './home.component';
+import {CompanyClient} from '@api/clients';
+import {ModelViewSetClientMock} from '@api/testing';
 
 describe('AdminHomeComponent', () => {
   let component: HomeComponent;
@@ -10,12 +10,12 @@ describe('AdminHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent],
       providers: [
-        {provide: CompanyService, useClass: DjangoRWModelServiceMock}
+        {provide: CompanyClient, useClass: ModelViewSetClientMock}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

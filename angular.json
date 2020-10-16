@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "appointment-manager-SPA": {
+    "kalendario-SPA": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/appointment-manager-SPA",
+            "outputPath": "dist/kalendario-SPA",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -21,11 +21,12 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               {
-                "input": "src/theme/custom-ng-material.scss"
+                "input": "src/theme/material/custom-ng-material.scss"
               },
               "src/styles.scss"
             ],
@@ -41,7 +42,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "deployUrl": "/static/ang/",
+              "deployUrl": "static/ang/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -60,25 +61,27 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "appointment-manager-SPA:build"
+            "browserTarget": "kalendario-SPA:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "appointment-manager-SPA:build:production"
+              "browserTarget": "kalendario-SPA:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "appointment-manager-SPA:build"
+            "browserTarget": "kalendario-SPA:build"
           }
         },
         "test": {
@@ -90,7 +93,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -115,21 +119,24 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "appointment-manager-SPA:serve"
+            "devServerTarget": "kalendario-SPA:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "appointment-manager-SPA:serve:production"
+              "devServerTarget": "kalendario-SPA:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "appointment-manager-SPA",
+  "defaultProject": "kalendario-SPA",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"
     }
+  },
+  "cli": {
+    "analytics": "10c7666b-d32c-4c38-9973-bcd25e275b28"
   }
 }

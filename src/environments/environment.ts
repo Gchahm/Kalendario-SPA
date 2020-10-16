@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://192.168.0.17:8070/api/'
+  // apiUrl: 'https://192.168.0.19:8070/api/'
+  apiUrl: 'http://localhost:8070/api/',
+  assetUrl: 'assets/',
+  imageStorage: 'https://res.cloudinary.com/gchahm/',
+  stripePk: 'pk_test_51HG6eSAe2CG5hLhgSySK6m0KWXT7MgcoZdCAtqfFyg8nqwL9ZklNpCVke2H1EOX6uLI0jqYuRF08wb4X65gfDE1V00inHpeisT'
 };
 
 /*

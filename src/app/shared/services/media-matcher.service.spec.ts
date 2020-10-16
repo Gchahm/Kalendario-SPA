@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MediaMatcherService } from './media-matcher.service';
+import {MediaMatcherService} from './media-matcher.service';
 
 describe('MediaMatcherService', () => {
   let service: MediaMatcherService;

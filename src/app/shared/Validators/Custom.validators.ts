@@ -2,7 +2,7 @@ import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from '@angu
 
 
 export class CustomValidators {
-  static number(prms: {min: number, max: number}): ValidatorFn {
+  static number(prms: { min: number, max: number }): ValidatorFn {
     return (control: FormControl): ValidationErrors | null => {
       const val: number = control.value;
       if (isNaN(val) || /\D/.test(val.toString())) {

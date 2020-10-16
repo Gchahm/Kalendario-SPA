@@ -1,0 +1,7 @@
+<div [@pulse]="animationState"
+     class="slot-container bs-primary m-auto"
+     [class.no-border]="slot.id === currentSlotId"
+     [class.bg-primary-gradient]="slot.id === currentSlotId"
+     (click)="animateEmit()">
+  <p>{{slot.title}}</p>
+</div>

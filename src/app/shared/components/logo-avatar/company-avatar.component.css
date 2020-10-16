@@ -1,0 +1,7 @@
+.logo-avatar-container {
+  display: flex;
+}
+
+.logo-avatar-content {
+  margin-left: 0.5rem;
+}

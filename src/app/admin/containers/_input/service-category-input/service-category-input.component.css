@@ -1,0 +1,21 @@
+.service-cat-input-container {
+  display: flex;
+}
+
+.service-cat-input-element {
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  font: inherit;
+  text-align: center;
+}
+
+.service-cat-input-spacer {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+:host.service-cat-floating .service-cat-input-spacer {
+  opacity: 1;
+}

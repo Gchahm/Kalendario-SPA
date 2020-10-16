@@ -1,0 +1,6 @@
+<shared-dashboard-container [isMobile]="isMobile$ | async"
+                            [user]="user$ | async"
+                            [leftPaneOpen]="leftPaneOpen$ | async"
+                            [routes]="routes">
+  <ng-content></ng-content>
+</shared-dashboard-container>

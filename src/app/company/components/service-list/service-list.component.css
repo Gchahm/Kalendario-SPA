@@ -1,0 +1,29 @@
+.s-l-container {
+  display: flex;
+  padding: 2em;
+}
+
+.row {
+  max-height: 400px;
+  min-height: 400px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.selected-category {
+  border-bottom: 1px solid #AAAAAA;
+}
+
+.s-l-categories {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-right: 2em;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.12em;
+}
+
+.s-l-item {
+  cursor: pointer;
+}

@@ -1,14 +1,15 @@
-import {isDevMode, NgModule} from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { NgModule} from '@angular/core';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {SharedModule} from '@shared/shared.module';
 import {CoreModule} from '@core/core.module';
-import { LayoutModule } from '@angular/cdk/layout';
-import {IAppState, INITIAL_STATE, rootReducer} from './Store';
-import {DevToolsExtension, NgRedux} from '@angular-redux/store';
+import {LayoutModule} from '@angular/cdk/layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgReduxModule} from '@angular-redux/store';
-import {MediaMatcherService} from '@shared/services/media-matcher.service';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -16,23 +17,21 @@ import {MediaMatcherService} from '@shared/services/media-matcher.service';
   ],
   imports: [
     BrowserAnimationsModule,
-    NgReduxModule,
     SharedModule,
     CoreModule,
     AppRoutingModule,
     LayoutModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      name: 'App DevTools',
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>,
-              devTools: DevToolsExtension,
-              mediaMatcher: MediaMatcherService) {
-    // Can't have the isDevMode on my mobile as it won't load the website,
-    // the matcher service blocks enhancers when the website is loaded on mobile view.
-    const enhancers = isDevMode() && !mediaMatcher.isMobile ? [devTools.enhancer()] : [];
-    ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancers);
-  }
 }

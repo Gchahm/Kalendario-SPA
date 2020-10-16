@@ -1,0 +1,12 @@
+<span class="sf-title">{{showName}}</span>
+<span class="c-light-gray c-pointer">
+      <i *ngIf="toolTip" [matTooltip]="toolTip" class="fa fa-info-circle"></i>
+    </span>
+<div [formGroup]="form">
+  <label class="switch">
+    <input type="checkbox"
+           formControlName="formControl"
+           (change)="_handleInput()">
+    <span class="slider round"></span>
+  </label>
+</div>

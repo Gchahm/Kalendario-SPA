@@ -1,0 +1,22 @@
+<div *ngIf="company$ | async as company">
+  <!--  <div class="mb-100 container-fluid p-0">-->
+  <!--    <company-carousel-shell></company-carousel-shell>-->
+  <!--  </div>-->
+  <div @fadeInOnEnter class="container kalendario-company">
+    <div class="mb-100">
+      <company-logo-shell></company-logo-shell>
+    </div>
+    <div class="mb-100">
+      <div class="h1" @fadeInDownOnEnter>ALL SERVICES</div>
+      <company-services-shell></company-services-shell>
+    </div>
+    <div class="mb-100">
+      <div class="col-12 h1" @fadeInDownOnEnter>OUR TEAM</div>
+      <company-employees-shell></company-employees-shell>
+    </div>
+    <div class="mb-100">
+      <h1 @fadeInDownOnEnter>ABOUT US</h1>
+      {{company.about}}
+    </div>
+  </div>
+</div>

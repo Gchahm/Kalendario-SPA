@@ -1,0 +1,7 @@
+.employee-details-card-container {
+  display: flex;
+}
+
+.blob-holder {
+  max-height: 20rem;
+}

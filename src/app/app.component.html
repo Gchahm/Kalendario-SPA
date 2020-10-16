@@ -1,7 +1,11 @@
-<!--<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>-->
-<header>
-  <app-navbar></app-navbar>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div class="app-container">
+  <header>
+    <app-navbar-shell></app-navbar-shell>
+  </header>
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
+</div>

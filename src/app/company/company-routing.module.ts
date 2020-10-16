@@ -1,15 +1,17 @@
-import {EmployeeListPageComponent} from './components/employee-list-page/employee-list-page.component';
-import {EmployeeDetailPageComponent} from './components/employee-detail-page/employee-detail-page.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {CompanyComponent} from './components/company/company.component';
+import {CompanyShellComponent} from '@company/containers/company-shell/company-shell.component';
+import {EmployeeListPageComponent} from '@company/containers/employee-list-page/employee-list-page.component';
+import {EmployeeDetailsPageComponent} from '@company/pages/employee-details-page/employee-details-page.component';
+import {LandingPageComponent} from '@company/pages/landing-page/landing-page.component';
+import {CartPageComponent} from '@company/pages/cart-page/cart-page.component';
 import {AuthGuard} from '@shared/guards/auth.guard';
-import {BookAppointmentPageComponent} from './components/book-appointment-page/book-appointment-page.component';
 
 const routes: Routes = [
+
   {
     path: ':cid',
-    component: CompanyComponent,
+    component: CompanyShellComponent,
     children: [
       {
         path: 'staff',
@@ -17,16 +19,16 @@ const routes: Routes = [
       },
       {
         path: 'staff/:id',
-        component: EmployeeDetailPageComponent
+        component: EmployeeDetailsPageComponent
       },
       {
-        path: 'booking/:employee/:service/:date',
-        component: BookAppointmentPageComponent,
+        path: 'cart',
+        component: CartPageComponent,
         canActivate: [AuthGuard]
       },
       {
         path: '',
-        component: EmployeeListPageComponent
+        component: LandingPageComponent
       },
     ]
   },

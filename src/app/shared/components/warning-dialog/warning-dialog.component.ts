@@ -9,5 +9,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class WarningDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<WarningDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {subject: string, message: string}) {}
+    @Inject(MAT_DIALOG_DATA) public data: { subject: string, message: string }) {
+  }
 }

@@ -1,0 +1,22 @@
+span {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+:host.floating span {
+  opacity: 1;
+}
+
+i {
+  font-size: 3.52rem;
+  margin-right: 1rem;
+  margin-left: 0.625rem;
+}
+
+.d-flex {
+  margin-bottom: 3.9375rem;
+}
+
+input[type="time"] {
+  margin-left: 3rem;
+}

@@ -1,0 +1,47 @@
+html {
+  font-size: 0.5rem;
+  font-style: normal;
+}
+
+
+@include media-breakpoint-up(xs) {
+  html {
+    font-size: 0.5rem;
+  }
+  .material-icons {
+    font-size: 18px !important;
+  }
+}
+
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 0.5rem;
+  }
+  .material-icons {
+    font-size: 18px !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 0.75rem;
+  }
+  .material-icons {
+    font-size: 24px !important;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.0rem;
+  }
+  .material-icons {
+    font-size: 24px !important;
+  }
+}
+
+
+.tiny {
+  font-size: 0.6rem;
+}

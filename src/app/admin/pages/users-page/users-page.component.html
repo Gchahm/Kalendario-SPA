@@ -1,0 +1,36 @@
+<model-list-container [modelList]="modelList$ | async"
+                      [selectedModel]="selectedModel$ | async"
+                      [editMode]="editMode$ | async"
+                      [mobileView]="isMobile$ | async"
+                      (edit)="toggleEdit($event)"
+                      (selected)="modelSelected($event)"
+                      (create)="newModel()"
+                      (delete)="deleteModel($event)">
+  <ng-container *ngIf="(selectedModel$ | async) as selectedModel">
+
+    <ng-container *ngIf="!(showPasswordForm$ | async); else passwordForm">
+
+      <ng-container *ngIf="!(editMode$ | async)">
+        <button class="btn btn-accent" (click)="toggleShowPassword(true)">update password</button>
+        <admin-user-details [model]="userViewModel$ | async"></admin-user-details>
+      </ng-container>
+
+      <admin-user-form *ngIf="editMode$ | async"
+                       [model]="selectedModel"
+                       [groups]="groups$ | async"
+                       [employees]="employees$ | async"
+                       [apiError]="apiError$ | async"
+                       (create)="saveModel($event)"
+                       (update)="updateModel($event)"
+                       (cancel)="cancelForm($event)"></admin-user-form>
+    </ng-container>
+
+    <ng-template #passwordForm>
+      <admin-update-password (update)="updatePassword(selectedModel, $event)"
+                             (cancel)="toggleShowPassword(false)">
+      </admin-update-password>
+    </ng-template>
+
+
+  </ng-container>
+</model-list-container>

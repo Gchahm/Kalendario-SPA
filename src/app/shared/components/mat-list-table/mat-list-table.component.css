@@ -2,6 +2,11 @@
   max-width: 600px;
 }
 
+.h30 {
+  max-height: 30vh;
+  overflow-y: scroll;
+}
+
 .mat-list-header {
   display: inline-block;
   margin: auto;
@@ -13,6 +18,7 @@
   margin: 0;
   display: inline-block;
   font-weight: bold;
+  width:300px;
 }
 
 .mat-list-value {

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { AlerterService } from './alerter.service';
+import {AlerterService} from './alerter.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatDialogMock} from '@shared/test/stubs';
 

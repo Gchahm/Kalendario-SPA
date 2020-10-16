@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AuthService} from '@shared/services/auth.service';
 import {Subscription} from 'rxjs';
-import {NgRedux} from '@angular-redux/store';
-import {IAppState} from './Store';
-import {SET_IS_MOBILE_VIEW_FLAG, SET_IS_TABLET_VIEW_FLAG} from '@core/CoreActions';
 import {MediaMatcherService} from '@shared/services/media-matcher.service';
+
+import * as fromRoot from '@app/state';
+import {Store} from '@ngrx/store';
+import * as coreActions from '@core/state/core.actions';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'Kalendario';
   subscription: Subscription;
 
-  constructor(private authService: AuthService,
-              private redux: NgRedux<IAppState>,
+  constructor(private store: Store<fromRoot.State>,
               private mediaMatcher: MediaMatcherService) {
     this.setMobileViewFlag();
     this.setTabletViewFlag();
@@ -28,9 +27,9 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-
   ngOnInit(): void {
-    this.subscription = this.authService.whoAmI().subscribe();
+    this.store.dispatch(new coreActions.InitializeUser());
+    // this.subscription = this.authService.whoAmI().subscribe();
   }
 
   ngOnDestroy(): void {
@@ -40,11 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   setMobileViewFlag() {
-    this.redux.dispatch({type: SET_IS_MOBILE_VIEW_FLAG, value: this.mediaMatcher.isMobile});
+    this.store.dispatch(new coreActions.ToggleIsMobile(this.mediaMatcher.isMobile));
   }
 
   setTabletViewFlag() {
-    this.redux.dispatch({type: SET_IS_TABLET_VIEW_FLAG, value: this.mediaMatcher.isTablet});
+    this.store.dispatch(new coreActions.ToggleIsTablet(this.mediaMatcher.isTablet));
   }
 
 }

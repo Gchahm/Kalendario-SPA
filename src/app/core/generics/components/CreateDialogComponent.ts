@@ -1,15 +1,16 @@
 import {MatDialogRef} from '@angular/material/dialog';
 import {ViewChild} from '@angular/core';
-import {BaseFormComponent} from '@admin-schedule/components/_forms/BaseFormComponent';
-import {IReadModel} from '../../models/interfaces/IReadModel';
+import {BaseFormComponent} from '@shared/common/BaseFormComponent';
+import {IReadModel} from '@api/models';
 
 export abstract class CreateDialogComponent {
 
   @ViewChild('formComponent') protected child: BaseFormComponent<IReadModel>;
 
-  protected constructor(private dialogRef: MatDialogRef<CreateDialogComponent>) {}
+  protected constructor(private dialogRef: MatDialogRef<CreateDialogComponent>) {
+  }
 
-  onSubmitClicked(event: IReadModel) {
+  onSuccess(event: IReadModel) {
     this.dialogRef.close(event);
   }
 

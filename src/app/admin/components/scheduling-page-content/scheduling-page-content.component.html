@@ -1,0 +1,18 @@
+<mat-card class="mat-elevation-z3 m-2">
+  <mat-card-content>
+    <div class="scheduling-page-content-container pretty-scroll">
+      <div class="hours-container">
+        <div class="scheduling-panel-heading"></div>
+        <app-calendar-hours></app-calendar-hours>
+      </div>
+      <admin-scheduling-panel-shell class="panels-container"
+                                    *ngFor="let employee of employees"
+                                    [employee]="employee"
+                                    [showCalendarHours]="false"
+                                    [date]="date"
+                                    (close)="emitClose($event)">
+      </admin-scheduling-panel-shell>
+      <div class="scheduling-panel-heading w-100"></div>
+    </div>
+  </mat-card-content>
+</mat-card>

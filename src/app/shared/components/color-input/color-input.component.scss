@@ -1,27 +1,6 @@
 div {
   display: flex;
 }
-input {
-  border: none;
-  background: none;
-  padding: 0;
-  outline: none;
-  font: inherit;
-  text-align: center;
-}
-
-//span {
-//  opacity: 0;
-//  transition: opacity 200ms;
-//}
-//:host.floating span {
-//  opacity: 1;
-//}
-
-.color-picker-container {
-  position: relative;
-  width: 100%;
-}
 
 .color-picker-box {
   min-height: 2em;
@@ -30,9 +9,13 @@ input {
   border-radius: 2px;
 }
 
-.color-picker-button {
-  position: absolute;
-  top: 0;
-  right: 0;
+.form-control {
+  max-width: 10rem;
 }
 
+.color-picker-button {
+  position: relative;
+  top: 0.5rem;
+  left: -2rem;
+  z-index: 10;
+}

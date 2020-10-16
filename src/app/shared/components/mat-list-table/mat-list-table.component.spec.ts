@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MatListTableComponent } from './mat-list-table.component';
+import {MatListTableComponent} from './mat-list-table.component';
 
 describe('MatListTableComponent', () => {
   let component: MatListTableComponent;
@@ -8,9 +8,9 @@ describe('MatListTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatListTableComponent ]
+      declarations: [MatListTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

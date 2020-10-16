@@ -9,7 +9,8 @@ export class TokenInterceptor implements HttpInterceptor {
 
   private baseUrl = environment.apiUrl;
 
-  constructor() {}
+  constructor() {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (AuthService.isLoggedIn() && req.url.includes(this.baseUrl)) {

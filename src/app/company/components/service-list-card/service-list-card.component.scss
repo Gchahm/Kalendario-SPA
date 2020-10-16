@@ -1,0 +1,22 @@
+.service-list-card-container {
+  display: flex;
+  border-bottom: 1px solid #A1A1A1;
+  margin-bottom: 15px;
+  margin-right: 20px;
+  white-space: nowrap;
+}
+
+.card-title-container {
+  text-transform: capitalize;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+p, h6 {
+  margin-bottom: 0;
+}
+
+.select-circle {
+  background: linear-gradient(247.82deg, #F2A1A1 0%, #AA83C3 200.13%);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}

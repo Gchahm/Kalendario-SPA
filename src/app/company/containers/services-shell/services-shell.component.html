@@ -1,0 +1,6 @@
+<company-service-list [services]="services$ | async"
+                      [categories]="categories$ | async"
+                      [currentCategoryId]="currentCategoryId$ | async"
+                      [currentServiceId]="currentServiceId$ | async"
+                      (selectCategory)="updateSelectedCategory($event)"
+                      (selectService)="updateSelectedService($event)"></company-service-list>

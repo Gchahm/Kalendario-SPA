@@ -1,0 +1,47 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+
+      <admin-input-rw formControlName="preBookWarn" showName="Pre Booking Warn" inputType="textarea"
+                      (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"
+                      toolTip="This message will show up with the appointment
+        information when a customer is trying to create an appointment request">
+      </admin-input-rw>
+
+      <admin-input-rw formControlName="postBookMessage" showName="Post Booking Warn" inputType="textarea"
+                      (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"
+                      toolTip="This message will show on the screen after an appointment request was made">
+      </admin-input-rw>
+
+      <admin-input-rw formControlName="postBookEmailMessage" showName="Post Booking Email" inputType="textarea"
+                      (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"
+                      toolTip="This is the message that goes in the email sent after a request is created">
+      </admin-input-rw>
+
+    </div>
+    <div class="col-sm-12 col-md-6">
+
+      <admin-input-rw formControlName="appointmentAcceptedMessage" showName="Request Accepted Message" inputType="textarea"
+                      (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"
+                      toolTip="When a requested is accepted an email is sent with tis message">
+      </admin-input-rw>
+
+      <admin-input-rw formControlName="appointmentRejectedMessage" showName="Request Rejected Message" inputType="textarea"
+                      (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"
+                      toolTip="When a request is rejected an email is sent with this message">
+      </admin-input-rw>
+
+      <admin-input-rw formControlName="appointmentReminderMessage" showName="Request Reminder Message" inputType="textarea"
+                      (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"
+                      toolTip="This message is sent 3 days prior to the appointment date">
+      </admin-input-rw>
+
+    </div>
+  </div>
+</form>
+<div *ngIf="editMode">
+  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
+  <button class="btn btn-admin btn-danger" type="button" (click)="edit.emit(false)">Cancel</button>
+</div>
+
+

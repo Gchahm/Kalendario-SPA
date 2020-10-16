@@ -1,0 +1,4 @@
+.panel-container {
+  min-width: 200px;
+  border-right: lightgray 1px solid;
+}

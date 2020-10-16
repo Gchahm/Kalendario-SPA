@@ -1,14 +1,13 @@
-import { TestBed } from '@angular/core/testing';
-import { AuthService } from './auth.service';
+import {TestBed} from '@angular/core/testing';
+import {AuthService} from './auth.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {User, UserAdapter} from '@core/models/User';
 import {MockNgRedux, NgReduxTestingModule} from '@angular-redux/store/testing';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {LoginModel} from '@core/models/LoginModel';
 import {environment} from '../../../environments/environment';
-import {AUTH_WHO_AM_I_RESPONSE, AUTH_LOGIN_RESPONSE} from '../../../tests/server/responses';
-import {LOGIN_USER} from '@core/CoreActions';
+import {AUTH_LOGIN_RESPONSE, AUTH_WHO_AM_I_RESPONSE} from '../../../tests/server/responses';
 import {of} from 'rxjs';
+import {LoginModel} from '@api/models/LoginModel';
+import {User, UserAdapter} from '@api/models';
 
 describe('AuthService', () => {
   const matSnackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
@@ -66,23 +65,23 @@ describe('AuthService', () => {
   });
 
   describe('whoAmI', () => {
-      it('should return a user if logged in', () => {
-        let response;
+    it('should return a user if logged in', () => {
+      let response;
 
-        AuthService.setToken('token');
+      AuthService.setToken('token');
 
-        authService.whoAmI().subscribe(res => {
-          response = res;
-        });
-        spyOn(redux, 'dispatch').and.callFake(({type, user}) => {
-          expect(type).toBe(LOGIN_USER);
-          expect(user).toEqual(whoAmIResponse);
-        });
-
-        http.expectOne(baseUrl + 'current/').flush(AUTH_WHO_AM_I_RESPONSE);
-        expect(response).toEqual(whoAmIResponse);
-        http.verify();
+      authService.whoAmI().subscribe(res => {
+        response = res;
       });
+      spyOn(redux, 'dispatch').and.callFake(({type, user}) => {
+        expect(type).toBe(LOGIN_USER);
+        expect(user).toEqual(whoAmIResponse);
+      });
+
+      http.expectOne(baseUrl + 'current/').flush(AUTH_WHO_AM_I_RESPONSE);
+      expect(response).toEqual(whoAmIResponse);
+      http.verify();
+    });
 
     it('should return an anonymous user if not logged in', async () => {
       let response;
@@ -90,8 +89,8 @@ describe('AuthService', () => {
       await authService.whoAmI()
         .toPromise()
         .then(res => {
-        response = res;
-      });
+          response = res;
+        });
 
       expect(response).toBe(User.AnonymousUser());
     });

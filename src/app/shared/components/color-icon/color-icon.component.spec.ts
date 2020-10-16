@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ColorIconComponent } from './color-icon.component';
+import {ColorIconComponent} from './color-icon.component';
 
 describe('ColorIconComponent', () => {
   let component: ColorIconComponent;
@@ -8,9 +8,9 @@ describe('ColorIconComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ColorIconComponent ]
+      declarations: [ColorIconComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

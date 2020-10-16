@@ -1,15 +1,5 @@
 import {Observable, of} from 'rxjs';
-import {User} from '@core/models/User';
-import {IReadModel} from '@core/models/interfaces/IReadModel';
-import {IWriteModel} from '@core/models/interfaces/IWriteModel';
-
-export class ReadModelStub implements IReadModel {
-  id: number;
-
-  writeModel(): IWriteModel {
-    return undefined;
-  }
-}
+import {User} from '@api/models';
 
 export class AuthServiceMock {
   constructor() {
@@ -43,7 +33,7 @@ export class MatDialogRefMock {
 }
 
 export class RouterMock {
-  navitage(routes) {
+  navigate(commands: any[]) {
   }
 }
 

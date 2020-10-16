@@ -1,0 +1,28 @@
+.btn {
+  border-radius: 0;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-header {
+  cursor: pointer;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+.event-container {
+  position: relative;
+}
+
+.history-container {
+  overflow-y: scroll;
+  max-height: 50vh;
+}

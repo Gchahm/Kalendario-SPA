@@ -1,0 +1,9 @@
+<div class="row" *ngIf="model.group">
+  <app-mat-list-table class="col-sm-12 col-md-6 col-lg-6"
+                      title="DETAILS" [items]="details()">
+  </app-mat-list-table>
+
+  <app-mat-list-table class="col-sm-12 col-md-6 col-lg-6"
+                      title="PERMISSIONS" [items]="permissions()">
+  </app-mat-list-table>
+</div>

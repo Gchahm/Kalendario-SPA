@@ -1,24 +1,22 @@
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
-import {RegisterComponent} from './components/register/register.component';
 import {NgModule} from '@angular/core';
 import {NotLoggedInGuard} from './guards/not-logged-in.guard';
-import {LoginComponent} from './components/login/login.component';
-import {DashboardPageComponent} from './components/dashboard-page/dashboard-page.component';
 import {AuthGuard} from '@shared/guards/auth.guard';
-import {CreateCompanyComponent} from './components/create-company/create-company.component';
+import {CreateCompanyComponent} from '@admin/containers/_dialogs/create-company/create-company.component';
 import {ConfirmEmailComponent} from './components/confirm-email/confirm-email.component';
 import {ResendConfirmationComponent} from './components/resend-confirmation/resend-confirmation.component';
+import {LoginRegisterPageComponent} from '@core/pages/login-register-page/login-register-page.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginRegisterPageComponent,
     canActivate: [NotLoggedInGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: LoginRegisterPageComponent,
     canActivate: [NotLoggedInGuard]
   },
   {
@@ -35,11 +33,6 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'my-appointments',
-    component: DashboardPageComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'create-company',
     component: CreateCompanyComponent,
     canActivate: [AuthGuard]
@@ -50,4 +43,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CoreRoutingModule { }
+export class CoreRoutingModule {
+}

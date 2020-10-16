@@ -1,0 +1,12 @@
+<model-list-container [categorizedList]="categorizedList$ | async"
+                      [selectedModel]="selectedModel$ | async"
+                      [searchValue]="searchValue$ | async"
+                      [editMode]="editMode$ | async"
+                      [mobileView]="isMobile$ | async"
+                      (edit)="toggleEdit($event)"
+                      (selected)="modelSelected($event)"
+                      (create)="newModel()"
+                      (delete)="deleteModel($event)"
+                      (search)="updateSearch($event)">
+  <admin-service-view-shell></admin-service-view-shell>
+</model-list-container>

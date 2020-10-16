@@ -1,0 +1,6 @@
+<app-customer-appointments-form [customerId]="(selectedCustomer$ | async).id"
+                                [services]="services$ | async"
+                                [employees]="employees$ | async"
+                                (load)="loadAppointments($event)"></app-customer-appointments-form>
+<app-customer-appointments-table [appointments]="appointments$ | async"
+                                 (select)="openAppointment($event)"></app-customer-appointments-table>

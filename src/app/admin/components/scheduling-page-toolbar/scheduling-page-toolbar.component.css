@@ -1,0 +1,16 @@
+.toolbar-wrapper {
+  background-color: white;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 30;
+}
+
+.toolbar-row {
+  border-bottom: lightgray 1px solid;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
+}

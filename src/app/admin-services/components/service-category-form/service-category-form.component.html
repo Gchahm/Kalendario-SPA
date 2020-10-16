@@ -1,0 +1,35 @@
+<form class="form-100" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+
+      <mat-error>
+        <mat-list *ngFor="let error of form.errors">
+          {{error}}
+        </mat-list>
+      </mat-error>
+
+      <mat-form-field>
+        <input matInput placeholder="name" formControlName="name">
+
+        <mat-error *ngIf="form.get('name').errors?.serverError">
+          {{form.get('name').errors?.serverError}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <color-input placeholder="color" formControlName="color"></color-input>
+
+        <mat-error *ngIf="form.get('color').errors?.serverError">
+          {{form.get('color').errors?.serverError}}
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="col-12" *ngIf="showButtons">
+      <button [disabled]="!form.valid" class="btn btn-primary">confirm</button>
+      <button (click)="emitCancel()" class="btn btn-danger">cancel</button>
+    </div>
+  </div>
+</form>
+

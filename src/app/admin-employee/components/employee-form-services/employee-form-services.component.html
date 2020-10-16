@@ -1,0 +1,17 @@
+<div class="pretty-scroll scroll-80">
+  <ng-container *ngFor="let name of keys()">
+    <mat-checkbox [checked]="allChecked(name)"
+                  (change)="groupChecked(name)">
+      {{name}}
+    </mat-checkbox>
+    <ul class="ul-none">
+      <li *ngFor="let item of grouped[name]">
+        <mat-checkbox [(ngModel)]="item.checked"
+                      [id]="item.model.id"
+                      (change)="emitChanged($event)">
+          {{item.model.name}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </ng-container>
+</div>

@@ -1,0 +1,17 @@
+<div class="form-holder">
+  <input autocomplete="off"
+         [(ngModel)]="searchValue" (keyup)="searchChange.emit(searchValue)"
+         class="input-default w-100"
+         placeholder="search">
+  <i class="fa fa-search"></i>
+</div>
+
+<app-kalendario-card>
+  <div class="row pretty-scroll" @staggeredFadeIn>
+    <div class="col-12" *ngFor="let service of services">
+      <company-service-list-card [service]="service"
+                                 [checked]="service.id === selected"
+                                 (selected)="select.emit($event)"></company-service-list-card>
+    </div>
+  </div>
+</app-kalendario-card>

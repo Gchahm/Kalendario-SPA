@@ -1,9 +1,22 @@
-<div class="container p-2">
-  <div class="card m-auto mat-elevation-z5">
-    <div class="card-body">
-      <mat-list>
-        <mat-list-item *ngFor="let company of (companies$ | async)"><a routerLink="c/{{company.name}}/">{{company.name}}</a></mat-list-item>
-      </mat-list>
+<div class="container mt-4">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="form-holder">
+        <input type="text"
+               placeholder="Search for a company..."
+               aria-label="Number"
+               class="input-default w-100"
+               [formControl]="companyControl"
+               [matAutocomplete]="auto">
+        <i class="fa fa-search"></i>
+      </div>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let company of companies$ | async"
+                    [value]="company.name"
+                    routerLink="c/{{company.name}}/">
+          {{company.name}}
+        </mat-option>
+      </mat-autocomplete>
     </div>
   </div>
 </div>

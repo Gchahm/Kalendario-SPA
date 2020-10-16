@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptorProvider} from './interceptors/token.interceptor';
@@ -14,11 +13,26 @@ import {MatListTableComponent} from './components/mat-list-table/mat-list-table.
 import {DurationInputComponent} from './components/duration-input/duration-input.component';
 import {ColorInputComponent} from './components/color-input/color-input.component';
 import {DateTimeInputComponent} from './components/date-time-input/date-time-input.component';
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule} from '@angular/material-moment-adapter';
-import { WarningDialogComponent } from './components/warning-dialog/warning-dialog.component';
-import { CustomerInputComponent } from './components/customer-input/customer-input.component';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MomentUtcDateAdapter} from './adapters/MomentUtcDateAdapter';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {WarningDialogComponent} from './components/warning-dialog/warning-dialog.component';
+import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
+import {MomentUtcDateAdapter, MY_FORMATS} from './adapters/MomentUtcDateAdapter';
+import {AppointmentStatusPipe} from './pipes/appointment-status.pipe';
+import {LoginRegisterShellComponent} from './containers/login-register-shell/login-register-shell.component';
+import {RegisterComponent} from '@shared/components/register/register.component';
+import {LoginComponent} from '@shared/components/login/login.component';
+import {TextInputDialogComponent} from './components/text-input-dialog/text-input-dialog.component';
+import {KalendarioCardComponent} from './components/kalendario-card/kalendario-card.component';
+import {CompanyAvatarComponent} from '@shared/components/logo-avatar/company-avatar.component';
+import {ImageInputComponent} from './components/image-input/image-input.component';
+import {RemoveHyphenPipe} from './pipes/remove-hyphen.pipe';
+import {DateTimePrettyInputComponent} from '@shared/components/date-time-pretty-input/date-time-pretty-input.component';
+import {ToMomentDayPipe} from './pipes/to-moment-day.pipe';
+import {ToMomentDateLongPipe} from './pipes/to-moment-date-long.pipe';
+import {RouterModule} from '@angular/router';
+import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
+import { DashboardContainerShellComponent } from './containers/dashboard-container-shell/dashboard-container-shell.component';
+import {InputRwComponent} from '@shared/components/single-field-read-write/input-rw.component';
 
 
 @NgModule({
@@ -29,31 +43,44 @@ import {MomentUtcDateAdapter} from './adapters/MomentUtcDateAdapter';
     DateTimeInputComponent,
     DurationInputComponent,
     WarningDialogComponent,
-    CustomerInputComponent,
+    AppointmentStatusPipe,
+    LoginRegisterShellComponent,
+    RegisterComponent,
+    LoginComponent,
+    TextInputDialogComponent,
+    KalendarioCardComponent,
+    CompanyAvatarComponent,
+    ImageInputComponent,
+    RemoveHyphenPipe,
+    DateTimePrettyInputComponent,
+    ToMomentDayPipe,
+    ToMomentDateLongPipe,
+    DashboardContainerComponent,
+    DashboardContainerShellComponent,
+    InputRwComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    NgbModule,
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
     TranslateModule.forRoot(),
     ColorPickerModule,
     MatMomentDateModule,
+    RouterModule,
   ],
   providers: [
     ErrorInterceptorProvider,
     AuthInterceptorProvider,
     ToastService,
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    { provide: DateAdapter, useClass: MomentUtcDateAdapter },
+    // {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    {provide: DateAdapter, useClass: MomentUtcDateAdapter},
   ],
   exports: [
     CommonModule,
     HttpClientModule,
-    NgbModule,
     FormsModule,
     ReactiveFormsModule,
     AngularMaterialModule,
@@ -65,8 +92,24 @@ import {MomentUtcDateAdapter} from './adapters/MomentUtcDateAdapter';
     DateTimeInputComponent,
     DurationInputComponent,
     MatMomentDateModule,
-    CustomerInputComponent,
+    AppointmentStatusPipe,
+    RegisterComponent,
+    LoginComponent,
+    LoginRegisterShellComponent,
+    TextInputDialogComponent,
+    KalendarioCardComponent,
+    KalendarioCardComponent,
+    CompanyAvatarComponent,
+    ImageInputComponent,
+    RemoveHyphenPipe,
+    DateTimePrettyInputComponent,
+    ToMomentDayPipe,
+    ToMomentDateLongPipe,
+    DashboardContainerComponent,
+    DashboardContainerShellComponent,
+    InputRwComponent,
   ]
 })
 export class SharedModule {
 }
+

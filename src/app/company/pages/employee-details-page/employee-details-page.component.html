@@ -1,0 +1,14 @@
+<div class="container" *ngIf="model$ | async as currentModel">
+  <div class="mt-4 mb-4">
+    <company-employee-details-card [employee]="currentModel"
+                                   [companyName]="companyName$ | async"></company-employee-details-card>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 mb-2">
+      <company-employee-details-services-shell></company-employee-details-services-shell>
+    </div>
+    <div class="col-sm-12 col-md-6 mb-2">
+      <company-slots-for-service-shell></company-slots-for-service-shell>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.create-form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+div.mat-form-field-wrapper {
+  height: 100%;
+}
+

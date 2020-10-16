@@ -1,0 +1,70 @@
+<mat-card class="card-container" *ngIf="!mobileView; else mobileContainer">
+  <div class="row" *ngIf="modelList || categorizedList; else spinner">
+    <div class="col-sm-4 col-md-3 col-lg-2">
+      <ng-container *ngTemplateOutlet="list"></ng-container>
+    </div>
+    <div class="col-sm-8 col-md-9 col-lg-10">
+      <ng-container *ngTemplateOutlet="details"></ng-container>
+    </div>
+  </div>
+  <ng-template #spinner>
+    <mat-spinner class="m-auto"></mat-spinner>
+  </ng-template>
+</mat-card>
+
+<ng-template #mobileContainer>
+  <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="center">
+    <mat-tab label="List">
+      <ng-container *ngTemplateOutlet="list"></ng-container>
+    </mat-tab>
+    <mat-tab label="Details">
+      <ng-container *ngTemplateOutlet="details"></ng-container>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+<ng-template #list>
+  <div [hidden]="editMode" class="text-center">
+    <button class="btn btn-light" matTooltip="new" (click)="onCreate()">
+      <i class="fa fa-plus c-primary"></i>
+    </button>
+    <button class="btn btn-light" matTooltip="edit" (click)="toggleEdit()" [disabled]="!selectedModel">
+      <i class="fa fa-pen c-accent"></i>
+    </button>
+    <button class="btn btn-light" matTooltip="delete" (click)="onDelete()" [disabled]="!selectedModel">
+      <i class="fa fa-trash c-warn"></i>
+    </button>
+    <mat-form-field appearance="standard">
+      <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchChange()">
+    </mat-form-field>
+  </div>
+  <div class="model-list pretty-scroll">
+    <mat-selection-list *ngIf="modelList"
+                        [disabled]="editMode"
+                        [multiple]="false"
+                        dense>
+      <mat-list-option *ngFor="let model of modelList"
+                       (click)="selectModel(model)"
+                       [selected]="isSelected(model)">
+        {{model.name}}
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-selection-list *ngIf="categorizedList"
+                        [disabled]="editMode"
+                        [multiple]="false"
+                        dense>
+      <ng-container *ngFor="let category of categories()">
+        <div mat-subheader>{{category}}</div>
+        <mat-list-option *ngFor="let model of categorizedList[category]"
+                         (click)="selectModel(model)"
+                         selected="{{model.id === selectedModel?.id}}">
+          {{model.name}}
+        </mat-list-option>
+      </ng-container>
+    </mat-selection-list>
+  </div>
+</ng-template>
+
+<ng-template #details>
+  <ng-content></ng-content>
+</ng-template>

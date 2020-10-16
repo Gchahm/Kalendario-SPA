@@ -1,26 +1,25 @@
-
-
-<div id="calendar-table-container" class="pretty-scroll" [style.height]="calendarHeight()">
+<div class="calendar-table-container">
 
   <div #calendarTable class="calendar-table">
-    <ng-container *ngFor="let hour of calendarHours">
-      <tr [style.background-color]="backGroundColor(hour, 0)">
-        <th width="60px">{{hour}}:00</th>
-        <td class="top-line"></td>
-      </tr>
-      <tr [style.background-color]="backGroundColor(hour, 30)">
-        <th class="bottom-line"></th>
-        <td class="bottom-line"></td>
-      </tr>
-    </ng-container>
+    <app-calendar-hours *ngIf="showHours"
+                        [minStart]="minStart"
+                        [maxStart]="maxStart"></app-calendar-hours>
+    <div class="calendar-right">
+      <app-calendar-line *ngFor="let time of calendarHours"
+                         [time]="time"
+                         [availability]="availability"
+                         (clicked)="emitLineClick($event)"></app-calendar-line>
+    </div>
+
   </div>
 
-  <div class="calendar-event mat-elevation-z1" *ngFor="let event of events"
+  <div class="calendar-event mat-elevation-z1" *ngFor="let event of calendarEvents"
        [style.background-color]="event.color"
        [style.top]="topPosition(event)"
-       [style.height]="eventHeight(event)"
+       [style.height]="event.height"
        [style.width]="eventWidth()"
-       (click)="event.onClick()">
+       [style.left]="eventLeft()"
+       (click)="eventClicked(event.id)">
     <div class="calendar-event-text">{{event.title}}</div>
   </div>
 

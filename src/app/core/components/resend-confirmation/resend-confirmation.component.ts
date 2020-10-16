@@ -22,7 +22,7 @@ export class ResendConfirmationComponent implements OnInit {
   ngOnInit(): void {
     const key = this.route.snapshot.paramMap.get('when');
     if (key === 'now') {
-      this.resendEmail()
+      this.resendEmail();
     }
   }
 
@@ -32,7 +32,7 @@ export class ResendConfirmationComponent implements OnInit {
       .then(res => {
         this.toast.success('email resent');
         this.sent = true;
-      })
+      });
   }
 
 }

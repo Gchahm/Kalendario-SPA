@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {catchError, switchMap, map} from 'rxjs/operators';
-import {Observable, of, throwError} from 'rxjs';
-import {LoginModel} from '@core/models/LoginModel';
-import {User, UserAdapter} from '@core/models/User';
-import {NgRedux} from '@angular-redux/store';
-import {IAppState} from '@app/Store';
-import {LOGIN_USER, LOGOUT_USER} from '@core/CoreActions';
-import {ToastService} from './toast.service';
+import {catchError, map, switchMap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+
+import {User, UserAdapter} from '@api/models/User';
+import {LoginModel} from '@api/models/LoginModel';
+
+export interface RegisterModel {
+  firstName: string,
+  lastName: string,
+  email: string,
+  password1: string,
+  password2: string,
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +23,7 @@ export class AuthService {
   private baseUrl = environment.apiUrl + 'auth/';
 
   constructor(private http: HttpClient,
-              private adapter: UserAdapter,
-              private redux: NgRedux<IAppState>,
-              private toastService: ToastService) {
-
+              private adapter: UserAdapter) {
   }
 
   static setToken(token: string) {
@@ -49,7 +51,6 @@ export class AuthService {
       .pipe(
         map(res => {
           AuthService.removeToken();
-          this.redux.dispatch({type: LOGOUT_USER, user: User.AnonymousUser()});
           return res;
         })
       );
@@ -59,26 +60,19 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'login/', user)
       .pipe(
         switchMap((project: any) => {
-          this.toastService.success('logged in');
           AuthService.setToken(project.key);
           return this.whoAmI();
-        }),
-        catchError(error => {
-          if (error['detail'] && error['detail']['nonFieldErrors']) {
-            this.toastService.error(error['detail']['nonFieldErrors']);
-          }
-          return throwError(error);
         })
       );
   }
 
-  register(form: any): Observable<User> {
+  register(form: RegisterModel): Observable<User> {
     return this.http.post(this.baseUrl + 'registration/', form)
       .pipe(
         switchMap((project: any) => {
           AuthService.setToken(project.key);
           return this.whoAmI();
-        })
+        }),
       );
   }
 
@@ -94,17 +88,13 @@ export class AuthService {
   }
 
   private getUser(): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'current/')
+    return this.http.get<User>(this.baseUrl + 'user/')
       .pipe(
-      map(this.adapter.adapt),
-      map(user => {
-        this.redux.dispatch({type: LOGIN_USER, user});
-        return user;
-      }),
-      catchError(() => {
-        AuthService.removeToken();
-        return of(User.AnonymousUser());
-      })
-    );
+        map(this.adapter.adapt),
+        catchError(() => {
+          AuthService.removeToken();
+          return of(User.AnonymousUser());
+        })
+      );
   }
 }

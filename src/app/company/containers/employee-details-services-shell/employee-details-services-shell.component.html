@@ -1,0 +1,5 @@
+<company-employee-details-services [services]="services$ | async"
+                                   [search]="search$ | async"
+                                   [selected]="selected$ | async"
+                                   (searchChange)="setSearch($event)"
+                                   (select)="setCurrentService($event)"></company-employee-details-services>

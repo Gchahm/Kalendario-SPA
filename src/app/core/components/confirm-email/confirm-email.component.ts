@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '@shared/services/auth.service';
 import {ToastService} from '@shared/services/toast.service';
-import {select} from '@angular-redux/store';
-import {IAppState} from '@app/Store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-confirm-email',
@@ -14,7 +13,7 @@ export class ConfirmEmailComponent implements OnInit {
 
   confirmed = false;
   failure = false;
-  @select((s: IAppState) => s.core.isLoggedIn) isLoggedIn$;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
@@ -24,7 +23,7 @@ export class ConfirmEmailComponent implements OnInit {
   ngOnInit(): void {
     const key = this.route.snapshot.paramMap.get('emailKey');
     if (key) {
-      this.confirmEmail(key)
+      this.confirmEmail(key);
     }
   }
 
@@ -37,7 +36,7 @@ export class ConfirmEmailComponent implements OnInit {
       })
       .catch(error => {
         this.failure = true;
-        this.toast.error("couldn't confirm the email address");
+        this.toast.error('couldn\'t confirm the email address');
       });
   }
 
@@ -46,6 +45,6 @@ export class ConfirmEmailComponent implements OnInit {
       .toPromise()
       .then(res => {
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-      })
+      });
   }
 }

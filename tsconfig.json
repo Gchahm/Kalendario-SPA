@@ -5,7 +5,10 @@
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@core/*": ["src/app/core/*"],
-      "@admin-schedule/*": ["src/app/admin-schedule/*"],
+      "@admin/*": ["src/app/admin/*"],
+      "@api/*": ["src/app/api/*"],
+      "@company/*": ["src/app/company/*"],
+      "@customers/*": ["src/app/customers/*"],
       "@app/*": ["src/app/*"]
     },
     "outDir": "./dist/out-tsc",
@@ -18,7 +21,8 @@
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/types/typing.d.ts"
     ],
     "lib": [
       "es2018",

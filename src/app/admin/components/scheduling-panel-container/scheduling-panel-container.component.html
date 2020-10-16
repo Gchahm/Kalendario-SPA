@@ -1,0 +1,25 @@
+<div class="panel-container">
+  <div class="scheduling-panel-heading">
+    <div>
+      <h6>{{employee.name}}</h6>
+    </div>
+
+    <div>
+      <button class="btn btn-outline-primary" (click)="bookAppointment()">
+        <i class="fa fa-calendar" matTooltip="book appointment"></i>
+      </button>
+      <button class="btn btn-outline-accent" (click)="bookSelfAppointment()">
+        <i class="fa fa-lock" matTooltip="lock time"></i>
+      </button>
+      <button class="btn btn-outline-danger close-button" (click)="closeClick()">
+        <i class="fa fa-times" matTooltip="close"></i>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>
+
+

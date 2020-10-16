@@ -1,0 +1,44 @@
+<div *ngIf="request">
+  <div [@fadeIn]="animationState" class="row mb-4" *ngIf="request.owner as company">
+    <div class="col-8">
+      <shared-company-avatar [address]="company.address"
+                             [logo]="company.avatar"
+                             [name]="company.name">
+      </shared-company-avatar>
+    </div>
+    <div class="col-4 h4 text-right font-weight-bold">
+      {{request.scheduledDate | toMomentDateLong}}
+      <div class="c-primary">
+        {{request.status | appointmentStatus}}
+      </div>
+    </div>
+  </div>
+  <p>
+    {{request.owner.config.postBookMessage}}
+  </p>
+  <h2 [@fadeInDown]="animationState" class="c-primary mb-4">Summary</h2>
+  <div [@staggeredFadeIn]="attentionState">
+    <div class="d-flex mb-4" *ngFor="let requestItem of request.items">
+      <img src="{{requestItem.employee.photoUrl}}" class="company-circle-img-7">
+      <div class="row w-100 ml-2">
+        <div class="col-12">
+          <h4>{{requestItem.employee.name}}</h4>
+        </div>
+        <ng-container *ngFor="let appointment of requestItem.appointments">
+          <div class="col-9">
+            <b>{{appointment.service.name}}</b>
+            <p class="text-small">
+              {{appointment.start.format('DD/MM/YYYY - HH:mm')}} (duration: {{appointment.service.duration}})
+            </p>
+          </div>
+          <div class="col-3 text-right c-primary">
+            <h6>{{appointment.service.price}}</h6>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div [@fadeInDown]="animationState" class="c-primary text-right h4">
+    Total: {{request.total | currency:'EUR'}}
+  </div>
+</div>

@@ -3,37 +3,27 @@ h4 {
   width: 50%;
 }
 
-#calendar-table-container {
-  overflow-y: scroll;
+.calendar-table-container {
   position: relative;
   max-width: 600px;
 }
 
-.calendar-table > th {
-  width: 60px;
-}
-
-.top-line {
-  border-bottom: 1px solid lightgray;
-  width: 100%;
-  height: 30px;
-}
-
-.bottom-line {
-  border-bottom: 1px solid gray;
-  width: 100%;
-  height: 30px;
-}
-
-th {
-  border-right: 1px solid gray;
-}
+//.top-line {
+//  border-bottom: 1px dashed lightgray;
+//  width: 100%;
+//  height: 30px;
+//}
+//
+//.bottom-line {
+//  border-bottom: 1px solid lightgray;
+//  width: 100%;
+//  height: 30px;
+//}
 
 .calendar-event {
   box-sizing: border-box;
   border: 1px solid lightgray;
   position: absolute;
-  left: 60px;
   border-radius: 10px;
 }
 
@@ -46,4 +36,17 @@ th {
   /* move .inner up by half of its height so that its middle is in the middle of .outer */
   transform: translateY(-50%);
   width: 100%;
+}
+
+.calendar-table {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.calendar-right {
+  width: 100%;
+}
+
+.bg-light-gray {
+  background-color: #f1f1f1;
 }

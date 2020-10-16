@@ -1,11 +1,11 @@
 import {Component, DoCheck, ElementRef, Input, OnDestroy, Optional, Self} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormGroup, NgControl, Validators} from '@angular/forms';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 import {MatFormFieldControl} from '@angular/material/form-field';
 import {Subject} from 'rxjs';
 import {FocusMonitor} from '@angular/cdk/a11y';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import * as moment from 'moment';
 
 @Component({
   selector: 'date-time-input',
@@ -25,12 +25,12 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
   stateChanges = new Subject<void>();
   focused = false;
   controlType = 'datetime-input';
-  id = `example-tel-input-${DateTimeInputComponent.nextId++}`;
+  id = `datetime-input-${DateTimeInputComponent.nextId++}`;
   describedBy = '';
   onChange = (_: any) => {
-  };
+  }
   onTouched = () => {
-  };
+  }
 
   get empty() {
     const {value: {date, time}} = this.datetimeParts;
@@ -102,7 +102,7 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
   errorState: boolean;
 
   ngDoCheck(): void {
-    if(this.ngControl) {
+    if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
       this.stateChanges.next();
     }
@@ -115,7 +115,7 @@ export class DateTimeInputComponent implements MatFormFieldControl<Moment>, Cont
     @Optional() @Self() public ngControl: NgControl) {
 
     this.datetimeParts = formBuilder.group({
-      date: [{value: moment.utc(), disabled: true}, [Validators.required]],
+      date: [moment.utc(), [Validators.required]],
       time: [0, [Validators.required]],
     });
 

@@ -1,0 +1,11 @@
+<div class="text-center"
+     (mouseover)="toggleVisible(true)"
+     (mouseout)="toggleVisible(false)"
+     [class.top-line]="oClock"
+     [class.bottom-line]="!oClock"
+     [class.bg-white]="available"
+     [class.bg-light-gray]="!available">
+  <button [hidden]="!showButton" (click)="emitClick()" class="btn btn-light">
+    <i class="fa fa-plus-circle"></i>
+  </button>
+</div>

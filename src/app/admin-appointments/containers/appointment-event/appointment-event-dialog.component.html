@@ -1,0 +1,60 @@
+<div class="event-container" *ngIf="appointment$ | async as appointment">
+  <div class="text-right" *ngIf="permissions$ | async as permission">
+    <ng-container *ngIf="!editMode">
+      <button class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
+        <i class="fa fa-history c-accent m-1"></i>
+      </button>
+      <button *ngIf="permission.change"
+              (click)="toggleEdit(true)"
+              class="btn btn-light" matTooltip="edit">
+        <i class="fa fa-pen c-primary m-1"></i>
+      </button>
+      <button *ngIf="permission.delete"
+              (click)="delete(appointment.id)"
+              class="btn btn-light" matTooltip="delete">
+        <i class="fa fa-trash c-warn m-1"></i>
+      </button>
+    </ng-container>
+    <button class="btn btn-light" matTooltip="close" (click)="closeDialog()">
+      <i class="fa fa-times c-warn m-1"></i>
+    </button>
+  </div>
+
+  <ng-container *ngIf="hasService(appointment); else selfAppointment">
+    <ng-container *ngIf="!editMode">
+      <admin-appointment-details [model]="appointment"></admin-appointment-details>
+    </ng-container>
+    <ng-container *ngIf="editMode">
+      <admin-appointment-form [model]="appointment"
+                              [employees]="employees$ | async"
+                              [services]="services$ | async"
+                              [apiError]="apiError$ | async"
+                              (cancel)="toggleEdit(false)"
+                              (update)="updateAppointment($event)">
+      </admin-appointment-form>
+    </ng-container>
+  </ng-container>
+
+  <div class="history-container pretty-scroll" [@expandCollapse]="showHistory">
+    <div class="sticky-top bg-white pt-4 pb-4">
+      <h3>History</h3>
+    </div>
+    <div *ngFor="let h of history$ | async">
+      <admin-appointment-history-details [model]="h"></admin-appointment-history-details>
+      <mat-divider class="mt-4 mb-4"></mat-divider>
+    </div>
+  </div>
+
+  <ng-template #selfAppointment>
+    <ng-container *ngIf="!editMode">
+      <admin-self-appointment-details [model]="appointment"></admin-self-appointment-details>
+    </ng-container>
+    <ng-container *ngIf="editMode">
+      <admin-self-appointment-form [model]="appointment"
+                                   [apiError]="apiError$ | async"
+                                   (cancel)="toggleEdit(false)"
+                                   (update)="updateSelfAppointment($event)">
+      </admin-self-appointment-form>
+    </ng-container>
+  </ng-template>
+</div>

@@ -1,0 +1,18 @@
+<div class="create-appointment-dialog-container" *ngIf="appointment$ | async as model">
+  <ng-container *ngIf="(type$ | async) === appointmentType.service">
+    <admin-appointment-form [model]="model"
+                            [employees]="employees$ | async"
+                            [services]="services$ | async"
+                            [apiError]="apiError$ | async"
+                            (cancel)="closeDialog()"
+                            (create)="saveAppointment($event)">
+    </admin-appointment-form>
+  </ng-container>
+  <ng-container *ngIf="(type$ | async) === appointmentType.self">
+    <admin-self-appointment-form [model]="model"
+                                 [apiError]="apiError$ | async"
+                                 (cancel)="closeDialog()"
+                                 (create)="saveSelfAppointment($event)">
+    </admin-self-appointment-form>
+  </ng-container>
+</div>

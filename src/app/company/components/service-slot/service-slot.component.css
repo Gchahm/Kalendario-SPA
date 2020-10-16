@@ -1,0 +1,11 @@
+p {
+  margin: 0;
+}
+
+.slot-container {
+  padding: 0.5rem;
+  border-radius: 3px;
+  text-align: center;
+  width: 10rem;
+  cursor: pointer;
+}

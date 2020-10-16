@@ -9,11 +9,12 @@
       <h4 class="card-title">Invallid confirmation token</h4>
       <ng-container *ngIf="isLoggedIn$ | async; else login">
         <p>Your email couldn't be confirmed with the provided token click in the button </p>
-        <button mat-flat-button color="primary" (click)="resendEmail()">resend</button>
+        <button (click)="resendEmail()" class="btn btn-primary">resend</button>
       </ng-container>
       <ng-template #login>
-        <p>Your email couldn't be confirmed with the provided token click in the button to login and resend the token</p>
-        <button mat-flat-button color="primary" routerLink="/resend-confirm-email/now">resend</button>
+        <p>Your email couldn't be confirmed with the provided token click in the button to login and resend the
+          token</p>
+        <button routerLink="/resend-confirm-email/now" class="btn btn-primary">resend</button>
       </ng-template>
     </mat-card-content>
   </mat-card>

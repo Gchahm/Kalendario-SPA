@@ -1,0 +1,15 @@
+.calendar-left {
+  background-color: white;
+  text-align: center;
+  width: 60px;
+}
+
+.calendar-hour {
+  height: 60px;
+}
+
+.hour-box {
+  position: relative;
+  top: -15px;
+  color: darkgray;
+}

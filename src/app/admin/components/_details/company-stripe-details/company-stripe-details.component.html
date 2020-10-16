@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-6">
+    <h3>Stripe Details</h3>
+  </div>
+  <div class="col-6 text-right">
+    <button (click)="edit.emit()" class="btn btn-admin btn-primary">Edit</button>
+  </div>
+  <div class="col-12">
+    <table *ngIf="model" class="table table-borderless">
+      <tbody>
+      <tr>
+        <th>Payment Currency</th>
+        <td>{{model.stripeDefaultCurrency}}</td>
+      </tr>
+      <tr>
+        <th>Details Submitted</th>
+        <td>
+          <div class="status-circle {{model.stripeDetailsSubmitted ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+        </td>
+      </tr>
+      <tr>
+        <th>Payouts Enabled</th>
+        <td>
+          <div class="status-circle {{model.stripePayoutsEnabled ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+        </td>
+      </tr>
+      <tr>
+        <th>Charges Enabled</th>
+        <td>
+          <div class="status-circle {{model.stripeChargesEnabled ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+

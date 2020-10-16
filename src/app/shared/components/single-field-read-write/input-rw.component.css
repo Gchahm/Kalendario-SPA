@@ -1,0 +1,31 @@
+.sf-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.fa.fa-pen {
+  margin-left: 0.5rem;
+  font-size: 0.6rem;
+}
+
+.fa.fa-pen:hover {
+  color: black;
+}
+
+.sf-field {
+  color: #8F8F8F;
+}
+
+.invalid-feedback {
+  display: block;
+}
+.sf-field {
+  color: #8F8F8F;
+}
+
+.color-picker-box {
+  min-height: 2em;
+  min-width: 5em;
+  border: black 1px solid;
+  border-radius: 2px;
+}

@@ -1,0 +1,6 @@
+<app-service-category-form [model]="model$ | async"
+                           [apiError]="apiError$ | async"
+                           (cancel)="closeDialog()"
+                           (create)="saveModel($event)"
+                           (update)="updateModel($event)">
+</app-service-category-form>

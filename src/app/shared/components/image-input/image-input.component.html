@@ -1,0 +1,13 @@
+<div class="image-holder text-center">
+  <div class="profile-img semi-circle">
+  </div>
+  <div class="profile-img edit-button-wrapper">
+    <div class="m-auto edit-button-content"
+         (click)="imageInput.click()">Edit</div>
+  </div>
+  <input type="image" src="{{url}}"
+         class="profile-img"
+         alt="upload profile image"
+         title="change image">
+  <input type="file" accept="image/*" #imageInput hidden (change)="processFile(imageInput)">
+</div>

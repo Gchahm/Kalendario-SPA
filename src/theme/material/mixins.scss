@@ -1,0 +1,45 @@
+@import '../../../node_modules/@angular/material/theming';
+// Plus imports for other components in your app.
+
+
+@mixin div-component($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, background);
+
+  .pretty-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: mat-color($accent, 200);
+  }
+
+  div, mat-toolbar, button, mat-list, mat-drawer, mat-list-item, a, mat-grid-tile-header.mat-grid-tile-header  {
+    &.p900{
+      color: white;
+      background-color: mat-color($primary, 900);
+    }
+    &.p600{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 600);
+    }
+    &.p300{
+      color: mat-color($foreground, text);
+      background-color: mat-color($primary, 300);
+    }
+    &.p100{
+      background-color: mat-color($primary, 100);
+    }
+
+    &.A100{
+      background-color: mat-color($accent, 100);
+    }
+    &.A200 {
+      color: white;
+      background-color: mat-color($accent, 200);
+    }
+    &.A400 {
+      color: white;
+      background-color: mat-color($accent, 400);
+    }
+  }
+}

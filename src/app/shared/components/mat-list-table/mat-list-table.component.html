@@ -1,13 +1,18 @@
-<mat-list class="mat-list-container">
-  <mat-list-item class="p500">
-    <span class="mat-list-header">{{title}}</span>
-  </mat-list-item>
-  <mat-list-item *ngFor="let item of items">
-    <mat-divider></mat-divider>
-    <span class="mat-list-title">{{item.name}}</span>
-    <span class="mat-list-value color-box" *ngIf="isColor(item.value); else notColor" [style.backgroundColor]="item.value"></span>
-    <ng-template #notColor>
-      <span  class="mat-list-value">{{item.value}}</span >
-    </ng-template>
-  </mat-list-item>
-</mat-list>
+<div class="mat-list-container pretty-scroll">
+  <mat-list dense>
+    <mat-list-item class="p600">
+      <span class="mat-list-header">{{title}}</span>
+    </mat-list-item>
+    <div class="pretty-scroll h30">
+      <mat-list-item *ngFor="let item of items">
+        <mat-divider></mat-divider>
+        <span class="mat-list-title">{{item.name}}</span>
+        <span class="mat-list-value color-box" *ngIf="isColor(item.value); else notColor"
+              [style.backgroundColor]="item.value"></span>
+        <ng-template #notColor>
+          <mat-list-item>{{item.value}}</mat-list-item>
+        </ng-template>
+      </mat-list-item>
+    </div>
+  </mat-list>
+</div>

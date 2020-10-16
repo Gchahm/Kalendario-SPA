@@ -1,0 +1,7 @@
+<admin-service-rw *ngIf="fullModel$ | async as model"
+                  [model]="model"
+                  [editMode]="editMode$ | async"
+                  [apiError]="apiError$ | async"
+                  (edit)="toggleEdit($event)"
+                  (update)="updateModel($event)">
+</admin-service-rw>

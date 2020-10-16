@@ -1,14 +1,6 @@
-import {Component} from '@angular/core';
-import {AuthService} from '@shared/services/auth.service';
-import {ToastService} from '@shared/services/toast.service';
-import {NgRedux, select} from '@angular-redux/store';
-import {IAppState} from '@app/Store';
-import {TOGGLE_LEFT_PANE} from '../../CoreActions';
-import {PERMISSION_ADD, PERMISSION_VIEW, User} from '../../models/User';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {Company} from '../../models/Company';
-import {Router} from '@angular/router';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Company, User} from '@api/models';
+import {PERMISSION_ADD, PERMISSION_VIEW} from '@api/permissions';
 
 @Component({
   selector: 'app-navbar',
@@ -17,40 +9,24 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent {
 
-  @select((s: IAppState) => s.core.isLoggedIn) isLoggedIn$;
-  @select((s: IAppState) => s.core.showLeftPane) showLeftPane$;
-  @select((s: IAppState) => s.company.companyName) companyName$;
-  @select((s: IAppState) => s.core.user) user$: Observable<User>;
+  @Input() isLoggedIn: boolean;
+  @Input() showLeftPaneButton: boolean
+  @Input() companyName: string;
+  @Input() user: User;
+  @Input() cartItems: number;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private toastService: ToastService,
-              private redux: NgRedux<IAppState>) {
+  @Output() logout = new EventEmitter<void>()
+  @Output() toggleLeftPane = new EventEmitter<void>()
+
+  canCreateCompany(): boolean {
+    return this.user.hasPermission(PERMISSION_ADD, Company.modelType);
   }
 
-  logout() {
-    this.authService.logout()
-      .toPromise()
-      .then( res => {
-        this.router.navigate(['']);
-        this.toastService.message(res.detail)
-      });
+  canManageCompany(): boolean {
+    return this.user.hasPermission(PERMISSION_VIEW, Company.modelType);
   }
 
-  toggleLeftPane() {
-    this.redux.dispatch({type: TOGGLE_LEFT_PANE});
+  canViewEmpDashboard(): boolean {
+    return !!this.user.employee;
   }
-
-  canCreateCompany(): Observable<boolean> {
-    return this.user$.pipe(
-        map(u =>  u.hasPermission(PERMISSION_ADD, Company.modelType))
-      );
-  }
-
-  canManageCompany(): Observable<boolean> {
-    return this.user$.pipe(
-      map(u => u.hasPermission(PERMISSION_VIEW, Company.modelType))
-    );
-  }
-
 }

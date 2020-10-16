@@ -1,0 +1,10 @@
+<admin-scheduling-panel-container [employee]="employee"
+                                  (createAppointment)="createAppointment()"
+                                  (createSelfAppointment)="createSelfAppointment()"
+                                  (close)="closeClick()">
+  <app-calendar [events]="events$ | async"
+                [availability]="availability$ | async"
+                [showHours]="showCalendarHours"
+                (eventClick)="editAppointment($event)"
+                (lineClick)="createAppointment2($event)"></app-calendar>
+</admin-scheduling-panel-container>

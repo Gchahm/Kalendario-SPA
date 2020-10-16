@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {CompanyService} from '@shared/services/company.service';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Company} from '../../models/Company';
-import {map} from 'rxjs/operators';
+import {filter, map, startWith, switchMap} from 'rxjs/operators';
+import {CompanyClient} from '@api/clients';
+import {Company} from '@api/models';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +13,18 @@ import {map} from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   companies$: Observable<Company[]>;
+  companyControl = new FormControl();
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private companyService: CompanyClient) {
+  }
 
   ngOnInit() {
-    this.companies$ = this.companyService.get()
+
+    this.companies$ = this.companyControl.valueChanges
       .pipe(
+        startWith(''),
+        filter((v: string) => v.length > 2),
+        switchMap(search => this.companyService.get({search})),
         map(res => res.results)
       );
   }

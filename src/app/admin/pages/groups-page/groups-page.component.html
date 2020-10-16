@@ -1,0 +1,20 @@
+<model-list-container [modelList]="modelList$ | async"
+                      [selectedModel]="selectedModel$ | async"
+                      [editMode]="editMode$ | async"
+                      [searchValue]="searchValue$ | async"
+                      [mobileView]="isMobile$ | async"
+                      (edit)="toggleEdit($event)"
+                      (selected)="modelSelected($event)"
+                      (create)="newModel()"
+                      (delete)="deleteModel($event)"
+                      (search)="updateSearch($event)">
+  <admin-group-details *ngIf="!(editMode$ | async)"
+                       [model]="viewModel$ | async"></admin-group-details>
+  <admin-group-form *ngIf="editMode$ | async"
+                    [model]="selectedModel$ | async"
+                    [permissions]="permissions$ | async"
+                    [apiError]="apiError$ | async"
+                    (create)="saveModel($event)"
+                    (update)="updateModel($event)"
+                    (cancel)="cancelForm($event)"></admin-group-form>
+</model-list-container>

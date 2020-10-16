@@ -1,5 +1,5 @@
 <div [formGroup]="colorParts">
-  <input class="color-picker-container"
+  <input class="form-control form-control-admin"
          [(colorPicker)]="value"
          [cpPosition]="'bottom'"
          [cpPositionOffset]="'50%'"
@@ -8,6 +8,7 @@
          (input)="_handleInput()"/>
   <span class="color-picker-button">
     <app-color-icon [color]="value"></app-color-icon>
-    <mat-icon>colorize</mat-icon>
+    <i class="fa fa-fill"></i>
   </span>
+  <div class="color-picker-box" [style.background-color]="value"></div>
 </div>

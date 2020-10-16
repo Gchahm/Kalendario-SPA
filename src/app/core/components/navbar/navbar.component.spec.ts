@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavbarComponent } from './navbar.component';
+import {NavbarComponent} from './navbar.component';
 import {AuthService} from '@shared/services/auth.service';
 import {AuthServiceMock, RouterMock, ToastServiceMock} from '@shared/test/stubs';
 import {ToastService} from '@shared/services/toast.service';
@@ -16,14 +16,14 @@ describe('NavbarComponent', () => {
       imports: [
         NgReduxTestingModule,
       ],
-      declarations: [ NavbarComponent ],
+      declarations: [NavbarComponent],
       providers: [
         {provide: AuthService, useClass: AuthServiceMock},
         {provide: ToastService, useClass: ToastServiceMock},
         {provide: Router, useClass: RouterMock},
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

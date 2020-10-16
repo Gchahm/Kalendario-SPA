@@ -1,0 +1,11 @@
+<div class="request-shell-container">
+  <div class="row no-gutters">
+    <div class="col-12 mb-4" *ngFor="let model of modelList$ | async">
+      <app-kalendario-card>
+        <admin-request-details [model]="model"
+                               (reject)="reject($event)"
+                               (accept)="accept($event)"></admin-request-details>
+      </app-kalendario-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="schedule-appointment-container">
+  <div class="row">
+    <div class="col-2 text-center m-auto c-medium-gray">
+      {{appointment.start.format('HH:mm')}}
+      <p *ngIf="showEdit">
+        <i class="fa fa-pen c-primary c-pointer"
+           (click)="edit()"></i>
+      </p>
+    </div>
+    <div class="col-6 m-auto">
+      <p class="m-auto">
+        {{appointment.service.name}}
+      </p>
+    </div>
+    <div class="col-4 c-medium-gray">
+      <p>
+        <i class="fa fa-clock c-primary mr-2"></i> {{appointment.service.duration}}
+      </p>
+      <p [matTooltip]="customerDetails()"
+         [matTooltipClass]="'tooltip-ws'"
+         class="c-primary">
+        <i class="fa fa-address-card mr-2"></i>{{appointment.customer.name}}
+      </p>
+    </div>
+    <div class="col-12">
+      <hr/>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<shared-company-avatar *ngIf="company$ | async as company"
+                       [logo]="company.avatar"
+                       [name]="company.name"
+                       [address]="company.address"></shared-company-avatar>

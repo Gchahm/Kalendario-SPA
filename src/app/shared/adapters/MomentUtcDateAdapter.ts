@@ -1,7 +1,7 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { Moment } from 'moment';
+import {Inject, Injectable, Optional} from '@angular/core';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import * as moment from 'moment';
+import {Moment} from 'moment';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class MomentUtcDateAdapter extends MomentDateAdapter {
       throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
     }
 
-    let result = moment.utc({ year, month, date }).locale(this.locale);
+    const result = moment.utc({year, month, date}).locale(this.locale);
 
     // If the result isn't valid, the date must have been out of bounds for this month.
     if (!result.isValid()) {
@@ -32,3 +32,16 @@ export class MomentUtcDateAdapter extends MomentDateAdapter {
     return result;
   }
 }
+
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'ddd DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'ddd DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};

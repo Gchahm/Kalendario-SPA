@@ -1,0 +1,23 @@
+<div class="shared-dashboard-container" [class.admin-dashboard-is-mobile]="isMobile">
+  <mat-sidenav-container class="shared-dashboard-sidenav-container">
+    <mat-sidenav [mode]="isMobile ? 'over' : 'side'"
+                 [fixedInViewport]="isMobile" fixedTopGap="56" [opened]="leftPaneOpen">
+      <mat-nav-list *ngIf="user">
+        <ng-container *ngFor="let route of routes">
+          <a *ngIf="!route.fn || route.fn(user)"
+             mat-list-item
+             routerLink="{{route.path}}"
+             routerLinkActive #rla="routerLinkActive"
+             (click)="this.routeClick.emit(route)">
+            <i [matTooltip]="route.path | titlecase"
+               class="fa fa-{{route.icon}} c-pointer"
+               [class.c-primary]="rla.isActive"></i>
+          </a>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

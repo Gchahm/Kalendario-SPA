@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DateTimeInputComponent } from './date-time-input.component';
+import {DateTimeInputComponent} from './date-time-input.component';
 import {FormBuilder} from '@angular/forms';
 import * as moment from 'moment';
 
@@ -10,12 +10,12 @@ describe('DateTimeInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DateTimeInputComponent ],
+      declarations: [DateTimeInputComponent],
       providers: [
         FormBuilder
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -33,5 +33,5 @@ describe('DateTimeInputComponent', () => {
     component.writeValue(value);
 
     expect(component.value).toEqual(value);
-  })
+  });
 });

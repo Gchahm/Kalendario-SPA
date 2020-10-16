@@ -1,0 +1,7 @@
+<app-navbar [isLoggedIn]="isLoggedIn$ | async"
+            [showLeftPaneButton]="showLeftPaneButton$ | async"
+            [user]="user$ | async"
+            [companyName]="companyName$ | async"
+            [cartItems]="cartCount$ | async"
+            (logout)="logout()"
+            (toggleLeftPane)="toggleLeftPane()"></app-navbar>

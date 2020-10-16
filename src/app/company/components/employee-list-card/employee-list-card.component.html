@@ -1,0 +1,17 @@
+<div class="emp-card-container">
+  <img class="company-circle-img-7" src="{{model.employee.photoUrl}}">
+  <div class="emp-card-content">
+    <div class="h4">
+      {{model.employee.name}}
+    </div>
+    {{model.employee.bio}}
+    <div class="emp-card-button">
+<!--      <button class="btn-details mr-3">-->
+<!--        Show details-->
+<!--      </button>-->
+      <button class="btn btn-primary-gradient" routerLink="staff/{{model.employee.id}}">
+        Book appointment
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,36 +1,61 @@
-<mat-toolbar color="primary" class="navbar-container">
-  <mat-toolbar-row>
-    <button *ngIf="(showLeftPane$ | async)" mat-button (click)="toggleLeftPane()">
-      <mat-icon>dehaze</mat-icon>
+<mat-toolbar class="navbar-container">
+  <mat-toolbar-row class="bg-white company-shadow-1">
+
+    <button *ngIf="showLeftPaneButton" (click)="toggleLeftPane.emit()" class="btn btn-light">
+      <i class="fa fa-bars"></i>
     </button>
-    <button mat-button routerLink="/c/{{companyName}}" *ngIf="companyName$ | async as companyName">
-      <span>{{companyName}}</span>
-    </button>
+
+    <h4 class="c-pointer nav-logo" routerLink="/">
+      Kalendario
+    </h4>
+
     <span class="nav-spacer"></span>
-    <div *ngIf="isLoggedIn$ | async; else loginTemplate">
-      <ng-container *ngIf="user$ | async as user">
-        <a [matMenuTriggerFor]="menu"><mat-icon>dehaze</mat-icon></a>
+
+
+    <h4 class="c-pointer nav-logo"  routerLink="/c/{{companyName}}" *ngIf="companyName">
+      <span>{{companyName | removeHyphen}}</span>
+    </h4>
+
+
+    <div *ngIf="isLoggedIn; else loginTemplate">
+
+      <button *ngIf="companyName"
+              class="btn btn-light"
+              routerLink="c/{{companyName}}/cart"
+              [matBadge]="cartItems"
+              matBadgePosition="above"
+              matBadgeColor="accent">
+        <i class="fa fa-shopping-cart"></i>
+      </button>
+      <button class="btn btn-light" routerLink="cust/requests">
+        <i class="fa fa-calendar"></i>
+      </button>
+
+      <ng-container *ngIf="user">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <i class="fa fa-bars"></i>
+        </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item routerLink="/my-appointments">
-            My appointments
-          </button>
-          <button *ngIf="canCreateCompany() | async" mat-menu-item routerLink="/create-company">
+          <button *ngIf="canCreateCompany()" mat-menu-item routerLink="/create-company">
             Create Company
           </button>
-          <button *ngIf="canManageCompany() | async" mat-menu-item routerLink="/admin/home">
+          <button *ngIf="canManageCompany()" mat-menu-item routerLink="/admin/home">
             Company dashboard
           </button>
-          <button mat-menu-item (click)="logout()">
+          <button *ngIf="canViewEmpDashboard()" mat-menu-item routerLink="/emp/">
+            Employee dashboard
+          </button>
+          <button mat-menu-item (click)="logout.emit()">
             Logout
           </button>
         </mat-menu>
       </ng-container>
     </div>
     <ng-template #loginTemplate>
-      <button mat-button routerLink="/login">
+      <button class="btn btn-light" routerLink="/login">
         login
       </button>
-      <button mat-button routerLink="/register">
+      <button class="btn btn-light" routerLink="/register">
         register
       </button>
     </ng-template>

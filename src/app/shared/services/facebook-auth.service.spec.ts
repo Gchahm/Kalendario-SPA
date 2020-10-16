@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { FacebookAuthService } from './facebook-auth.service';
+import {FacebookAuthService} from './facebook-auth.service';
 
 describe('FacebookAuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

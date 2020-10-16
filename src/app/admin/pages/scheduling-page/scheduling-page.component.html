@@ -1,0 +1,29 @@
+<admin-scheduling-page-toolbar [date]="date$ | async"
+                               [panels]="modelList$ | async"
+                               [currentPanel]="selectedModel$ | async"
+                               [toolbarEmployees]="toolbarEmployees$ | async"
+                               [isMobile]="isMobile$ | async"
+                               [requestCount]="requestsCount$ | async"
+                               (select)="modelSelected($event)"
+                               (create)="saveModel($event)"
+                               (update)="updateModel($event)"
+                               (delete)="deleteModel($event)"
+                               (toggleRequests)="showRequests = !showRequests"
+                               (dateChanged)="updateDate($event)">
+</admin-scheduling-page-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav [position]="'end'" [opened]="showRequests">
+    <admin-requests-shell></admin-requests-shell>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <admin-scheduling-page-content *ngIf="selectedModel$ | async as panel; else spinner"
+                                   [employees]="selectedEmployees$ | async"
+                                   [date]="date$ | async"
+                                   (close)="removeEmployee(panel, $event)">
+    </admin-scheduling-page-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<ng-template #spinner>
+  <mat-spinner class="m-auto"></mat-spinner>
+</ng-template>
+

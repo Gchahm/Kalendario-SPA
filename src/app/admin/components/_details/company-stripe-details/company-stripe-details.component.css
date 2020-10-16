@@ -1,0 +1,14 @@
+
+
+tr > td {
+  position: relative;
+  text-align: right;
+}
+
+.status-circle {
+  position: absolute;
+  right: 1rem;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+}

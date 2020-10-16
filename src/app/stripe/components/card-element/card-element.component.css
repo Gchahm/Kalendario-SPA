@@ -1,0 +1,12 @@
+.stripe-card-container {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.pay-container {
+  margin-right: 0.5rem;
+}

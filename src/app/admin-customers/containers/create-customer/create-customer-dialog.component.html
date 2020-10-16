@@ -1,0 +1,7 @@
+<mat-dialog-content>
+  <admin-customer-form [model]="model$ | async"
+                       [apiError]="apiError$ | async"
+                       (create)="saveModel($event)"
+                       (cancel)="closeDialog()">
+  </admin-customer-form>
+</mat-dialog-content>

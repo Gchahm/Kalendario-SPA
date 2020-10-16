@@ -1,0 +1,16 @@
+<div [formGroup]="form" class="service-cat-input-container">
+  <select formControlName="formControl"
+          class="form-control form-control-admin"
+          (change)="_handleInput()">
+    <option value="{{null}}"></option>
+    <option *ngFor="let category of categories$ | async"
+                [value]="category.id">{{category.name}}</option>
+  </select>
+  <button type="button" (click)="edit()" class="btn btn-light c-accent">
+    <i class="fa fa-pen"></i>
+  </button>
+  <button type="button" (click)="create()" class="btn btn-light c-accent">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>
+

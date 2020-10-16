@@ -1,0 +1,59 @@
+<mat-toolbar class="toolbar-wrapper mat-elevation-z3">
+  <mat-toolbar-row class="toolbar-row">
+    <button class="btn  btn-outline-{{color(panel)}}" *ngFor="let panel of panels"
+            (click)="selectClick(panel)">{{panel.name}}</button>
+    <button class="btn btn-light" matTooltip="add panel" (click)="createPanel()">
+      <i class="fa fa-plus c-primary"></i>
+    </button>
+    <button class="btn btn-light" *ngIf="currentPanel" matTooltip="add panel" (click)="editPanel()">
+      <i class="fa fa-pen c-accent"></i>
+    </button>
+    <button class="btn btn-light" *ngIf="currentPanel" matTooltip="remove panel" (click)="deletePanel()">
+      <i class="fa fa-times c-warn"></i>
+    </button>
+  </mat-toolbar-row>
+  <mat-toolbar-row *ngIf="currentPanel">
+    <mat-menu #employeesMenu="matMenu">
+      <button *ngFor="let emp of toolbarEmployees"
+              mat-menu-item
+              (click)="addEmployee(emp)">
+        <i *ngIf="emp.isSelected" class="fa fa-check"></i>
+        {{emp.employee.name}}
+      </button>
+    </mat-menu>
+
+    <button class="btn btn-light" [matMenuTriggerFor]="employeesMenu">
+      <i class="fa fa-ellipsis-v c-accent"></i>
+    </button>
+
+    <ng-container *ngIf="!isMobile">
+      <button class="btn btn-accent" (click)="today()">
+        today
+      </button>
+      <button class="btn btn-light" (click)="previousDay()">
+        <i class="fa fa-chevron-left c-accent"></i>
+      </button>
+      <button class="btn btn-light" (click)="nextDay()">
+        <i class="fa fa-chevron-right c-accent"></i>
+      </button>
+    </ng-container>
+
+    <mat-form-field appearance="standard">
+      <input matInput
+             (click)="dpApointmentDashboard.open()"
+             [ngModel]="date"
+             (ngModelChange)="dateChanged.emit($event)"
+             [matDatepicker]="dpApointmentDashboard">
+      <i class="fa fa-calendar-alt" matsuffix (click)="dpApointmentDashboard.open()"></i>
+      <mat-datepicker [touchUi]="isMobile" #dpApointmentDashboard></mat-datepicker>
+    </mat-form-field>
+
+    <span class="nav-spacer"></span>
+
+    <button class="btn btn-outline-primary"
+            [matBadge]="requestCount"
+            (click)="toggleRequests.emit()">requests
+    </button>
+
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,14 @@
+.r-i-container {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.company-circle-img-7 {
+  width: 5rem;
+  height: 5rem;
+}
+
+h4 {
+  border-bottom: 1px solid gray;
+}
+

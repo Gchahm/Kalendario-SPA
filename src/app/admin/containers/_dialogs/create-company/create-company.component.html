@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-12 col-md-4">
+      <mat-card class="mat-elevation-z5 card-400">
+        <mat-card-content>
+          <h4 class="card-title text-center">create company</h4>
+          <form class="form-100" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-form-field *ngIf="form.get('name') as name">
+              <input matInput
+                     class="form-control"
+                     type="text"
+                     placeholder="company name"
+                     name="name"
+                     formControlName="name">
+              <mat-error *ngIf="form.get('name').hasError('required')">
+                name is <strong>required</strong>
+              </mat-error>
+              <mat-error *ngIf="name.hasError('shouldBeUnique')">
+                this name has already been taken
+              </mat-error>
+              <mat-error *ngIf="form.get('name').errors?.serverError">
+                {{name.errors?.serverError}}
+              </mat-error>
+            </mat-form-field>
+            <button class="btn btn-accent" [disabled]="!form.valid" type="submit">create</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

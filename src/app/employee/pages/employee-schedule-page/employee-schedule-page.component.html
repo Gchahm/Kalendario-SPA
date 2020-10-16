@@ -1,0 +1,11 @@
+<div class="container mt-4" *ngIf="employee$ | async as employee">
+  <employee-schedule [currentDate]="currentDate$ | async"
+                     [appointments]="appointments$ | async"
+                     [permissions]="permissions$ | async"
+                     [employee]="employee"
+                     [startDate]="startDate"
+                     [endDate]="endDate"
+                     (updateCurrent)="updateCurrent($event)"
+                     (add)="openCreateDialog($event, employee)">
+  </employee-schedule>
+</div>

@@ -1,0 +1,51 @@
+<form class="appointment-form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-12">
+      <mat-error>
+        <mat-list *ngFor="let error of form.errors">
+          {{error}}
+        </mat-list>
+      </mat-error>
+
+    </div>
+
+    <div class="col-4 mb-5">
+      <h5>Date</h5>
+      <input readonly
+             formControlName="start"
+             [matDatepicker]="dp"
+             (click)="dp.open()"
+             class="form-control form-control-admin">
+      <mat-datepicker #dp></mat-datepicker>
+    </div>
+    <div class="col-4">
+      <h5>Start</h5>
+      <input type="time" formControlName="startTime" class="form-control form-control-admin">
+    </div>
+    <div class="col-4">
+      <h5>End</h5>
+      <input type="time" formControlName="endTime" class="form-control form-control-admin">
+    </div>
+
+    <div class="col-12">
+      <div class="form-group">
+      <textarea class="form-control form-control-admin" formControlName="internalNotes"
+                placeholder="internal notes"></textarea>
+        <mat-error *ngIf="form.get('internalNotes').errors?.serverError">
+          {{form.get('internalNotes').errors?.serverError}}
+        </mat-error>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">
+        {{model.id === 0 ? 'book appointment' : 'update appointment'}}
+      </button>
+      <button type="button" (click)="emitCancel()" class="btn btn-danger">
+        cancel
+      </button>
+    </div>
+  </div>
+</form>
+
+

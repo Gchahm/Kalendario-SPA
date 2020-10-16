@@ -1,0 +1,26 @@
+<div *ngIf="company$ | async as company" class="container mt-4">
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <shared-image-input [id]="company.id"
+                          [url]="company.avatar"
+                          (photoChange)="onPhotoChange($event)"></shared-image-input>
+      <admin-company-ui-rw [model]="config$ | async"
+                           [apiError]="apiError$ | async"
+                           [editMode]="cfgEditMode$ | async"
+                           (edit)="toggleEditConfig($event)"
+                           (update)="saveConfig($event)"></admin-company-ui-rw>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <admin-company-rw [model]="company"
+                        [editMode]="editMode$ | async"
+                        [apiError]="apiError$ | async"
+                        (edit)="toggleEdit($event)"
+                        (update)="save($event)"></admin-company-rw>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <admin-stripe-details-shell></admin-stripe-details-shell>
+    </div>
+  </div>
+</div>

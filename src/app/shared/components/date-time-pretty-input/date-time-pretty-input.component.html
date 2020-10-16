@@ -1,0 +1,14 @@
+<div [formGroup]="form" class="row">
+  <div class="col-sm-12 col-md-6">
+    <input readonly
+           formControlName="date"
+           (dateChange)="_handleInput()"
+           [matDatepicker]="dp"
+           (click)="dp.open()"
+           class="form-control form-control-admin">
+    <mat-datepicker #dp (input)="_handleInput()"></mat-datepicker>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <input type="time" formControlName="time" (input)="_handleInput()" class="form-control form-control-admin">
+  </div>
+</div>

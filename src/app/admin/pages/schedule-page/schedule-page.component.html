@@ -1,0 +1,24 @@
+<model-list-container [modelList]="modelList$ | async"
+                      [selectedModel]="selectedModel$ | async"
+                      [editMode]="editMode$ | async"
+                      [searchValue]="searchValue$ | async"
+                      [mobileView]="isMobile$ | async"
+                      (edit)="toggleEdit($event)"
+                      (selected)="modelSelected($event)"
+                      (create)="newModel()"
+                      (delete)="deleteModel($event)"
+                      (search)="updateSearch($event)">
+  <ng-container *ngIf="(selectedModel$ | async) as selectedModel">
+    <admin-schedule-details *ngIf="!(editMode$ | async)"
+                            [isMobile]="isMobile$ | async"
+                            [isTablet]="isTablet$ | async"
+                            [model]="selectedModel"></admin-schedule-details>
+    <admin-schedule-form *ngIf="editMode$ | async"
+                         [model]="selectedModel"
+                         [apiError]="apiError$ | async"
+                         [isTablet]="isTablet$ | async"
+                         (create)="saveModel($event)"
+                         (update)="updateModel($event)"
+                         (cancel)="cancelForm($event)"></admin-schedule-form>
+  </ng-container>
+</model-list-container>

@@ -1,0 +1,53 @@
+<div [class.mb-4]="!editMode">
+  <span class="sf-title" [matTooltip]="toolTip">{{showName}}</span>
+  <span class="c-light-gray c-pointer" (click)="edit.emit()">
+      <i [hidden]="editMode" class="fa fa-pen"></i>
+    </span>
+  <div class="sf-field" [hidden]="editMode">
+    <div class="d-flex">
+      <div *ngIf="useColor" class="color-picker-box" [style.background-color]="value"></div>
+      <div *ngIf="!useColor">{{value}}</div>
+    </div>
+  </div>
+  <div class="sf-field" [hidden]="!editMode">
+    <div *ngIf="showForm" [formGroup]="form">
+      <div class="form-group">
+        <input *ngIf="useInput"
+               type="{{inputType}}"
+               class="form-control form-control-admin"
+               [placeholder]="showName"
+               formControlName="formControl"
+               (input)="_handleInput()"/>
+
+        <textarea *ngIf="useTextArea"
+                  class="form-control form-control-admin"
+                  [placeholder]="showName"
+                  formControlName="formControl"
+                  (input)="_handleInput()"></textarea>
+
+        <div *ngIf="useToggle">
+          <label class="switch">
+            <input type="checkbox"
+                   formControlName="formControl"
+                   (change)="_handleInput()">
+            <span class="slider round"></span>
+          </label>
+
+        </div>
+
+        <duration-input *ngIf="useDuration"
+                        (ngModelChange)="_handleInput()"
+                        formControlName="formControl"></duration-input>
+
+        <color-input *ngIf="useColor"
+                        (ngModelChange)="_handleInput()"
+                        formControlName="formControl"></color-input>
+
+        <div class="invalid-feedback">
+          {{form.get('formControl').errors?.serverError}}
+        </div>
+      </div>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</div>

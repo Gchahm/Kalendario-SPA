@@ -1,0 +1,14 @@
+.scheduling-page-content-container {
+  max-height: 75vh;
+  overflow: auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.hours-container {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 20;
+  border-right: lightgray 1px solid;
+}

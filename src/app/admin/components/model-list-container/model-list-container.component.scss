@@ -1,0 +1,29 @@
+.model-create {
+  width: 100%;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.model-list {
+  overflow-y: scroll;
+  min-height: 80vh;
+  max-height: 80vh;
+}
+
+.edit-desktop-container {
+  text-align: right;
+}
+
+.edit-mobile-container > button {
+  width: 100%;
+}
+
+.action-button {
+  margin-top: 10px;
+}
+
+.card-container {
+  margin: 10px;
+}
