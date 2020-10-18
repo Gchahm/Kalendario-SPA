@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AlerterService} from '@shared/services/alerter.service';
 import {IReadModel} from '@api/models';
+import {expandCollapseAnimation} from '@app/animations';
 
 @Component({
   selector: 'model-list-container',
   templateUrl: './model-list-container.component.html',
-  styleUrls: ['./model-list-container.component.scss']
+  styleUrls: ['./model-list-container.component.scss'],
+  animations: [expandCollapseAnimation]
 })
 export class ModelListContainerComponent {
 
@@ -29,7 +31,7 @@ export class ModelListContainerComponent {
   tabIndex = 0;
 
   @Output() selected = new EventEmitter<IReadModel>();
-
+  hiddenCategories: string[] = [];
 
   constructor(public alerter: AlerterService) {
   }
@@ -65,8 +67,20 @@ export class ModelListContainerComponent {
       });
   }
 
-  searchChange(){
+  searchChange() {
     this.search.emit(this.searchVal);
   }
 
+  showItems(category: string): boolean {
+    return !this.hiddenCategories.includes(category);
+  }
+
+  showHideCategory(category: string) {
+    const index = this.hiddenCategories.indexOf(category);
+    if (index >= 0) {
+      this.hiddenCategories.splice(index, 1);
+    } else {
+      this.hiddenCategories.push(category);
+    }
+  }
 }

@@ -39,29 +39,38 @@
     </mat-form-field>
   </div>
   <div class="model-list pretty-scroll">
-    <mat-selection-list *ngIf="modelList"
-                        [disabled]="editMode"
-                        [multiple]="false"
-                        dense>
-      <mat-list-option *ngFor="let model of modelList"
-                       (click)="selectModel(model)"
-                       [selected]="isSelected(model)">
+
+    <div *ngIf="modelList" class="list-group">
+      <button *ngFor="let model of modelList"
+              (click)="selectModel(model)"
+              [disabled]="editMode"
+              [class.active]="model.id === selectedModel?.id"
+              type="button"
+              class="list-group-item list-group-item-action border-0">
         {{model.name}}
-      </mat-list-option>
-    </mat-selection-list>
-    <mat-selection-list *ngIf="categorizedList"
-                        [disabled]="editMode"
-                        [multiple]="false"
-                        dense>
+      </button>
+    </div>
+
+    <div *ngIf="categorizedList" class="list-group">
       <ng-container *ngFor="let category of categories()">
-        <div mat-subheader>{{category}}</div>
-        <mat-list-option *ngFor="let model of categorizedList[category]"
-                         (click)="selectModel(model)"
-                         selected="{{model.id === selectedModel?.id}}">
-          {{model.name}}
-        </mat-list-option>
+        <button (click)="showHideCategory(category)"
+                type="button"
+                class="list-group-item list-group-item-action p-0 border-0">
+          <span class="badge badge-left py-3 badge-light">{{categorizedList[category].length}}</span>
+          <span class="badge">{{category}}</span>
+        </button>
+        <div [@expandCollapse]="showItems(category)">
+          <button *ngFor="let model of categorizedList[category]"
+                  (click)="selectModel(model)"
+                  [disabled]="editMode"
+                  [class.active]="model.id === selectedModel?.id"
+                  type="button" class="list-group-item list-group-item-action border-0">
+            {{model.name}}
+          </button>
+        </div>
       </ng-container>
-    </mat-selection-list>
+    </div>
+
   </div>
 </ng-template>
 

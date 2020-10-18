@@ -1,13 +1,11 @@
 import {
   animate,
-  animateChild, animation, AUTO_STYLE, group, keyframes,
   query,
   stagger,
   state,
   style,
   transition,
   trigger,
-  useAnimation
 } from '@angular/animations';
 
 export const staggeredFadeInAnimation = trigger('staggeredFadeIn', [
@@ -29,14 +27,14 @@ export const expandCollapseAnimation = trigger('expandCollapse', [
 
   state('1', style({
     height: '*',
-    overflow: 'auto'
+    overflow: 'hidden'
   })),
 
   transition('0 => 1', [
-    animate('0.3s ease-out')
+    animate('0.4s ease-out')
   ]),
 
   transition('1 => 0', [
-    animate('0.3s ease-in')
+    animate('0.4s ease-in')
   ])
 ]);

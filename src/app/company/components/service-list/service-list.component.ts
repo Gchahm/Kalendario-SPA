@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Service, ServiceCategory} from '@api/models';
 import {staggeredFadeInAnimation} from '@app/animations';
-import {shakeAnimation, fadeInOnEnterAnimation} from 'angular-animations';
 
 @Component({
   selector: 'company-service-list',
