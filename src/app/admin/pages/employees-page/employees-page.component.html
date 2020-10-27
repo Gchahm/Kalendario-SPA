@@ -1,5 +1,5 @@
 <model-list-container [modelList]="modelList$ | async"
-                      [selectedModel]="(selectedModel$ | async)"
+                      [selectedModel]="selectedModel$ | async"
                       [editMode]="editMode$ | async"
                       [mobileView]="isMobile$ | async"
                       [searchValue]="searchValue$ | async"
@@ -9,18 +9,6 @@
                       (delete)="deleteModel($event)"
                       (search)="updateSearch($event)">
   <ng-container *ngIf="(selectedModel$ | async) as selectedModel">
-    <admin-employee-details *ngIf="!(editMode$ | async)"
-                            [isMobile]="isMobile$ | async"
-                            [isTablet]="isTablet$ | async"
-                            [model]="viewModel$ | async"
-                            (photoChange)="onPhotoChange($event)"></admin-employee-details>
-    <admin-employee-form *ngIf="editMode$ | async"
-                         [model]="selectedModel"
-                         [apiError]="apiError$ | async"
-                         [schedules]="schedules$ | async"
-                         [services]="services$ | async"
-                         (create)="saveModel($event)"
-                         (update)="updateModel($event)"
-                         (cancel)="cancelForm($event)"></admin-employee-form>
+    <admin-employee-view-shell></admin-employee-view-shell>
   </ng-container>
 </model-list-container>

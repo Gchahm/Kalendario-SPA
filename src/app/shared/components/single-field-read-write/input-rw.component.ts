@@ -7,13 +7,14 @@ import {ControlImplementation} from '@shared/common/ControlImplementation';
   templateUrl: './input-rw.component.html',
   styleUrls: ['./input-rw.component.css'],
 })
-export class InputRwComponent extends ControlImplementation<string> {
+export class InputRwComponent extends ControlImplementation<string | number> {
   @Input() editMode: boolean;
   @Input() showName: string;
   @Input() toolTip: string;
+  @Input() listItems: { id: number, name: string }[];
 
-  private _inputType = 'text';
-  @Input() set inputType(value: string) {
+  private _inputType: inputTypes = 'text';
+  @Input() set inputType(value: inputTypes) {
     this._inputType = value;
     this.showForm = value !== 'none';
     this.useInput = ['text', 'number'].includes(value);
@@ -21,9 +22,10 @@ export class InputRwComponent extends ControlImplementation<string> {
     this.useColor = value === 'color';
     this.useToggle = value === 'toggle';
     this.useDuration = value === 'duration';
+    this.useList = value === 'list';
   }
 
-  get inputType(): string {
+  get inputType(): inputTypes {
     return this._inputType;
   }
 
@@ -47,4 +49,18 @@ export class InputRwComponent extends ControlImplementation<string> {
   useColor = false;
   useToggle = false;
   useDuration = false;
+  useList = false;
+
+  listItem() {
+    return this.listItems.find(item => item.id === this.value)?.name;
+  }
 }
+
+type inputTypes = 'duration'
+  | 'none'
+  | 'text'
+  | 'number'
+  | 'textarea'
+  | 'toggle'
+  | 'color'
+  | 'list';

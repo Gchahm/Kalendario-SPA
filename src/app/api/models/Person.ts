@@ -11,22 +11,14 @@ export class Person implements IReadModel {
   static fromJS(data: any): Person {
     data = typeof data === 'object' ? data : {};
     const result = new Person();
-    result.init(data);
-    return result;
-  }
-
-  init(data: any) {
     if (data) {
-      this.id = data.id;
-      this.firstName = data.firstName;
-      this.lastName = data.lastName;
-      this.name = data.name;
-      this.email = data.email;
-      this.phone = data.phone;
+      result.id = data.id;
+      result.firstName = data.firstName;
+      result.lastName = data.lastName;
+      result.name = data.name;
+      result.email = data.email;
+      result.phone = data.phone;
     }
-  }
-
-  writeModel() {
-    return undefined;
+    return result;
   }
 }

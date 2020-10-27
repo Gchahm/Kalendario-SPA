@@ -3,7 +3,17 @@ import {IReadModel} from '@api/models';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 
 export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
-  @Input() models: T[];
+
+  private _models: T[];
+  @Input() set models(value: T[]) {
+    this._models = value;
+    this.updateGrouped();
+  }
+
+  get models(): T[] {
+    return this._models;
+  }
+
   @Input() checked: number[];
   @Output() changed = new EventEmitter<CheckChanged>();
   grouped: Grouped<T>;
@@ -11,14 +21,7 @@ export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
   abstract modelField(model: T): string;
 
   ngOnInit() {
-    this.grouped = {};
-    for (const model of this.models) {
-      if (this.grouped.hasOwnProperty(this.modelField(model))) {
-        this.grouped[this.modelField(model)].push(this.boxItem(model));
-      } else {
-        this.grouped[this.modelField(model)] = [this.boxItem(model)];
-      }
-    }
+    this.updateGrouped();
   }
 
   emitChanged(event: MatCheckboxChange) {
@@ -49,6 +52,17 @@ export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
 
   keys() {
     return Object.keys(this.grouped);
+  }
+
+  updateGrouped() {
+    this.grouped = {};
+    for (const model of this.models) {
+      if (this.grouped.hasOwnProperty(this.modelField(model))) {
+        this.grouped[this.modelField(model)].push(this.boxItem(model));
+      } else {
+        this.grouped[this.modelField(model)] = [this.boxItem(model)];
+      }
+    }
   }
 }
 

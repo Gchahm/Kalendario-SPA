@@ -12,12 +12,9 @@ import {Observable} from 'rxjs';
   styleUrls: ['./service-view-shell.component.css']
 })
 export class ServiceViewShellComponent extends ViewShellComponent<Service> {
-
   fullModel$: Observable<fromServices.ServiceFullModel>;
-
   constructor(protected store: Store<State>) {
     super(store, fromServices.actions, fromServices.selectors);
     this.fullModel$ = this.store.select(fromServices.selectors.getCurrentServiceFullModel);
   }
-
 }

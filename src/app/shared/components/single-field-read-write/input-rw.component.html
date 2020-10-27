@@ -6,7 +6,10 @@
   <div class="sf-field" [hidden]="editMode">
     <div class="d-flex">
       <div *ngIf="useColor" class="color-picker-box" [style.background-color]="value"></div>
-      <div *ngIf="!useColor">{{value}}</div>
+      <div *ngIf="useList">{{listItem()}}</div>
+      <div *ngIf="!useColor && !useList">
+        {{value}}
+      </div>
     </div>
   </div>
   <div class="sf-field" [hidden]="!editMode">
@@ -40,8 +43,17 @@
                         formControlName="formControl"></duration-input>
 
         <color-input *ngIf="useColor"
-                        (ngModelChange)="_handleInput()"
-                        formControlName="formControl"></color-input>
+                     (ngModelChange)="_handleInput()"
+                     formControlName="formControl"></color-input>
+
+        <select *ngIf="useList"
+                (ngModelChange)="_handleInput()"
+                formControlName="formControl"
+                class="form-control form-control-admin">
+          <option *ngFor="let item of listItems" [value]="item.id.toString()">
+            {{item.name}}
+          </option>
+        </select>
 
         <div class="invalid-feedback">
           {{form.get('formControl').errors?.serverError}}

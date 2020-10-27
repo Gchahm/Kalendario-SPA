@@ -17,9 +17,7 @@ import {BaseEntityPage} from '@admin/pages/BaseEntityPage';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ServicesPageComponent extends BaseEntityPage<Service> implements OnInit {
-
   categorizedList$: Observable<{[key: string]: Service[]}>;
-  viewModel$: Observable<fromServices.ServiceFullModel>;
 
   constructor(protected store: Store<State>) {
     super(store, fromServices.actions, fromServices.selectors);
@@ -28,6 +26,5 @@ export class ServicesPageComponent extends BaseEntityPage<Service> implements On
   ngOnInit() {
     this.store.dispatch(fromServiceCategories.actions.initializeStore({params: {}}));
     this.categorizedList$ = this.store.select(fromServices.selectors.getServiceCategorized);
-    this.viewModel$ = this.store.select(fromServices.selectors.getCurrentServiceFullModel);
   }
 }

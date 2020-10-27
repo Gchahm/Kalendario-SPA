@@ -1,0 +1,30 @@
+<div class="row"
+     [class.no-gutters]="isMobile$ | async"
+     *ngIf="fullModel$ | async as model">
+  <div class="col-sm-12 col-md-4 col-lg-4 text-center">
+    <shared-image-input [id]="model.id"
+                        [url]="model.photoUrl"
+                        (photoChange)="onPhotoChange($event)"></shared-image-input>
+  </div>
+
+  <admin-employee-rw class="col-sm-12 col-md-8 col-lg-8"
+                     [model]="model"
+                     [services]="services$ | async"
+                     [schedules]="schedules$ | async"
+                     [editMode]="editMode$ | async"
+                     [apiError]="apiError$ | async"
+                     (edit)="toggleEdit($event)"
+                     (update)="updateModel($event)">
+  </admin-employee-rw>
+
+
+  <div *ngIf="model.scheduleModel" class="col-sm-12 col-md-12 col-lg-12">
+    <admin-schedule-details *ngIf="!(editMode$ | async)"
+                            [model]="model.scheduleModel"
+                            [isMobile]="isMobile$ | async"
+                            class="mt-2"></admin-schedule-details>
+  </div>
+</div>
+
+
+

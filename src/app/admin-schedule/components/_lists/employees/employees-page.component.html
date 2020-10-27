@@ -2,9 +2,9 @@
                       (create)="openCreateDialog()"
                       (delete)="deleteModel($event)">
   <ng-container *ngIf="selectedModel$ | async as selectedModel">
-    <admin-employee-details *ngIf="!(editMode$ | async)"
-                            [model]="selectedModel"
-                            (photoChange)="onPhotoChange($event)"></admin-employee-details>
+    <admin-employee-view-shell *ngIf="!(editMode$ | async)"
+                               [model]="selectedModel"
+                               (photoChange)="onPhotoChange($event)"></admin-employee-view-shell>
     <admin-employee-form *ngIf="editMode$ | async"
                          [model]="selectedModel"
                          [htmlAction]="'PATCH'"

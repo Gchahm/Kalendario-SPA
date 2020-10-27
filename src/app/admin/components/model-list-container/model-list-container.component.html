@@ -1,4 +1,4 @@
-<mat-card class="card-container" *ngIf="!mobileView; else mobileContainer">
+<div class="model-list-content" *ngIf="!mobileView; else mobileContainer">
   <div class="row" *ngIf="modelList || categorizedList; else spinner">
     <div class="col-sm-4 col-md-3 col-lg-2">
       <ng-container *ngTemplateOutlet="list"></ng-container>
@@ -10,7 +10,7 @@
   <ng-template #spinner>
     <mat-spinner class="m-auto"></mat-spinner>
   </ng-template>
-</mat-card>
+</div>
 
 <ng-template #mobileContainer>
   <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="center">
@@ -44,7 +44,7 @@
       <button *ngFor="let model of modelList"
               (click)="selectModel(model)"
               [disabled]="editMode"
-              [class.active]="model.id === selectedModel?.id"
+              [class.c-accent]="model.id === selectedModel?.id"
               type="button"
               class="list-group-item list-group-item-action border-0">
         {{model.name}}
@@ -63,7 +63,7 @@
           <button *ngFor="let model of categorizedList[category]"
                   (click)="selectModel(model)"
                   [disabled]="editMode"
-                  [class.active]="model.id === selectedModel?.id"
+                  [class.c-accent]="model.id === selectedModel?.id"
                   type="button" class="list-group-item list-group-item-action border-0">
             {{model.name}}
           </button>

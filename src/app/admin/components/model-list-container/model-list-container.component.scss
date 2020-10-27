@@ -8,7 +8,7 @@ button:focus {
 
 .model-list {
   overflow-y: scroll;
-  min-height: 80vh;
+  min-height: 50vh;
   max-height: 80vh;
 }
 
@@ -24,8 +24,8 @@ button:focus {
   margin-top: 10px;
 }
 
-.card-container {
-  margin: 10px;
+.model-list-content {
+  margin: 2rem 2rem 0 2rem;
 }
 
 .badge-left {

@@ -1,0 +1,84 @@
+<form *ngIf="form" [formGroup]="form">
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <admin-input-rw formControlName="firstName"
+                          showName="First Name"
+                          (edit)="emitEdit()"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+        </div>
+
+        <div class="col-12">
+          <admin-input-rw formControlName="lastName"
+                          showName="Last Name"
+                          (edit)="emitEdit()"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+        </div>
+
+        <div class="col-12">
+          <admin-input-rw formControlName="private"
+                          showName="Hide in Web"
+                          inputType="toggle"
+                          (edit)="emitEdit()"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+
+        </div>
+
+        <div class="col-12">
+          <admin-input-rw formControlName="phone"
+                          showName="Phone Number"
+                          (edit)="emitEdit()"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+
+        </div>
+
+        <div class="col-12">
+          <admin-input-rw formControlName="instagram"
+                          showName="Instagram"
+                          (edit)="emitEdit()"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+        </div>
+
+        <div class="col-12">
+          <admin-input-rw formControlName="email"
+                          showName="Email"
+                          (edit)="emitEdit()"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+        </div>
+
+        <div class="col-12">
+          <admin-input-rw formControlName="schedule"
+                          showName="Schedule"
+                          inputType="list"
+                          (edit)="emitEdit()"
+                          [listItems]="schedules"
+                          [editMode]="editMode"
+                          [apiError]="apiError"></admin-input-rw>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-6">
+      <admin-employee-form-services class="col-sm-12 col-md-4 col-lg-4"
+                                    [model]="model"
+                                    [models]="services"
+                                    [editMode]="editMode"
+                                    [checked]="model.services"
+                                    (changed)="changed($event)"
+                                    (edit)="emitEdit()">
+      </admin-employee-form-services>
+
+    </div>
+  </div>
+</form>
+<div *ngIf="editMode">
+  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
+  <button class="btn btn-admin btn-danger" type="button" (click)="cancel()">Cancel</button>
+</div>

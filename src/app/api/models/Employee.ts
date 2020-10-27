@@ -21,26 +21,22 @@ export class Employee extends Person {
   static fromJs(data: any): Employee {
     data = typeof data === 'object' ? data : {};
     const result = new Employee();
-    result.init(data);
-    return result;
-  }
-
-  init(data: any) {
     if (data) {
-      this.id = data.id;
-      this.private = data.private;
-      this.firstName = data.firstName;
-      this.lastName = data.lastName;
-      this.name = data.name;
-      this.email = data.email;
-      this.phone = data.phone;
-      this.schedule = data.schedule;
-      this.instagram = data.instagram;
-      this.photoUrl = data.profileImg ? environment.imageStorage + data.profileImg
+      result.id = data.id;
+      result.private = data.private;
+      result.firstName = data.firstName;
+      result.lastName = data.lastName;
+      result.name = data.name;
+      result.email = data.email;
+      result.phone = data.phone;
+      result.schedule = data.schedule;
+      result.instagram = data.instagram;
+      result.photoUrl = data.profileImg ? environment.imageStorage + data.profileImg
         : environment.assetUrl + 'img/default-avatar.jpg';
-      this.bio = data.bio;
-      this.services = data.services;
+      result.bio = data.bio;
+      result.services = data.services;
     }
+    return result;
   }
 }
 
