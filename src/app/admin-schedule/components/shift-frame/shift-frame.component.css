@@ -1,0 +1,6 @@
+.frame-container {
+  position: absolute;
+  top: 0.75rem;
+  height: 1.5rem;
+  z-index: 99;
+}

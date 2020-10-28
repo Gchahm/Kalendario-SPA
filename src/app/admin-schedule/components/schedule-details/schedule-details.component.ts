@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {BaseDetailsComponent} from '@shared/common/BaseDetailsComponent';
-import {Schedule} from '@api/models';
+import {Schedule, Shift} from '@api/models';
 
 @Component({
   selector: 'admin-schedule-details',
@@ -8,11 +8,16 @@ import {Schedule} from '@api/models';
   styleUrls: ['./schedule-details.component.scss']
 })
 export class ScheduleDetailsComponent extends BaseDetailsComponent<Schedule> {
+
+  hours: string[] = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00',
+    '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00',
+    '23:00'];
+
   constructor() {
     super();
   }
 
-  shifts() {
-    return this.model.shifts.map(s => ({name: s.toUpperCase(), value: !!this.model[s] ? this.model[s].name : ''}));
+  shifts(): Shift[] {
+    return this.model.shifts.map(s => this.model[s]);
   }
 }

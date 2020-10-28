@@ -20,22 +20,18 @@ export class Schedule implements IReadModel {
   static fromJs(data: any): Schedule {
     data = typeof data === 'object' ? data : {};
     const result = new Schedule();
-    result.init(data);
-    return result;
-  }
-
-  init(data: any) {
     if (data) {
-      this.id = data.id;
-      this.name = data.name;
-      this.mon = Shift.fromJs(data.mon);
-      this.tue = Shift.fromJs(data.tue);
-      this.wed = Shift.fromJs(data.wed);
-      this.thu = Shift.fromJs(data.thu);
-      this.fri = Shift.fromJs(data.fri);
-      this.sat = Shift.fromJs(data.sat);
-      this.sun = Shift.fromJs(data.sun);
+      result.id = data.id;
+      result.name = data.name;
+      result.mon = Shift.fromJs(data.mon);
+      result.tue = Shift.fromJs(data.tue);
+      result.wed = Shift.fromJs(data.wed);
+      result.thu = Shift.fromJs(data.thu);
+      result.fri = Shift.fromJs(data.fri);
+      result.sat = Shift.fromJs(data.sat);
+      result.sun = Shift.fromJs(data.sun);
     }
+    return result;
   }
 }
 

@@ -16,7 +16,6 @@
     <admin-schedule-form *ngIf="editMode$ | async"
                          [model]="selectedModel"
                          [apiError]="apiError$ | async"
-                         [isTablet]="isTablet$ | async"
                          (create)="saveModel($event)"
                          (update)="updateModel($event)"
                          (cancel)="cancelForm($event)"></admin-schedule-form>

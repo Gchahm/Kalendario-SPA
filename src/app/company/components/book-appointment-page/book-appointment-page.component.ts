@@ -5,7 +5,6 @@ import {Subscription} from 'rxjs';
 import {AppointmentService} from '@shared/services/appointment.service';
 import * as moment from 'moment';
 import {Appointment} from '@core/models/Appointment';
-import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '@app/Store';
 import {EmployeeService} from '@app/company/services/employee.service';
 import {concatMap} from 'rxjs/operators';
@@ -27,8 +26,7 @@ export class BookAppointmentPageComponent implements OnInit, OnDestroy {
               private appointmentService: AppointmentService,
               private toast: ToastService,
               private route: ActivatedRoute,
-              private router: Router,
-              private redux: NgRedux<IAppState>) {
+              private router: Router) {
   }
 
   ngOnInit() {

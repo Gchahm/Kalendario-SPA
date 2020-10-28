@@ -4,16 +4,16 @@ import {EffectsModule} from '@ngrx/effects';
 import {SchedulesEffects} from '@app/admin-schedule/state/schedules.effects';
 import {ScheduleDetailsComponent} from '@app/admin-schedule/components/schedule-details/schedule-details.component';
 import {ScheduleFormComponent} from '@app/admin-schedule/components/schedule-form/schedule-form.component';
-import {CreateScheduleDialogComponent} from '@app/admin-schedule/containers/create-schedule/create-schedule-dialog.component';
 import {SharedModule} from '@shared/shared.module';
 import * as fromSchedules from '@app/admin-schedule/state';
+import { ShiftFrameComponent } from './components/shift-frame/shift-frame.component';
 
 
 @NgModule({
   declarations: [
     ScheduleDetailsComponent,
     ScheduleFormComponent,
-    CreateScheduleDialogComponent,
+    ShiftFrameComponent,
   ],
   imports: [
     StoreModule.forFeature(fromSchedules.storeName, fromSchedules.reducer),

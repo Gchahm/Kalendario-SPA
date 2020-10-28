@@ -1,12 +1,22 @@
-<mat-grid-list [cols]="7" rowHeight="8em" [gutterSize]="0" *ngIf="!isTablet; else tabletView">
-  <mat-grid-tile [colspan]="1" *ngFor="let item of shifts()">
-    <mat-grid-tile-header class="p600">{{item.name}}</mat-grid-tile-header>
-    {{item.value}}
-  </mat-grid-tile>
-</mat-grid-list>
+  <div class="schedule-container">
+    <div class="d-flex">
+      <div *ngFor="let hour of hours" class="cell">
+        <div class="hour-text">
+          {{hour}}
+        </div>
+      </div>
+    </div>
 
-<ng-template #tabletView>
-  <app-mat-list-table title="SCHEDULE" [items]="shifts()">
-  </app-mat-list-table>
-</ng-template>
+    <div class="schedule-body">
+      <div *ngFor="let day of model.shifts; let i = index" class="week-line">
+        <div class="line-cell c-primary" [class.b-top]="i > 0">
+          {{day}}
+        </div>
+        <div class="position-relative">
+          <app-shift-frame *ngFor="let frame of model[day]?.frames" [frame]="frame"></app-shift-frame>
+        </div>
+        <div *ngFor="let hour of hours" class="cell b-left" [class.b-top]="i > 0"></div>
+      </div>
+    </div>
 
+  </div>
