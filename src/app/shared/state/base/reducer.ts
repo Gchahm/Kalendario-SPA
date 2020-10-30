@@ -15,9 +15,7 @@ export function createBaseReducer<T extends IReadModel>(initialState: BaseEntity
     on(actions.setSearch, (state, {value}) => ({...state, search: value})),
     on(actions.initializeCreate, (state, {}) => ({...state, selectedId: 0, editMode: true})),
     on(actions.alreadyInitialized, (state, {}) => ({...state})),
-
     on(actions.requestEntities, (state, {}) => ({...state, initialized: true})),
-
     on(actions.addMany, (state, {entities}) => adapter.adapter.addMany(entities, {
       ...state,
       selectedId: state.selectedId === null ? entities.map(e => e.id).find(i => i === i) : state.selectedId
