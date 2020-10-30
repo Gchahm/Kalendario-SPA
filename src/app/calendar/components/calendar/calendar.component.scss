@@ -36,6 +36,8 @@ h4 {
   /* move .inner up by half of its height so that its middle is in the middle of .outer */
   transform: translateY(-50%);
   width: 100%;
+  color: white;
+  mix-blend-mode: difference;
 }
 
 .calendar-table {

@@ -45,7 +45,7 @@ export class CalendarComponent implements OnInit {
   }
 
   topPosition(event: CalendarEvent): string {
-    const value = event.start.hour() * 60 + event.start.minute() - this.minStart * 60;
+    const value = (event.start.hour() * 60 + event.start.minute() - this.minStart * 60) * 2;
     return value.toString() + 'px';
   }
 
@@ -85,7 +85,7 @@ class Event implements CalendarEvent {
     this.title = event.title;
 
     const eventHeight = (event.end.hour() * 60 + event.end.minute()) - (event.start.hour() * 60 + event.start.minute());
-    this.height = `${eventHeight}px`;
+    this.height = `${eventHeight * 2}px`;
   }
 
   static fromJson(event: CalendarEvent): Event {
