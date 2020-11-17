@@ -8,24 +8,5 @@
                       (create)="newModel()"
                       (delete)="deleteModel($event)"
                       (search)="searchModel($event)">
-  <ng-container *ngIf="(selectedModel$ | async) as selectedModel">
-
-    <div class="row" *ngIf="!(editMode$ | async)">
-      <div class="col-sm-12 col-md-4">
-        <admin-customer-details [model]="selectedModel"
-                                [isMobile]="isMobile$ | async"
-                                [isTablet]="isTablet$ | async"></admin-customer-details>
-      </div>
-      <div class="col-sm-12 col-md-8">
-        <app-customer-appointments></app-customer-appointments>
-      </div>
-    </div>
-
-    <admin-customer-form *ngIf="editMode$ | async"
-                         [model]="selectedModel"
-                         [apiError]="apiError$ | async"
-                         (create)="saveModel($event)"
-                         (update)="updateModel($event)"
-                         (cancel)="cancelForm($event)"></admin-customer-form>
-  </ng-container>
+  <admin-customer-view-shell *ngIf="selectedModel$ | async"></admin-customer-view-shell>
 </model-list-container>

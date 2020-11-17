@@ -1,0 +1,10 @@
+<admin-customer-rw class="col-sm-12 col-md-8 col-lg-8"
+                   *ngIf="model$ | async as model"
+                   [model]="model"
+                   [editMode]="editMode$ | async"
+                   [apiError]="apiError$ | async"
+                   (edit)="toggleEdit($event)"
+                   (update)="updateModel($event)">
+</admin-customer-rw>
+
+<admin-customer-appointments-shell></admin-customer-appointments-shell>

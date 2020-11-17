@@ -1,0 +1,41 @@
+<form *ngIf="form" [formGroup]="form">
+  <div class="row">
+    <div class="col-12">
+      <admin-input-rw formControlName="firstName"
+                      showName="First Name"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw formControlName="lastName"
+                      showName="Last Name"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw formControlName="phone"
+                      showName="Phone Number"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+
+    </div>
+
+    <div class="col-12">
+      <admin-input-rw formControlName="email"
+                      showName="Email"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+
+  </div>
+</form>
+<div *ngIf="editMode">
+  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
+  <button class="btn btn-admin btn-danger" type="button" (click)="cancel()">Cancel</button>
+</div>

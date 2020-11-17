@@ -1,6 +1,6 @@
 <mat-dialog-content>
-  <admin-customer-form [model]="model$ | async"
-                       [apiError]="apiError$ | async"
+  <admin-customer-form [model]="model"
+                       [apiError]="error"
                        (create)="saveModel($event)"
                        (cancel)="closeDialog()">
   </admin-customer-form>

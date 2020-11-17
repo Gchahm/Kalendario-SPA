@@ -33,6 +33,9 @@ import {RouterModule} from '@angular/router';
 import { DashboardContainerComponent } from './components/dashboard-container/dashboard-container.component';
 import { DashboardContainerShellComponent } from './containers/dashboard-container-shell/dashboard-container-shell.component';
 import {InputRwComponent} from '@shared/components/single-field-read-write/input-rw.component';
+import {CustomerInputComponent} from '@shared/components/customer-input/customer-input.component';
+import {CreateCustomerDialogComponent} from '@shared/containers/create-customer/create-customer-dialog.component';
+import {CustomerFormComponent} from '@shared/components/customer-form/customer-form.component';
 
 
 @NgModule({
@@ -58,6 +61,9 @@ import {InputRwComponent} from '@shared/components/single-field-read-write/input
     DashboardContainerComponent,
     DashboardContainerShellComponent,
     InputRwComponent,
+    CustomerInputComponent,
+    CreateCustomerDialogComponent,
+    CustomerFormComponent
   ],
   imports: [
     CommonModule,
@@ -108,6 +114,7 @@ import {InputRwComponent} from '@shared/components/single-field-read-write/input
     DashboardContainerComponent,
     DashboardContainerShellComponent,
     InputRwComponent,
+    CustomerInputComponent,
   ]
 })
 export class SharedModule {

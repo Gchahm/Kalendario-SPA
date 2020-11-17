@@ -6,10 +6,8 @@ import {AdminRoutingModule} from '@admin/admin-routing.module';
 import {SchedulingPageComponent} from '@admin/pages/scheduling-page/scheduling-page.component';
 import {SchedulingPanelShellComponent} from '@admin/containers/scheduling-panel-shell/scheduling-panel-shell.component';
 import {CustomersPageComponent} from '@admin/pages/customers-page/customers-page.component';
-import {CustomerAppointmentsComponent} from '@admin/containers/customer-appointments/customer-appointments.component';
 
 import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.component';
-import {CustomerDetailsComponent} from '@admin/components/_details/customer-details/customer-details.component';
 import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page.component';
 
 import {StoreModule} from '@ngrx/store';
@@ -23,8 +21,6 @@ import * as fromRequests from '@admin/state/requests';
 import {EffectsModule} from '@ngrx/effects';
 import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';
 import {CalendarModule} from '@app/calendar/calendar.module';
-import {CustomerAppointmentsFormComponent} from './components/_form/customer-appointments-form/customer-appointments-form.component';
-import {CustomerAppointmentsTableComponent} from './components/customer-appointments-table/customer-appointments-table.component';
 import {SchedulingPageToolbarComponent} from './components/scheduling-page-toolbar/scheduling-page-toolbar.component';
 import {SchedulingPanelContainerComponent} from './components/scheduling-panel-container/scheduling-panel-container.component';
 import {ModelListContainerComponent} from '@admin/components/model-list-container/model-list-container.component';
@@ -74,8 +70,6 @@ import * as fromScheduling from '@admin/state/scheduling';
     SchedulingPanelShellComponent,
 
     CustomersPageComponent,
-    CustomerDetailsComponent,
-    CustomerAppointmentsComponent,
 
     EmployeesPageComponent,
 
@@ -86,8 +80,7 @@ import * as fromScheduling from '@admin/state/scheduling';
     ConfigRwComponent,
     CompanyRwComponent,
 
-    CustomerAppointmentsFormComponent,
-    CustomerAppointmentsTableComponent,
+
     SchedulingPageToolbarComponent,
     SchedulingPanelContainerComponent,
     ConfigShellComponent,

@@ -1,0 +1,6 @@
+<app-customer-appointments-table [appointments]="appointments$ | async"
+                                 [services]="services$ | async"
+                                 [employees]="employees$ | async"
+                                 [customer]="selectedCustomer$ | async"
+                                 (select)="openAppointment($event)"
+                                 (filterChange)="loadAppointments($event)"></app-customer-appointments-table>

@@ -8,7 +8,6 @@ import {AppointmentDetailsComponent} from '@app/admin-appointments/components/ap
 import {AppointmentEventDialogComponent} from '@app/admin-appointments/containers/appointment-event/appointment-event-dialog.component';
 import {AppointmentFormComponent} from '@app/admin-appointments/components/appointment-form/appointment-form.component';
 import {CreateAppointmentDialogComponent} from '@app/admin-appointments/containers/create-appointment/create-appointment-dialog.component';
-import {CustomerInputComponent} from '@app/admin-appointments/containers/customer-input/customer-input.component';
 import {AppointmentHistoryDetailsComponent} from '@app/admin-appointments/components/appointment-history-details/appointment-history-details.component';
 import {SelfAppointmentDetailsComponent} from '@app/admin-appointments/components/self-appointment-details/self-appointment-details.component';
 import {SelfAppointmentFormComponent} from '@app/admin-appointments/components/self-appointment-form/self-appointment-form.component';
@@ -29,8 +28,6 @@ import {AdminCustomersModule} from '@app/admin-customers/admin-customers.module'
 
     AppointmentEventDialogComponent,
     CreateAppointmentDialogComponent,
-
-    CustomerInputComponent,
   ],
   imports: [
     StoreModule.forFeature(fromAppointments.storeName, fromAppointments.reducer),

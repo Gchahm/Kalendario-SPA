@@ -29,4 +29,4 @@ const getCurrentCustomerAppointments = createSelector(
 export const selectors = {
   ...baseSelectors,
   getCurrentCustomerAppointments
-}
+};

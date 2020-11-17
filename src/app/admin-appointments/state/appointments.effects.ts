@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {Observable, of} from 'rxjs';
-import {catchError, map, mergeMap, withLatestFrom} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, withLatestFrom} from 'rxjs/operators';
 
 import {AppointmentAdminClient} from '@api/clients';
 
@@ -46,7 +46,7 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
   requestAppointmentHistory$: Observable<Action> = this.actions$.pipe(
     ofType(fromAppointments.actions.requestAppointmentHistory),
     withLatestFrom(this.store.select(fromAppointments.selectors.getCurrentId)),
-    mergeMap(([action, id]) => this.appointmentAdminClient.history(id).pipe(
+    switchMap(([action, id]) => this.appointmentAdminClient.history(id).pipe(
       map(result => result.results),
       map(appointments => fromAppointments.actions.setAppointmentHistory({appointments})),
       catchError(err => of(fromAppointments.actions.setError(err)))

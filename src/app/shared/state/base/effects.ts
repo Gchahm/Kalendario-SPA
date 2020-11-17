@@ -1,5 +1,5 @@
 import {Observable, of} from 'rxjs';
-import {catchError, map, mergeMap, tap, withLatestFrom} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 
 import {Action, Store} from '@ngrx/store';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
@@ -21,8 +21,8 @@ export class BaseEffects<T extends IReadModel> {
 
   requestEntities$ = createEffect(() => this.actions$.pipe(
     ofType(this.actions.requestEntities),
-    mergeMap(action => this.client.get(action.params).pipe(
-      map(result => (this.actions.addMany({entities: result.results}))),
+    switchMap(action => this.client.get(action.params).pipe(
+      map(result => (this.actions.setAll({entities: result.results}))),
       catchError(error => of(this.actions.setError({error})))
       )
     )

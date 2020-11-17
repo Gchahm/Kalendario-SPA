@@ -20,6 +20,7 @@ export interface BaseEntityActions<T extends IReadModel> {
   alreadyInitialized: ActionCreator<string, (props: {}) => ({} & TypedAction<string>)>;
   openFormDialog: ActionCreator<string, (props: {id: number}) => ({id: number} & TypedAction<string>)>;
 
+  setAll: ActionCreator<string, (props: { entities: T[] }) => ({ entities: T[] } & TypedAction<string>)>;
   addMany: ActionCreator<string, (props: { entities: T[] }) => ({ entities: T[] } & TypedAction<string>)>;
   upsertOne: ActionCreator<string, (props: { entity: T }) => ({ entity: T } & TypedAction<string>)>;
   updateOne: ActionCreator<string, (props: { update: Update<T> }) => ({ update: Update<T> } & TypedAction<string>)>;
@@ -44,6 +45,7 @@ export function createActions<T extends IReadModel>(name: string): BaseEntityAct
     alreadyInitialized: createAction(`[${name}] Already Initialized`, props<{}>()),
     openFormDialog: createAction(`[${name}] Open Create Dialog`, props<{id: number}>()),
 
+    setAll: createAction(`[${name}] Set All Entities`, props<{ entities: T[] }>()),
     addMany: createAction(`[${name}] Add Many Entities`, props<{ entities: T[] }>()),
     upsertOne: createAction(`[${name}] Upsert One`, props<{ entity: T }>()),
     updateOne: createAction(`[${name}] Update One`, props<{ update: Update<T> }>()),

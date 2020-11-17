@@ -4,15 +4,20 @@ import * as fromCustomers from '@app/admin-customers/state';
 import {SharedModule} from '@shared/shared.module';
 import {EffectsModule} from '@ngrx/effects';
 import {CustomersEffects} from '@app/admin-customers/state/customers.effects';
-import {CustomerInputComponent} from '@app/admin-appointments/containers/customer-input/customer-input.component';
-import {CreateCustomerDialogComponent} from '@app/admin-customers/containers/create-customer/create-customer-dialog.component';
-import {CustomerFormComponent} from '@app/admin-customers/components/customer-form/customer-form.component';
+import { CustomerRwComponent } from './components/customer-rw/customer-rw.component';
+import { CustomerViewShellComponent } from './containers/customer-view-shell/customer-view-shell.component';
+import {CustomerAppointmentsTableComponent} from '@app/admin-customers/components/customer-appointments-table/customer-appointments-table.component';
+import {CustomerAppointmentsFormComponent} from '@app/admin-customers/components/customer-appointments-form/customer-appointments-form.component';
+import {CustomerAppointmentsShellComponent} from '@app/admin-customers/containers/customer-appointments-shell/customer-appointments-shell.component';
 
 
 @NgModule({
   declarations: [
-    CreateCustomerDialogComponent,
-    CustomerFormComponent,
+    CustomerAppointmentsFormComponent,
+    CustomerAppointmentsTableComponent,
+    CustomerRwComponent,
+    CustomerViewShellComponent,
+    CustomerAppointmentsShellComponent,
   ],
   imports: [
     SharedModule,
@@ -22,7 +27,7 @@ import {CustomerFormComponent} from '@app/admin-customers/components/customer-fo
     ])
   ],
   exports: [
-    CustomerFormComponent,
+    CustomerViewShellComponent,
   ]
 })
 export class AdminCustomersModule {

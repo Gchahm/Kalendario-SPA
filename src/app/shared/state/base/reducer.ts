@@ -20,6 +20,10 @@ export function createBaseReducer<T extends IReadModel>(initialState: BaseEntity
       ...state,
       selectedId: state.selectedId === null ? entities.map(e => e.id).find(i => i === i) : state.selectedId
     })),
+    on(actions.setAll, (state, {entities}) => adapter.adapter.setAll(entities, {
+      ...state,
+      selectedId: state.selectedId === null ? entities.map(e => e.id).find(i => i === i) : state.selectedId
+    })),
     on(actions.upsertOne, (state, {entity}) => adapter.adapter.upsertOne(entity, {
       ...state,
       selectedId: entity.id,

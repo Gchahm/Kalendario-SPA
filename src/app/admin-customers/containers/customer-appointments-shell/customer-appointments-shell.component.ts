@@ -12,14 +12,15 @@ import * as fromCustomers from '@app/admin-customers/state';
 import * as fromEmployees from '@app/admin-employee/state';
 import * as fromServices from '@app/admin-services/state';
 import {filter} from 'rxjs/operators';
+import {AppointmentQueryParams} from '@api/queryParams';
 
 
 @Component({
-  selector: 'app-customer-appointments',
-  templateUrl: './customer-appointments.component.html',
-  styleUrls: ['./customer-appointments.component.css']
+  selector: 'admin-customer-appointments-shell',
+  templateUrl: './customer-appointments-shell.component.html',
+  styleUrls: ['./customer-appointments-shell.component.css']
 })
-export class CustomerAppointmentsComponent implements OnInit {
+export class CustomerAppointmentsShellComponent implements OnInit {
 
   appointments$: Observable<Appointment[]>;
   selectedCustomer$: Observable<Customer>;
@@ -29,6 +30,9 @@ export class CustomerAppointmentsComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(fromServices.actions.initializeStore({params: {}}));
+    this.store.dispatch(fromEmployees.actions.initializeStore({params: {}}));
+
     this.services$ = this.store.select(fromServices.selectors.selectAll);
     this.employees$ = this.store.select(fromEmployees.selectors.selectAll);
     this.appointments$ = this.store.select(fromCustomers.selectors.getCurrentCustomerAppointments);
@@ -40,8 +44,8 @@ export class CustomerAppointmentsComponent implements OnInit {
 
   }
 
-  loadAppointments(obj) {
-    this.store.dispatch(fromAppointments.actions.requestEntities({params: obj}));
+  loadAppointments(params: AppointmentQueryParams) {
+    this.store.dispatch(fromAppointments.actions.requestEntities({params}));
   }
 
   openAppointment(id: number) {
