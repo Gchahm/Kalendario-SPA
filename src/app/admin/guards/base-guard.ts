@@ -4,12 +4,14 @@ import {map} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '@app/state';
 import * as fromCore from '@core/state';
+import {checkForPermission, PermissionModels} from '@api/models/User';
+import {PERMISSION_VIEW} from '@api/permissions';
 
 export abstract class BaseGuard implements CanActivate {
 
   protected constructor(private store: Store<fromRoot.State>,
                         private type: string,
-                        private model: string) {
+                        private model: PermissionModels) {
   }
 
   canActivate(
@@ -17,7 +19,7 @@ export abstract class BaseGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> {
     return this.store.pipe(
       fromCore.getCurrentUser,
-      map(user => user.hasPermission(this.type, this.model))
+      map(user => checkForPermission(user, this.type, this.model))
     );
   }
 }

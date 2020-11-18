@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Company, User} from '@api/models';
 import {PERMISSION_ADD, PERMISSION_VIEW} from '@api/permissions';
+import {checkForPermission, PermissionModels} from '@api/models/User';
 
 @Component({
   selector: 'app-navbar',
@@ -15,15 +16,15 @@ export class NavbarComponent {
   @Input() user: User;
   @Input() cartItems: number;
 
-  @Output() logout = new EventEmitter<void>()
-  @Output() toggleLeftPane = new EventEmitter<void>()
+  @Output() logout = new EventEmitter<void>();
+  @Output() toggleLeftPane = new EventEmitter<void>();
 
   canCreateCompany(): boolean {
-    return this.user.hasPermission(PERMISSION_ADD, Company.modelType);
+    return  checkForPermission(this.user, PERMISSION_ADD, PermissionModels.company);
   }
 
   canManageCompany(): boolean {
-    return this.user.hasPermission(PERMISSION_VIEW, Company.modelType);
+    return  checkForPermission(this.user, PERMISSION_VIEW, PermissionModels.company);
   }
 
   canViewEmpDashboard(): boolean {

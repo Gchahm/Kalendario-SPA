@@ -1,0 +1,31 @@
+Groups
+<span class="c-light-gray c-pointer" (click)="edit.emit()">
+      <i [hidden]="editMode" class="fa fa-pen"></i>
+</span>
+<div class="pretty-scroll scroll-60" *ngIf="models">
+
+  <ng-container *ngIf="!editMode; else editView">
+    <div class="list-group">
+      <div *ngFor="let group of model.groupsModel" class="list-group-item border-0">
+        <div class="d-flex">
+          {{group.name}}
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+
+<ng-template #editView>
+  <ng-container *ngFor="let name of keys()">
+    <ul class="ul-none">
+      <li *ngFor="let item of grouped[name]">
+        <mat-checkbox [(ngModel)]="item.checked"
+                      [id]="item.model.id"
+                      (change)="emitChanged($event)">
+          {{item.model.name}}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </ng-container>
+</ng-template>

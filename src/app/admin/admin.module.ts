@@ -12,7 +12,6 @@ import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page
 
 import {StoreModule} from '@ngrx/store';
 
-import * as fromUsers from '@admin/state/users';
 import * as fromConfig from '@admin/state/company';
 import * as fromPanels from '@admin/state/scheduling';
 import * as fromGroups from '@admin/state/groups';
@@ -28,14 +27,10 @@ import {ConfigsEffects} from '@admin/state/company/company.effects';
 import {ConfigShellComponent} from './containers/config-shell/config-shell.component';
 import {SchedulingEffects} from '@admin/state/scheduling/scheduling.effects';
 import {UsersPageComponent} from './pages/users-page/users-page.component';
-import {UsersEffects} from '@admin/state/users/users.effects';
-import {UserFormComponent} from './components/_form/user-form/user-form.component';
-import {UserDetailsComponent} from './components/_details/user-details/user-details.component';
 import {GroupsPageComponent} from './pages/groups-page/groups-page.component';
 import {GroupDetailsComponent} from './components/_details/group-details/group-details.component';
 import {GroupsEffects} from '@admin/state/groups/groups.effects';
 import {GroupFormComponent} from './components/_form/group-form/group-form.component';
-import {UserPasswordFormComponent} from './components/_form/user-password-form/user-password-form.component';
 import {GroupFormPermissionsComponent} from './components/_form/group-form-permissions/group-form-permissions.component';
 import {SchedulingPageContentComponent} from './components/scheduling-page-content/scheduling-page-content.component';
 import {CompanyShellComponent} from './containers/company-shell/company-shell.component';
@@ -58,6 +53,7 @@ import {AdminServicesModule} from '@app/admin-services/admin-services.module';
 import {AdminEmployeeModule} from '@app/admin-employee/admin-employee.module';
 import {AdminScheduleModule} from '@app/admin-schedule/admin-schedule.module';
 import * as fromScheduling from '@admin/state/scheduling';
+import {AdminUsersModule} from '@app/admin-users/admin-users.module';
 
 
 @NgModule({
@@ -85,12 +81,9 @@ import * as fromScheduling from '@admin/state/scheduling';
     SchedulingPanelContainerComponent,
     ConfigShellComponent,
     UsersPageComponent,
-    UserFormComponent,
-    UserDetailsComponent,
     GroupsPageComponent,
     GroupDetailsComponent,
     GroupFormComponent,
-    UserPasswordFormComponent,
     GroupFormPermissionsComponent,
     SchedulingPageContentComponent,
     CompanyShellComponent,
@@ -106,14 +99,12 @@ import * as fromScheduling from '@admin/state/scheduling';
     ToggleFieldComponent,
   ],
   imports: [
-    StoreModule.forFeature(fromUsers.storeName, fromUsers.reducer),
     StoreModule.forFeature(fromGroups.storeName, fromGroups.reducer),
     StoreModule.forFeature(fromScheduling.storeName, fromScheduling.reducer),
     StoreModule.forFeature(fromConfig.storeName, fromConfig.reducer),
     StoreModule.forFeature(fromPanels.storeName, fromPanels.reducer),
     StoreModule.forFeature(fromRequests.storeName, fromRequests.reducer),
     EffectsModule.forFeature([
-      UsersEffects,
       ConfigsEffects,
       SchedulingEffects,
       GroupsEffects,
@@ -126,9 +117,13 @@ import * as fromScheduling from '@admin/state/scheduling';
     AdminAppointmentsModule,
     AdminServicesModule,
     AdminEmployeeModule,
-    AdminScheduleModule
+    AdminScheduleModule,
+    AdminUsersModule,
   ],
+
   providers: [],
+  exports: [
+  ]
 })
 export class AdminModule {
 }

@@ -5,7 +5,6 @@ import {environment} from '../../../environments/environment';
 import {CompanyConfig, IConfigWriteModel} from '@api/models/CompanyConfig';
 
 export class Company implements IReadModel {
-  static modelType = 'company';
   id: number;
   name: string;
   address: string;

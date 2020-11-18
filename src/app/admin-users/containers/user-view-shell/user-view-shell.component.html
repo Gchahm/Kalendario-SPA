@@ -1,0 +1,24 @@
+<ng-container *ngIf="model$ | async as model">
+  <admin-user-rw class="col-sm-12 col-md-8 col-lg-8"
+                 [model]="model"
+                 [groups]="groups$ | async"
+                 [editMode]="editMode$ | async"
+                 [apiError]="apiError$ | async"
+                 (edit)="toggleEdit($event)"
+                 (update)="updateModel($event)">
+  </admin-user-rw>
+
+  <ng-container *ngIf="!(editMode$ | async)">
+    <button *ngIf="!(showPasswordForm$ | async)"
+            (click)="toggleShowPasswordForm(true)"
+            class="btn btn-primary">Update Password
+    </button>
+
+    <admin-update-password *ngIf="(showPasswordForm$ | async)"
+                           [error]="changePasswordError$ | async"
+                           (update)="updatePassword(model, $event)"
+                           (cancel)="toggleShowPasswordForm(false)"></admin-update-password>
+  </ng-container>
+
+</ng-container>
+

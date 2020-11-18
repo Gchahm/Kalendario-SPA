@@ -9,10 +9,9 @@ export {actions, storeName} from './users.actions';
 export {reducer, State} from './users.reducer';
 
 
-export interface UserViewModel {
-  user: User;
-  employee: Employee;
-  groups: Group[];
+export interface UserViewModel extends User {
+  employeeModel: Employee;
+  groupsModel: Group[];
 }
 
 
@@ -23,21 +22,29 @@ const baseSelectors = fromReducer.adapter.getBaseSelectors(getFeature,
   (e, s: string) => e.name.toLowerCase().includes(s.toLowerCase()));
 
 
-const getShowPasswordForm = createSelector(
+export const selectPasswordError = createSelector(
   getFeature,
-  state => state.showPasswordForm
-)
+  store => store.changePassError
+);
 
+
+export const selectShowPasswordForm = createSelector(
+  getFeature,
+  store => store.showPasswordForm
+);
 
 export const getUserViewModel: MemoizedSelector<object, UserViewModel> = createSelector(
   baseSelectors.getCurrent,
   fromGroups.selectors.selectAll,
   fromEmployees.selectors.selectAll,
   (user, groups, emps) => {
+    if (!user) {
+      return null;
+    }
     return {
-      user,
-      groups: !!user && !!groups ? groups.filter(g => user.groups.includes(g.id)) : [],
-      employee: user.employee
+      ...user,
+      groupsModel: !!groups ? groups.filter(g => user.groups.includes(g.id)) : [],
+      employeeModel: user.employee ? emps.find(e => e.id === user.employee) : null
     };
   }
 );
@@ -45,6 +52,7 @@ export const getUserViewModel: MemoizedSelector<object, UserViewModel> = createS
 
 export const selectors = {
   ...baseSelectors,
-  getShowPasswordForm,
-  getUserViewModel
+  getUserViewModel,
+  selectPasswordError,
+  selectShowPasswordForm
 };

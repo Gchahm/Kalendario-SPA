@@ -13,7 +13,7 @@ export {SchedulingPanel, ISchedulingPanelWriteModel, SchedulingPanelAdapter, Pan
 export {ServiceCategory, IServiceCategoryWriteModel, ServiceCategoryAdapter} from './ServiceCategory';
 export {Group, IGroupWriteModel, GroupAdapter} from './Group';
 export {Permission, IPermissionWriteModel, PermissionAdapter} from './Permission';
-export {User, UserAdapter} from './User';
+export {User, IUserWriteModel, UserAdapter} from './User';
 export {Slot, SlotAdapter} from './Slot';
 export {RequestModel, RequestAdapter, AddAppointmentWriteModel} from './RequestModel';
 export {IReadModel} from './IReadModel';

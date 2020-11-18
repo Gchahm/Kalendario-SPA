@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {Person} from './Person';
+import {PermissionModels} from '@api/models/User';
 
 export class Customer extends Person {
-  static modelType = 'customer';
+  static modelType = PermissionModels.customer;
 
   static fromJs(data: any): Customer {
     data = typeof data === 'object' ? data : {};

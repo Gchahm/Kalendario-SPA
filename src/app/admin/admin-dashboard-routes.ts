@@ -1,6 +1,6 @@
 import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page.component';
 import {CanViewEmployeesGuard} from '@admin/guards/can-view-employees.guard';
-import {PermissionModels} from '@api/models/User';
+import {checkForPermission, PermissionModels} from '@api/models/User';
 import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';
 import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.component';
 import {CanViewSchedulesGuard} from '@admin/guards/can-view-schedules.guard';
@@ -12,6 +12,7 @@ import {HomePageComponent} from '@admin/pages/home-page/home-page.component';
 import {SchedulingPageComponent} from '@admin/pages/scheduling-page/scheduling-page.component';
 import {CanBookAppointmentsGuard} from '@admin/guards/can-book-appointments.guard';
 import {DashBoardRoute} from '@shared/components/dashboard-container/dashboard-container.component';
+import {PERMISSION_VIEW} from '@api/permissions';
 
 
 export const adminDashboardRoutes: DashBoardRoute[] =
@@ -26,28 +27,28 @@ export const adminDashboardRoutes: DashBoardRoute[] =
       icon: 'user-friends',
       component: EmployeesPageComponent,
       canActivate: [CanViewEmployeesGuard],
-      fn: (user) => user.hasPermission('view', PermissionModels.employee)
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.employee)
     },
     {
       path: 'services',
       icon: 'magic',
       component: ServicesPageComponent,
       // canActivate: [CanViewServicesGuard]
-      fn: (user) => user.hasPermission('view', PermissionModels.service)
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.service)
     },
     {
       path: 'schedules',
       icon: 'calendar-alt',
       component: SchedulePageComponent,
       canActivate: [CanViewSchedulesGuard],
-      fn: (user) => user.hasPermission('view', PermissionModels.schedule)
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.schedule)
     },
     {
       path: 'customers',
       icon: 'address-card',
       component: CustomersPageComponent,
       canActivate: [CanViewCustomersGuard],
-      fn: (user) => user.hasPermission('view', PermissionModels.customer)
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.customer)
     },
     {
       path: 'users',
@@ -55,7 +56,7 @@ export const adminDashboardRoutes: DashBoardRoute[] =
       component: UsersPageComponent,
       // TODO
       // canActivate: [CanViewCustomersGuard],
-            fn: (user) => user.hasPermission('view', PermissionModels.user)
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.user)
     },
     {
       path: 'groups',
@@ -63,7 +64,7 @@ export const adminDashboardRoutes: DashBoardRoute[] =
       component: GroupsPageComponent,
       // TODO
       // canActivate: [CanViewCustomersGuard],
-      fn: (user) => user.hasPermission('view', PermissionModels.group)
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.group)
     },
     {
       path: 'appointments',

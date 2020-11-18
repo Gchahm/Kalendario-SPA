@@ -10,7 +10,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {User} from '@api/models';
 import {BaseEffects} from '@shared/state/base/effects';
 
-import * as fromUsers from '@admin/state/users';
+import * as fromUsers from '@app/admin-users/state';
 
 
 @Injectable()
@@ -27,7 +27,7 @@ export class UsersEffects extends BaseEffects<User> {
     mergeMap((payload) =>
       this.userAdminClient.changePassword(payload.id, payload.command).pipe(
         map(user => (fromUsers.actions.changePasswordSuccess(user))),
-        catchError(err => of(fromUsers.actions.setError(err)))
+        catchError(changePassError => of(fromUsers.actions.changePasswordError({changePassError})))
       )
     )
   );

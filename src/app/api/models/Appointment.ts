@@ -6,10 +6,10 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {Person} from './Person';
 import {IReadModel} from './IReadModel';
-import {User} from '@api/models/User';
+import {PermissionModels, User} from '@api/models/User';
 
 export class Appointment implements IReadModel {
-  static modelType = 'appointment';
+  static modelType = PermissionModels.appointment;
 
   public id = 0;
   public request: number;

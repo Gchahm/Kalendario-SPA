@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {Person} from '@api/models/Person';
 import {environment} from '../../../environments/environment';
+import {PermissionModels} from '@api/models/User';
 
 export class Employee extends Person {
-  static modelType = 'employee';
   id = 0;
   private = false;
   firstName = '';

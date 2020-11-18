@@ -3,9 +3,10 @@ import {Shift} from './Shift';
 import {IReadModel} from './IReadModel';
 import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
+import {PermissionModels} from '@api/models/User';
 
 export class Schedule implements IReadModel {
-  static modelType = 'schedule';
+  static modelType = PermissionModels.schedule;
   id = 0;
   name: string;
   mon: Shift;

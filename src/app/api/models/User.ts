@@ -15,7 +15,8 @@ export enum PermissionModels {
   shift = 'shift',
   schedule = 'schedule',
   customer = 'customer',
-  appointment = 'appointment'
+  appointment = 'appointment',
+  company = 'company'
 }
 
 export function getApp(permission: PermissionModels): string {
@@ -29,13 +30,17 @@ export function getApp(permission: PermissionModels): string {
   }
 }
 
+export function checkForPermission(user: User, permission: string, model: PermissionModels) {
+  return user.permissions.includes(`${getApp(model)}.${permission}_${model}`);
+}
+
 export class User implements IReadModel {
   public id: number;
   public firstName: string;
   public lastName: string;
   public name: string;
   public email: string;
-  public employee: Employee;
+  public employee;
   public person: Person;
   public groups: number[] = [];
   public permissions: string[] = [];
@@ -53,19 +58,13 @@ export class User implements IReadModel {
     result.lastName = data.lastName;
     result.name = data.name;
     result.email = data.email;
-    result.employee = Employee.fromJs(data.employee);
+    result.employee = data.employee;
     result.person = Person.fromJS(data.person);
     result.groups = data.groups;
     result.permissions = data.permissions ? data.permissions : [];
     result.company = Company.fromJs(data.owner);
     return result;
   }
-
-  /*Deprecated: */
-  hasPermission(type, model) {
-    return this.permissions.includes(`${getApp(model)}.${type}_${model}`);
-  }
-
 }
 
 export interface IUserWriteModel {
