@@ -36,6 +36,7 @@ import {InputRwComponent} from '@shared/components/single-field-read-write/input
 import {CustomerInputComponent} from '@shared/components/customer-input/customer-input.component';
 import {CreateCustomerDialogComponent} from '@shared/containers/create-customer/create-customer-dialog.component';
 import {CustomerFormComponent} from '@shared/components/customer-form/customer-form.component';
+import { MomentDatePipe } from './pipes/moment-date.pipe';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {CustomerFormComponent} from '@shared/components/customer-form/customer-f
     InputRwComponent,
     CustomerInputComponent,
     CreateCustomerDialogComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    MomentDatePipe
   ],
   imports: [
     CommonModule,
@@ -84,38 +86,39 @@ import {CustomerFormComponent} from '@shared/components/customer-form/customer-f
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
     {provide: DateAdapter, useClass: MomentUtcDateAdapter},
   ],
-  exports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularMaterialModule,
-    TranslateModule,
-    ColorPickerModule,
-    ColorInputComponent,
-    ColorIconComponent,
-    MatListTableComponent,
-    DateTimeInputComponent,
-    DurationInputComponent,
-    MatMomentDateModule,
-    AppointmentStatusPipe,
-    RegisterComponent,
-    LoginComponent,
-    LoginRegisterShellComponent,
-    TextInputDialogComponent,
-    KalendarioCardComponent,
-    KalendarioCardComponent,
-    CompanyAvatarComponent,
-    ImageInputComponent,
-    RemoveHyphenPipe,
-    DateTimePrettyInputComponent,
-    ToMomentDayPipe,
-    ToMomentDateLongPipe,
-    DashboardContainerComponent,
-    DashboardContainerShellComponent,
-    InputRwComponent,
-    CustomerInputComponent,
-  ]
+    exports: [
+        CommonModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularMaterialModule,
+        TranslateModule,
+        ColorPickerModule,
+        ColorInputComponent,
+        ColorIconComponent,
+        MatListTableComponent,
+        DateTimeInputComponent,
+        DurationInputComponent,
+        MatMomentDateModule,
+        AppointmentStatusPipe,
+        RegisterComponent,
+        LoginComponent,
+        LoginRegisterShellComponent,
+        TextInputDialogComponent,
+        KalendarioCardComponent,
+        KalendarioCardComponent,
+        CompanyAvatarComponent,
+        ImageInputComponent,
+        RemoveHyphenPipe,
+        DateTimePrettyInputComponent,
+        ToMomentDayPipe,
+        ToMomentDateLongPipe,
+        DashboardContainerComponent,
+        DashboardContainerShellComponent,
+        InputRwComponent,
+        CustomerInputComponent,
+        MomentDatePipe,
+    ]
 })
 export class SharedModule {
 }

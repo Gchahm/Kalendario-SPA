@@ -7,13 +7,11 @@ import {CustomersEffects} from '@app/admin-customers/state/customers.effects';
 import { CustomerRwComponent } from './components/customer-rw/customer-rw.component';
 import { CustomerViewShellComponent } from './containers/customer-view-shell/customer-view-shell.component';
 import {CustomerAppointmentsTableComponent} from '@app/admin-customers/components/customer-appointments-table/customer-appointments-table.component';
-import {CustomerAppointmentsFormComponent} from '@app/admin-customers/components/customer-appointments-form/customer-appointments-form.component';
 import {CustomerAppointmentsShellComponent} from '@app/admin-customers/containers/customer-appointments-shell/customer-appointments-shell.component';
 
 
 @NgModule({
   declarations: [
-    CustomerAppointmentsFormComponent,
     CustomerAppointmentsTableComponent,
     CustomerRwComponent,
     CustomerViewShellComponent,

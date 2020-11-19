@@ -4,19 +4,21 @@
     <th mat-header-cell *matHeaderCellDef>
       Date
       <i class="fa fa-filter c-pointer ml-3" (click)="startDt.open()"></i>
+      {{fromDate | momentDate}}
 
       <div class="cdk-visually-hidden">
-          <input [(ngModel)]="fromDate" [matDatepicker]="startDt">
-          <mat-datepicker-toggle matSuffix [for]="startDt"></mat-datepicker-toggle>
-          <mat-datepicker #startDt disabled="false"></mat-datepicker>
+        <input [(ngModel)]="fromDate" [matDatepicker]="startDt">
+        <mat-datepicker-toggle matSuffix [for]="startDt"></mat-datepicker-toggle>
+        <mat-datepicker #startDt disabled="false"></mat-datepicker>
       </div>
 
       <i class="fa fa-filter c-pointer ml-3" (click)="endDt.open()"></i>
+      {{toDate | momentDate}}
 
       <div class="cdk-visually-hidden">
-          <input [(ngModel)]="toDate" [matDatepicker]="endDt">
-          <mat-datepicker-toggle matSuffix [for]="endDt"></mat-datepicker-toggle>
-          <mat-datepicker #endDt disabled="false"></mat-datepicker>
+        <input [(ngModel)]="toDate" [matDatepicker]="endDt">
+        <mat-datepicker-toggle matSuffix [for]="endDt"></mat-datepicker-toggle>
+        <mat-datepicker #endDt disabled="false"></mat-datepicker>
       </div>
     </th>
     <td class="c-primary" mat-cell *matCellDef="let element"> {{element.start}}</td>
