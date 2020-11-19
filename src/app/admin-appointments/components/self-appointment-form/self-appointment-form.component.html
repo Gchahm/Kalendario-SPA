@@ -1,7 +1,6 @@
 <form class="appointment-form" [formGroup]="form" (ngSubmit)="submit()">
   <div class="row">
     <div class="col-12">
-      {{form.value | json}}
       <mat-error>
         <mat-list *ngFor="let error of form.errors">
           {{error}}
