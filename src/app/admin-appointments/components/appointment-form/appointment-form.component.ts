@@ -5,11 +5,13 @@ import {modelId} from '@api/models/IReadModel';
 import {FormControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Moment} from 'moment';
+import {pulseAnimation} from 'angular-animations';
 
 @Component({
   selector: 'admin-appointment-form',
   templateUrl: './appointment-form.component.html',
-  styleUrls: ['./appointment-form.component.scss']
+  styleUrls: ['./appointment-form.component.scss'],
+  animations: [pulseAnimation({scale: 1.2, duration: 200})]
 })
 export class AppointmentFormComponent extends BaseFormComponent<Appointment> implements OnInit, OnDestroy {
 
@@ -20,11 +22,13 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
     this._services = services;
     this.setEmployeeServices(this.model.employee.id);
   }
+
   get services(): Service[] {
     return this._services;
   }
 
   employeeServices: Service[];
+  animationState = false;
   private serviceSub: Subscription;
   private endTimeSub: Subscription;
   private startTimeSub: Subscription;
@@ -47,8 +51,8 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   ngOnInit() {
     super.ngOnInit();
     this.subscribeOnServiceChanges();
-    this.subscribeOnEndTimeChanges();
     this.subscribeOnStartTimeChanges();
+    this.subscribeOnEndTimeChanges();
     this.subscribeOnEmployeeChanges();
     this.setEmployeeServices(this.model.employee.id);
   }
@@ -56,8 +60,8 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
 
   ngOnDestroy() {
     this.serviceSub.unsubscribe();
-    this.endTimeSub.unsubscribe();
     this.startTimeSub.unsubscribe();
+    this.endTimeSub.unsubscribe();
     this.employeeSubscription.unsubscribe();
   }
 
@@ -76,32 +80,25 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   }
 
   private subscribeOnServiceChanges() {
-    this.serviceSub = this.form.get('service').valueChanges.subscribe(sid => {
-        const service = this.services.find(s => s.id === +sid);
-        const end = this.startControlValue()
-          .add(service.duration.hour, 'hours')
-          .add(service.duration.minute, 'minutes');
-
-        this.form.patchValue({
-          end,
-          endTime: end.format('HH:mm')
-        });
-      }
-    );
-  }
-
-  private subscribeOnEndTimeChanges() {
-    this.startTimeSub = this.form.get('startTime').valueChanges.subscribe(endTime => {
-        const hours = +endTime.substring(0, 2);
-        const minutes = +endTime.substring(3, 5);
-        this.form.patchValue({
-          start: this.startControlValue().set({hours, minutes})
-        });
+    this.serviceSub = this.serviceControl.valueChanges.subscribe(sid => {
+        this.updateEndTimeFromService(+sid);
       }
     );
   }
 
   private subscribeOnStartTimeChanges() {
+    this.startTimeSub = this.form.get('startTime').valueChanges.subscribe(endTime => {
+        const hours = +endTime.substring(0, 2);
+        const minutes = +endTime.substring(3, 5);
+        this.form.patchValue({
+          start: this.startControlValue().set({hours, minutes}),
+        });
+        this.updateEndTimeFromService(+this.serviceControl.value);
+      }
+    );
+  }
+
+  private subscribeOnEndTimeChanges() {
     this.endTimeSub = this.form.get('endTime').valueChanges.subscribe(endTime => {
         const hours = +endTime.substring(0, 2);
         const minutes = +endTime.substring(3, 5);
@@ -116,6 +113,7 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
     this.employeeSubscription = this.form.get('employee')
       .valueChanges.subscribe(e => this.setEmployeeServices(+e));
   }
+
   private startControlValue(): Moment {
     return this.form.get('start').value.clone();
   }
@@ -124,10 +122,28 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
     return this.form.get('end').value.clone();
   }
 
+  private get serviceControl(): FormControl {
+    return this.form.get('service') as FormControl;
+  }
+
   private setEmployeeServices(empId: number) {
     const serviceIds = this.employees.find(e => e.id === empId).services;
     this.employeeServices = this.services.filter(s => serviceIds.includes(s.id));
-    console.log(serviceIds, this.employeeServices);
+  }
+
+  private updateEndTimeFromService(serviceId: number) {
+    const service = this.services.find(s => s.id === serviceId);
+    if (service) {
+      const end = this.startControlValue()
+        .add(service.duration.hour, 'hours')
+        .add(service.duration.minute, 'minutes');
+
+      this.form.patchValue({
+        end,
+        endTime: end.format('HH:mm')
+      });
+      this.animationState = !this.animationState;
+    }
   }
 }
 
