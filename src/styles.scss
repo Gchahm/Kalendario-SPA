@@ -52,6 +52,7 @@ body {
 
 .pretty-scroll::-webkit-scrollbar {
   width: 0.75rem;
+  height: 0.75rem;
 }
 
 .pretty-scroll::-webkit-scrollbar-track {
@@ -102,7 +103,7 @@ body {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  height: 6rem;
+  height: 80px;
   background: white;
   text-align: center;
   z-index: 11;

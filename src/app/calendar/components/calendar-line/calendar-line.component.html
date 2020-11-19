@@ -1,4 +1,4 @@
-<div class="text-center"
+<div class="calendar-line-container"
      (mouseover)="toggleVisible(true)"
      (mouseout)="toggleVisible(false)"
      [class.top-line]="oClock"
@@ -6,6 +6,6 @@
      [class.bg-white]="available"
      [class.bg-light-gray]="!available">
   <button [hidden]="!showButton" (click)="emitClick()" class="btn btn-light">
-    <i class="fa fa-plus-circle"></i>
+    <i class="fa fa-plus-circle fix-size"></i>
   </button>
 </div>

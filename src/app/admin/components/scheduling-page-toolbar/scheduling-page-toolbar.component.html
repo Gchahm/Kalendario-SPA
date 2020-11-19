@@ -1,33 +1,38 @@
 <mat-toolbar class="toolbar-wrapper mat-elevation-z3">
   <mat-toolbar-row class="toolbar-row">
-    <button class="btn  btn-outline-{{color(panel)}}" *ngFor="let panel of panels"
-            (click)="selectClick(panel)">{{panel.name}}</button>
-    <button class="btn btn-light" matTooltip="add panel" (click)="createPanel()">
-      <i class="fa fa-plus c-primary"></i>
+    <div class="h5 c-pointer mr-2 fix-size"
+         [class.selected-panel]="color(panel)"
+         *ngFor="let panel of panels; let i = index"
+         [@pulse]="panelPulses[i]"
+         (click)="selectClick(i)">{{panel.name}}</div>
+    <button mat-mini-fab color="primary" class="mx-2" matTooltip="add panel" (click)="createPanel()">
+      <i class="fa fa-plus fix-size"></i>
     </button>
-    <button class="btn btn-light" *ngIf="currentPanel" matTooltip="add panel" (click)="editPanel()">
-      <i class="fa fa-pen c-accent"></i>
+    <button mat-mini-fab color="accent" class="mr-2" *ngIf="currentPanel" matTooltip="edit panel" (click)="editPanel()">
+      <i class="fa fa-pen fix-size"></i>
     </button>
-    <button class="btn btn-light" *ngIf="currentPanel" matTooltip="remove panel" (click)="deletePanel()">
-      <i class="fa fa-times c-warn"></i>
+    <button mat-mini-fab color="warn" *ngIf="currentPanel" matTooltip="remove panel" (click)="deletePanel()">
+      <i class="fa fa-times fix-size"></i>
     </button>
   </mat-toolbar-row>
+
   <mat-toolbar-row *ngIf="currentPanel">
     <mat-menu #employeesMenu="matMenu">
       <button *ngFor="let emp of toolbarEmployees"
               mat-menu-item
+              class="fix-size"
               (click)="addEmployee(emp)">
-        <i *ngIf="emp.isSelected" class="fa fa-check"></i>
+        <i *ngIf="emp.isSelected" class="fa fa-check fix-size"></i>
         {{emp.employee.name}}
       </button>
     </mat-menu>
 
-    <button class="btn btn-light" [matMenuTriggerFor]="employeesMenu">
-      <i class="fa fa-ellipsis-v c-accent"></i>
+    <button class="btn mr-2" [matMenuTriggerFor]="employeesMenu">
+      <i class="fa fa-user-plus c-primary fix-size"></i>
     </button>
 
     <ng-container *ngIf="!isMobile">
-      <button class="btn btn-accent" (click)="today()">
+      <button class="btn btn-admin btn-primary" (click)="today()">
         today
       </button>
       <button class="btn btn-light" (click)="previousDay()">
@@ -38,15 +43,19 @@
       </button>
     </ng-container>
 
-    <mat-form-field appearance="standard">
+    <div (click)="dpApointmentDashboard.open()" class="text-center">
+      <div class="top-date">{{date | momentDate:'ddd'}}</div>
+      {{date | momentDate}}
+    </div>
+    <i class="fa fa-calendar-alt ml-2" matsuffix (click)="dpApointmentDashboard.open()"></i>
+    <div class="cdk-visually-hidden">
       <input matInput
              (click)="dpApointmentDashboard.open()"
              [ngModel]="date"
              (ngModelChange)="dateChanged.emit($event)"
              [matDatepicker]="dpApointmentDashboard">
-      <i class="fa fa-calendar-alt" matsuffix (click)="dpApointmentDashboard.open()"></i>
-      <mat-datepicker [touchUi]="isMobile" #dpApointmentDashboard></mat-datepicker>
-    </mat-form-field>
+    </div>
+    <mat-datepicker [touchUi]="isMobile" #dpApointmentDashboard></mat-datepicker>
 
     <span class="nav-spacer"></span>
 

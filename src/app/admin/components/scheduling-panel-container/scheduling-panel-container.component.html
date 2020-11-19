@@ -1,18 +1,18 @@
 <div class="panel-container">
   <div class="scheduling-panel-heading">
-    <div>
-      <h6>{{employee.name}}</h6>
+    <div class="fix-size h6">
+      {{employee.name}}
     </div>
 
     <div>
-      <button class="btn btn-outline-primary" (click)="bookAppointment()">
-        <i class="fa fa-calendar" matTooltip="book appointment"></i>
+      <button mat-mini-fab color="primary" class="mr-2" (click)="bookAppointment()" matTooltip="book appointment">
+        <i class="fa fa-calendar fix-size"></i>
       </button>
-      <button class="btn btn-outline-accent" (click)="bookSelfAppointment()">
-        <i class="fa fa-lock" matTooltip="lock time"></i>
+      <button  mat-mini-fab color="accent" class="mr-2" (click)="bookSelfAppointment()" matTooltip="lock time">
+        <i class="fa fa-lock fix-size"></i>
       </button>
-      <button class="btn btn-outline-danger close-button" (click)="closeClick()">
-        <i class="fa fa-times" matTooltip="close"></i>
+      <button  mat-mini-fab color="warn" (click)="closeClick()" matTooltip="remove">
+        <i class="fa fa-user-times fix-size"></i>
       </button>
     </div>
   </div>

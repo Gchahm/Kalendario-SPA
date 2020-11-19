@@ -6,22 +6,32 @@ import {PanelManager, SchedulingPanel} from '@api/models';
 import {MatDialog} from '@angular/material/dialog';
 import {TextInputDialogComponent} from '@shared/components/text-input-dialog/text-input-dialog.component';
 import {AlerterService} from '@shared/services/alerter.service';
+import {pulseAnimation} from 'angular-animations';
 
 @Component({
   selector: 'admin-scheduling-page-toolbar',
   templateUrl: './scheduling-page-toolbar.component.html',
-  styleUrls: ['./scheduling-page-toolbar.component.css']
+  styleUrls: ['./scheduling-page-toolbar.component.scss'],
+  animations: [pulseAnimation({scale: 1.2, duration: 300, delay: 0})]
 })
 export class SchedulingPageToolbarComponent {
 
   @Input() toolbarEmployees: ToolbarEmployee[];
-  @Input() panels: SchedulingPanel[];
   @Input() currentPanel: SchedulingPanel;
   @Input() requestCount: number;
   @Input() date: Moment;
   @Input() isMobile: boolean;
 
-  /**Emits when an employee that is not showing gets a click*/
+  private _panels: SchedulingPanel[];
+  @Input() set panels(value: SchedulingPanel[]) {
+    this._panels = value;
+    this.panelPulses = value.map(p => false);
+  }
+  get panels(): SchedulingPanel[] {
+    return this._panels;
+  }
+
+  /* Emits when an employee that is not showing gets a click */
   @Output() select = new EventEmitter<SchedulingPanel>();
   @Output() update = new EventEmitter<SchedulingPanel>();
   @Output() create = new EventEmitter<SchedulingPanel>();
@@ -29,16 +39,19 @@ export class SchedulingPageToolbarComponent {
   @Output() toggleRequests = new EventEmitter<void>();
   @Output() dateChanged = new EventEmitter<Moment>();
 
+  panelPulses: boolean[];
+
   constructor(private dialog: MatDialog,
               public alerter: AlerterService) {
   }
 
-  color(panel: SchedulingPanel) {
-    return this.currentPanel.id === panel.id ? 'accent' : 'primary';
+  color(panel: SchedulingPanel): boolean {
+    return this.currentPanel?.id === panel.id;
   }
 
-  selectClick(panel: SchedulingPanel) {
-    this.select.emit(panel);
+  selectClick(index: number) {
+    this.select.emit(this.panels[index]);
+    this.panelPulses[index] = !this.panelPulses[index];
   }
 
   addEmployee(tbEmp: ToolbarEmployee) {

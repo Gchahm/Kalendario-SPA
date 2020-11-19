@@ -1,4 +1,4 @@
-@import "/src/_variables.scss";
+@import "../../../../_variables.scss";
 
 .toolbar-wrapper {
   background-color: white;
@@ -18,5 +18,10 @@
 }
 
 .selected-panel {
-  text-decoration: underline $primary;
+  text-decoration: underline $accent;
+}
+
+.top-date {
+  line-height: 0.6rem;
+  text-transform: uppercase;
 }

@@ -100,3 +100,18 @@ mat-dialog-container.mat-dialog-container {
 .tooltip-ws {
   white-space: pre-line;
 }
+
+.mat-mini-fab.mat-button-base.mat-primary {
+  background-color: white;
+  color: $primary;
+}
+
+.mat-mini-fab.mat-button-base.mat-accent {
+  background-color: white;
+  color: $accent;
+}
+
+.mat-mini-fab.mat-button-base.mat-warn {
+  background-color: white;
+  color: map-get($mat-red, 900);
+}
