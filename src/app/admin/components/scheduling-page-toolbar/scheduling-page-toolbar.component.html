@@ -1,22 +1,25 @@
-<mat-toolbar class="toolbar-wrapper mat-elevation-z3">
-  <mat-toolbar-row class="toolbar-row">
-    <div class="h5 c-pointer mr-2 fix-size"
+<div class="toolbar-wrapper pb-4">
+  <div class="toolbar-top-line">
+    <div class="h5 c-pointer my-auto mr-4 fix-size"
          [class.selected-panel]="color(panel)"
          *ngFor="let panel of panels; let i = index"
          [@pulse]="panelPulses[i]"
          (click)="selectClick(i)">{{panel.name}}</div>
-    <button mat-mini-fab color="primary" class="mx-2" matTooltip="add panel" (click)="createPanel()">
-      <i class="fa fa-plus fix-size"></i>
-    </button>
-    <button mat-mini-fab color="accent" class="mr-2" *ngIf="currentPanel" matTooltip="edit panel" (click)="editPanel()">
-      <i class="fa fa-pen fix-size"></i>
-    </button>
-    <button mat-mini-fab color="warn" *ngIf="currentPanel" matTooltip="remove panel" (click)="deletePanel()">
-      <i class="fa fa-times fix-size"></i>
-    </button>
-  </mat-toolbar-row>
+    <div>
+      <button mat-mini-fab color="primary" class="mx-2" matTooltip="add panel" (click)="createPanel()">
+        <i class="fa fa-plus fix-size"></i>
+      </button>
+      <button mat-mini-fab color="accent" class="mr-2" *ngIf="currentPanel" matTooltip="edit panel"
+              (click)="editPanel()">
+        <i class="fa fa-pen fix-size"></i>
+      </button>
+      <button mat-mini-fab color="warn" *ngIf="currentPanel" matTooltip="remove panel" (click)="deletePanel()">
+        <i class="fa fa-times fix-size"></i>
+      </button>
+    </div>
+  </div>
 
-  <mat-toolbar-row *ngIf="currentPanel">
+  <div *ngIf="currentPanel" class="d-flex">
     <mat-menu #employeesMenu="matMenu">
       <button *ngFor="let emp of toolbarEmployees"
               mat-menu-item
@@ -27,8 +30,8 @@
       </button>
     </mat-menu>
 
-    <button class="btn mr-2" [matMenuTriggerFor]="employeesMenu">
-      <i class="fa fa-user-plus c-primary fix-size"></i>
+    <button class="btn mr-2 fix-size" [matMenuTriggerFor]="employeesMenu">
+      <i class="fa fa-user-plus c-primary"></i>
     </button>
 
     <ng-container *ngIf="!isMobile">
@@ -43,11 +46,11 @@
       </button>
     </ng-container>
 
-    <div (click)="dpApointmentDashboard.open()" class="text-center">
+    <div (click)="dpApointmentDashboard.open()" class="text-center fix-size mr-4">
       <div class="top-date">{{date | momentDate:'ddd'}}</div>
       {{date | momentDate}}
     </div>
-    <i class="fa fa-calendar-alt ml-2" matsuffix (click)="dpApointmentDashboard.open()"></i>
+    <i class="fa fa-calendar-alt fix-size" matsuffix (click)="dpApointmentDashboard.open()"></i>
     <div class="cdk-visually-hidden">
       <input matInput
              (click)="dpApointmentDashboard.open()"
@@ -59,10 +62,10 @@
 
     <span class="nav-spacer"></span>
 
-    <button class="btn btn-outline-primary"
+    <button class="btn btn-outline-primary mr-4"
             [matBadge]="requestCount"
             (click)="toggleRequests.emit()">requests
     </button>
+  </div>
 
-  </mat-toolbar-row>
-</mat-toolbar>
+</div>

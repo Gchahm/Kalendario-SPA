@@ -9,10 +9,6 @@
   z-index: 30;
 }
 
-.toolbar-row {
-  border-bottom: lightgray 1px solid;
-}
-
 .nav-spacer {
   flex: 1 1 auto;
 }
@@ -24,4 +20,11 @@
 .top-date {
   line-height: 0.6rem;
   text-transform: uppercase;
+}
+
+.toolbar-top-line {
+  display: flex;
+  flex-wrap: wrap;
+  padding: .4rem;
+  margin-bottom: 1rem;
 }
