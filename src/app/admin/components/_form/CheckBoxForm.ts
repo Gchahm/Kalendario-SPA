@@ -30,7 +30,7 @@ export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
 
   boxItem(model: T): BoxItem<T> {
     return {
-      checked: this.checked.includes(model.id),
+      checked: this.checked?.includes(model.id),
       model
     };
   }
