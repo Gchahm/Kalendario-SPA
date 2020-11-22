@@ -5,17 +5,17 @@
          *ngFor="let panel of panels; let i = index"
          [@pulse]="panelPulses[i]"
          (click)="selectClick(i)">{{panel.name}}</div>
-    <div>
-      <button mat-mini-fab color="primary" class="mx-2" matTooltip="add panel" (click)="createPanel()">
-        <i class="fa fa-plus fix-size"></i>
-      </button>
-      <button mat-mini-fab color="accent" class="mr-2" *ngIf="currentPanel" matTooltip="edit panel"
-              (click)="editPanel()">
-        <i class="fa fa-pen fix-size"></i>
-      </button>
-      <button mat-mini-fab color="warn" *ngIf="currentPanel" matTooltip="remove panel" (click)="deletePanel()">
-        <i class="fa fa-times fix-size"></i>
-      </button>
+    <div class="d-flex my-auto">
+      <app-fab-button icon="fa-plus" class="mr-2 c-primary" matTooltip="add panel" (click)="createPanel()"></app-fab-button>
+      <app-fab-button icon="fa-pen" class="mr-2 c-accent" matTooltip="edit panel" (click)="editPanel()"></app-fab-button>
+      <app-fab-button icon="fa-times" class="c-danger" matTooltip="remove panel" (click)="deletePanel()"></app-fab-button>
+<!--      <button mat-mini-fab color="accent" class="mr-2" *ngIf="currentPanel" -->
+<!--              (click)="editPanel()">-->
+<!--        <i class="fa fa-pen fix-size"></i>-->
+<!--      </button>-->
+<!--      <button mat-mini-fab color="warn" *ngIf="currentPanel">-->
+<!--        <i class="fa fa-times fix-size"></i>-->
+<!--      </button>-->
     </div>
   </div>
 

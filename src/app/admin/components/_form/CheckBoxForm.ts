@@ -5,16 +5,23 @@ import {MatCheckboxChange} from '@angular/material/checkbox';
 export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
 
   private _models: T[];
-  @Input() set models(value: T[]) {
-    this._models = value;
+  @Input() set models(models: T[]) {
+    this._models = models;
     this.updateGrouped();
   }
-
   get models(): T[] {
     return this._models;
   }
 
-  @Input() checked: number[];
+  private _checked: number[];
+  @Input() set checked(value: number[]) {
+    this._checked = value;
+    this.updateGrouped();
+  }
+  get checked(): number[] {
+    return this._checked;
+  }
+
   @Output() changed = new EventEmitter<CheckChanged>();
   grouped: Grouped<T>;
 
@@ -26,13 +33,6 @@ export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
 
   emitChanged(event: MatCheckboxChange) {
     this.changed.emit({checked: event.checked, id: +event.source.id});
-  }
-
-  boxItem(model: T): BoxItem<T> {
-    return {
-      checked: this.checked?.includes(model.id),
-      model
-    };
   }
 
   allChecked(name: string) {
@@ -63,6 +63,13 @@ export abstract class CheckBoxForm<T extends IReadModel> implements OnInit {
         this.grouped[this.modelField(model)] = [this.boxItem(model)];
       }
     }
+  }
+
+  boxItem(model: T): BoxItem<T> {
+    return {
+      checked: this.checked?.includes(model.id),
+      model
+    };
   }
 }
 
