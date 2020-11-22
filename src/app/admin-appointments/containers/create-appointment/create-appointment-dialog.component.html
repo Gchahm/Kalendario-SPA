@@ -1,4 +1,4 @@
-<div class="create-appointment-dialog-container" *ngIf="appointment$ | async as model">
+<mat-dialog-content class="create-appointment-dialog-container" *ngIf="appointment$ | async as model">
   <ng-container *ngIf="(type$ | async) === appointmentType.service">
     <admin-appointment-form [model]="model"
                             [employees]="employees$ | async"
@@ -15,4 +15,4 @@
                                  (create)="saveSelfAppointment($event)">
     </admin-self-appointment-form>
   </ng-container>
-</div>
+</mat-dialog-content>

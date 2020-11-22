@@ -1,6 +1,6 @@
 <form class="appointment-form" [formGroup]="form" (ngSubmit)="submit()">
   <div class="row">
-    <div class="col-12 mb-5">
+    <div class="col-12 form-group">
       <mat-error>
         <mat-list *ngFor="let error of form.errors">
           {{error}}
@@ -8,7 +8,7 @@
       </mat-error>
     </div>
 
-    <div class="col-sm-12 col-md-6 mb-5">
+    <div class="col-sm-12 col-md-6 form-group">
       <h5>Employee</h5>
       <div *ngIf="canChangeEmployee(); else employeeView" class="form-group">
         <select formControlName="employee"
@@ -26,7 +26,7 @@
       </ng-template>
     </div>
 
-    <div class="col-sm-12 col-md-6 mb-5">
+    <div class="col-sm-12 col-md-6 form-group">
       <h5>Service</h5>
       <div *ngIf="!model.request; else serviceView" class="form-group">
         <select formControlName="service" class="form-control form-control-admin">
@@ -43,7 +43,7 @@
       </ng-template>
     </div>
 
-    <div class="col-4 mb-5">
+    <div class="col-4 form-group">
       <h5>Date</h5>
         <input readonly
                formControlName="start"
@@ -61,7 +61,7 @@
       <input [@pulse]="animationState" type="time" formControlName="endTime" class="form-control form-control-admin">
     </div>
 
-    <div class="col-12 mb-5">
+    <div class="col-12 form-group">
       <h5>Customer</h5>
       <ng-container *ngIf="!model.request; else customerView">
         <shared-customer-input formControlName="customer"></shared-customer-input>
@@ -84,7 +84,7 @@
       </ng-template>
     </div>
 
-    <div class="col-12 mb-5">
+    <div class="col-12 form-group">
       <h5>Internal Notes</h5>
       <textarea formControlName="internalNotes"
                 placeholder="internal notes"
@@ -93,6 +93,11 @@
         {{form.get('internalNotes').errors?.serverError}}
       </mat-error>
     </div>
+
+    <div class="col-12 form-group" *ngIf="permissions.overlap">
+      <mat-checkbox formControlName="ignoreAvailability">Ignore Availability</mat-checkbox>
+    </div>
+
     <div class="col-6">
       <button type="submit" class="btn btn-block btn-primary-gradient"
               [disabled]="!form.valid">{{model.id === 0 ? 'Create' : 'Update'}}</button>

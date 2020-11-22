@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Moment} from 'moment';
 import {Appointment, Employee} from '@api/models';
 import * as moment from 'moment';
-import {ModelPermissions} from '@core/state';
+import {ModelPermissions} from '@api/permissions';
 
 @Component({
   selector: 'employee-schedule',

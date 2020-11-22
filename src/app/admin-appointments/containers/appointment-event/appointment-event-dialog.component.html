@@ -1,4 +1,4 @@
-<div class="event-container" *ngIf="appointment$ | async as appointment">
+<mat-dialog-content class="event-container" *ngIf="appointment$ | async as appointment">
   <div class="text-right" *ngIf="permissions$ | async as permission">
     <ng-container *ngIf="!editMode">
       <button class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
@@ -26,6 +26,7 @@
     </ng-container>
     <ng-container *ngIf="editMode">
       <admin-appointment-form [model]="appointment"
+                              [permissions]="permissions$ | async"
                               [employees]="employees$ | async"
                               [services]="services$ | async"
                               [apiError]="apiError$ | async"
@@ -57,4 +58,4 @@
       </admin-self-appointment-form>
     </ng-container>
   </ng-template>
-</div>
+</mat-dialog-content>

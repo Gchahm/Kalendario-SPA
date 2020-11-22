@@ -6,6 +6,7 @@ import {FormControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Moment} from 'moment';
 import {pulseAnimation} from 'angular-animations';
+import {AppointmentPermissions} from '@api/permissions';
 
 @Component({
   selector: 'admin-appointment-form',
@@ -16,6 +17,7 @@ import {pulseAnimation} from 'angular-animations';
 export class AppointmentFormComponent extends BaseFormComponent<Appointment> implements OnInit, OnDestroy {
 
   @Input() employees: Employee[];
+  @Input() permissions: AppointmentPermissions;
 
   private _services: Service[];
   @Input() set services(services: Service[]) {
@@ -27,12 +29,13 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
     return this._services;
   }
 
-  employeeServices: Service[];
-  animationState = false;
   private serviceSub: Subscription;
   private endTimeSub: Subscription;
   private startTimeSub: Subscription;
   private employeeSubscription: Subscription;
+
+  employeeServices: Service[];
+  animationState = false;
 
   writeModel(): IAppointmentWriteModel {
     return {
@@ -45,6 +48,7 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
       status: this.model.status,
       customerNotes: this.model.customerNotes,
       internalNotes: this.model.internalNotes,
+      ignoreAvailability: false
     };
   }
 

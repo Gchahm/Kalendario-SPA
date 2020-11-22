@@ -67,4 +67,5 @@ export interface IAppointmentWriteModel {
   status: string;
   customerNotes: string;
   internalNotes: string;
+  ignoreAvailability: boolean;
 }

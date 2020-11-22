@@ -4,6 +4,8 @@ import * as fromReducer from './appointments.reducer';
 
 import {storeName} from './appointments.actions';
 import {Appointment} from '@api/models';
+import {selectCurrentUser} from '@core/state';
+import {appointmentPermissions} from '@api/permissions';
 
 export {State, reducer, AppointmentType} from './appointments.reducer';
 export {actions, storeName} from './appointments.actions';
@@ -69,6 +71,10 @@ const selectCurrentDateEmployeeAppointments = createSelector(
 );
 
 
+const selectAppointmentPermissions = createSelector(
+  selectCurrentUser,
+  (user) => appointmentPermissions(user)
+);
 
 export const selectors = {
   ...baseSelectors,
@@ -77,7 +83,8 @@ export const selectors = {
   getCurrentAppointmentHistory,
   selectCurrentDate,
   selectCurrentDateAppointments,
-  selectCurrentDateEmployeeAppointments
+  selectCurrentDateEmployeeAppointments,
+  selectAppointmentPermissions
 };
 
 

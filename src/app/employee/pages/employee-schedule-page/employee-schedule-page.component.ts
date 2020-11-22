@@ -9,7 +9,7 @@ import {map, switchMap} from 'rxjs/operators';
 
 import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromCore from '@app/core/state';
-import {ModelPermissions} from '@app/core/state';
+import {ModelPermissions} from '@api/permissions';
 
 
 @Component({

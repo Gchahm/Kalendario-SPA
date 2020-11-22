@@ -13,7 +13,7 @@ import * as fromEmployees from '@app/admin-employee/state';
 import * as fromServices from '@app/admin-services/state';
 import * as fromCore from '@app/core/state';
 import {expandCollapseAnimation} from '@app/animations';
-import {ModelPermissions} from '@app/core/state';
+import {AppointmentPermissions} from '@api/permissions';
 
 @Component({
   selector: 'employee-appointment-event',
@@ -30,7 +30,7 @@ export class AppointmentEventDialogComponent implements OnInit, OnDestroy {
   services$: Observable<Service[]>;
   employees$: Observable<Employee[]>;
   apiError$: Observable<ApiError>;
-  permissions$: Observable<ModelPermissions>;
+  permissions$: Observable<AppointmentPermissions>;
   editMode = false;
   showHistory = false;
 
@@ -49,7 +49,7 @@ export class AppointmentEventDialogComponent implements OnInit, OnDestroy {
     this.appointment$ = this.store.select(fromAppointments.selectors.getCurrent);
     this.history$ = this.store.select(fromAppointments.selectors.getCurrentAppointmentHistory);
     this.apiError$ = this.store.select(fromAppointments.selectors.getApiError);
-    this.permissions$ = this.store.select(fromCore.hasPermission, {model: Appointment.modelType});
+    this.permissions$ = this.store.select(fromAppointments.selectors.selectAppointmentPermissions);
   }
 
   ngOnDestroy() {

@@ -25,6 +25,11 @@ h4 {
   border: 1px solid lightgray;
   position: absolute;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.calendar-event:hover {
+  z-index: 100;
 }
 
 .calendar-event-text {

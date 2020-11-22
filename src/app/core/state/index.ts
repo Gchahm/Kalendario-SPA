@@ -1,10 +1,10 @@
-import {createFeatureSelector, createSelector, select} from '@ngrx/store';
+import {createFeatureSelector, createSelector, MemoizedSelectorWithProps, select} from '@ngrx/store';
 import * as fromCore from './core.reducer';
 import {pipe} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {User} from '@api/models';
-import {getApp} from '@api/models/User';
-import {PERMISSION_ADD, PERMISSION_CHANGE, PERMISSION_DELETE, PERMISSION_VIEW} from '@api/permissions';
+import {ModelPermissions, userPermissions} from '@api/permissions';
+import {PermissionModels} from '@api/models/User';
 
 export * from './core.reducer';
 export * from './core.actions';
@@ -78,22 +78,8 @@ export const getCompanyName = createSelector(
 );
 
 
-export interface ModelPermissions {
-  view: boolean;
-  add: boolean;
-  change: boolean;
-  delete: boolean;
-}
-
-export const hasPermission = createSelector(
+export const hasPermission: MemoizedSelectorWithProps<object, { readonly model?: PermissionModels }, ModelPermissions> = createSelector(
   selectCurrentUser,
-  (user, {model}) => {
-    return {
-      view: user.permissions.includes(`${getApp(model)}.${PERMISSION_VIEW}_${model}`),
-      add: user.permissions.includes(`${getApp(model)}.${PERMISSION_ADD}_${model}`),
-      change: user.permissions.includes(`${getApp(model)}.${PERMISSION_CHANGE}_${model}`),
-      delete: user.permissions.includes(`${getApp(model)}.${PERMISSION_DELETE}_${model}`),
-    };
-  }
+  (user, {model}) => userPermissions(user, model)
 );
 
