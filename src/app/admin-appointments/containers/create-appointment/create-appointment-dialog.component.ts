@@ -10,6 +10,7 @@ import * as fromServices from '@app/admin-services/state';
 import * as fromEmployees from '@app/admin-employee/state';
 import {ApiError} from '@api/Errors';
 import {Employee, Service} from '@api/models';
+import {AppointmentPermissions} from '@api/permissions';
 
 @Component({
   selector: 'employee-form-appointment',
@@ -24,6 +25,7 @@ export class CreateAppointmentDialogComponent implements OnInit {
   apiError$: Observable<ApiError>;
   type$: Observable<string>;
   appointmentType = fromAppointments.AppointmentType;
+  permissions$: Observable<AppointmentPermissions>;
 
   constructor(private dialogRef: MatDialogRef<CreateAppointmentDialogComponent>,
               private store: Store<State>) {
@@ -38,6 +40,7 @@ export class CreateAppointmentDialogComponent implements OnInit {
     this.employees$ = this.store.select(fromEmployees.selectors.selectAll);
     this.type$ = this.store.select(fromAppointments.selectors.getInitializedAppointmentType);
     this.apiError$ = this.store.select(fromAppointments.selectors.getApiError);
+    this.permissions$ = this.store.select(fromAppointments.selectors.selectAppointmentPermissions);
   }
 
   closeDialog(): void {

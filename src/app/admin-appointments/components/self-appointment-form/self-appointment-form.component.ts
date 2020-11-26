@@ -24,6 +24,7 @@ export class SelfAppointmentFormComponent extends BaseFormComponent<Appointment>
       status: this.model.status,
       customerNotes: this.model.customerNotes,
       internalNotes: this.model.internalNotes,
+      ignoreAvailability: false
     };
   }
 

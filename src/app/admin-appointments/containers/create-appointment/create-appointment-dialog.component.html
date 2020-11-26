@@ -1,6 +1,7 @@
 <mat-dialog-content class="create-appointment-dialog-container" *ngIf="appointment$ | async as model">
   <ng-container *ngIf="(type$ | async) === appointmentType.service">
     <admin-appointment-form [model]="model"
+                            [permissions]="permissions$ | async"
                             [employees]="employees$ | async"
                             [services]="services$ | async"
                             [apiError]="apiError$ | async"
