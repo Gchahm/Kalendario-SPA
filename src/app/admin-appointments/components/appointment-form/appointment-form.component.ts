@@ -32,6 +32,7 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   private serviceSub: Subscription;
   private endTimeSub: Subscription;
   private startTimeSub: Subscription;
+  private startSub: Subscription;
   private employeeSubscription: Subscription;
 
   employeeServices: Service[];
@@ -55,6 +56,7 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   ngOnInit() {
     super.ngOnInit();
     this.subscribeOnServiceChanges();
+    this.subscribeOnStartChanges();
     this.subscribeOnStartTimeChanges();
     this.subscribeOnEndTimeChanges();
     this.subscribeOnEmployeeChanges();
@@ -64,6 +66,7 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
 
   ngOnDestroy() {
     this.serviceSub.unsubscribe();
+    this.startSub.unsubscribe();
     this.startTimeSub.unsubscribe();
     this.endTimeSub.unsubscribe();
     this.employeeSubscription.unsubscribe();
@@ -90,10 +93,21 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
     );
   }
 
+  private subscribeOnStartChanges() {
+    this.startTimeSub = this.form.get('start').valueChanges.subscribe((start: Moment) => {
+        const hours = this.endControlValue().hours();
+        const minutes = this.endControlValue().minutes();
+        this.form.patchValue({
+          end: start.set({hours, minutes})
+        });
+      }
+    );
+  }
+
   private subscribeOnStartTimeChanges() {
-    this.startTimeSub = this.form.get('startTime').valueChanges.subscribe(endTime => {
-        const hours = +endTime.substring(0, 2);
-        const minutes = +endTime.substring(3, 5);
+    this.startTimeSub = this.form.get('startTime').valueChanges.subscribe(startTime => {
+        const hours = +startTime.substring(0, 2);
+        const minutes = +startTime.substring(3, 5);
         this.form.patchValue({
           start: this.startControlValue().set({hours, minutes}),
         });
