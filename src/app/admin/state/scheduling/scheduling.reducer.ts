@@ -13,7 +13,7 @@ export interface State extends BaseEntityState<SchedulingPanel> {
 
 const initialState: State = {
   ...baseInitialState<SchedulingPanel>(),
-  date: moment.utc()
+  date: null
 };
 
 

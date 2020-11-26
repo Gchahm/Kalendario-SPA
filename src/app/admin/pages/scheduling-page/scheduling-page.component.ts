@@ -12,6 +12,8 @@ import * as fromEmployees from '@app/admin-employee/state';
 import * as fromSchedules from '@app/admin-schedule/state';
 import * as fromRequests from '@admin/state/requests';
 import {BaseEntityPage} from '@admin/pages/BaseEntityPage';
+import * as moment from 'moment';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -31,19 +33,35 @@ export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> imp
   isActive = true;
   showRequests = false;
 
-  constructor(protected store: Store<State>) {
+  constructor(protected store: Store<State>,
+              private route: ActivatedRoute,
+              private router: Router) {
     super(store, fromScheduling.actions, fromScheduling.selectors);
   }
 
   ngOnInit() {
+    this.loadDateFromQueryParams();
+
     this.store.dispatch(fromEmployees.actions.initializeStore({params: {}}));
     this.store.dispatch(fromSchedules.actions.initializeStore({params: {}}));
-
     this.toolbarEmployees$ = this.store.select(fromScheduling.selectors.getToolBarEmployees);
     this.selectedEmployees$ = this.store.select(fromScheduling.selectors.getSelectedEmployees);
     this.requestsCount$ = this.store.select(fromRequests.selectors.selectTotal);
     this.date$ = this.store.select(fromScheduling.selectors.getDate);
+
     this.observeStoreAndReloadAppointments();
+  }
+
+  private loadDateFromQueryParams() {
+    const routeSnapShot = this.route.snapshot.queryParamMap;
+    let date: Moment;
+    if (routeSnapShot.has('date')) {
+      date = moment(routeSnapShot.get('date'));
+    }
+    if (!date || !date.isValid()) {
+      date = moment().startOf('day');
+    }
+    this.updateDate(date);
   }
 
   observeStoreAndReloadAppointments() {
@@ -70,6 +88,13 @@ export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> imp
 
   updateDate(date: Moment) {
     this.store.dispatch(fromScheduling.actions.updateDate({date}));
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {date: date.toISOString()},
+        queryParamsHandling: 'merge', // remove to replace all query params by provided
+      });
   }
 
 }
