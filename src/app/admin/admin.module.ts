@@ -11,7 +11,6 @@ import * as fromGroups from '@admin/state/groups';
 import {EffectsModule} from '@ngrx/effects';
 import {ConfigsEffects} from '@admin/state/company/company.effects';
 import {ConfigShellComponent} from './containers/config-shell/config-shell.component';
-import {UsersPageComponent} from '../admin-users/pages/users-page/users-page.component';
 import {GroupsPageComponent} from './pages/groups-page/groups-page.component';
 import {GroupDetailsComponent} from './components/_details/group-details/group-details.component';
 import {GroupsEffects} from '@admin/state/groups/groups.effects';
@@ -76,10 +75,6 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
     AdminSchedulingModule,
     AdminSharedModule
   ],
-
-  providers: [],
-  exports: [
-  ]
 })
 export class AdminModule {
 }

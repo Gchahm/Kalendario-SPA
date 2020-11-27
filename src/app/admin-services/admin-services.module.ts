@@ -34,10 +34,7 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
       ServiceCategoriesEffects,
     ]),
     AdminSharedModule
-  ],
-    exports: [
-      ServicesPageComponent,
-    ]
+  ]
 })
 export class AdminServicesModule {
 }

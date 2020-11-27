@@ -42,9 +42,6 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
       SchedulingEffects,
       RequestsEffects,
     ]),
-  ],
-  exports: [
-    SchedulingPageComponent,
   ]
 })
 export class AdminSchedulingModule { }

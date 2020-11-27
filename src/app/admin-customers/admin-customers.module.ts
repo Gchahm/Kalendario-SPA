@@ -26,9 +26,6 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
     EffectsModule.forFeature([
       CustomersEffects,
     ])
-  ],
-  exports: [
-    CustomersPageComponent,
   ]
 })
 export class AdminCustomersModule {

@@ -25,9 +25,6 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
     ]),
     AdminSharedModule,
     AdminScheduleModule
-  ],
-  exports: [
-    EmployeesPageComponent,
   ]
 })
 export class AdminEmployeeModule { }

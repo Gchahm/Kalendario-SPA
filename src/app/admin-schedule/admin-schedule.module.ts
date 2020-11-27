@@ -25,7 +25,6 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
     ])
     ],
   exports: [
-    SchedulePageComponent,
     ScheduleDetailsComponent,
   ]
 })
