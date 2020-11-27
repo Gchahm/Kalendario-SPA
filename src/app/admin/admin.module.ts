@@ -3,7 +3,6 @@ import {SharedModule} from '@shared/shared.module';
 import {AdminDashboardComponent} from './containers/admin-dashboard/admin-dashboard.component';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {AdminRoutingModule} from '@admin/admin-routing.module';
-import {CustomersPageComponent} from '@admin/pages/customers-page/customers-page.component';
 
 import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page.component';
 
@@ -14,7 +13,6 @@ import * as fromGroups from '@admin/state/groups';
 
 import {EffectsModule} from '@ngrx/effects';
 import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';
-import {ModelListContainerComponent} from '@admin/../admin-shared/components/model-list-container/model-list-container.component';
 import {ConfigsEffects} from '@admin/state/company/company.effects';
 import {ConfigShellComponent} from './containers/config-shell/config-shell.component';
 import {UsersPageComponent} from './pages/users-page/users-page.component';
@@ -50,7 +48,6 @@ import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.co
     AdminDashboardComponent,
     HomePageComponent,
 
-    CustomersPageComponent,
     EmployeesPageComponent,
     ServicesPageComponent,
 

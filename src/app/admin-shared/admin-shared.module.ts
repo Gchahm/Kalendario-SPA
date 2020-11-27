@@ -12,7 +12,8 @@ import {ModelListContainerComponent} from '@app/admin-shared/components/model-li
     SharedModule
   ],
   exports: [
-    ModelListContainerComponent
+    SharedModule,
+    ModelListContainerComponent,
   ]
 })
 export class AdminSharedModule { }

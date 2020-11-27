@@ -34,7 +34,6 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
     CalendarLineComponent,
   ],
   imports: [
-    SharedModule,
     AdminSharedModule,
     // AdminScheduleModule,
     StoreModule.forFeature(fromScheduling.storeName, fromScheduling.reducer),
