@@ -4,15 +4,11 @@ import {AdminDashboardComponent} from './containers/admin-dashboard/admin-dashbo
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {AdminRoutingModule} from '@admin/admin-routing.module';
 
-import {EmployeesPageComponent} from '@admin/../admin-employee/pages/employees-page/employees-page.component';
-
 import {StoreModule} from '@ngrx/store';
-
 import * as fromConfig from '@admin/state/company';
 import * as fromGroups from '@admin/state/groups';
 
 import {EffectsModule} from '@ngrx/effects';
-import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';
 import {ConfigsEffects} from '@admin/state/company/company.effects';
 import {ConfigShellComponent} from './containers/config-shell/config-shell.component';
 import {UsersPageComponent} from './pages/users-page/users-page.component';
@@ -48,7 +44,6 @@ import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.co
     AdminDashboardComponent,
     HomePageComponent,
 
-    ServicesPageComponent,
 
     ConfigRwComponent,
     CompanyRwComponent,

@@ -1,7 +1,7 @@
 import {EmployeesPageComponent} from '@admin/../admin-employee/pages/employees-page/employees-page.component';
 import {CanViewEmployeesGuard} from '@admin/guards/can-view-employees.guard';
 import {checkForPermission, PermissionModels} from '@api/models/User';
-import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';
+import {ServicesPageComponent} from '@admin/../admin-services/pages/services-page/services-page.component';
 import {SchedulePageComponent} from '@admin/./pages/schedule-page/schedule-page.component';
 import {CanViewSchedulesGuard} from '@admin/guards/can-view-schedules.guard';
 import {CustomersPageComponent} from '@admin/../admin-customers/pages/customers-page/customers-page.component';
