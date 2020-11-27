@@ -28,7 +28,7 @@ export class RequestsEffects extends BaseEffects<RequestModel> {
         fromRequests.actions.removeOne({id: entity.id}),
         fromRequests.actions.selectNext({})
       ])),
-      catchError(err => of(fromRequests.actions.setError(err)))
+      catchError(error => of(fromRequests.actions.setError({error})))
       )
     )
   );
@@ -41,7 +41,7 @@ export class RequestsEffects extends BaseEffects<RequestModel> {
         fromRequests.actions.removeOne({id: entity.id}),
         fromRequests.actions.selectNext({})
       ])),
-      catchError(err => of(fromRequests.actions.setError(err)))
+      catchError(error => of(fromRequests.actions.setError({error})))
       )
     )
   );

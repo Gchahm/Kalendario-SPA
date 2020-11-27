@@ -20,7 +20,7 @@ export class CustomersEffects {
     map(({date}) => ({fromDate: date, toDate: date.clone().endOf('month')})),
     mergeMap(({fromDate, toDate}) => this.requestClient.get({fromDate, toDate}).pipe(
       map(result => actions.upsertMany({entities: result.results})),
-      catchError(err => of(actions.setError(err)))
+      catchError(error => of(actions.setError({error})))
     ))
   );
 
@@ -31,7 +31,7 @@ export class CustomersEffects {
     map(({date}) => ({fromDate: date, toDate: date.clone().endOf('month')})),
     mergeMap(({fromDate, toDate}) => this.requestClient.get({fromDate, toDate}).pipe(
       map(result => actions.setAll({entities: result.results})),
-      catchError(err => of(actions.setError(err)))
+      catchError(error => of(actions.setError({error})))
     ))
   );
 
@@ -43,7 +43,7 @@ export class CustomersEffects {
         actions.addOne({entity}),
         actions.setSelectedId({id})
       ]),
-      catchError(err => of(actions.setError(err)))
+      catchError(error => of(actions.setError({error})))
     ))
   );
 }

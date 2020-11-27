@@ -26,7 +26,7 @@ export class GroupsEffects extends BaseEffects<Group> {
     mergeMap(action =>
       this.groupAdminClient.permissions().pipe(
         map(permissions => fromGroups.actions.addPermissions({permissions})),
-        catchError(err => of(fromGroups.actions.setError(err)))
+        catchError(error => of(fromGroups.actions.setError({error})))
       )
     )
   );

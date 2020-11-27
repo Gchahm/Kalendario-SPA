@@ -27,7 +27,7 @@ export class EmployeesEffects extends BaseEffects<Employee> {
     map((action) => action.image),
     mergeMap((imageSnippet: ImageSnippet) => this.employeeAdminClient.uploadProfilePicture(imageSnippet.id, imageSnippet.file).pipe(
         map(res => (fromEmployees.actions.updateOne({update: {id: imageSnippet.id, changes: {photoUrl: res.url}}}))),
-        catchError(err => of(fromEmployees.actions.setError(err)))
+        catchError(error => of(fromEmployees.actions.setError({error})))
       )
     )
   );

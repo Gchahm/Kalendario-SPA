@@ -37,7 +37,7 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
         this.afterSuccess();
         return fromAppointments.actions.upsertOne({entity: updatedAppointment});
       }),
-      catchError(err => of(fromAppointments.actions.setError(err)))
+      catchError(error => of(fromAppointments.actions.setError({error})))
       )
     )
   );
@@ -49,7 +49,7 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
     switchMap(([action, id]) => this.appointmentAdminClient.history(id).pipe(
       map(result => result.results),
       map(appointments => fromAppointments.actions.setAppointmentHistory({appointments})),
-      catchError(err => of(fromAppointments.actions.setError(err)))
+      catchError(error => of(fromAppointments.actions.setError({error})))
       )
     )
   );
@@ -63,7 +63,7 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
         this.afterSuccess();
         return fromAppointments.actions.upsertOne({entity: newAppointment});
       }),
-      catchError(err => of(fromAppointments.actions.setError(err)))
+      catchError(error => of(fromAppointments.actions.setError({error})))
       )
     )
   );
