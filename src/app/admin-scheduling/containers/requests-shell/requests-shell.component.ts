@@ -1,10 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {BaseEntityPage} from '@admin/pages/BaseEntityPage';
 import {RequestModel} from '@api/models';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
-import * as fromRequests from '@admin/state/requests';
 import {Moment} from 'moment';
+import * as fromRequests from '@app/admin-scheduling/state/requests';
 
 @Component({
   selector: 'admin-requests-shell',

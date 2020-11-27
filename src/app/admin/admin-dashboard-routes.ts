@@ -2,14 +2,14 @@ import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page
 import {CanViewEmployeesGuard} from '@admin/guards/can-view-employees.guard';
 import {checkForPermission, PermissionModels} from '@api/models/User';
 import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';
-import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.component';
+import {SchedulePageComponent} from '@admin/./pages/schedule-page/schedule-page.component';
 import {CanViewSchedulesGuard} from '@admin/guards/can-view-schedules.guard';
 import {CustomersPageComponent} from '@admin/pages/customers-page/customers-page.component';
 import {CanViewCustomersGuard} from '@admin/guards/can-view-customers.guard';
 import {UsersPageComponent} from '@admin/pages/users-page/users-page.component';
 import {GroupsPageComponent} from '@admin/pages/groups-page/groups-page.component';
 import {HomePageComponent} from '@admin/pages/home-page/home-page.component';
-import {SchedulingPageComponent} from '@admin/pages/scheduling-page/scheduling-page.component';
+import {SchedulingPageComponent} from '@admin/../admin-scheduling/pages/scheduling-page/scheduling-page.component';
 import {CanBookAppointmentsGuard} from '@admin/guards/can-book-appointments.guard';
 import {DashBoardRoute} from '@shared/components/dashboard-container/dashboard-container.component';
 import {PERMISSION_VIEW} from '@api/permissions';

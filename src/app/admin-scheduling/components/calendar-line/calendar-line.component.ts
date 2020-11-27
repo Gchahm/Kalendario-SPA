@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TimeOfDay} from '@api/models/TimeOfDay';
-import {Slot} from '@app/calendar/models/Slot';
+import {Slot} from '@app/admin-scheduling/models/Slot';
 
 @Component({
   selector: 'app-calendar-line',

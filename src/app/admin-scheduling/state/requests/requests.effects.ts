@@ -5,7 +5,7 @@ import {RequestModel} from '@api/models';
 import {Store} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 
-import * as fromRequests from '@admin/state/requests';
+import * as fromRequests from '@app/admin-scheduling/state/requests/index';
 import {BaseEffects} from '@shared/state/base/effects';
 import {RequestAdminClient} from '@api/clients/RequestAdminClient';
 import {catchError, mergeMap} from 'rxjs/operators';

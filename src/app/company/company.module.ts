@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {EmployeeListPageComponent} from './containers/employee-list-page/employee-list-page.component';
 import {SharedModule} from '@shared/shared.module';
-import {CalendarModule} from '../calendar/calendar.module';
 import {CompanyRoutingModule} from './company-routing.module';
 
 import * as fromCompany from '@company/state';
@@ -64,7 +63,6 @@ import {StripeModule} from '@app/stripe/stripe.module';
   imports: [
     CompanyRoutingModule,
     SharedModule,
-    CalendarModule,
     StripeModule,
     StoreModule.forFeature(fromCompany.storeName, fromCompany.reducer),
     EffectsModule.forFeature([

@@ -6,7 +6,6 @@ import * as fromServices from '@app/admin-services/state';
 import * as fromSchedules from '@app/admin-schedule/state';
 
 import {storeName} from './employees.actions';
-import {ToolbarEmployee} from '@admin/state/scheduling';
 export {State, reducer} from './employees.reducer';
 export {actions, storeName} from './employees.actions';
 

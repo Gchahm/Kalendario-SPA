@@ -7,10 +7,10 @@ import {State} from '@admin/state';
 
 import {filter, map, takeWhile} from 'rxjs/operators';
 import * as fromAppointments from '@app/admin-appointments/state';
-import * as fromScheduling from '@admin/state/scheduling';
+import * as fromScheduling from '@app/admin-scheduling/state';
 import * as fromEmployees from '@app/admin-employee/state';
 import * as fromSchedules from '@app/admin-schedule/state';
-import * as fromRequests from '@admin/state/requests';
+import * as fromRequests from '@app/admin-scheduling/state/requests/';
 import {BaseEntityPage} from '@admin/pages/BaseEntityPage';
 import * as moment from 'moment';
 import {ActivatedRoute, Router} from '@angular/router';

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {ToolbarEmployee} from '@admin/state/scheduling';
+import {ToolbarEmployee} from '@app/admin-scheduling/state';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {PanelManager, SchedulingPanel} from '@api/models';

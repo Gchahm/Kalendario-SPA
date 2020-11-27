@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {ActivatedRoute, Router} from '@angular/router';
 import {Service} from '@core/models/Service';
 import * as moment from 'moment';
-import {CalendarEvent} from '@app/calendar/models/CalendarEvent';
+import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 import {Subscription} from 'rxjs';
 import {NgRedux, select} from '@angular-redux/store';
 import {IAppState} from '@app/Store';

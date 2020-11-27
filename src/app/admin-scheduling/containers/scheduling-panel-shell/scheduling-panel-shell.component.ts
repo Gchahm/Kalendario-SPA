@@ -2,14 +2,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Moment} from 'moment';
 import {Observable} from 'rxjs';
 
-import {Slot} from '@app/calendar/models/Slot';
+import {Slot} from '@app/admin-scheduling/models/Slot';
 import {Appointment, Employee, Schedule} from '@api/models';
 
-import {CalendarEvent} from '@app/calendar/models/CalendarEvent';
+import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state/admin.reducer';
-import * as fromScheduling from '@admin/state/scheduling';
+import * as fromScheduling from '@app/admin-scheduling/state';
 import * as fromAppointments from '@app/admin-appointments/state';
 import {TimeOfDay} from '@api/models/TimeOfDay';
 

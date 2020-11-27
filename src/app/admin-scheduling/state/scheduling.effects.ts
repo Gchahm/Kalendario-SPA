@@ -6,7 +6,7 @@ import {SchedulingPanel} from '@api/models';
 import {Store} from '@ngrx/store';
 import {Actions} from '@ngrx/effects';
 
-import * as fromScheduling from '@admin/state/scheduling/index';
+import * as fromScheduling from '@app/admin-scheduling/state';
 import {BaseEffects} from '@shared/state/base/effects';
 
 @Injectable()
