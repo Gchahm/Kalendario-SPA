@@ -1,4 +1,4 @@
-import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page.component';
+import {EmployeesPageComponent} from '@admin/../admin-employee/pages/employees-page/employees-page.component';
 import {CanViewEmployeesGuard} from '@admin/guards/can-view-employees.guard';
 import {checkForPermission, PermissionModels} from '@api/models/User';
 import {ServicesPageComponent} from '@admin/pages/services-page/services-page.component';

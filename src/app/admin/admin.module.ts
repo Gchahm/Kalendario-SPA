@@ -4,7 +4,7 @@ import {AdminDashboardComponent} from './containers/admin-dashboard/admin-dashbo
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {AdminRoutingModule} from '@admin/admin-routing.module';
 
-import {EmployeesPageComponent} from '@admin/pages/employees-page/employees-page.component';
+import {EmployeesPageComponent} from '@admin/../admin-employee/pages/employees-page/employees-page.component';
 
 import {StoreModule} from '@ngrx/store';
 
@@ -48,7 +48,6 @@ import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.co
     AdminDashboardComponent,
     HomePageComponent,
 
-    EmployeesPageComponent,
     ServicesPageComponent,
 
     ConfigRwComponent,
