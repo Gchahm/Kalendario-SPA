@@ -4,7 +4,6 @@
                                   (close)="closeClick()">
   <app-calendar [events]="events$ | async"
                 [availability]="availability$ | async"
-                [showHours]="showCalendarHours"
                 [date]="date"
                 (eventClick)="editAppointment($event)"
                 (lineClick)="createAppointment2($event)"></app-calendar>

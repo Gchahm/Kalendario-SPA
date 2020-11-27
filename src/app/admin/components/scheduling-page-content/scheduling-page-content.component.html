@@ -6,7 +6,6 @@
   <admin-scheduling-panel-shell class="panels-container"
                                 *ngFor="let employee of employees"
                                 [employee]="employee"
-                                [showCalendarHours]="false"
                                 [date]="date"
                                 (close)="emitClose($event)">
   </admin-scheduling-panel-shell>

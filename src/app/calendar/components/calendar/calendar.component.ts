@@ -31,8 +31,6 @@ export class CalendarComponent implements OnInit {
   }
 
   @Input() availability: Slot[] = [];
-
-  @Input() showHours = true;
   @Output() eventClick = new EventEmitter<number>();
   @Output() lineClick = new EventEmitter<TimeOfDay>();
 
@@ -64,17 +62,7 @@ export class CalendarComponent implements OnInit {
       return '60px';
     }
     const div: HTMLElement = this.calendarTable.nativeElement;
-    if (this.showHours) {
-      return `${div.offsetWidth - 60}px`;
-    }
     return `${div.offsetWidth}px`;
-  }
-
-  eventLeft() {
-    if (this.showHours) {
-      return '60px';
-    }
-    return '0';
   }
 }
 

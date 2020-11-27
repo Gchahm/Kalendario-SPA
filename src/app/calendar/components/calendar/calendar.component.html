@@ -1,9 +1,6 @@
 <div class="calendar-table-container">
 
   <div #calendarTable class="calendar-table">
-    <app-calendar-hours *ngIf="showHours"
-                        [minStart]="minStart"
-                        [maxStart]="maxStart"></app-calendar-hours>
     <div class="calendar-right">
       <app-calendar-line *ngFor="let time of calendarHours"
                          [time]="time"
@@ -18,7 +15,6 @@
        [style.top]="topPosition(event)"
        [style.height]="event.height"
        [style.width]="eventWidth()"
-       [style.left]="eventLeft()"
        (click)="eventClicked(event.id)">
     <div class="calendar-event-text">{{event.title}}</div>
   </div>
