@@ -36,7 +36,6 @@ import {AdminScheduleModule} from '@app/admin-schedule/admin-schedule.module';
 import {AdminUsersModule} from '@app/admin-users/admin-users.module';
 import {AdminSchedulingModule} from '@app/admin-scheduling/admin-scheduling.module';
 import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
-import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.component';
 
 
 @NgModule({
@@ -44,10 +43,8 @@ import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.co
     AdminDashboardComponent,
     HomePageComponent,
 
-
     ConfigRwComponent,
     CompanyRwComponent,
-    SchedulePageComponent,
 
     ConfigShellComponent,
     UsersPageComponent,

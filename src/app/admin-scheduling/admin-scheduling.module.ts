@@ -9,7 +9,7 @@ import {SchedulingPanelContainerComponent} from '@app/admin-scheduling/component
 
 import * as fromScheduling from '@app/admin-scheduling/state';
 import * as fromRequests from '@app/admin-scheduling/state/requests';
-import {SchedulePageComponent} from '@admin/pages/schedule-page/schedule-page.component';
+import {SchedulePageComponent} from '@admin/../admin-schedule/pages/schedule-page/schedule-page.component';
 import {SharedModule} from '@shared/shared.module';
 import {SchedulingPageComponent} from '@app/admin-scheduling/pages/scheduling-page/scheduling-page.component';
 import {SchedulingPanelShellComponent} from '@app/admin-scheduling/containers/scheduling-panel-shell/scheduling-panel-shell.component';

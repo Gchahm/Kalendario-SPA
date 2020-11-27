@@ -19,6 +19,7 @@ import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
     EmployeesPageComponent,
   ],
   imports: [
+    AdminScheduleModule,
     StoreModule.forFeature(fromEmployees.storeName, fromEmployees.reducer),
     EffectsModule.forFeature([
       EmployeesEffects,
