@@ -6,7 +6,7 @@ import {SchedulePageComponent} from '@admin/../admin-schedule/pages/schedule-pag
 import {CanViewSchedulesGuard} from '@admin/guards/can-view-schedules.guard';
 import {CustomersPageComponent} from '@admin/../admin-customers/pages/customers-page/customers-page.component';
 import {CanViewCustomersGuard} from '@admin/guards/can-view-customers.guard';
-import {UsersPageComponent} from '@admin/pages/users-page/users-page.component';
+import {UsersPageComponent} from '@admin/../admin-users/pages/users-page/users-page.component';
 import {GroupsPageComponent} from '@admin/pages/groups-page/groups-page.component';
 import {HomePageComponent} from '@admin/pages/home-page/home-page.component';
 import {SchedulingPageComponent} from '@admin/../admin-scheduling/pages/scheduling-page/scheduling-page.component';

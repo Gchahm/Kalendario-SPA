@@ -6,9 +6,10 @@ import {EffectsModule} from '@ngrx/effects';
 import {UsersEffects} from '@app/admin-users/state/users.effects';
 import {UserViewShellComponent} from './containers/user-view-shell/user-view-shell.component';
 import {UserRwComponent} from './components/user-rw/user-rw.component';
-import {SharedModule} from '@shared/shared.module';
 import {UserGroupsFormComponent} from '@app/admin-users/components/user-groups-form/user-groups-form.component';
 import {UserPasswordFormComponent} from '@app/admin-users/components/user-password-form/user-password-form.component';
+import {UsersPageComponent} from '@app/admin-users/pages/users-page/users-page.component';
+import {AdminSharedModule} from '@app/admin-shared/admin-shared.module';
 
 
 @NgModule({
@@ -17,12 +18,10 @@ import {UserPasswordFormComponent} from '@app/admin-users/components/user-passwo
     UserGroupsFormComponent,
     UserRwComponent,
     UserPasswordFormComponent,
-  ],
-  exports: [
-    UserViewShellComponent
+    UsersPageComponent,
   ],
   imports: [
-    SharedModule,
+    AdminSharedModule,
     StoreModule.forFeature(fromUsers.storeName, fromUsers.reducer),
     EffectsModule.forFeature([
       UsersEffects,
