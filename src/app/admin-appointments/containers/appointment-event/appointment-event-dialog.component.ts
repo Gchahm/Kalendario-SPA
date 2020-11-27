@@ -11,7 +11,6 @@ import {AlerterService} from '@shared/services/alerter.service';
 import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromEmployees from '@app/admin-employee/state';
 import * as fromServices from '@app/admin-services/state';
-import * as fromCore from '@app/core/state';
 import {expandCollapseAnimation} from '@app/animations';
 import {AppointmentPermissions} from '@api/permissions';
 

@@ -1,23 +1,23 @@
-<mat-dialog-content class="event-container" *ngIf="appointment$ | async as appointment">
+<mat-dialog-content class="pretty-scroll" *ngIf="appointment$ | async as appointment">
   <div class="text-right" *ngIf="permissions$ | async as permission">
     <ng-container *ngIf="!editMode">
-      <button class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
+      <a class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
         <i class="fa fa-history c-accent m-1"></i>
-      </button>
-      <button *ngIf="permission.change"
+      </a>
+      <a *ngIf="permission.change"
               (click)="toggleEdit(true)"
               class="btn btn-light" matTooltip="edit">
         <i class="fa fa-pen c-primary m-1"></i>
-      </button>
-      <button *ngIf="permission.delete"
+      </a>
+      <a *ngIf="permission.delete"
               (click)="delete(appointment.id)"
               class="btn btn-light" matTooltip="delete">
         <i class="fa fa-trash c-warn m-1"></i>
-      </button>
+      </a>
     </ng-container>
-    <button class="btn btn-light" matTooltip="close" (click)="closeDialog()">
+    <a class="btn btn-light" matTooltip="close" (click)="closeDialog()">
       <i class="fa fa-times c-warn m-1"></i>
-    </button>
+    </a>
   </div>
 
   <ng-container *ngIf="hasService(appointment); else selfAppointment">
@@ -36,7 +36,7 @@
     </ng-container>
   </ng-container>
 
-  <div class="history-container pretty-scroll" [@expandCollapse]="showHistory">
+  <div [@expandCollapse]="showHistory">
     <div class="sticky-top bg-white pt-4 pb-4">
       <h3>History</h3>
     </div>
