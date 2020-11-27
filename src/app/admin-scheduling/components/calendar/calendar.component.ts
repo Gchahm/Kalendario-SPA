@@ -79,14 +79,14 @@ class Event implements CalendarEvent {
     this.id = event.id;
     this.color = event.color;
     this.end = event.end;
-    this.start = event.start < currentDate ? event.start.set({h: 6, m: 0}) : event.start;
+    this.start = event.start < currentDate ? event.start.clone().set({h: 6, m: 0}) : event.start;
     this.title = event.title;
 
     if (event.end.clone().startOf('day') > currentDate.startOf('day')) {
-      const eventHeight = 24 * 60 - (event.start.hour() * 60 + event.start.minute());
+      const eventHeight = 24 * 60 - (this.start.hour() * 60 + this.start.minute());
       this.height = `${eventHeight * 2}px`;
     } else {
-      const eventHeight = (event.end.hour() * 60 + event.end.minute()) - (event.start.hour() * 60 + event.start.minute());
+      const eventHeight = (event.end.hour() * 60 + event.end.minute()) - (this.start.hour() * 60 + this.start.minute());
       this.height = `${eventHeight * 2}px`;
     }
   }
