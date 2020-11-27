@@ -16,11 +16,21 @@ export class CalendarComponent implements OnInit {
   @Input() maxStart = 23;
 
   calendarEvents: Event[];
-  @Input('events') set events(events: CalendarEvent[]) {
-    this.calendarEvents = events.map(event => Event.fromJson(event));
+
+  @Input() set events(events: CalendarEvent[]) {
+    this.calendarEvents = events.map(event => Event.fromJson(event, this.date));
   }
 
-  @Input('availability') availability: Slot[] = [];
+  private _date: Moment;
+  @Input() set date(date: Moment) {
+    this._date = date.clone().startOf('day');
+  }
+
+  get date(): Moment {
+    return this._date;
+  }
+
+  @Input() availability: Slot[] = [];
 
   @Input() showHours = true;
   @Output() eventClick = new EventEmitter<number>();
@@ -45,7 +55,7 @@ export class CalendarComponent implements OnInit {
   }
 
   topPosition(event: CalendarEvent): string {
-    const value = (event.start.hour() * 60 + event.start.minute() - this.minStart * 60) * 2;
+    const value = event.start < this.date ? 0 : (event.start.hour() * 60 + event.start.minute() - this.minStart * 60) * 2;
     return value.toString() + 'px';
   }
 
@@ -77,18 +87,23 @@ class Event implements CalendarEvent {
 
   height: string;
 
-  constructor(event: CalendarEvent) {
+  constructor(event: CalendarEvent, currentDate: Moment) {
     this.id = event.id;
     this.color = event.color;
     this.end = event.end;
-    this.start = event.start;
+    this.start = event.start < currentDate ? event.start.set({h: 6, m: 0}) : event.start;
     this.title = event.title;
 
-    const eventHeight = (event.end.hour() * 60 + event.end.minute()) - (event.start.hour() * 60 + event.start.minute());
-    this.height = `${eventHeight * 2}px`;
+    if (event.end.clone().startOf('day') > currentDate.startOf('day')) {
+      const eventHeight = 24 * 60 - (event.start.hour() * 60 + event.start.minute());
+      this.height = `${eventHeight * 2}px`;
+    } else {
+      const eventHeight = (event.end.hour() * 60 + event.end.minute()) - (event.start.hour() * 60 + event.start.minute());
+      this.height = `${eventHeight * 2}px`;
+    }
   }
 
-  static fromJson(event: CalendarEvent): Event {
-    return new Event(event);
+  static fromJson(event: CalendarEvent, currentDate: Moment): Event {
+    return new Event(event, currentDate);
   }
 }

@@ -71,7 +71,9 @@ const getEmployeeEvents: MemoizedSelectorWithProps<object, number, CalendarEvent
   getDate,
   (appointments, date, props) =>
     appointments
-      .filter(appointment => appointment.employee.id === props && date.date() === appointment.start.date())
+      .filter(appointment => appointment.employee.id === props &&
+        (date.date() === appointment.start.date() ||
+          (appointment.start < date && appointment.end > date)))
       .map(transformToCalendarEvent)
 );
 
