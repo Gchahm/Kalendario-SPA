@@ -4,16 +4,12 @@
       {{employee.name}}
     </div>
 
-    <div>
-      <button mat-mini-fab color="primary" class="mr-2" (click)="bookAppointment()" matTooltip="book appointment">
-        <i class="fa fa-calendar fix-size"></i>
-      </button>
-      <button  mat-mini-fab color="accent" class="mr-2" (click)="bookSelfAppointment()" matTooltip="lock time">
-        <i class="fa fa-lock fix-size"></i>
-      </button>
-      <button  mat-mini-fab color="warn" (click)="closeClick()" matTooltip="remove">
-        <i class="fa fa-user-times fix-size"></i>
-      </button>
+    <div class="d-flex justify-content-center">
+      <app-fab-button icon="fa-calendar" class="c-primary mr-2" matTooltip="book appointment"
+                      (click)="bookAppointment()"></app-fab-button>
+      <app-fab-button icon="fa-lock" class="c-accent mr-2" matTooltip="lock time"
+                      (click)="bookSelfAppointment()"></app-fab-button>
+      <app-fab-button icon="fa-user-times" class="c-danger" matTooltip="remove" (click)="closeClick()"></app-fab-button>
     </div>
   </div>
 
