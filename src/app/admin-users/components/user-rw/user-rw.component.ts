@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {BaseRWComponent} from '@shared/common/BaseRWComponent';
-import {Group, IUserWriteModel, User} from '@api/models';
+import {Employee, Group, IUserWriteModel, User} from '@api/models';
 import {CheckChanged} from '@admin/components/_form/CheckBoxForm';
 import {UserViewModel} from '@app/admin-users/state';
 
@@ -11,9 +11,17 @@ import {UserViewModel} from '@app/admin-users/state';
 })
 export class UserRwComponent extends BaseRWComponent<UserViewModel> {
   @Input() groups: Group[];
+  @Input() employees: Employee[];
 
   writeModel(): IUserWriteModel {
-    return {...this.model, employee: this.model.employee.id};
+    return {
+      id: this.model.id,
+      firstName: this.model.firstName,
+      lastName: this.model.lastName,
+      email: this.model.email,
+      employeeId: this.model.employeeId,
+      groups: this.model.groups
+    };
   }
 
   changed(event: CheckChanged) {

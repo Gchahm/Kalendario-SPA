@@ -18,6 +18,7 @@ export class User implements IReadModel {
   public name: string;
   public email: string;
   public employee: EmployeeResourceModel;
+  public employeeId: number;
   public person: Person;
   public groups: number[] = [];
   public permissions: string[] = [];
@@ -35,6 +36,7 @@ export class User implements IReadModel {
     result.lastName = data.lastName;
     result.name = data.name;
     result.email = data.email;
+    result.employeeId = data.employeeId;
     result.employee = data.employee ? EmployeeResourceModel.fromJs(data.employee) : null;
     result.person = Person.fromJS(data.person);
     result.groups = data.groups;
@@ -49,7 +51,7 @@ export interface IUserWriteModel {
   firstName: string;
   lastName: string;
   email: string;
-  employee: number;
+  employeeId: number;
   groups: number[];
 }
 

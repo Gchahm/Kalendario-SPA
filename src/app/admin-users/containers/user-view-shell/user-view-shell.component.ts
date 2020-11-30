@@ -31,6 +31,7 @@ export class UserViewShellComponent extends ViewShellComponent<User> implements 
   ngOnInit(): void {
     this.store.dispatch(fromUsers.actions.initializeStore({params: {}}));
     this.store.dispatch(fromGroups.actions.initializeStore({params: {}}));
+    this.store.dispatch(fromEmployees.actions.initializeStore({params: {}}));
     this.bindProperties();
   }
   bindProperties() {

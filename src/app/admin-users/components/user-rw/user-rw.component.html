@@ -26,8 +26,18 @@
                           [editMode]="editMode"
                           [apiError]="apiError"></admin-input-rw>
         </div>
-
       </div>
+
+      <div class="col-12">
+        <admin-input-rw formControlName="employeeId"
+                        showName="Employee"
+                        inputType="list"
+                        (edit)="emitEdit()"
+                        [listItems]="employees"
+                        [editMode]="editMode"
+                        [apiError]="apiError"></admin-input-rw>
+      </div>
+
     </div>
     <div class="col-6">
       <admin-user-groups-services class="col-sm-12 col-md-4 col-lg-4"
