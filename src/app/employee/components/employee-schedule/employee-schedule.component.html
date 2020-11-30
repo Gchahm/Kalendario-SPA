@@ -29,6 +29,8 @@
     <div class="col-12 h5 text-center">
       {{currentDate.format('dddd, DD MMMM YYYY')}}
       <hr/>
+      {{availability()}}
+      <hr/>
       <button *ngIf="permissions.add"
               (click)="add.emit(currentDate)"
               class="btn btn-primary">

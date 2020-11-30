@@ -4,6 +4,7 @@ import {Appointment} from '@api/models';
 import * as moment from 'moment';
 import {ModelPermissions} from '@api/permissions';
 import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
+import {getShift} from '@api/models/Schedule';
 
 @Component({
   selector: 'employee-schedule',
@@ -45,5 +46,11 @@ export class EmployeeScheduleComponent {
 
   previousDay() {
     this.emitDate(this.currentDate.clone().subtract(1, 'day'));
+  }
+
+  availability(): string {
+    return getShift(this.employee.scheduleModel, this.currentDate).frames
+      .map(f => f.name)
+      .reduce(((previousValue, currentValue) => previousValue + ' | ' + currentValue));
   }
 }
