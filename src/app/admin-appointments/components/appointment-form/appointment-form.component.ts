@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs';
 import {Moment} from 'moment';
 import {pulseAnimation} from 'angular-animations';
 import {AppointmentPermissions} from '@api/permissions';
+import * as moment from 'moment';
 
 @Component({
   selector: 'admin-appointment-form',
@@ -41,8 +42,8 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   writeModel(): IAppointmentWriteModel {
     return {
       id: this.model.id,
-      start: this.model.start,
-      end: this.model.end,
+      start: moment(this.model.start),
+      end: moment(this.model.end),
       customer: modelId(this.model.customer),
       employee: modelId(this.model.employee),
       service: modelId(this.model.service),
@@ -88,43 +89,31 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
 
   private subscribeOnServiceChanges() {
     this.serviceSub = this.serviceControl.valueChanges.subscribe(sid => {
-        this.updateEndTimeFromService(+sid);
-      }
-    );
+      this.updateEndTimeFromService(+sid);
+    });
   }
 
   private subscribeOnStartChanges() {
-    this.startTimeSub = this.form.get('start').valueChanges.subscribe((start: Moment) => {
-        const hours = this.endControlValue().hours();
-        const minutes = this.endControlValue().minutes();
-        this.form.patchValue({
-          end: start.set({hours, minutes})
-        });
-      }
-    );
+    this.startSub = this.form.get('start').valueChanges.subscribe((start: Moment) => {
+      // Update form start hours / minutes from form control start time
+      start.set(getHours(this.startTimeControlValue()));
+      // Update end datetime based on the new start date and the end time control
+      this.form.patchValue({end: moment(start).set(getHours(this.endTimeControlValue()))});
+    });
   }
+
 
   private subscribeOnStartTimeChanges() {
     this.startTimeSub = this.form.get('startTime').valueChanges.subscribe(startTime => {
-        const hours = +startTime.substring(0, 2);
-        const minutes = +startTime.substring(3, 5);
-        this.form.patchValue({
-          start: this.startControlValue().set({hours, minutes}),
-        });
-        this.updateEndTimeFromService(+this.serviceControl.value);
-      }
-    );
+      this.startControlValue().set(getHours(startTime));
+      this.updateEndTimeFromService(+this.serviceControl.value);
+    });
   }
 
   private subscribeOnEndTimeChanges() {
     this.endTimeSub = this.form.get('endTime').valueChanges.subscribe(endTime => {
-        const hours = +endTime.substring(0, 2);
-        const minutes = +endTime.substring(3, 5);
-        this.form.patchValue({
-          end: this.endControlValue().set({hours, minutes})
-        });
-      }
-    );
+      this.endControlValue().set(getHours(endTime));
+    });
   }
 
   private subscribeOnEmployeeChanges() {
@@ -133,11 +122,19 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   }
 
   private startControlValue(): Moment {
-    return this.form.get('start').value.clone();
+    return this.form.get('start').value;
   }
 
   private endControlValue(): Moment {
-    return this.form.get('end').value.clone();
+    return this.form.get('end').value;
+  }
+
+  private startTimeControlValue(): string {
+    return this.form.get('startTime').value;
+  }
+
+  private endTimeControlValue(): string {
+    return this.form.get('endTime').value;
   }
 
   private get serviceControl(): FormControl {
@@ -152,7 +149,7 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   private updateEndTimeFromService(serviceId: number) {
     const service = this.services.find(s => s.id === serviceId);
     if (service) {
-      const end = this.startControlValue()
+      const end = moment(this.startControlValue())
         .add(service.duration.hour, 'hours')
         .add(service.duration.minute, 'minutes');
 
@@ -165,3 +162,8 @@ export class AppointmentFormComponent extends BaseFormComponent<Appointment> imp
   }
 }
 
+function getHours(startTime: string): { hours: number, minutes: number } {
+  const hours = +startTime.substring(0, 2);
+  const minutes = +startTime.substring(3, 5);
+  return {hours, minutes};
+}

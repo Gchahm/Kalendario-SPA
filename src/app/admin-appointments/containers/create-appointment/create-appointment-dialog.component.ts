@@ -51,7 +51,7 @@ export class CreateAppointmentDialogComponent implements OnInit {
     this.store.dispatch(fromAppointments.actions.requestCreate({entity}));
   }
 
-  saveSelfAppointment(entity: Appointment){
+  saveSelfAppointment(entity: Appointment) {
     this.store.dispatch(fromAppointments.actions.requestSelfAppointmentCreate({entity}));
   }
 }
