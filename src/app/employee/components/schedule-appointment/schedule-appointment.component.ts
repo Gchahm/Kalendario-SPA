@@ -20,6 +20,9 @@ export class ScheduleAppointmentComponent {
   }
 
   edit() {
-    this.store.dispatch(fromAppointments.actions.openFormDialog({id: this.appointment.id}));
+    this.store.dispatch(fromAppointments.actions.openAppointmentEventDialog({
+      id: this.appointment.id,
+      employeeMode: true
+    }));
   }
 }

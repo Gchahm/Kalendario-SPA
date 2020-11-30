@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {Person} from '@api/models/Person';
 import {environment} from '../../../environments/environment';
-import {PermissionModels} from '@api/models/User';
+import {PermissionModels} from '@api/permissions';
 
 export class Employee extends Person {
   id = 0;

@@ -4,8 +4,8 @@ import {map} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '@app/state';
 import * as fromCore from '@core/state';
-import {checkForPermission, PermissionModels} from '@api/models/User';
-import {PERMISSION_VIEW} from '@api/permissions';
+import {checkForPermission} from '@api/models/User';
+import {PERMISSION_VIEW, PermissionModels} from '@api/permissions';
 
 export abstract class BaseGuard implements CanActivate {
 

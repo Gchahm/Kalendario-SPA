@@ -7,10 +7,12 @@ import {Store} from '@ngrx/store';
 import {AdminAppointmentParams} from '@api/clients/AppointmentAdminClient.service';
 import {map, switchMap} from 'rxjs/operators';
 
+
+import {ModelPermissions} from '@api/permissions';
+import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
+
 import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromCore from '@app/core/state';
-import {ModelPermissions} from '@api/permissions';
-
 
 @Component({
   selector: 'employee-schedule-page',
@@ -23,7 +25,7 @@ export class EmployeeSchedulePageComponent implements OnInit {
   currentDate$: Observable<Moment>;
   appointments$: Observable<Appointment[]>;
   permissions$: Observable<ModelPermissions>;
-  employee$: Observable<Employee>;
+  employee$: Observable<EmployeeResourceModel>;
   startDate: Moment;
   endDate: Moment;
 
@@ -72,6 +74,6 @@ export class EmployeeSchedulePageComponent implements OnInit {
   }
 
   openCreateDialog(date: Moment, employee: Employee) {
-    this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({date, employee}));
+    this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({date, employee, employeeMode: true}));
   }
 }

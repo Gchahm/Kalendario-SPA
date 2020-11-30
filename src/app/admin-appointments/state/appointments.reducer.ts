@@ -3,6 +3,7 @@ import {Appointment, Employee} from '@api/models';
 import {actions} from './appointments.actions';
 import {on} from '@ngrx/store';
 import {Moment} from 'moment';
+import {ApiError} from '@api/Errors';
 
 export enum AppointmentType {
   self = 'SELF',
@@ -14,7 +15,7 @@ export interface State extends BaseEntityState<Appointment> {
   initialize: { type: string, employee: Employee, date: Moment };
   currentAppointmentHistory: Appointment[];
   currentDate: string;
-
+  historyApiError: ApiError;
 }
 
 
@@ -23,6 +24,7 @@ const initialState: State = {
   initialize: null,
   currentAppointmentHistory: null,
   currentDate: null,
+  historyApiError: null
 };
 
 
@@ -47,5 +49,11 @@ export const reducer = createBaseReducer<Appointment>(initialState, adapter, act
   on(actions.setCurrentDate, (state, {date}) => ({
     ...state,
     currentDate: date.toISOString()
+  })),
+
+
+  on(actions.setHistoryApiError, (state: State, {error}) => ({
+    ...state,
+    historyApiError: error
   })),
 );

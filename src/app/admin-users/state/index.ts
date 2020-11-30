@@ -10,7 +10,6 @@ export {reducer, State} from './users.reducer';
 
 
 export interface UserViewModel extends User {
-  employeeModel: Employee;
   groupsModel: Group[];
 }
 
@@ -44,7 +43,6 @@ export const getUserViewModel: MemoizedSelector<object, UserViewModel> = createS
     return {
       ...user,
       groupsModel: !!groups ? groups.filter(g => user.groups.includes(g.id)) : [],
-      employeeModel: user.employee ? emps.find(e => e.id === user.employee) : null
     };
   }
 );

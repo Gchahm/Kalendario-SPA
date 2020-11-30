@@ -3,8 +3,8 @@ import * as fromCore from './core.reducer';
 import {pipe} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {User} from '@api/models';
-import {ModelPermissions, userPermissions} from '@api/permissions';
-import {PermissionModels} from '@api/models/User';
+import {ModelPermissions, PermissionModels} from '@api/permissions';
+import {userPermissions} from '@api/permissions/helpers';
 
 export * from './core.reducer';
 export * from './core.actions';
@@ -36,6 +36,12 @@ export const selectCurrentUser = createSelector(
 export const selectCurrentUserEmployee = createSelector(
   selectCurrentUser,
   user => user.employee
+);
+
+
+export const selectCurrentUserEmployeeServices = createSelector(
+  selectCurrentUserEmployee,
+  employee => employee.serviceModels
 );
 
 

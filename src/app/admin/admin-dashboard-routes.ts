@@ -1,6 +1,6 @@
 import {EmployeesPageComponent} from '@admin/../admin-employee/pages/employees-page/employees-page.component';
 import {CanViewEmployeesGuard} from '@admin/guards/can-view-employees.guard';
-import {checkForPermission, PermissionModels} from '@api/models/User';
+import {checkForPermission} from '@api/models/User';
 import {ServicesPageComponent} from '@admin/../admin-services/pages/services-page/services-page.component';
 import {SchedulePageComponent} from '@admin/../admin-schedule/pages/schedule-page/schedule-page.component';
 import {CanViewSchedulesGuard} from '@admin/guards/can-view-schedules.guard';
@@ -12,7 +12,7 @@ import {HomePageComponent} from '@admin/pages/home-page/home-page.component';
 import {SchedulingPageComponent} from '@admin/../admin-scheduling/pages/scheduling-page/scheduling-page.component';
 import {CanBookAppointmentsGuard} from '@admin/guards/can-book-appointments.guard';
 import {DashBoardRoute} from '@shared/components/dashboard-container/dashboard-container.component';
-import {PERMISSION_VIEW} from '@api/permissions';
+import {PERMISSION_VIEW, PermissionModels} from '@api/permissions';
 
 
 export const adminDashboardRoutes: DashBoardRoute[] =

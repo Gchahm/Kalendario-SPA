@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Company, User} from '@api/models';
-import {PERMISSION_ADD, PERMISSION_VIEW} from '@api/permissions';
-import {checkForPermission, PermissionModels} from '@api/models/User';
+import {PERMISSION_ADD, PERMISSION_VIEW, PermissionModels} from '@api/permissions';
+import {checkForPermission} from '@api/models/User';
 
 @Component({
   selector: 'app-navbar',

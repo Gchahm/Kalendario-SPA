@@ -1,18 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
-import {Appointment, Employee, Service} from '@api/models';
+import {Component, Inject, OnDestroy} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Appointment} from '@api/models';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 
 import {Observable} from 'rxjs';
-import {ApiError} from '@api/Errors';
 import {AlerterService} from '@shared/services/alerter.service';
 
 import * as fromAppointments from '@app/admin-appointments/state';
-import * as fromEmployees from '@app/admin-employee/state';
-import * as fromServices from '@app/admin-services/state';
 import {expandCollapseAnimation} from '@app/animations';
-import {AppointmentPermissions} from '@api/permissions';
+import {BaseAppointmentDialog} from '@app/admin-appointments/containers/BaseAppointmentDialog';
 
 @Component({
   selector: 'employee-appointment-event',
@@ -22,33 +19,20 @@ import {AppointmentPermissions} from '@api/permissions';
     expandCollapseAnimation,
     ]
 })
-export class AppointmentEventDialogComponent implements OnInit, OnDestroy {
+export class AppointmentEventDialogComponent extends BaseAppointmentDialog implements OnDestroy {
 
-  appointment$: Observable<Appointment>;
   history$: Observable<Appointment[]>;
-  services$: Observable<Service[]>;
-  employees$: Observable<Employee[]>;
-  apiError$: Observable<ApiError>;
-  permissions$: Observable<AppointmentPermissions>;
   editMode = false;
   showHistory = false;
 
   constructor(public dialogRef: MatDialogRef<AppointmentEventDialogComponent>,
-              private store: Store<State>,
-              public alerter: AlerterService) {
-  }
-
-  ngOnInit() {
-    this.store.dispatch(fromEmployees.actions.initializeStore({params: {}}));
-    this.store.dispatch(fromServices.actions.initializeStore({params: {}}));
+              public alerter: AlerterService,
+              @Inject(MAT_DIALOG_DATA) public data: { employeeMode: boolean },
+              store: Store<State>) {
+    super(store, data?.employeeMode);
     this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({}));
-
-    this.services$ = this.store.select(fromServices.selectors.selectAll);
-    this.employees$ = this.store.select(fromEmployees.selectors.selectAll);
-    this.appointment$ = this.store.select(fromAppointments.selectors.getCurrent);
     this.history$ = this.store.select(fromAppointments.selectors.getCurrentAppointmentHistory);
-    this.apiError$ = this.store.select(fromAppointments.selectors.getApiError);
-    this.permissions$ = this.store.select(fromAppointments.selectors.selectAppointmentPermissions);
+    this.appointment$ = this.store.select(fromAppointments.selectors.getCurrent);
   }
 
   ngOnDestroy() {

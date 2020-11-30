@@ -49,7 +49,7 @@ export class CustomerAppointmentsShellComponent implements OnInit {
   }
 
   openAppointment(id: number) {
-    this.store.dispatch(fromAppointments.actions.openFormDialog({id}));
+    this.store.dispatch(fromAppointments.actions.openAppointmentEventDialog({id, employeeMode: false}));
   }
 }
 

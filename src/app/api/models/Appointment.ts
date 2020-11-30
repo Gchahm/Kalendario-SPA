@@ -6,7 +6,8 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {Person} from './Person';
 import {IReadModel} from './IReadModel';
-import {PermissionModels, User} from '@api/models/User';
+import {User} from '@api/models/User';
+import {PermissionModels} from '@api/permissions';
 
 export class Appointment implements IReadModel {
   static modelType = PermissionModels.appointment;

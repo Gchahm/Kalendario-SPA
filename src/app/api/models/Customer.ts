@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {Person} from './Person';
-import {PermissionModels} from '@api/models/User';
+import {PermissionModels} from '@api/permissions';
 
 export class Customer extends Person {
   static modelType = PermissionModels.customer;

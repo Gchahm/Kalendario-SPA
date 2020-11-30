@@ -1,21 +1,14 @@
-import {getApp, PermissionModels, User} from '@api/models/User';
-import {Appointment} from '@api/models';
+import {Appointment, User} from '@api/models';
+import {
+  AppointmentPermissions,
+  getApp,
+  ModelPermissions,
+  PERMISSION_ADD,
+  PERMISSION_CHANGE, PERMISSION_DELETE,
+  PERMISSION_VIEW,
+  PermissionModels
+} from '@api/permissions/index';
 
-export const PERMISSION_VIEW = 'view';
-export const PERMISSION_ADD = 'add';
-export const PERMISSION_CHANGE = 'change';
-export const PERMISSION_DELETE = 'delete';
-
-export interface ModelPermissions {
-  view: boolean;
-  add: boolean;
-  change: boolean;
-  delete: boolean;
-}
-
-export interface AppointmentPermissions extends ModelPermissions {
-  overlap: boolean;
-}
 
 export function userPermissions(user: User, model: PermissionModels): ModelPermissions {
   return {

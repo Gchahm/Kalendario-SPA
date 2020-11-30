@@ -5,7 +5,7 @@ import * as fromReducer from './appointments.reducer';
 import {storeName} from './appointments.actions';
 import {Appointment} from '@api/models';
 import {selectCurrentUser} from '@core/state';
-import {appointmentPermissions} from '@api/permissions';
+import {appointmentPermissions} from '@api/permissions/helpers';
 
 export {State, reducer, AppointmentType} from './appointments.reducer';
 export {actions, storeName} from './appointments.actions';

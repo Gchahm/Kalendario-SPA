@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 
 import {Observable, of} from 'rxjs';
-import {catchError, map, mergeMap, switchMap, withLatestFrom} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 
 import {AppointmentAdminClient} from '@api/clients';
 
 import {Action, Store} from '@ngrx/store';
-import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
 import {Appointment} from '@api/models';
-import {MatDialog} from '@angular/material/dialog';
-import {BaseEffectsWithDialog} from '@shared/state/base/effects';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {BaseEffects, BaseEffectsWithDialog} from '@shared/state/base/effects';
 
 import * as fromAppointments from '@app/admin-appointments/state/index';
 
@@ -18,14 +18,15 @@ import {AppointmentEventDialogComponent} from '@app/admin-appointments/container
 
 
 @Injectable()
-export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
+export class AppointmentsEffects extends BaseEffects<Appointment> {
+
+  dialogRef: MatDialogRef<any>;
 
   constructor(actions$: Actions,
               store: Store<fromAppointments.State>,
               private appointmentAdminClient: AppointmentAdminClient,
-              dialog: MatDialog) {
-    super(actions$, appointmentAdminClient, fromAppointments.actions, fromAppointments.selectors, store
-      , dialog, AppointmentEventDialogComponent);
+              private dialog: MatDialog) {
+    super(actions$, appointmentAdminClient, fromAppointments.actions, fromAppointments.selectors, store);
   }
 
   @Effect()
@@ -49,7 +50,7 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
     switchMap(([action, id]) => this.appointmentAdminClient.history(id).pipe(
       map(result => result.results),
       map(appointments => fromAppointments.actions.setAppointmentHistory({appointments})),
-      catchError(error => of(fromAppointments.actions.setError({error})))
+      catchError(error => of(fromAppointments.actions.setHistoryApiError({error})))
       )
     )
   );
@@ -71,9 +72,9 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
   @Effect()
   OpenCreateAppointmentDialog$: Observable<Action> = this.actions$.pipe(
     ofType(fromAppointments.actions.openCreateAppointmentDialog),
-    map(payload => {
-      this.dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {width: '44rem'});
-      return fromAppointments.actions.initializeCurrentAppointment(payload);
+    map(({employee, date, employeeMode}) => {
+      this.dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {width: '44rem', data: {employeeMode}});
+      return fromAppointments.actions.initializeCurrentAppointment({employee, date});
     })
   );
 
@@ -85,4 +86,18 @@ export class AppointmentsEffects extends BaseEffectsWithDialog<Appointment> {
       return fromAppointments.actions.initializeCurrentSelfAppointment(payload);
     })
   );
+
+  openAppointmentEventDialog$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(fromAppointments.actions.openAppointmentEventDialog),
+    map(({id, employeeMode}) => {
+      this.dialogRef = this.dialog.open(AppointmentEventDialogComponent, {width: '44rem', data: {employeeMode}});
+      return this.actions.select({id});
+    })
+  ));
+
+  afterSuccess() {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
 }

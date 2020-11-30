@@ -3,32 +3,9 @@ import {Injectable} from '@angular/core';
 import {Person} from './Person';
 import {Company} from './Company';
 import {IReadModel} from '@api/models/IReadModel';
-import {Employee} from '@api/models/Employee';
+import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
+import {getApp, PermissionModels} from '@api/permissions';
 
-
-export enum PermissionModels {
-  employee= 'employee',
-  group = 'groupprofile',
-  user = 'user',
-  config = 'config',
-  service = 'service',
-  shift = 'shift',
-  schedule = 'schedule',
-  customer = 'customer',
-  appointment = 'appointment',
-  company = 'company'
-}
-
-export function getApp(permission: PermissionModels): string {
-  switch (permission) {
-    case PermissionModels.group:
-      return 'core';
-    case PermissionModels.user:
-      return 'core';
-    default:
-      return 'scheduling';
-  }
-}
 
 export function checkForPermission(user: User, permission: string, model: PermissionModels) {
   return user.permissions.includes(`${getApp(model)}.${permission}_${model}`);
@@ -40,7 +17,7 @@ export class User implements IReadModel {
   public lastName: string;
   public name: string;
   public email: string;
-  public employee;
+  public employee: EmployeeResourceModel;
   public person: Person;
   public groups: number[] = [];
   public permissions: string[] = [];
@@ -58,7 +35,7 @@ export class User implements IReadModel {
     result.lastName = data.lastName;
     result.name = data.name;
     result.email = data.email;
-    result.employee = data.employee;
+    result.employee = data.employee ? EmployeeResourceModel.fromJs(data.employee) : null;
     result.person = Person.fromJS(data.person);
     result.groups = data.groups;
     result.permissions = data.permissions ? data.permissions : [];

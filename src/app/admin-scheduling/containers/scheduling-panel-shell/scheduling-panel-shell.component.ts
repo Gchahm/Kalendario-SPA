@@ -44,22 +44,33 @@ export class SchedulingPanelShellComponent implements OnInit {
   }
 
   createSelfAppointment() {
-    this.store.dispatch(fromAppointments.actions.openCreateSelfAppointmentDialog({date: this.date, employee: this.employee}));
+    this.store.dispatch(fromAppointments.actions.openCreateSelfAppointmentDialog({
+      date: this.date,
+      employee: this.employee
+    }));
   }
 
   createAppointment() {
-    this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({date: this.date, employee: this.employee}));
+    this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({
+      date: this.date,
+      employee: this.employee,
+      employeeMode: false
+    }));
   }
 
   createAppointment2(time: TimeOfDay) {
     const date = this.date.clone();
     date.minute(time.minute);
     date.hour(time.hour);
-    this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({date, employee: this.employee}));
+    this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({
+      date,
+      employee: this.employee,
+      employeeMode: false
+    }));
   }
 
   editAppointment(id: number) {
-    this.store.dispatch(fromAppointments.actions.openFormDialog({id}));
+    this.store.dispatch(fromAppointments.actions.openAppointmentEventDialog({id, employeeMode: false}));
   }
 }
 

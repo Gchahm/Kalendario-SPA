@@ -13,7 +13,7 @@ export class UserRwComponent extends BaseRWComponent<UserViewModel> {
   @Input() groups: Group[];
 
   writeModel(): IUserWriteModel {
-    return {...this.model};
+    return {...this.model, employee: this.model.employee.id};
   }
 
   changed(event: CheckChanged) {

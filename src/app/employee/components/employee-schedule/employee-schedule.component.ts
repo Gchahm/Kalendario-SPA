@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Moment} from 'moment';
-import {Appointment, Employee} from '@api/models';
+import {Appointment} from '@api/models';
 import * as moment from 'moment';
 import {ModelPermissions} from '@api/permissions';
+import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
 
 @Component({
   selector: 'employee-schedule',
@@ -15,7 +16,7 @@ export class EmployeeScheduleComponent {
   @Input() endDate: Moment;
   @Input() appointments: Appointment[];
   @Input() permissions: ModelPermissions;
-  @Input() employee: Employee;
+  @Input() employee: EmployeeResourceModel;
 
   @Output() updateCurrent = new EventEmitter<Moment>();
   @Output() add = new EventEmitter<Moment>();
