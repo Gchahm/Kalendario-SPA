@@ -1,3 +1,5 @@
+@import "./src/variables";
+
 .calendar-left {
   position: relative;
   background-color: white;
@@ -16,7 +18,7 @@
 }
 
 .current-time-line {
-  border-bottom: red 1px solid;
+  border-bottom: $accent 1px solid;
   width: calc(100% + 1px);
   position: absolute;
   z-index: 102;
@@ -29,6 +31,6 @@
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  border-left: 10px solid red;
-  z-index: 102;
+  border-left: 10px solid $accent;
+  z-index: 40;
 }

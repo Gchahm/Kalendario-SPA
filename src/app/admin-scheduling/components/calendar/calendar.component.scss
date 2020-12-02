@@ -1,3 +1,5 @@
+@import "./src/variables";
+
 h4 {
   margin: auto;
   width: 50%;
@@ -48,8 +50,8 @@ h4 {
 }
 
 .current-time-line {
-  border-bottom: red 1px solid;
+  border-bottom: $accent 1px solid;
   width: calc(100% + 1px);
   position: absolute;
-  z-index: 102;
+  z-index: 40;
 }
