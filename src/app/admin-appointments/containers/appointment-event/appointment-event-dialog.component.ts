@@ -30,7 +30,6 @@ export class AppointmentEventDialogComponent extends BaseAppointmentDialog imple
               @Inject(MAT_DIALOG_DATA) public data: { employeeMode: boolean },
               store: Store<State>) {
     super(store, data?.employeeMode);
-    this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({}));
     this.history$ = this.store.select(fromAppointments.selectors.getCurrentAppointmentHistory);
     this.appointment$ = this.store.select(fromAppointments.selectors.getCurrent);
   }
@@ -54,12 +53,12 @@ export class AppointmentEventDialogComponent extends BaseAppointmentDialog imple
 
   updateAppointment(appointment: Appointment) {
     this.store.dispatch(fromAppointments.actions.requestUpdate({entity: appointment}));
-    this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({}));
+    this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({id: appointment.id}));
   }
 
   updateSelfAppointment(appointment: Appointment) {
     this.store.dispatch(fromAppointments.actions.requestSelfAppointmentUpdate({entity: appointment}));
-    this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({}));
+    this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({id: appointment.id}));
   }
 
   delete(id) {

@@ -17,7 +17,7 @@ interface AppointmentActions extends BaseEntityActions<Appointment> {
     ({ entity: Appointment } & TypedAction<string>)>;
 
   requestAppointmentHistory: ActionCreator<string, (props: {}) =>
-    ({} & TypedAction<string>)>;
+    ({ id: number } & TypedAction<string>)>;
 
   openCreateAppointmentDialog: ActionCreator<string, (props: { date: Moment, employee: Employee, employeeMode: boolean }) =>
     ({ date: Moment, employee: Employee, employeeMode: boolean } & TypedAction<string>)>;
@@ -54,7 +54,7 @@ export const actions: AppointmentActions = {
     props<{ entity: Appointment }>()),
 
   requestAppointmentHistory: createAction(`[${storeName}] Request Appointment History`,
-    props<{}>()),
+    props<{ id: number }>()),
 
   openCreateAppointmentDialog: createAction(`[${storeName}] Open Create Appointment`,
     props<{ date: Moment, employee: Employee, employeeMode: boolean }>()),

@@ -44,10 +44,15 @@ export class AppointmentsEffects extends BaseEffects<Appointment> {
   );
 
   @Effect()
+  select$: Observable<Action> = this.actions$.pipe(
+    ofType(fromAppointments.actions.select),
+    map(({id}) => fromAppointments.actions.requestAppointmentHistory({id}))
+  );
+
+  @Effect()
   requestAppointmentHistory$: Observable<Action> = this.actions$.pipe(
     ofType(fromAppointments.actions.requestAppointmentHistory),
-    withLatestFrom(this.store.select(fromAppointments.selectors.getCurrentId)),
-    switchMap(([action, id]) => this.appointmentAdminClient.history(id).pipe(
+    switchMap(({id}) => this.appointmentAdminClient.history(id).pipe(
       map(result => result.results),
       map(appointments => fromAppointments.actions.setAppointmentHistory({appointments})),
       catchError(error => of(fromAppointments.actions.setHistoryApiError({error})))
