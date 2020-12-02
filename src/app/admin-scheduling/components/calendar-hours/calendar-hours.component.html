@@ -1,5 +1,13 @@
 <div class="calendar-left">
+  <div class="current-time-line"
+       [hidden]="!isToday"
+       [style.top]="markerTop + 'px'"></div>
+
+  <div class="current-time-arrow"
+       [hidden]="!isToday"
+       [style.top]="markerTop - 10 + 'px'"></div>
+
   <div *ngFor="let hour of calendarHours" class="calendar-hour">
-    <div class="hour-box">{{hour}}:00</div>
+    <div class="hour-box">{{hour}}</div>
   </div>
 </div>

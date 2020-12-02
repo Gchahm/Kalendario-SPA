@@ -1,7 +1,7 @@
 <div class="scheduling-page-content-container pretty-scroll">
   <div class="hours-container">
     <div class="scheduling-panel-heading"></div>
-    <app-calendar-hours></app-calendar-hours>
+    <app-calendar-hours [date]="date"></app-calendar-hours>
   </div>
   <admin-scheduling-panel-shell class="panels-container"
                                 *ngFor="let employee of employees"

@@ -1,20 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CalendarComponents} from '@app/admin-scheduling/components/commom/CalendarComponents';
 
 @Component({
   selector: 'app-calendar-hours',
   templateUrl: './calendar-hours.component.html',
-  styleUrls: ['./calendar-hours.component.css']
+  styleUrls: ['./calendar-hours.component.scss']
 })
-export class CalendarHoursComponent implements OnInit {
-
-  calendarHours: number[];
-  @Input() minStart = 6;
-  @Input() maxStart = 23;
-
-  ngOnInit() {
-    this.calendarHours = [];
-    for (let i = this.minStart; i <= this.maxStart; i++) {
-      this.calendarHours.push(i);
-    }
-  }
+export class CalendarHoursComponent extends CalendarComponents implements OnInit {
 }

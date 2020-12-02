@@ -3,17 +3,15 @@ import {CalendarEvent} from '../../models/CalendarEvent';
 import {Slot} from '../../models/Slot';
 import {TimeOfDay} from '@api/models/TimeOfDay';
 import {Moment} from 'moment';
+import * as moment from 'moment';
+import {CalendarComponents} from '@app/admin-scheduling/components/commom/CalendarComponents';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
-
-  calendarHours: TimeOfDay[];
-  @Input() minStart = 6;
-  @Input() maxStart = 23;
+export class CalendarComponent extends CalendarComponents implements OnInit {
 
   calendarEvents: Event[];
 
@@ -21,28 +19,11 @@ export class CalendarComponent implements OnInit {
     this.calendarEvents = events.map(event => Event.fromJson(event, this.date));
   }
 
-  private _date: Moment;
-  @Input() set date(date: Moment) {
-    this._date = date.clone().startOf('day');
-  }
-
-  get date(): Moment {
-    return this._date;
-  }
-
   @Input() availability: Slot[] = [];
   @Output() eventClick = new EventEmitter<number>();
   @Output() lineClick = new EventEmitter<TimeOfDay>();
 
   @ViewChild('calendarTable') calendarTable: ElementRef;
-
-  ngOnInit() {
-    this.calendarHours = [];
-    for (let i = this.minStart; i <= this.maxStart; i++) {
-      this.calendarHours.push(new TimeOfDay(i, 0));
-      this.calendarHours.push(new TimeOfDay(i, 30));
-    }
-  }
 
   eventClicked(id: number) {
     this.eventClick.emit(id);

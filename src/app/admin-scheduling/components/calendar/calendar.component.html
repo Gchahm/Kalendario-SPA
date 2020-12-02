@@ -10,6 +10,10 @@
 
   </div>
 
+  <div class="current-time-line"
+       [hidden]="!isToday"
+       [style.top]="markerTop + 'px'"></div>
+
   <div class="calendar-event mat-elevation-z1" *ngFor="let event of calendarEvents"
        [style.background-color]="event.color"
        [style.top]="topPosition(event)"
