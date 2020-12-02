@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --ssl",
+    "start": "ng serve",
+    "start-ssl": "ng serve --ssl",
     "start-lan": "ng serve --ssl --host 192.168.0.19",
     "build": "ng build --prod --output-path C:\\development\\Kalendario\\Kalendario_API\\static\\ang --output-hashing none",
     "test": "ng test",
