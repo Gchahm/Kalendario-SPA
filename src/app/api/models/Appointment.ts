@@ -27,6 +27,7 @@ export class Appointment implements IReadModel {
   public internalNotes = '';
   public historyDate: Moment;
   public historyUser: User;
+  deleted: Moment | null;
 
   static fromJS(data: any): Appointment {
     data = typeof data === 'object' ? data : {};
@@ -43,6 +44,7 @@ export class Appointment implements IReadModel {
     result.end = moment.utc(data.end);
     result.customerNotes = data.customerNotes;
     result.internalNotes = data.internalNotes;
+    result.deleted = data.deleted ? moment.utc(data.deleted) : null;
     if (!!data.historyDate) { result.historyDate = moment.utc(data.historyDate); }
     if (!!data.historyUser) { result.historyUser = User.fromJs(data.historyUser); }
     return result;

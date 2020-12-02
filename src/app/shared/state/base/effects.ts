@@ -64,6 +64,7 @@ export class BaseEffects<T extends IReadModel> {
     ofType(this.actions.requestDelete),
     map((action) => action.id),
     mergeMap((employeeId: number) => this.client.delete(employeeId).pipe(
+      tap(u => this.afterSuccess()),
       map(() => (this.actions.removeOne({id: employeeId}))),
       catchError(error => of(this.actions.setError({error})))
       )

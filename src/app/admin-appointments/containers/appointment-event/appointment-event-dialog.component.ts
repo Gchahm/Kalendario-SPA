@@ -63,7 +63,7 @@ export class AppointmentEventDialogComponent extends BaseAppointmentDialog imple
   }
 
   delete(id) {
-    this.alerter.warn('Are you sure?', `this will permanently delete the appointment`)
+    this.alerter.warn('Are you sure?', `this will move the appointment to the bin`)
       .toPromise()
       .then(res => {
         if (res) {

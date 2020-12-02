@@ -33,7 +33,8 @@ export class CustomerAppointmentsTableComponent implements OnInit {
         id: appointment.id,
         start: appointment.start.format('DD/MM/YYYY'),
         employee: appointment.employee.name,
-        service: appointment.service.name
+        service: appointment.service.name,
+        deleted: appointment.deleted
       };
     });
   }
@@ -42,7 +43,7 @@ export class CustomerAppointmentsTableComponent implements OnInit {
   @Output() filterChange = new EventEmitter<AppointmentQueryParams>();
 
   appointmentData: AppointmentData[];
-  displayedColumns: string[] = ['start', 'employee', 'service'];
+  displayedColumns: string[] = ['start', 'employee', 'service', 'deleted'];
   init = false;
 
   private _selectedServices: number[];
@@ -86,6 +87,16 @@ export class CustomerAppointmentsTableComponent implements OnInit {
     this.emitFilterChange();
   }
 
+  private _showAll: boolean;
+  get showAll(): boolean {
+    return this._showAll || false;
+  }
+
+  set showAll(value: boolean) {
+    this._showAll = value;
+    this.emitFilterChange();
+  }
+
   ngOnInit() {
     this.emitFilterChange();
     this.init = true;
@@ -101,7 +112,8 @@ export class CustomerAppointmentsTableComponent implements OnInit {
       services: this.selectedServices,
       from_date: this.fromDate,
       to_date: this.toDate,
-      customer: this.customer.id
+      customer: this.customer.id,
+      show_all: this.showAll
     });
   }
 }
@@ -111,4 +123,5 @@ interface AppointmentData {
   start: string;
   employee: string;
   service: string;
+  deleted: Moment;
 }

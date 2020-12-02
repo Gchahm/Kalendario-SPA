@@ -8,4 +8,6 @@ export interface AppointmentQueryParams {
   employee?: number;
   employees?: number[];
   services?: number[];
+  show_all?: boolean;
+  delete_only?: boolean;
 }

@@ -1,23 +1,31 @@
 <mat-dialog-content class="pretty-scroll" *ngIf="appointment$ | async as appointment">
-  <div class="text-right" *ngIf="permissions$ | async as permission">
-    <ng-container *ngIf="!editMode">
-      <a class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
-        <i class="fa fa-history c-accent m-1"></i>
+  <div class="row" *ngIf="permissions$ | async as permission">
+    <div class="col-3">
+      <span *ngIf="!!appointment.deleted"
+            class="badge badge-pill badge-danger">Deleted on {{appointment.deleted | momentDate}}</span>
+    </div>
+    <div class="col-6 text-right">
+      <ng-container *ngIf="!editMode && !appointment.deleted">
+        <a class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
+          <i class="fa fa-history c-accent m-1"></i>
+        </a>
+        <a *ngIf="permission.change"
+           (click)="toggleEdit(true)"
+           class="btn btn-light" matTooltip="edit">
+          <i class="fa fa-pen c-primary m-1"></i>
+        </a>
+        <a *ngIf="permission.delete"
+           (click)="delete(appointment.id)"
+           class="btn btn-light" matTooltip="delete">
+          <i class="fa fa-trash c-warn m-1"></i>
+        </a>
+      </ng-container>
+    </div>
+    <div class="col-3 text-right">
+      <a class="btn btn-light" matTooltip="close" (click)="closeDialog()">
+        <i class="fa fa-times c-warn m-1"></i>
       </a>
-      <a *ngIf="permission.change"
-              (click)="toggleEdit(true)"
-              class="btn btn-light" matTooltip="edit">
-        <i class="fa fa-pen c-primary m-1"></i>
-      </a>
-      <a *ngIf="permission.delete"
-              (click)="delete(appointment.id)"
-              class="btn btn-light" matTooltip="delete">
-        <i class="fa fa-trash c-warn m-1"></i>
-      </a>
-    </ng-container>
-    <a class="btn btn-light" matTooltip="close" (click)="closeDialog()">
-      <i class="fa fa-times c-warn m-1"></i>
-    </a>
+    </div>
   </div>
 
   <ng-container *ngIf="hasService(appointment); else selfAppointment">

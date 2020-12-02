@@ -8,7 +8,7 @@ import {Moment} from 'moment';
 export class MomentDatePipe implements PipeTransform {
 
   transform(value: string | Moment, format: string = 'DD/MM/YYYY'): string {
-    return moment.utc(value).format(format);
+    return value ? moment.utc(value).format(format) : '';
   }
 
 }
