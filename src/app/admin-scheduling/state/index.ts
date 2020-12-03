@@ -5,7 +5,7 @@ import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromSchedule from '@app/admin-schedule/state';
 
 import {storeName} from './scheduling.actions';
-import {Appointment, Employee} from '@api/models';
+import {IAppointment, Employee} from '@api/models';
 import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 import {Slot} from '@app/admin-scheduling/models/Slot';
 import {getShift} from '@api/models/Schedule';
@@ -45,7 +45,7 @@ const getSelectedEmployees = createSelector(
   employees => employees.filter(emp => emp.isSelected).map(emp => emp.employee)
 );
 
-function transformToCalendarEvent(appointment: Appointment): CalendarEvent {
+function transformToCalendarEvent(appointment: IAppointment): CalendarEvent {
   if (appointment.service !== null) {
     return {
       id: appointment.id,

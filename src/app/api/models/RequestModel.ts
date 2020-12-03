@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {IReadModel} from './IReadModel';
-import {Appointment} from '@api/models/Appointment';
+import {Appointment, IAppointment} from './Appointment';
 import {Moment} from 'moment';
 import {Employee} from '@api/models/Employee';
 import {Company} from '@api/models/Company';
 import {Person} from '@api/models/Person';
-import * as moment from 'moment';
 
 export interface RequestItem {
   employee: Employee;
-  appointments: Appointment[];
+  appointments: IAppointment[];
 }
 
 export class RequestModel implements IReadModel {

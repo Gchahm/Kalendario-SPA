@@ -3,7 +3,7 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromReducer from './appointments.reducer';
 
 import {storeName} from './appointments.actions';
-import {Appointment} from '@api/models';
+import {Appointment, IAppointment} from '@api/models';
 import {selectCurrentUser} from '@core/state';
 import {appointmentPermissions} from '@api/permissions/helpers';
 
@@ -26,7 +26,7 @@ const getInitializedAppointmentType = createSelector(
 const getInitializedAppointment = createSelector(
   getFeature,
     state => {
-      const appointment = new Appointment();
+      const appointment = Appointment.fromJS();
       if (!state.initialize) {
         return appointment;
       }

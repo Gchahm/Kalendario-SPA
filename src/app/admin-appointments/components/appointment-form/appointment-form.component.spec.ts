@@ -4,7 +4,7 @@ import {AppointmentFormComponent} from './appointment-form.component';
 import {FormBuilder} from '@angular/forms';
 import {ModelViewSetClientMock} from '@api/testing';
 import {AppointmentAdminClient} from '@api/clients';
-import {Appointment} from '@api/models';
+import {Appointment, IAppointment} from '@api/models';
 
 describe('AppointmentFormComponent', () => {
   let component: AppointmentFormComponent;
@@ -24,7 +24,7 @@ describe('AppointmentFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppointmentFormComponent);
     component = fixture.componentInstance;
-    component.model = new Appointment();
+    component.model = Appointment.fromJS();
     fixture.detectChanges();
   });
 

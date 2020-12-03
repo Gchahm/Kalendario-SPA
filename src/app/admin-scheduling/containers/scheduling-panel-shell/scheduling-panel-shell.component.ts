@@ -3,7 +3,7 @@ import {Moment} from 'moment';
 import {Observable} from 'rxjs';
 
 import {Slot} from '@app/admin-scheduling/models/Slot';
-import {Appointment, Employee, Schedule} from '@api/models';
+import {IAppointment, Employee, Schedule} from '@api/models';
 
 import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 
@@ -28,7 +28,7 @@ export class SchedulingPanelShellComponent implements OnInit {
   @Output() close = new EventEmitter<Employee>();
 
   events$: Observable<CalendarEvent[]>;
-  requests$: Observable<Appointment[]>;
+  requests$: Observable<IAppointment[]>;
   availability$: Observable<Slot[]>;
 
   constructor(protected store: Store<State>) {

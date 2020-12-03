@@ -1,6 +1,6 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Appointment} from '@api/models';
+import {IAppointment} from '@api/models';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 
@@ -21,7 +21,7 @@ import {BaseAppointmentDialog} from '@app/admin-appointments/containers/BaseAppo
 })
 export class AppointmentEventDialogComponent extends BaseAppointmentDialog implements OnDestroy {
 
-  history$: Observable<Appointment[]>;
+  history$: Observable<IAppointment[]>;
   editMode = false;
   showHistory = false;
 
@@ -38,7 +38,7 @@ export class AppointmentEventDialogComponent extends BaseAppointmentDialog imple
     this.store.dispatch(fromAppointments.actions.setAppointmentHistory(null));
   }
 
-  hasService(appointment: Appointment) {
+  hasService(appointment: IAppointment) {
     return !!appointment.service && appointment.service.id !== 0;
   }
 
@@ -51,12 +51,12 @@ export class AppointmentEventDialogComponent extends BaseAppointmentDialog imple
     this.editMode = value;
   }
 
-  updateAppointment(appointment: Appointment) {
+  updateAppointment(appointment: IAppointment) {
     this.store.dispatch(fromAppointments.actions.requestUpdate({entity: appointment}));
     this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({id: appointment.id}));
   }
 
-  updateSelfAppointment(appointment: Appointment) {
+  updateSelfAppointment(appointment: IAppointment) {
     this.store.dispatch(fromAppointments.actions.requestSelfAppointmentUpdate({entity: appointment}));
     this.store.dispatch(fromAppointments.actions.requestAppointmentHistory({id: appointment.id}));
   }

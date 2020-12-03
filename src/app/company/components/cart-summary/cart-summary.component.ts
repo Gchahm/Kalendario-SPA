@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Appointment, CompanyDetailsResult, RequestModel} from '@api/models';
+import {IAppointment, CompanyDetailsResult, RequestModel} from '@api/models';
 import {StripePaymentDetails} from '@api/clients/RequestClient.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class CartSummaryComponent {
 
   customerNotes: string;
 
-  appointments(): Appointment[] {
+  appointments(): IAppointment[] {
     return this.request.items.reduce((p, i) => p.concat(i.appointments), []);
   }
 

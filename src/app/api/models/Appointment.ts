@@ -6,56 +6,71 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {Person} from './Person';
 import {IReadModel} from './IReadModel';
-import {User} from '@api/models/User';
 import {PermissionModels} from '@api/permissions';
 
 export class Appointment implements IReadModel {
   static modelType = PermissionModels.appointment;
 
-  public id = 0;
-  public request: number;
-  public name = '';
-  public companyName = '';
-  public customer = new Person();
-  public employee = new Employee();
-  public service = new Service();
-  public lockEmployee: boolean;
-  public status = 'P';
-  public start: Moment = moment.utc();
-  public end: Moment = moment.utc();
-  public customerNotes = '';
-  public internalNotes = '';
-  public historyDate: Moment;
-  public historyUser: User;
+  id: number;
+  request: number;
+  name;
+  companyName;
+  customer = new Person();
+  employee = new Employee();
+  service = new Service();
+  lockEmployee: boolean;
+  status;
+  start: Moment;
+  end: Moment;
+  customerNotes;
+  internalNotes;
   deleted: Moment | null;
 
-  static fromJS(data: any): Appointment {
+  static fromJS(data?: any): IAppointment {
     data = typeof data === 'object' ? data : {};
     const result = new Appointment();
-    result.id = data.id;
-    result.request = data.request;
-    result.companyName = data.owner.name;
-    result.customer = Person.fromJS(data.customer);
-    result.employee = Employee.fromJs(data.employee);
-    result.lockEmployee = data.lockEmployee;
-    result.service = Service.fromJs(data.service);
-    result.status = data.status;
-    result.start = moment.utc(data.start);
-    result.end = moment.utc(data.end);
-    result.customerNotes = data.customerNotes;
-    result.internalNotes = data.internalNotes;
-    result.deleted = data.deleted ? moment.utc(data.deleted) : null;
-    if (!!data.historyDate) { result.historyDate = moment.utc(data.historyDate); }
-    if (!!data.historyUser) { result.historyUser = User.fromJs(data.historyUser); }
+    result.init(data);
     return result;
   }
+
+  init(data: any) {
+    this.id = data.id ? data.id : 0;
+    this.request = data.request;
+    this.companyName = data.owner?.name ? data.owner.name : '';
+    this.customer = Person.fromJS(data?.customer);
+    this.employee = Employee.fromJs(data?.employee);
+    this.lockEmployee = data.lockEmployee;
+    this.service = Service.fromJs(data?.service);
+    this.status = data.status ? data.status : 'P';
+    this.start = data.start ? moment.utc(data.start) : moment.utc();
+    this.end = data.end ? moment.utc(data.end) : moment.utc();
+    this.customerNotes = data.customerNotes ? data.customerNotes : '';
+    this.internalNotes = data.internalNotes ? data.internalNotes : '';
+    this.deleted = data.deleted ? moment.utc(data.deleted) : null;
+  }
 }
+
+export interface IAppointment extends IReadModel {
+  request: number;
+  companyName;
+  customer: Person;
+  employee: Employee;
+  service: Service;
+  lockEmployee: boolean;
+  status;
+  start: Moment;
+  end: Moment;
+  customerNotes;
+  internalNotes;
+  deleted: Moment | null;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentAdapter implements Adapter<Appointment> {
-  adapt(item: any): Appointment {
+export class AppointmentAdapter implements Adapter<IAppointment> {
+  adapt(item: any): IAppointment {
     return Appointment.fromJS(item);
   }
 }

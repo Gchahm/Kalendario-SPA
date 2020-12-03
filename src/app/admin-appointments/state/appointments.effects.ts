@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 
 import {Observable, of} from 'rxjs';
-import {catchError, map, mergeMap, switchMap, tap, withLatestFrom} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 
 import {AppointmentAdminClient} from '@api/clients';
 
 import {Action, Store} from '@ngrx/store';
 import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
-import {Appointment} from '@api/models';
+import {IAppointment} from '@api/models';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {BaseEffects, BaseEffectsWithDialog} from '@shared/state/base/effects';
+import {BaseEffects} from '@shared/state/base/effects';
 
 import * as fromAppointments from '@app/admin-appointments/state/index';
 
@@ -18,7 +18,7 @@ import {AppointmentEventDialogComponent} from '@app/admin-appointments/container
 
 
 @Injectable()
-export class AppointmentsEffects extends BaseEffects<Appointment> {
+export class AppointmentsEffects extends BaseEffects<IAppointment> {
 
   dialogRef: MatDialogRef<any>;
 
@@ -33,7 +33,7 @@ export class AppointmentsEffects extends BaseEffects<Appointment> {
   updateSelfAppointment$: Observable<Action> = this.actions$.pipe(
     ofType(fromAppointments.actions.requestSelfAppointmentUpdate),
     map((action) => action.entity),
-    mergeMap((apt: Appointment) => this.appointmentAdminClient.updateLock(apt.id, apt).pipe(
+    mergeMap((apt: IAppointment) => this.appointmentAdminClient.updateLock(apt.id, apt).pipe(
       map(updatedAppointment => {
         this.afterSuccess();
         return fromAppointments.actions.upsertOne({entity: updatedAppointment});
@@ -64,7 +64,7 @@ export class AppointmentsEffects extends BaseEffects<Appointment> {
   CreateSelfAppointment$: Observable<Action> = this.actions$.pipe(
     ofType(fromAppointments.actions.requestSelfAppointmentCreate),
     map(action => action.entity),
-    mergeMap((appointment: Appointment) => this.appointmentAdminClient.createLock(appointment).pipe(
+    mergeMap((appointment: IAppointment) => this.appointmentAdminClient.createLock(appointment).pipe(
       map(newAppointment => {
         this.afterSuccess();
         return fromAppointments.actions.upsertOne({entity: newAppointment});

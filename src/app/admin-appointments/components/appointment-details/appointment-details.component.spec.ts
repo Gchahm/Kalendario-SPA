@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AppointmentDetailsComponent} from './appointment-details.component';
-import {Appointment} from '@api/models';
+import {Appointment, IAppointment} from '@api/models';
 
 describe('AppointmentDetailsComponent', () => {
   let component: AppointmentDetailsComponent;
@@ -17,7 +17,7 @@ describe('AppointmentDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppointmentDetailsComponent);
     component = fixture.componentInstance;
-    component.model = new Appointment();
+    component.model = Appointment.fromJS();
     fixture.detectChanges();
   });
 

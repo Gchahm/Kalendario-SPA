@@ -4,11 +4,11 @@
       <span *ngIf="!!appointment.deleted"
             class="badge badge-pill badge-danger">Deleted on {{appointment.deleted | momentDate}}</span>
     </div>
-    <div class="col-6 text-right">
+    <div class="col-9 text-right">
+      <a class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
+        <i class="fa fa-history c-accent m-1"></i>
+      </a>
       <ng-container *ngIf="!editMode && !appointment.deleted">
-        <a class="btn btn-light" matTooltip="history" (click)="showHistory = !showHistory">
-          <i class="fa fa-history c-accent m-1"></i>
-        </a>
         <a *ngIf="permission.change"
            (click)="toggleEdit(true)"
            class="btn btn-light" matTooltip="edit">
@@ -20,8 +20,6 @@
           <i class="fa fa-trash c-warn m-1"></i>
         </a>
       </ng-container>
-    </div>
-    <div class="col-3 text-right">
       <a class="btn btn-light" matTooltip="close" (click)="closeDialog()">
         <i class="fa fa-times c-warn m-1"></i>
       </a>

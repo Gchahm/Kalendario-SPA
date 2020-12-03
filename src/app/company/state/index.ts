@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector, MemoizedSelector} from '@ngrx/store';
 import * as fromCompany from './company.reducer';
-import {Service, Employee, Appointment} from '@api/models';
+import {Service, Employee, IAppointment, Appointment} from '@api/models';
 import {SlotsParams} from '@api/clients';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -190,12 +190,12 @@ export const getServiceSlots: MemoizedSelector<object, ServiceSlot[]> = createSe
 );
 
 
-export const getRequest: MemoizedSelector<object, Appointment> = createSelector(
+export const getRequest: MemoizedSelector<object, IAppointment> = createSelector(
   getCurrentEmployee,
   getCurrentService,
   getCurrentMomentDate,
   (employee, service, date) => {
-    const appointment = new Appointment();
+    const appointment = Appointment.fromJS();
     appointment.service = service;
     appointment.employee = employee;
     appointment.start = date;

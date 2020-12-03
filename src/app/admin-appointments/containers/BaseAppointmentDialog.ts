@@ -1,7 +1,7 @@
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 import {Observable} from 'rxjs';
-import {Appointment, Employee, Service} from '@api/models';
+import {IAppointment, Employee, Service} from '@api/models';
 import {ApiError} from '@api/Errors';
 import * as fromAppointments from '@app/admin-appointments/state';
 import {AppointmentPermissions} from '@api/permissions';
@@ -14,7 +14,7 @@ import {map} from 'rxjs/operators';
 
 export class BaseAppointmentDialog implements OnInit {
 
-  appointment$: Observable<Appointment>;
+  appointment$: Observable<IAppointment>;
   services$: Observable<Service[]>;
   employees$: Observable<Employee[]>;
   apiError$: Observable<ApiError>;

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Service} from '@api/models/Service';
 import {Employee} from '@api/models/Employee';
-import {Appointment} from '@api/models/Appointment';
+import {IAppointment} from '@api/models';
 import {select, Store} from '@ngrx/store';
 import {State} from '@admin/state/admin.reducer';
 import {Customer} from '@api/models/Customer';
@@ -22,7 +22,7 @@ import {AppointmentQueryParams} from '@api/queryParams';
 })
 export class CustomerAppointmentsShellComponent implements OnInit {
 
-  appointments$: Observable<Appointment[]>;
+  appointments$: Observable<IAppointment[]>;
   selectedCustomer$: Observable<Customer>;
   services$: Observable<Service[]>;
   employees$: Observable<Employee[]>;

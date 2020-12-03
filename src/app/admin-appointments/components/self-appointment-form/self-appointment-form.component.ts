@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '@shared/common/BaseFormComponent';
-import {Appointment, IAppointmentWriteModel} from '@api/models';
+import {IAppointment, IAppointmentWriteModel} from '@api/models';
 import {modelId} from '@api/models/IReadModel';
 import {FormControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
@@ -11,7 +11,7 @@ import {Moment} from 'moment';
   templateUrl: './self-appointment-form.component.html',
   styleUrls: ['./self-appointment-form.component.scss']
 })
-export class SelfAppointmentFormComponent extends BaseFormComponent<Appointment> {
+export class SelfAppointmentFormComponent extends BaseFormComponent<IAppointment> {
 
   writeModel(): IAppointmentWriteModel {
     return {

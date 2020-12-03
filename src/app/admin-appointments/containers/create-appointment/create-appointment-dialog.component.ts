@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
-import {Appointment} from '@api/models/Appointment';
+import {IAppointment} from '@api/models';
 
 import * as fromAppointments from '@app/admin-appointments/state';
 import {BaseAppointmentDialog} from '@app/admin-appointments/containers/BaseAppointmentDialog';
@@ -25,11 +25,11 @@ export class CreateAppointmentDialogComponent extends BaseAppointmentDialog {
     this.dialogRef.close();
   }
 
-  saveAppointment(entity: Appointment) {
+  saveAppointment(entity: IAppointment) {
     this.store.dispatch(fromAppointments.actions.requestCreate({entity}));
   }
 
-  saveSelfAppointment(entity: Appointment) {
+  saveSelfAppointment(entity: IAppointment) {
     this.store.dispatch(fromAppointments.actions.requestSelfAppointmentCreate({entity}));
   }
 }

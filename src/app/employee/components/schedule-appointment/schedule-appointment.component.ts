@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Appointment} from '@api/models';
+import {IAppointment} from '@api/models';
 import {Store} from '@ngrx/store';
 import * as fromAppointments from '@app/admin-appointments/state';
 
@@ -9,7 +9,7 @@ import * as fromAppointments from '@app/admin-appointments/state';
   styleUrls: ['./schedule-appointment.component.css']
 })
 export class ScheduleAppointmentComponent {
-  @Input() appointment: Appointment;
+  @Input() appointment: IAppointment;
   @Input() showEdit: boolean;
 
   constructor(private store: Store<fromAppointments.State>) {

@@ -1,9 +1,10 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {Appointment, Employee} from '@api/models';
+import {IAppointment, Employee, Appointment} from '@api/models';
 import {actions} from './appointments.actions';
 import {on} from '@ngrx/store';
 import {Moment} from 'moment';
 import {ApiError} from '@api/Errors';
+import {IAppointmentHistory} from '@api/models/AppointmentHistory';
 
 export enum AppointmentType {
   self = 'SELF',
@@ -11,16 +12,16 @@ export enum AppointmentType {
 }
 
 
-export interface State extends BaseEntityState<Appointment> {
+export interface State extends BaseEntityState<IAppointment> {
   initialize: { type: string, employee: Employee, date: Moment };
-  currentAppointmentHistory: Appointment[];
+  currentAppointmentHistory: IAppointmentHistory[];
   currentDate: string;
   historyApiError: ApiError;
 }
 
 
 const initialState: State = {
-  ...baseInitialState<Appointment>(),
+  ...baseInitialState<IAppointment>(),
   initialize: null,
   currentAppointmentHistory: null,
   currentDate: null,
@@ -28,10 +29,10 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<Appointment>(Appointment);
+export const adapter = createBaseAdapter<IAppointment>(Appointment);
 
 
-export const reducer = createBaseReducer<Appointment>(initialState, adapter, actions,
+export const reducer = createBaseReducer<IAppointment>(initialState, adapter, actions,
   on(actions.initializeCurrentSelfAppointment, (state, {date, employee}) => ({
     ...state,
     initialize: {date, employee, type: AppointmentType.self},

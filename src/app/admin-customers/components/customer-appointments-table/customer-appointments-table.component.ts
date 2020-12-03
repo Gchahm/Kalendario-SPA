@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Appointment} from '@api/models/Appointment';
+import {IAppointment} from '@api/models';
 import {Customer, Employee, Service} from '@api/models';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -27,7 +27,7 @@ export class CustomerAppointmentsTableComponent implements OnInit {
     return this._customer;
   }
 
-  @Input() set appointments(appointments: Appointment[]) {
+  @Input() set appointments(appointments: IAppointment[]) {
     this.appointmentData = appointments.map(appointment => {
       return {
         id: appointment.id,

@@ -1,6 +1,6 @@
 <div class="row no-gutters">
   <div class="col-12 c-accent-light">
-    Changed on: {{model.historyDate.format('DD/MM/YYYY hh:mm')}} by  {{model.historyUser?.name}}
+    {{historyType[model.historyType]}} on: {{model.historyDate.format('DD/MM/YYYY hh:mm')}} by  {{model.historyUser?.name}}
   </div>
   <div class="col-6">
     <table class="table table-borderless">

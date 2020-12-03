@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {Appointment, Employee} from '@api/models';
+import {IAppointment, Employee, Appointment} from '@api/models';
 import {Store} from '@ngrx/store';
 import {AdminAppointmentParams} from '@api/clients/AppointmentAdminClient.service';
 import {map, switchMap} from 'rxjs/operators';
@@ -23,7 +23,7 @@ import * as fromCore from '@app/core/state';
 export class EmployeeSchedulePageComponent implements OnInit {
 
   currentDate$: Observable<Moment>;
-  appointments$: Observable<Appointment[]>;
+  appointments$: Observable<IAppointment[]>;
   permissions$: Observable<ModelPermissions>;
   employee$: Observable<EmployeeResourceModel>;
   startDate: Moment;

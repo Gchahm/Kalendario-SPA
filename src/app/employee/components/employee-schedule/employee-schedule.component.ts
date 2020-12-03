@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Moment} from 'moment';
-import {Appointment} from '@api/models';
+import {IAppointment} from '@api/models';
 import * as moment from 'moment';
 import {ModelPermissions} from '@api/permissions';
 import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
@@ -15,7 +15,7 @@ export class EmployeeScheduleComponent {
   @Input() currentDate: Moment;
   @Input() startDate: Moment;
   @Input() endDate: Moment;
-  @Input() appointments: Appointment[];
+  @Input() appointments: IAppointment[];
   @Input() permissions: ModelPermissions;
   @Input() employee: EmployeeResourceModel;
 

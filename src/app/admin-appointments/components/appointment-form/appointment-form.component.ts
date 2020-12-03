@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {BaseFormComponent} from '@shared/common/BaseFormComponent';
-import {Appointment, Employee, IAppointmentWriteModel, Service} from '@api/models';
+import {IAppointment, Employee, IAppointmentWriteModel, Service} from '@api/models';
 import {modelId} from '@api/models/IReadModel';
 import {FormControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
@@ -15,7 +15,7 @@ import * as moment from 'moment';
   styleUrls: ['./appointment-form.component.scss'],
   animations: [pulseAnimation({scale: 1.2, duration: 200})]
 })
-export class AppointmentFormComponent extends BaseFormComponent<Appointment> implements OnInit, OnDestroy {
+export class AppointmentFormComponent extends BaseFormComponent<IAppointment> implements OnInit, OnDestroy {
 
   @Input() employees: Employee[];
   @Input() permissions: AppointmentPermissions;

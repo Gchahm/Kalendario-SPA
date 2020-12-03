@@ -1,5 +1,5 @@
 import {BaseEntityActions, createActions} from '@shared/state/base/actions';
-import {Appointment, Employee} from '@api/models';
+import {IAppointment, Employee} from '@api/models';
 import {ActionCreator, createAction, props} from '@ngrx/store';
 import {TypedAction} from '@ngrx/store/src/models';
 import {Moment} from 'moment';
@@ -9,12 +9,12 @@ import {ApiError} from '@api/Errors';
 export const storeName = 'adminAppointments';
 
 
-interface AppointmentActions extends BaseEntityActions<Appointment> {
-  requestSelfAppointmentUpdate: ActionCreator<string, (props: { entity: Appointment }) =>
-    ({ entity: Appointment } & TypedAction<string>)>;
+interface AppointmentActions extends BaseEntityActions<IAppointment> {
+  requestSelfAppointmentUpdate: ActionCreator<string, (props: { entity: IAppointment }) =>
+    ({ entity: IAppointment } & TypedAction<string>)>;
 
-  requestSelfAppointmentCreate: ActionCreator<string, (props: { entity: Appointment }) =>
-    ({ entity: Appointment } & TypedAction<string>)>;
+  requestSelfAppointmentCreate: ActionCreator<string, (props: { entity: IAppointment }) =>
+    ({ entity: IAppointment } & TypedAction<string>)>;
 
   requestAppointmentHistory: ActionCreator<string, (props: {}) =>
     ({ id: number } & TypedAction<string>)>;
@@ -34,8 +34,8 @@ interface AppointmentActions extends BaseEntityActions<Appointment> {
   initializeCurrentSelfAppointment: ActionCreator<string, (props: { date: Moment, employee: Employee }) =>
     ({ date: Moment, employee: Employee } & TypedAction<string>)>;
 
-  setAppointmentHistory: ActionCreator<string, (props: { appointments: Appointment[] }) =>
-    ({ appointments: Appointment[] } & TypedAction<string>)>;
+  setAppointmentHistory: ActionCreator<string, (props: { appointments: IAppointment[] }) =>
+    ({ appointments: IAppointment[] } & TypedAction<string>)>;
 
   setCurrentDate: ActionCreator<string, (props: { date: Moment }) =>
     ({ date: Moment } & TypedAction<string>)>;
@@ -46,12 +46,12 @@ interface AppointmentActions extends BaseEntityActions<Appointment> {
 
 
 export const actions: AppointmentActions = {
-  ...createActions<Appointment>(storeName),
+  ...createActions<IAppointment>(storeName),
   requestSelfAppointmentUpdate: createAction(`[${storeName}] Request Self Appointment Update`,
-    props<{ entity: Appointment }>()),
+    props<{ entity: IAppointment }>()),
 
   requestSelfAppointmentCreate: createAction(`[${storeName}] Request Self Appointment Create`,
-    props<{ entity: Appointment }>()),
+    props<{ entity: IAppointment }>()),
 
   requestAppointmentHistory: createAction(`[${storeName}] Request Appointment History`,
     props<{ id: number }>()),
@@ -73,7 +73,7 @@ export const actions: AppointmentActions = {
     props<{ date: Moment, employee: Employee }>()),
 
   setAppointmentHistory: createAction(`[${storeName}] Set Appointment History`,
-    props<{ appointments: Appointment[] }>()),
+    props<{ appointments: IAppointment[] }>()),
 
   setCurrentDate: createAction(`[${storeName}] Set Current Date`,
     props<{ date: Moment }>()),

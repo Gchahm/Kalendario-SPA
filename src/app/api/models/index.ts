@@ -1,4 +1,4 @@
-export {Appointment, IAppointmentWriteModel, AppointmentAdapter} from './Appointment'
+export {Appointment, IAppointment, IAppointmentWriteModel, AppointmentAdapter} from './Appointment';
 export {Schedule, IScheduleWriteModel, ScheduleAdapter} from './Schedule';
 export {Shift, IShiftWriteModel, ShiftAdapter, TimeFrame} from './Shift';
 export {CompanyConfig, IConfigWriteModel, ConfigAdapter} from './CompanyConfig';

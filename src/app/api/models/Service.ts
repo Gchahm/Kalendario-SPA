@@ -24,7 +24,7 @@ export class Service implements IReadModel {
       result.id = data.id;
       result.private = data.private;
       result.name = data.name;
-      result.duration = TimeOfDay.fromString(data.duration);
+      result.duration = data.duration ? TimeOfDay.fromString(data.duration) : TimeOfDay.zero();
       result.description = data.description;
       result.color = data.color;
       result.cost = data.cost;
