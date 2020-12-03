@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {IAppointment, Employee, Appointment} from '@api/models';
+import {IAppointment, Employee, Appointment, AppointmentAdapter} from '@api/models';
 import {actions} from './appointments.actions';
 import {on} from '@ngrx/store';
 import {Moment} from 'moment';
@@ -29,7 +29,7 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<IAppointment>(Appointment);
+export const adapter = createBaseAdapter<IAppointment>(new AppointmentAdapter());
 
 
 export const reducer = createBaseReducer<IAppointment>(initialState, adapter, actions,

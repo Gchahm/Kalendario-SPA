@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {Group, Permission} from '@api/models';
+import {Group, GroupAdapter, Permission} from '@api/models';
 import {actions} from './groups.actions';
 import {on} from '@ngrx/store';
 
@@ -15,7 +15,7 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<Group>(Group);
+export const adapter = createBaseAdapter<Group>(new GroupAdapter());
 
 
 export const reducer = createBaseReducer<Group>(initialState, adapter, actions,

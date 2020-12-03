@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Company, User} from '@api/models';
+import {Company, IUser} from '@api/models';
 import {PERMISSION_ADD, PERMISSION_VIEW, PermissionModels} from '@api/permissions';
-import {checkForPermission} from '@api/models/User';
+import {checkForPermission} from '../../../api/models/IUser';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ export class NavbarComponent {
   @Input() isLoggedIn: boolean;
   @Input() showLeftPaneButton: boolean
   @Input() companyName: string;
-  @Input() user: User;
+  @Input() user: IUser;
   @Input() cartItems: number;
 
   @Output() logout = new EventEmitter<void>();

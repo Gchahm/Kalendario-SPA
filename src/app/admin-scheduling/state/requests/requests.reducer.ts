@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {RequestModel} from '@api/models';
+import {RequestAdapter, RequestModel} from '@api/models';
 import {actions} from './requests.actions';
 import {on} from '@ngrx/store';
 
@@ -13,7 +13,7 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<RequestModel>(RequestModel);
+export const adapter = createBaseAdapter<RequestModel>(new RequestAdapter());
 
 
 export const reducer = createBaseReducer<RequestModel>(initialState, adapter, actions,

@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {BaseRWComponent} from '@shared/common/BaseRWComponent';
-import {Employee, Group, IUserWriteModel, User} from '@api/models';
+import {Employee, Group, IUserWriteModel, IUser} from '@api/models';
 import {CheckChanged} from '@admin/components/_form/CheckBoxForm';
 import {UserViewModel} from '@app/admin-users/state';
 

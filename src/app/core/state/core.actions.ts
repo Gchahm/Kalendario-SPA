@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 import {ApiError} from '@api/Errors';
 import {LoginModel} from '@api/models/LoginModel';
 import {RegisterModel} from '@shared/services/auth.service';
@@ -55,7 +55,7 @@ export class InitializeUser implements Action {
 export class InitializeUserSuccess implements Action {
   readonly type = CoreActionsType.InitializeUserSuccess;
 
-  constructor(public payload: User) {
+  constructor(public payload: IUser) {
   }
 }
 
@@ -69,7 +69,7 @@ export class Login implements Action {
 export class LoginSuccess implements Action {
   readonly type = CoreActionsType.LoginSuccess;
 
-  constructor(public payload: User) {
+  constructor(public payload: IUser) {
   }
 }
 
@@ -90,7 +90,7 @@ export class Register implements Action {
 export class RegisterSuccess implements Action {
   readonly type = CoreActionsType.RegisterSuccess;
 
-  constructor(public payload: User) {
+  constructor(public payload: IUser) {
   }
 }
 

@@ -3,7 +3,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {CanViewSchedulesGuard} from './can-view-schedules.guard';
 import {AuthService} from '@shared/services/auth.service';
 import {AuthServiceMock} from '@shared/test/stubs';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 import {of} from 'rxjs';
 
 describe('CanViewSchedulesGuard', () => {
@@ -42,7 +42,7 @@ describe('CanViewSchedulesGuard', () => {
       let result;
 
       spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = new User();
+        const user = new IUser();
         user.permissions.push('scheduling.view_schedule');
         return of(user);
       });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ViewShellComponent} from '@shared/common/ViewShellComponent';
-import {Employee, Group, User} from '@api/models';
+import {Employee, Group, IUser} from '@api/models';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
@@ -16,7 +16,7 @@ import {ApiError} from '@api/Errors';
   templateUrl: './user-view-shell.component.html',
   styleUrls: ['./user-view-shell.component.css']
 })
-export class UserViewShellComponent extends ViewShellComponent<User> implements OnInit {
+export class UserViewShellComponent extends ViewShellComponent<IUser> implements OnInit {
 
   model$: Observable<UserViewModel>;
   groups$: Observable<Group[]>;
@@ -42,7 +42,7 @@ export class UserViewShellComponent extends ViewShellComponent<User> implements 
     this.showPasswordForm$ = this.store.select(fromUsers.selectors.selectShowPasswordForm);
   }
 
-  updatePassword(user: User, command: UserPasswordWriteModel) {
+  updatePassword(user: IUser, command: UserPasswordWriteModel) {
     this.store.dispatch(fromUsers.actions.requestChangeUserPassword({id: user.id, command}));
   }
 

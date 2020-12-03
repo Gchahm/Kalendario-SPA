@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {PermissionModels} from '@api/permissions';
 import {Appointment, IAppointment} from '@api/models/Appointment';
-import {User} from '@api/models/User';
+import {IUser, User} from './IUser';
 import {HistoryType} from '@api/models/HistoryType';
 
 export class AppointmentHistory extends Appointment implements IAppointmentHistory {
@@ -12,7 +12,7 @@ export class AppointmentHistory extends Appointment implements IAppointmentHisto
 
   historyType: HistoryType;
   historyDate: Moment;
-  historyUser: User;
+  historyUser: IUser;
 
   static fromJS(data?: any): IAppointmentHistory {
     data = typeof data === 'object' ? data : {};
@@ -32,7 +32,7 @@ export class AppointmentHistory extends Appointment implements IAppointmentHisto
 export interface IAppointmentHistory extends IAppointment {
   historyType: HistoryType;
   historyDate: Moment;
-  historyUser: User;
+  historyUser: IUser;
 }
 
 @Injectable({

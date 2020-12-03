@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
-import {User, UserAdapter} from '@api/models/User';
+import {IUser, User, UserAdapter} from '../../api/models/IUser';
 import {LoginModel} from '@api/models/LoginModel';
 
 export interface RegisterModel {
@@ -56,7 +56,7 @@ export class AuthService {
       );
   }
 
-  login(user: LoginModel): Observable<User> {
+  login(user: LoginModel): Observable<IUser> {
     return this.http.post(this.baseUrl + 'login/', user)
       .pipe(
         switchMap((project: any) => {
@@ -66,7 +66,7 @@ export class AuthService {
       );
   }
 
-  register(form: RegisterModel): Observable<User> {
+  register(form: RegisterModel): Observable<IUser> {
     return this.http.post(this.baseUrl + 'registration/', form)
       .pipe(
         switchMap((project: any) => {
@@ -80,15 +80,15 @@ export class AuthService {
     return this.http.post(this.baseUrl + 'resend/', {});
   }
 
-  public whoAmI(): Observable<User> {
+  public whoAmI(): Observable<IUser> {
     if (AuthService.isLoggedIn()) {
       return this.getUser();
     }
     return of(User.AnonymousUser());
   }
 
-  private getUser(): Observable<User> {
-    return this.http.get<User>(this.baseUrl + 'user/')
+  private getUser(): Observable<IUser> {
+    return this.http.get<IUser>(this.baseUrl + 'user/')
       .pipe(
         map(this.adapter.adapt),
         catchError(() => {

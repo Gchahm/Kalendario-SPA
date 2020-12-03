@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {Employee} from '@api/models/Employee';
+import {Employee, EmployeeAdapter} from '@api/models/Employee';
 import {actions} from './employees.actions';
 
 
@@ -12,7 +12,7 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<Employee>(Employee)
+export const adapter = createBaseAdapter<Employee>(new EmployeeAdapter())
 
 
 export const reducer = createBaseReducer<Employee>(initialState, adapter, actions);

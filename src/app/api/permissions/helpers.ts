@@ -1,4 +1,4 @@
-import {Appointment, User} from '@api/models';
+import {Appointment, IUser} from '@api/models';
 import {
   AppointmentPermissions,
   getApp,
@@ -10,7 +10,7 @@ import {
 } from '@api/permissions/index';
 
 
-export function userPermissions(user: User, model: PermissionModels): ModelPermissions {
+export function userPermissions(user: IUser, model: PermissionModels): ModelPermissions {
   return {
     view: user.permissions.includes(`${getApp(model)}.${PERMISSION_VIEW}_${model}`),
     add: user.permissions.includes(`${getApp(model)}.${PERMISSION_ADD}_${model}`),
@@ -19,7 +19,7 @@ export function userPermissions(user: User, model: PermissionModels): ModelPermi
   };
 }
 
-export function appointmentPermissions(user: User): AppointmentPermissions {
+export function appointmentPermissions(user: IUser): AppointmentPermissions {
   const model = Appointment.modelType;
   return {
     ...userPermissions(user, model),

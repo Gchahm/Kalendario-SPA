@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {Service} from '@api/models';
+import {Service, ServiceAdapter} from '@api/models';
 import {actions} from './services.actions';
 
 
@@ -12,7 +12,7 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<Service>(Service);
+export const adapter = createBaseAdapter<Service>(new ServiceAdapter());
 
 
 export const reducer = createBaseReducer<Service>(initialState, adapter, actions);

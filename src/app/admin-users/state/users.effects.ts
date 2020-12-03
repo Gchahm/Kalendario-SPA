@@ -7,14 +7,14 @@ import {UserAdminClient} from '@api/clients';
 
 import {Action, Store} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 import {BaseEffects} from '@shared/state/base/effects';
 
 import * as fromUsers from '@app/admin-users/state';
 
 
 @Injectable()
-export class UsersEffects extends BaseEffects<User> {
+export class UsersEffects extends BaseEffects<IUser> {
   constructor(actions$: Actions,
               store: Store<fromUsers.State>,
               private userAdminClient: UserAdminClient) {

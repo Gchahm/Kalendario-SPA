@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {SchedulingPanel} from '@api/models';
+import {SchedulingPanel, SchedulingPanelAdapter} from '@api/models';
 import {actions} from './scheduling.actions';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -17,7 +17,7 @@ const initialState: State = {
 };
 
 
-export const adapter = createBaseAdapter<SchedulingPanel>(SchedulingPanel);
+export const adapter = createBaseAdapter<SchedulingPanel>(new SchedulingPanelAdapter());
 
 
 export const reducer = createBaseReducer<SchedulingPanel>(initialState, adapter, actions,

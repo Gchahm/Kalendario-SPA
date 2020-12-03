@@ -4,6 +4,7 @@ import {createEntityAdapter, EntityState} from '@ngrx/entity';
 import {BaseEntitySelectors} from '@shared/state/base/selectors';
 import {createSelector} from '@ngrx/store';
 import {BaseEntityState} from '@shared/state/base/state';
+import {Adapter} from '@api/adapter';
 
 export interface BaseEntityAdapter<T extends IReadModel> {
   adapter: EntityAdapter<T>;
@@ -11,20 +12,20 @@ export interface BaseEntityAdapter<T extends IReadModel> {
                       filter: (m: T, s: string) => boolean): BaseEntitySelectors<T, V>;
 }
 
-export function createBaseAdapter<T extends IReadModel>(modelType: (new () => T)): BaseEntityAdapter<T> {
-  return new BaseAdapter<T>(modelType);
+export function createBaseAdapter<T extends IReadModel>(adapter: Adapter<T>): BaseEntityAdapter<T> {
+  return new BaseAdapter<T>(adapter);
 }
 
 class BaseAdapter<T extends IReadModel> implements BaseEntityAdapter<T> {
 
   adapter: EntityAdapter<T>;
 
-  constructor(private modelType: (new () => T)) {
+  constructor(private modelAdapter: Adapter<T>) {
     this.adapter = createEntityAdapter<T>();
   }
 
   create(): T {
-    return new this.modelType();
+    return this.modelAdapter.adapt({});
   }
 
   getBaseSelectors<V>(selectState: (state: V) => BaseEntityState<T>,

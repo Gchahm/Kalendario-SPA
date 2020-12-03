@@ -3,7 +3,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {CanViewEmployeesGuard} from './can-view-employees.guard';
 import {AuthService} from '@shared/services/auth.service';
 import {AuthServiceMock} from '@shared/test/stubs';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 import {of} from 'rxjs';
 
 describe('CanViewEmployeesGuard', () => {
@@ -42,7 +42,7 @@ describe('CanViewEmployeesGuard', () => {
       let result;
 
       spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = new User();
+        const user = new IUser();
         user.permissions.push('scheduling.view_employee');
         return of(user);
       });

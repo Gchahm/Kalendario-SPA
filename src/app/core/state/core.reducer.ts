@@ -1,13 +1,13 @@
 import {ApiError} from '@api/Errors';
 import {CoreActions, CoreActionsType} from './core.actions';
-import {User} from '@api/models';
+import {IUser, User} from '@api/models';
 
 export interface CoreState {
   isMobile: boolean;
   isTablet: boolean;
   showLeftPaneButton: boolean;
   isLeftPanelOpen: boolean;
-  user: User;
+  user: IUser;
   apiError: ApiError | null;
   requestCount: number;
   companyName: string | null;

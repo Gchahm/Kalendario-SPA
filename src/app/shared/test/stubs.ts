@@ -1,5 +1,5 @@
 import {Observable, of} from 'rxjs';
-import {User} from '@api/models';
+import {IUser, User} from '@api/models';
 
 export class AuthServiceMock {
   constructor() {

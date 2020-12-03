@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 import {Route} from '@angular/router';
 
 @Component({
@@ -10,14 +10,14 @@ import {Route} from '@angular/router';
 export class DashboardContainerComponent {
   @Input() isMobile: boolean;
   @Input() leftPaneOpen: boolean;
-  @Input() user: User;
+  @Input() user: IUser;
   @Input() routes: DashBoardRoute[];
   @Output() routeClick = new EventEmitter<DashBoardRoute>();
 
 }
 
 export interface DashBoardRoute extends Route {
-  fn?: (user: User) => boolean;
+  fn?: (user: IUser) => boolean;
   icon: string;
   children?: DashBoardRoute[];
 }

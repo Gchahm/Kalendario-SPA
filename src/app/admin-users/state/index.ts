@@ -3,13 +3,13 @@ import * as fromReducer from './users.reducer';
 import * as fromGroups from '@admin/state/groups';
 import * as fromEmployees from '@app/admin-employee/state';
 import {storeName} from './users.actions';
-import {Employee, Group, User} from '@api/models';
+import {Group, IUser} from '@api/models';
 
 export {actions, storeName} from './users.actions';
 export {reducer, State} from './users.reducer';
 
 
-export interface UserViewModel extends User {
+export interface UserViewModel extends IUser {
   groupsModel: Group[];
 }
 

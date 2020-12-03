@@ -5,14 +5,14 @@ import {Observable} from 'rxjs';
 import * as fromCore from '@core/state';
 
 import * as fromCompany from '@company/state';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 
 export abstract class BaseContainer {
 
   isMobile$: Observable<boolean>;
   isTablet$: Observable<boolean>;
   leftPaneOpen$: Observable<boolean>;
-  user$: Observable<User>;
+  user$: Observable<IUser>;
 
   protected constructor(protected store: Store<State | fromCompany.State>) {
     this.isMobile$ = this.store.pipe(select(fromCore.getIsMobileView));

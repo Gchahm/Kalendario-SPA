@@ -3,7 +3,7 @@ import {CanViewServicesGuard} from './can-view-services.guard';
 import {AuthService} from '@shared/services/auth.service';
 import {AuthServiceMock} from '@shared/test/stubs';
 import {of} from 'rxjs';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 
 describe('CanViewServicesGuard', () => {
   let guard: CanViewServicesGuard;
@@ -42,7 +42,7 @@ describe('CanViewServicesGuard', () => {
       let result;
 
       spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = new User();
+        const user = new IUser();
         user.permissions.push('scheduling.view_service');
         return of(user);
       });

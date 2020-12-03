@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {CanViewShiftsGuard} from './can-view-shifts-guard.service';
 import {AuthService} from '@shared/services/auth.service';
 import {AuthServiceMock} from '@shared/test/stubs';
-import {User} from '@api/models';
+import {IUser} from '@api/models';
 import {of} from 'rxjs';
 
 describe('CanViewShiftsGuard', () => {
@@ -43,7 +43,7 @@ describe('CanViewShiftsGuard', () => {
       let result;
 
       spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = new User();
+        const user = new IUser();
         user.permissions.push('scheduling.view_shift');
         return of(user);
       });
