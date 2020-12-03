@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Group, Permission} from '@api/models';
+import {IGroup, Permission} from '@api/models';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 
@@ -13,7 +13,7 @@ import {BaseEntityPage} from '@admin/pages/BaseEntityPage';
   styleUrls: ['./groups-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GroupsPageComponent extends BaseEntityPage<Group> implements OnInit {
+export class GroupsPageComponent extends BaseEntityPage<IGroup> implements OnInit {
 
   viewModel$: Observable<fromGroups.GroupViewModel>;
   permissions$: Observable<Permission[]>;

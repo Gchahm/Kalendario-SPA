@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {BaseFormComponent} from '@shared/common/BaseFormComponent';
-import {Group, IGroupWriteModel, Permission} from '@api/models';
+import {IGroup, IGroupWriteModel, Permission} from '@api/models';
 import {CheckChanged} from '@admin/components/_form/CheckBoxForm';
 
 @Component({
@@ -8,7 +8,7 @@ import {CheckChanged} from '@admin/components/_form/CheckBoxForm';
   templateUrl: './group-form.component.html',
   styleUrls: ['./group-form.component.css']
 })
-export class GroupFormComponent extends BaseFormComponent<Group> {
+export class GroupFormComponent extends BaseFormComponent<IGroup> {
   @Input() permissions: Permission[];
 
   changed(event: CheckChanged) {

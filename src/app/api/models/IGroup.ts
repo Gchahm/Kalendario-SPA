@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {IReadModel} from '@api/models/IReadModel';
 
-export class Group implements IReadModel {
+export class Group implements IGroup {
   static modelType = 'group';
 
-  id: number = 0;
-  name: string = ''
-  permissions: number[] = [];
+  id: number;
+  name: string;
+  permissions: number[];
 
-  static fromJs(data: any): Group {
+  static fromJs(data: any): IGroup {
     data = typeof data === 'object' ? data : {};
     const result = new Group();
     result.init(data);
@@ -18,11 +18,16 @@ export class Group implements IReadModel {
 
   init(data: any) {
     if (data) {
-      this.id = data.id;
-      this.name = data.name;
-      this.permissions = data.permissions;
+      this.id = data.id ? data.id : 0;
+      this.name = data.name ? data.name : '';
+      this.permissions = data.permissions ? data.permissions : [];
     }
   }
+}
+
+export interface IGroup extends IReadModel {
+  permissions: number[];
+
 }
 
 export interface IGroupWriteModel {
@@ -34,8 +39,8 @@ export interface IGroupWriteModel {
 @Injectable({
   providedIn: 'root'
 })
-export class GroupAdapter implements Adapter<Group> {
-  adapt(data: any): Group {
+export class GroupAdapter implements Adapter<IGroup> {
+  adapt(data: any): IGroup {
     return Group.fromJs(data);
   }
 }

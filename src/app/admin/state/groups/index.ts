@@ -1,14 +1,14 @@
 import {createFeatureSelector, createSelector, MemoizedSelector} from '@ngrx/store';
 import * as fromReducer from './groups.reducer';
 
-import {Group, Permission} from '@api/models';
+import {IGroup, Permission} from '@api/models';
 
 import {storeName} from './groups.actions';
 export {State, reducer} from './groups.reducer';
 export {actions, storeName} from './groups.actions';
 
 export interface GroupViewModel {
-  group: Group;
+  group: IGroup;
   permissions: Permission[];
 }
 

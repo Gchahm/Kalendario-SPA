@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ModelViewSetClient} from '@api/clients/ModelViewSetClient';
-import {Group, GroupAdapter, Permission, PermissionAdapter} from '@api/models';
+import {IGroup, GroupAdapter, Permission, PermissionAdapter} from '@api/models';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class GroupAdminClient extends ModelViewSetClient<Group, object> {
+export class GroupAdminClient extends ModelViewSetClient<IGroup, object> {
   constructor(http: HttpClient,
               adapter: GroupAdapter,
               private permissionAdapter: PermissionAdapter) {

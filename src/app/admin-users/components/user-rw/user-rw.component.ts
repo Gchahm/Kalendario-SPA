@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {BaseRWComponent} from '@shared/common/BaseRWComponent';
-import {Employee, Group, IUserWriteModel, IUser} from '@api/models';
+import {Employee, IGroup, IUserWriteModel, IUser} from '@api/models';
 import {CheckChanged} from '@admin/components/_form/CheckBoxForm';
 import {UserViewModel} from '@app/admin-users/state';
 
@@ -10,7 +10,7 @@ import {UserViewModel} from '@app/admin-users/state';
   styleUrls: ['./user-rw.component.css']
 })
 export class UserRwComponent extends BaseRWComponent<UserViewModel> {
-  @Input() groups: Group[];
+  @Input() groups: IGroup[];
   @Input() employees: Employee[];
 
   writeModel(): IUserWriteModel {

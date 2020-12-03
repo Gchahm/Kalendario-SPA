@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ViewShellComponent} from '@shared/common/ViewShellComponent';
-import {Employee, Group, IUser} from '@api/models';
+import {Employee, IGroup, IUser} from '@api/models';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
@@ -19,7 +19,7 @@ import {ApiError} from '@api/Errors';
 export class UserViewShellComponent extends ViewShellComponent<IUser> implements OnInit {
 
   model$: Observable<UserViewModel>;
-  groups$: Observable<Group[]>;
+  groups$: Observable<IGroup[]>;
   employees$: Observable<Employee[]>;
   changePasswordError$: Observable<ApiError>;
   showPasswordForm$: Observable<boolean>;

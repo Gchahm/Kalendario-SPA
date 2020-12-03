@@ -11,7 +11,7 @@ export {Customer, ICustomerWriteModel, CustomerAdapter} from './Customer';
 export {Service, IServiceWriteModel, ServiceAdapter} from './Service';
 export {SchedulingPanel, ISchedulingPanelWriteModel, SchedulingPanelAdapter, PanelManager} from './SchedulingPanel';
 export {ServiceCategory, IServiceCategoryWriteModel, ServiceCategoryAdapter} from './ServiceCategory';
-export {Group, IGroupWriteModel, GroupAdapter} from './Group';
+export {Group, IGroup, IGroupWriteModel, GroupAdapter} from './IGroup';
 export {Permission, IPermissionWriteModel, PermissionAdapter} from './Permission';
 export {User, IUser, IUserWriteModel, UserAdapter} from './IUser';
 export {Slot, SlotAdapter} from './Slot';
