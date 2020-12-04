@@ -3,7 +3,7 @@ import {Moment} from 'moment';
 import {Observable} from 'rxjs';
 
 import {Slot} from '@app/admin-scheduling/models/Slot';
-import {IAppointment, IEmployee, Schedule} from '@api/models';
+import {IAppointment, IEmployee, ISchedule} from '@api/models';
 
 import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 
@@ -21,7 +21,7 @@ import {TimeOfDay} from '@api/models/TimeOfDay';
 export class SchedulingPanelShellComponent implements OnInit {
 
   @Input() employee: IEmployee;
-  @Input() schedule: Schedule;
+  @Input() schedule: ISchedule;
   @Input() date: Moment;
   @Input() showCalendarHours: boolean;
 

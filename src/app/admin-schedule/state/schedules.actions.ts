@@ -1,14 +1,14 @@
 import {BaseEntityActions, createActions} from '@shared/state/base/actions';
-import {Schedule} from '@api/models';
+import {ISchedule} from '@api/models';
 
 
 export const storeName = 'adminSchedules';
 
 
-interface SchedulesActions extends BaseEntityActions<Schedule> {
+interface SchedulesActions extends BaseEntityActions<ISchedule> {
 }
 
 
 export const actions: SchedulesActions = {
-  ...createActions<Schedule>(storeName),
+  ...createActions<ISchedule>(storeName),
 };

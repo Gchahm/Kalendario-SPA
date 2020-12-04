@@ -8,7 +8,7 @@ import {storeName} from './scheduling.actions';
 import {IAppointment, IEmployee} from '@api/models';
 import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 import {Slot} from '@app/admin-scheduling/models/Slot';
-import {getShift} from '@api/models/Schedule';
+import {getShift} from '@api/models/ISchedule';
 
 export {State, reducer} from './scheduling.reducer';
 export {actions, storeName} from './scheduling.actions';

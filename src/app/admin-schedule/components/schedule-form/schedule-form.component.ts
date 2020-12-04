@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BaseFormComponent} from '@shared/common/BaseFormComponent';
-import {IScheduleWriteModel, Schedule, TimeFrame} from '@api/models';
+import {IScheduleWriteModel, ISchedule, TimeFrame} from '@api/models';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -8,7 +8,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
   templateUrl: './schedule-form.component.html',
   styleUrls: ['./schedule-form.component.scss']
 })
-export class ScheduleFormComponent extends BaseFormComponent<Schedule> implements OnInit {
+export class ScheduleFormComponent extends BaseFormComponent<ISchedule> implements OnInit {
   @Input() isTablet: boolean;
 
   constructor(public fb: FormBuilder) {

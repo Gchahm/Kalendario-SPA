@@ -1,4 +1,3 @@
-import {IReadModel} from './IReadModel';
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {TimeOfDay} from './TimeOfDay';
@@ -15,12 +14,12 @@ export class TimeFrame {
   }
 }
 
-export class Shift  {
+export class Shift implements IShift {
   static modelType = 'shift';
-  frames: TimeFrame[] = [];
+  frames: TimeFrame[];
   name: string;
 
-  static fromJs(data: any): Shift {
+  static fromJs(data?: any): IShift {
     if (data === null) {
       return null;
     }
@@ -31,11 +30,14 @@ export class Shift  {
   }
 
   init(data: any) {
-    if (data) {
-      this.frames = data.frames.map(f => new TimeFrame(f.start, f.end));
-      this.name = this.frames.length > 0 ? this.frames.map(f => f.name).reduce(((p, c) => p + c)) : '';
-    }
+    this.frames = data.frames ? data.frames.map(f => new TimeFrame(f.start, f.end)) : [];
+    this.name = this.frames.length > 0 ? this.frames.map(f => f.name).reduce(((p, c) => p + c)) : '';
   }
+}
+
+export interface IShift {
+  frames: TimeFrame[];
+  name: string;
 }
 
 export interface IShiftWriteModel {
@@ -47,8 +49,8 @@ export interface IShiftWriteModel {
 @Injectable({
   providedIn: 'root'
 })
-export class ShiftAdapter implements Adapter<Shift> {
-  adapt(data: any): Shift {
+export class ShiftAdapter implements Adapter<IShift> {
+  adapt(data: any): IShift {
     return data === null ? null : Shift.fromJs(data);
   }
 }

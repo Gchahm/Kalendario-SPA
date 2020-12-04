@@ -1,18 +1,18 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {Schedule, ScheduleAdapter} from '@api/models';
+import {ISchedule, ScheduleAdapter} from '@api/models';
 import {actions} from './schedules.actions';
 
 
-export interface State extends BaseEntityState<Schedule> {
+export interface State extends BaseEntityState<ISchedule> {
 }
 
 
 const initialState: State = {
-  ...baseInitialState<Schedule>(),
+  ...baseInitialState<ISchedule>(),
 };
 
 
-export const adapter = createBaseAdapter<Schedule>(new ScheduleAdapter());
+export const adapter = createBaseAdapter<ISchedule>(new ScheduleAdapter());
 
 
-export const reducer = createBaseReducer<Schedule>(initialState, adapter, actions);
+export const reducer = createBaseReducer<ISchedule>(initialState, adapter, actions);

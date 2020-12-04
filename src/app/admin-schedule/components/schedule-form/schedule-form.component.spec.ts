@@ -22,7 +22,7 @@ describe('ScheduleFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ScheduleFormComponent);
     component = fixture.componentInstance;
-    component.model = new Schedule();
+    component.model = Schedule.fromJs();
     fixture.detectChanges();
   });
 

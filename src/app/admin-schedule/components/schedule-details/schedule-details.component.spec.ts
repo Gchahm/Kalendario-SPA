@@ -17,7 +17,7 @@ describe('ScheduleDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ScheduleDetailsComponent);
     component = fixture.componentInstance;
-    component.model = new Schedule();
+    component.model = Schedule.fromJs();
     fixture.detectChanges();
   });
 

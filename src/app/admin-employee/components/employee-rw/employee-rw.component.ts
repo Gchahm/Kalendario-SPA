@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {BaseRWComponent} from '@shared/common/BaseRWComponent';
 import {EmployeeViewModel} from '@app/admin-employee/state';
-import {EmployeeWriteModel, Schedule} from '@api/models';
+import {EmployeeWriteModel, ISchedule} from '@api/models';
 import {CheckChanged} from '@admin/components/_form/CheckBoxForm';
 import {ServiceFullModel} from '@app/admin-services/state';
 
@@ -12,7 +12,7 @@ import {ServiceFullModel} from '@app/admin-services/state';
 })
 export class EmployeeRwComponent extends BaseRWComponent<EmployeeViewModel> {
   @Input() services: ServiceFullModel[];
-  @Input() schedules: Schedule[];
+  @Input() schedules: ISchedule[];
 
   writeModel(): EmployeeWriteModel {
     return {...this.model};

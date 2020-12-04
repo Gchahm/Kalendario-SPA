@@ -5,9 +5,10 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatDialogMock} from '@shared/test/stubs';
 import {MatMenuModule} from '@angular/material/menu';
 import * as moment from 'moment';
-import {IEmployee, Schedule} from '@api/models';
+import {Employee, IEmployee, ISchedule} from '@api/models';
 import {AppointmentAdminClient} from '@api/clients';
 import {ModelViewSetClientMock} from '@api/testing';
+import {Schedule} from '@api/models/ISchedule';
 
 describe('SchedulingPanelComponent', () => {
   let component: SchedulingPanelShellComponent;
@@ -30,8 +31,7 @@ describe('SchedulingPanelComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SchedulingPanelShellComponent);
     component = fixture.componentInstance;
-    component.employee = new IEmployee();
-    component.currentDate = moment.utc();
+    component.employee = new Employee();
     component.schedule = new Schedule();
     fixture.detectChanges();
   });

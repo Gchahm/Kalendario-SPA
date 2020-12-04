@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 import {ViewShellComponent} from '@shared/common/ViewShellComponent';
-import {IEmployee, Schedule} from '@api/models';
+import {IEmployee, ISchedule} from '@api/models';
 import * as fromEmployees from '@app/admin-employee/state';
 import * as fromServices from '@app/admin-services/state';
 import * as fromServiceCategories from '@app/admin-services/state/categories';
@@ -18,7 +18,7 @@ import * as fromSchedules from '@app/admin-schedule/state';
 export class EmployeeViewShellComponent extends ViewShellComponent<IEmployee> implements OnInit {
   fullModel$: Observable<fromEmployees.EmployeeViewModel>;
   services$: Observable<fromServices.ServiceFullModel[]>;
-  schedules$: Observable<Schedule[]>;
+  schedules$: Observable<ISchedule[]>;
 
   constructor(protected store: Store<State>) {
     super(store, fromEmployees.actions, fromEmployees.selectors);

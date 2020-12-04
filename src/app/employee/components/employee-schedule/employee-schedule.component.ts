@@ -4,7 +4,7 @@ import {IAppointment} from '@api/models';
 import * as moment from 'moment';
 import {ModelPermissions} from '@api/permissions';
 import {IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
-import {getShift} from '@api/models/Schedule';
+import {getShift} from '@api/models/ISchedule';
 
 @Component({
   selector: 'employee-schedule',

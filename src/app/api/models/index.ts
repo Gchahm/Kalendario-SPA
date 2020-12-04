@@ -1,6 +1,6 @@
 export {Appointment, IAppointment, IAppointmentWriteModel, AppointmentAdapter} from './Appointment';
-export {Schedule, IScheduleWriteModel, ScheduleAdapter} from './Schedule';
-export {Shift, IShiftWriteModel, ShiftAdapter, TimeFrame} from './Shift';
+export {Schedule, ISchedule, IScheduleWriteModel, ScheduleAdapter} from './ISchedule';
+export {IShift, IShiftWriteModel, ShiftAdapter, TimeFrame} from './IShift';
 export {CompanyConfig, IConfigWriteModel, ConfigAdapter} from './CompanyConfig';
 export {Company, ICompanyWriteModel, CompanyAdapter} from './Company';
 export {CompanyStripeDetails, CompanyStripeDetailsAdapter} from './CompanyStripeDetails';

@@ -2,7 +2,7 @@ import {environment} from '../../../environments/environment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {Person} from './IPerson';
-import {Schedule} from './Schedule';
+import {ISchedule, Schedule} from './ISchedule';
 import {Service} from './Service';
 
 export class EmployeeDashboardModel extends Person {
@@ -13,7 +13,7 @@ export class EmployeeDashboardModel extends Person {
   name: string;
   email: string;
   phone: string;
-  schedule: Schedule;
+  schedule: ISchedule;
   instagram: string;
   photoUrl: string;
   bio: string;

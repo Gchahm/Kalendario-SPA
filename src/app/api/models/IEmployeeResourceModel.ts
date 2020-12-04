@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
-import {Service} from '@api/models/Service';
-import {Schedule} from '@api/models/Schedule';
+import {Service} from './Service';
+import {ISchedule, Schedule} from './ISchedule';
 import {Employee, IEmployee} from './IEmployee';
 
 export class EmployeeResourceModel extends Employee implements IEmployeeResourceModel {
-  scheduleModel: Schedule;
+  scheduleModel: ISchedule;
   serviceModels: Service[];
 
   static fromJs(data: any): IEmployeeResourceModel {
@@ -24,7 +24,7 @@ export class EmployeeResourceModel extends Employee implements IEmployeeResource
 }
 
 export interface IEmployeeResourceModel extends IEmployee {
-  scheduleModel: Schedule;
+  scheduleModel: ISchedule;
   serviceModels: Service[];
 }
 

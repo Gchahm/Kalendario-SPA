@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector, MemoizedSelector} from '@ngrx/store';
-import {Employee, IEmployee, Schedule, Service} from '@api/models';
+import {Employee, IEmployee, ISchedule, Service} from '@api/models';
 
 import * as fromReducer from './employees.reducer';
 import * as fromServices from '@app/admin-services/state';
@@ -10,7 +10,7 @@ export {State, reducer} from './employees.reducer';
 export {actions, storeName} from './employees.actions';
 
 export interface EmployeeViewModel extends IEmployee {
-  scheduleModel: Schedule;
+  scheduleModel: ISchedule;
   serviceModels: Service[];
 }
 
