@@ -16,11 +16,13 @@ export class ModelListContainerComponent {
   @Input() categorizedList: { [key: string]: IReadModel[] };
   @Input() selectedModel: IReadModel;
   @Input() editMode: boolean;
+  @Input() noSelectionTitle = 'Nothing selected';
+  @Input() noSelectionText = 'Please select an item from the list to the left to start browsing.';
 
   searchVal: string;
   @Input() set searchValue(value: string) {
     this.searchVal = value;
-  };
+  }
 
   @Output() create = new EventEmitter();
   @Output() delete = new EventEmitter<IReadModel>();
@@ -34,6 +36,10 @@ export class ModelListContainerComponent {
   hiddenCategories: string[] = [];
 
   constructor(public alerter: AlerterService) {
+  }
+
+  get showContent(): boolean {
+    return (this.selectedModel && this.selectedModel.id > 0) || this.editMode;
   }
 
   categories(): string[] {
