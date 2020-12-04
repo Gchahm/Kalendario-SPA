@@ -31,12 +31,12 @@ export class CompanyAdminClient extends ModelViewSetClient<Company, object> {
   uploadProfilePicture(id: number, file: File): Observable<Company> {
     const formData = new FormData();
     formData.append('image', file);
-    return this.http.post<Company>(this.baseUrl + id + '/photo/', formData)
+    return this.http.patch<Company>(this.baseUrl + id + '/photo/', formData)
       .pipe(map(this.adapter.adapt));
   }
 
   stripeUrl(id: number): Observable<{ url: string }> {
-    return this.http.post<{url: string}>(this.baseUrl + id + '/stripe/', {});
+    return this.http.patch<{url: string}>(this.baseUrl + id + '/stripe/', {});
   }
 
   stripeDetails(id: number): Observable<CompanyStripeDetails> {
