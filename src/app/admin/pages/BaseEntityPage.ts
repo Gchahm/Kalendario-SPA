@@ -7,8 +7,9 @@ import {IReadModel} from '@api/models';
 import {BaseEntityActions} from '@shared/state/base/actions';
 import {BaseEntitySelectors} from '@shared/state/base/selectors';
 import {Params} from '@api/clients/ModelViewSetClient';
+import {OnDestroy} from '@angular/core';
 
-export class BaseEntityPage<M extends IReadModel> extends BaseContainer {
+export class BaseEntityPage<M extends IReadModel> extends BaseContainer implements OnDestroy {
 
   editMode$: Observable<boolean>;
   initialized$: Observable<boolean>;
@@ -30,6 +31,10 @@ export class BaseEntityPage<M extends IReadModel> extends BaseContainer {
     this.initialized$ = this.store.select(selectors.getIsInitialized);
     this.apiError$ = this.store.select(selectors.getApiError);
     this.searchValue$ = this.store.select(selectors.getSearchValue);
+  }
+
+  ngOnDestroy() {
+    this.toggleEdit(false);
   }
 
   modelSelected(model: M): void {
