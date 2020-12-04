@@ -3,14 +3,22 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ServiceSlot} from '@company/state';
 import {Service} from '@api/models';
-import {fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, flipInYOnEnterAnimation} from 'angular-animations';
+import {
+  bounceInLeftAnimation,
+  bounceInRightAnimation,
+  bounceInRightOnEnterAnimation, bounceOutLeftAnimation,
+  fadeInOnEnterAnimation,
+  fadeOutOnLeaveAnimation,
+} from 'angular-animations';
 
 @Component({
   selector: 'company-slots-for-service',
   templateUrl: './slots-for-service.component.html',
   styleUrls: ['./slots-for-service.component.scss'],
   animations: [
-    flipInYOnEnterAnimation(),
+    bounceInRightAnimation(),
+    bounceInLeftAnimation(),
+    bounceInRightOnEnterAnimation(),
     fadeInOnEnterAnimation({delay: 500}),
     fadeOutOnLeaveAnimation({duration: 300})
   ]
@@ -30,7 +38,15 @@ export class SlotsForServiceComponent {
     this.nextDayFormatted = this.nextDate.format('ddd DD/MM/YYYY');
   }
 
-  @Input() service: Service;
+  private _service: Service;
+  @Input() set service(service: Service) {
+    this._service = service;
+    this.serviceAnimationState = !this.serviceAnimationState;
+  }
+
+  get service(): Service {
+    return this._service;
+  }
 
   @Output() dateChange = new EventEmitter<Moment>();
   @Output() book = new EventEmitter<void>();
@@ -40,6 +56,7 @@ export class SlotsForServiceComponent {
   currentDateFormatted: string;
   nextDayFormatted: string;
   disabledTooltip = 'remove items from cart to update the date';
+  serviceAnimationState: boolean;
 
   today() {
     this.dateChange.emit(moment.utc());

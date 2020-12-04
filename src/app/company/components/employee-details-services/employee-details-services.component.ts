@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Service} from '@api/models';
-import {animate, keyframes, query, stagger, style, transition, trigger} from '@angular/animations';
 import {staggeredFadeInAnimation} from '@app/animations';
 
 @Component({

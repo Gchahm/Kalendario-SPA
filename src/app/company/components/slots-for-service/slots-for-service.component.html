@@ -43,8 +43,10 @@
     <div class="row no-gutters text-center pretty-scroll">
 
       <div class="col-12 c-accent pb-3 mb-0 sticky-top bg-white">
-        <h5 @flipInYOnEnter *ngIf="service && !isLoading">
-          {{service.name}}
+        <h5 [@bounceInRight]="serviceAnimationState">
+          <div [@bounceInRight]="!serviceAnimationState">
+            {{service?.name}}
+          </div>
         </h5>
       </div>
       <div class="col-6 pb-3 sticky-top-3 bg-white">
