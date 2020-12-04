@@ -1,5 +1,5 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {IAppointment, Employee, Appointment, AppointmentAdapter} from '@api/models';
+import {IAppointment, IEmployee, Appointment, AppointmentAdapter} from '@api/models';
 import {actions} from './appointments.actions';
 import {on} from '@ngrx/store';
 import {Moment} from 'moment';
@@ -13,7 +13,7 @@ export enum AppointmentType {
 
 
 export interface State extends BaseEntityState<IAppointment> {
-  initialize: { type: string, employee: Employee, date: Moment };
+  initialize: { type: string, employee: IEmployee, date: Moment };
   currentAppointmentHistory: IAppointmentHistory[];
   currentDate: string;
   historyApiError: ApiError;

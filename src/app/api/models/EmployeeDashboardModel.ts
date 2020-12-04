@@ -1,9 +1,9 @@
+import {environment} from '../../../environments/environment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
-import {Person} from '@api/models/Person';
-import {environment} from '../../../environments/environment';
-import {Schedule} from '@api/models/Schedule';
-import {Service} from '@api/models/Service';
+import {Person} from './IPerson';
+import {Schedule} from './Schedule';
+import {Service} from './Service';
 
 export class EmployeeDashboardModel extends Person {
   static modelType = 'employee';

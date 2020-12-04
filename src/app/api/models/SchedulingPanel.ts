@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {IReadModel} from '@api/models/IReadModel';
-import {Employee} from '@api/models/Employee';
+import {IEmployee} from './IEmployee';
 
 export class PanelManager {
   /** Returns a new panel instance with the id provided added to the employees list */

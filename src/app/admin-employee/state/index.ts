@@ -1,5 +1,5 @@
 import {createFeatureSelector, createSelector, MemoizedSelector} from '@ngrx/store';
-import {Employee, Schedule, Service} from '@api/models';
+import {Employee, IEmployee, Schedule, Service} from '@api/models';
 
 import * as fromReducer from './employees.reducer';
 import * as fromServices from '@app/admin-services/state';
@@ -9,7 +9,7 @@ import {storeName} from './employees.actions';
 export {State, reducer} from './employees.reducer';
 export {actions, storeName} from './employees.actions';
 
-export interface EmployeeViewModel extends Employee {
+export interface EmployeeViewModel extends IEmployee {
   scheduleModel: Schedule;
   serviceModels: Service[];
 }
@@ -26,7 +26,7 @@ const getViewModel: MemoizedSelector<object, EmployeeViewModel> = createSelector
   baseSelectors.getCurrentId,
   (employees, schedules, serviceList, currentEmpId) => {
     if (currentEmpId === 0) {
-      return {...Employee.fromJs({}), scheduleModel: undefined, serviceModels: undefined};
+      return {...Employee.fromJs(), scheduleModel: undefined, serviceModels: undefined};
     }
     const employee = !!currentEmpId && !!employees ? employees.find(emp => emp.id === currentEmpId) : null;
     const scheduleModel = !!schedules && !!employee ? schedules.find(schedule => schedule.id === employee.schedule) : null;

@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {CustomerFormComponent} from './customer-form.component';
 import {ModelViewSetClientMock} from '@api/testing';
 import {CustomerAdminClient} from '@api/clients';
-import {Customer} from '@api/models';
+import {Customer, ICustomer} from '@api/models';
 
 describe('CustomerFormComponent', () => {
   let component: CustomerFormComponent;
@@ -21,7 +21,7 @@ describe('CustomerFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CustomerFormComponent);
     component = fixture.componentInstance;
-    component.model = new Customer();
+    component.model = Customer.fromJs();
     fixture.detectChanges();
   });
 

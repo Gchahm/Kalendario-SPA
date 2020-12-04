@@ -5,7 +5,7 @@ import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromSchedule from '@app/admin-schedule/state';
 
 import {storeName} from './scheduling.actions';
-import {IAppointment, Employee} from '@api/models';
+import {IAppointment, IEmployee} from '@api/models';
 import {CalendarEvent} from '@app/admin-scheduling/models/CalendarEvent';
 import {Slot} from '@app/admin-scheduling/models/Slot';
 import {getShift} from '@api/models/Schedule';
@@ -15,7 +15,7 @@ export {actions, storeName} from './scheduling.actions';
 
 
 export interface ToolbarEmployee {
-  employee: Employee;
+  employee: IEmployee;
   isSelected: boolean;
 }
 

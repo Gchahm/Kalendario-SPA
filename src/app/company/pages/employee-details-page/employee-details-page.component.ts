@@ -5,7 +5,7 @@ import {BaseContainer} from '@app/containers/BaseContainer';
 import {Observable} from 'rxjs';
 
 import * as fromCompany from '@company/state';
-import {Employee} from '@api/models';
+import {IEmployee} from '@api/models';
 
 @Component({
   selector: 'company-employee-details-page',
@@ -15,7 +15,7 @@ import {Employee} from '@api/models';
 })
 export class EmployeeDetailsPageComponent extends BaseContainer implements OnInit, OnDestroy {
 
-  model$: Observable<Employee>;
+  model$: Observable<IEmployee>;
   companyName$: Observable<string>;
 
   constructor(protected store: Store<fromCompany.State>,

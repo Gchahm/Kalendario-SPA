@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Employee} from '@api/models';
+import {IEmployee} from '@api/models';
 import {Moment} from 'moment';
 
 @Component({
@@ -8,11 +8,11 @@ import {Moment} from 'moment';
   styleUrls: ['./scheduling-page-content.component.css']
 })
 export class SchedulingPageContentComponent {
-  @Input() employees: Employee[];
+  @Input() employees: IEmployee[];
   @Input() date: Moment;
-  @Output() close = new EventEmitter<Employee>();
+  @Output() close = new EventEmitter<IEmployee>();
 
-  emitClose(employee: Employee) {
+  emitClose(employee: IEmployee) {
     this.close.emit(employee);
   }
 }

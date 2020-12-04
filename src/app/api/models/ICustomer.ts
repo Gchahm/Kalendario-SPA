@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
-import {Person} from './Person';
+import {IPerson, Person} from './IPerson';
 import {PermissionModels} from '@api/permissions';
 
-export class Customer extends Person {
+export class Customer extends Person implements ICustomer {
   static modelType = PermissionModels.customer;
 
-  static fromJs(data: any): Customer {
+  static fromJs(data?: any): ICustomer {
     data = typeof data === 'object' ? data : {};
     const result = new Customer();
     result.init(data);
@@ -14,15 +14,12 @@ export class Customer extends Person {
   }
 
   init(data: any) {
-    if (data) {
-      this.id = data.id;
-      this.firstName = data.firstName;
-      this.lastName = data.lastName;
-      this.name = data.name;
-      this.email = data.email;
-      this.phone = data.phone;
-    }
+    super.init(data);
   }
+}
+
+// tslint:disable-next-line:no-empty-interface
+export interface ICustomer extends IPerson {
 }
 
 export interface ICustomerWriteModel {
@@ -36,8 +33,8 @@ export interface ICustomerWriteModel {
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerAdapter implements Adapter<Customer> {
-  adapt(data: any): Customer {
+export class CustomerAdapter implements Adapter<ICustomer> {
+  adapt(data: any): ICustomer {
     return Customer.fromJs(data);
   }
 }

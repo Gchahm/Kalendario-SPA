@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 import {ViewShellComponent} from '@shared/common/ViewShellComponent';
-import {Employee, Schedule} from '@api/models';
+import {IEmployee, Schedule} from '@api/models';
 import * as fromEmployees from '@app/admin-employee/state';
 import * as fromServices from '@app/admin-services/state';
 import * as fromServiceCategories from '@app/admin-services/state/categories';
@@ -15,7 +15,7 @@ import * as fromSchedules from '@app/admin-schedule/state';
   templateUrl: './employee-view-shell.component.html',
   styleUrls: ['./employee-view-shell.component.scss']
 })
-export class EmployeeViewShellComponent extends ViewShellComponent<Employee> implements OnInit {
+export class EmployeeViewShellComponent extends ViewShellComponent<IEmployee> implements OnInit {
   fullModel$: Observable<fromEmployees.EmployeeViewModel>;
   services$: Observable<fromServices.ServiceFullModel[]>;
   schedules$: Observable<Schedule[]>;

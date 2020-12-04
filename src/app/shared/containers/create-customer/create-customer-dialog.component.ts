@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {CustomerAdminClient} from '@api/clients';
-import {Customer} from '@api/models';
+import {Customer, ICustomer} from '@api/models';
 import {ApiError} from '@api/Errors';
 
 @Component({
@@ -11,7 +11,7 @@ import {ApiError} from '@api/Errors';
 })
 export class CreateCustomerDialogComponent implements OnInit {
 
-  model: Customer;
+  model: ICustomer;
   error: ApiError;
 
   constructor(private dialogRef: MatDialogRef<CreateCustomerDialogComponent>,
@@ -19,7 +19,7 @@ export class CreateCustomerDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model = new Customer();
+    this.model = Customer.fromJs();
   }
 
   saveModel(customer) {

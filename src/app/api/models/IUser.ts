@@ -1,8 +1,8 @@
 import {Adapter} from '@api/adapter';
 import {Injectable} from '@angular/core';
-import {Person} from './Person';
+import {IPerson, Person} from './IPerson';
 import {Company} from './Company';
-import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
+import {EmployeeResourceModel, IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 import {getApp, PermissionModels} from '@api/permissions';
 import {IReadModel} from '@api/models/IReadModel';
 
@@ -17,9 +17,9 @@ export class User implements IUser {
   lastName: string;
   name: string;
   email: string;
-  employee: EmployeeResourceModel;
+  employee: IEmployeeResourceModel;
   employeeId: number;
-  person: Person;
+  person: IPerson;
   groups: number[] = [];
   permissions: string[] = [];
   company: Company;
@@ -54,9 +54,9 @@ export interface IUser extends IReadModel {
   firstName: string;
   lastName: string;
   email: string;
-  employee: EmployeeResourceModel;
+  employee: IEmployeeResourceModel;
   employeeId: number;
-  person: Person;
+  person: IPerson;
   groups: number[];
   permissions: string[];
   company: Company;

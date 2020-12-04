@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IAppointment} from '@api/models';
-import {Customer, Employee, Service} from '@api/models';
+import {ICustomer, IEmployee, Service} from '@api/models';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {AppointmentQueryParams} from '@api/queryParams';
@@ -13,17 +13,17 @@ import {AppointmentQueryParams} from '@api/queryParams';
 export class CustomerAppointmentsTableComponent implements OnInit {
 
   @Input() services: Service[];
-  @Input() employees: Employee[];
+  @Input() employees: IEmployee[];
 
-  private _customer: Customer;
-  @Input() set customer(value: Customer) {
+  private _customer: ICustomer;
+  @Input() set customer(value: ICustomer) {
     this._customer = value;
     if (this.init) {
       this.emitFilterChange();
     }
   }
 
-  get customer(): Customer {
+  get customer(): ICustomer {
     return this._customer;
   }
 

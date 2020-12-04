@@ -2,7 +2,7 @@ import {Component, DoCheck, Input, OnDestroy, Optional, Self} from '@angular/cor
 import {AbstractControl, ControlValueAccessor, FormControl, FormGroup, NgControl, Validators} from '@angular/forms';
 import {interval, Observable, Subject, Subscription} from 'rxjs';
 import {debounce, debounceTime, filter, map, switchMap, tap} from 'rxjs/operators';
-import {Customer} from '@api/models';
+import {ICustomer} from '@api/models';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 import * as fromCustomers from '@app/admin-customers/state';
@@ -19,8 +19,8 @@ export class CustomerInputComponent implements ControlValueAccessor, DoCheck, On
   form: FormGroup;
   stateChanges = new Subject<void>();
 
-  customer$: Observable<Customer>;
-  customers$: Observable<Customer[]>;
+  customer$: Observable<ICustomer>;
+  customers$: Observable<ICustomer[]>;
   isLoading = false;
 
   @Input()
@@ -105,7 +105,7 @@ export class CustomerInputComponent implements ControlValueAccessor, DoCheck, On
     }
   }
 
-  selected(customer: Customer) {
+  selected(customer: ICustomer) {
     this.form.patchValue({
       id: customer.id,
     });

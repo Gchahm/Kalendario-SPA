@@ -3,12 +3,12 @@ import {Adapter} from '../adapter';
 import {IReadModel} from './IReadModel';
 import {Appointment, IAppointment} from './Appointment';
 import {Moment} from 'moment';
-import {Employee} from '@api/models/Employee';
+import {IEmployee} from './IEmployee';
 import {Company} from '@api/models/Company';
-import {Person} from '@api/models/Person';
+import {IPerson, Person} from '@api/models/IPerson';
 
 export interface RequestItem {
-  employee: Employee;
+  employee: IEmployee;
   appointments: IAppointment[];
 }
 
@@ -25,7 +25,7 @@ export class RequestModel implements IReadModel {
   fee: number;
   complete: boolean;
   status: string;
-  person: Person;
+  person: IPerson;
 
   static fromJS(data: any): RequestModel {
     data = typeof data === 'object' ? data : {};

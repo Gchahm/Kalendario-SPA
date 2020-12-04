@@ -1,10 +1,10 @@
-import {Employee} from './Employee';
+import {Employee, IEmployee} from './IEmployee';
 import {Service} from './Service';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
-import {Person} from './Person';
+import {IPerson, Person} from './IPerson';
 import {IReadModel} from './IReadModel';
 import {PermissionModels} from '@api/permissions';
 
@@ -15,9 +15,9 @@ export class Appointment implements IReadModel {
   request: number;
   name;
   companyName;
-  customer = new Person();
-  employee = new Employee();
-  service = new Service();
+  customer;
+  employee;
+  service;
   lockEmployee: boolean;
   status;
   start: Moment;
@@ -53,8 +53,8 @@ export class Appointment implements IReadModel {
 export interface IAppointment extends IReadModel {
   request: number;
   companyName;
-  customer: Person;
-  employee: Employee;
+  customer: IPerson;
+  employee: IEmployee;
   service: Service;
   lockEmployee: boolean;
   status;

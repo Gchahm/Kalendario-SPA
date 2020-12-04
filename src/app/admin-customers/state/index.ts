@@ -4,14 +4,14 @@ import * as fromReducer from './customers.reducer';
 import * as fromAppointments from '@app/admin-appointments/state';
 
 import {storeName} from './customers.actions';
-import {Customer} from '@api/models';
+import {ICustomer} from '@api/models';
 
 export {State, reducer} from './customers.reducer';
 export {actions, storeName} from './customers.actions';
 
 const getFeature = createFeatureSelector<fromReducer.State>(storeName);
 
-function customerFilter(m: Customer, s: string) {
+function customerFilter(m: ICustomer, s: string) {
   const sLower = s.toLowerCase();
   return m.name.toLowerCase().includes(sLower) ||
     m.phone.toLowerCase().includes(sLower) ||

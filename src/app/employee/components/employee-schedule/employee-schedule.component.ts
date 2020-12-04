@@ -3,7 +3,7 @@ import {Moment} from 'moment';
 import {IAppointment} from '@api/models';
 import * as moment from 'moment';
 import {ModelPermissions} from '@api/permissions';
-import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
+import {IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 import {getShift} from '@api/models/Schedule';
 
 @Component({
@@ -17,7 +17,7 @@ export class EmployeeScheduleComponent {
   @Input() endDate: Moment;
   @Input() appointments: IAppointment[];
   @Input() permissions: ModelPermissions;
-  @Input() employee: EmployeeResourceModel;
+  @Input() employee: IEmployeeResourceModel;
 
   @Output() updateCurrent = new EventEmitter<Moment>();
   @Output() add = new EventEmitter<Moment>();

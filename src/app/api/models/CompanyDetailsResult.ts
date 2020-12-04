@@ -1,7 +1,7 @@
 import {IReadModel} from './IReadModel';
 import {Adapter} from '@api/adapter';
 import {Injectable} from '@angular/core';
-import {Employee} from './Employee';
+import {Employee, IEmployee} from './IEmployee';
 import {Service} from './Service';
 import {CompanyConfig} from '@api/models/CompanyConfig';
 import {ServiceCategory} from '@api/models/ServiceCategory';
@@ -14,7 +14,7 @@ export class CompanyDetailsResult implements IReadModel {
   address: string;
   avatar: string;
   about: string;
-  employees: Employee[];
+  employees: IEmployee[];
   services: Service[];
   serviceCategories: ServiceCategory[];
   config: CompanyConfig;
@@ -26,7 +26,8 @@ export class CompanyDetailsResult implements IReadModel {
     return result;
   }
 
-  writeModel(){}
+  writeModel() {
+  }
 
   init(data: any) {
     if (data) {

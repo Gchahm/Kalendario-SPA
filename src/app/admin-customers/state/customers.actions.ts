@@ -1,15 +1,15 @@
 import {BaseEntityActions, createActions} from '@shared/state/base/actions';
-import {Customer} from '@api/models';
+import {ICustomer} from '@api/models';
 
 
 
 export const storeName = 'adminCustomers';
 
 
-interface CustomersActions extends BaseEntityActions<Customer> {
+interface CustomersActions extends BaseEntityActions<ICustomer> {
 }
 
 
 export const actions: CustomersActions = {
-  ...createActions<Customer>(storeName),
+  ...createActions<ICustomer>(storeName),
 };

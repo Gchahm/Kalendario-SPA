@@ -2,14 +2,14 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {IAppointment, Employee, Appointment} from '@api/models';
+import {IAppointment, IEmployee, Appointment} from '@api/models';
 import {Store} from '@ngrx/store';
 import {AdminAppointmentParams} from '@api/clients/AppointmentAdminClient.service';
 import {map, switchMap} from 'rxjs/operators';
 
 
 import {ModelPermissions} from '@api/permissions';
-import {EmployeeResourceModel} from '@api/models/EmployeeResourceModel';
+import {IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 
 import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromCore from '@app/core/state';
@@ -25,7 +25,7 @@ export class EmployeeSchedulePageComponent implements OnInit {
   currentDate$: Observable<Moment>;
   appointments$: Observable<IAppointment[]>;
   permissions$: Observable<ModelPermissions>;
-  employee$: Observable<EmployeeResourceModel>;
+  employee$: Observable<IEmployeeResourceModel>;
   startDate: Moment;
   endDate: Moment;
 
@@ -73,7 +73,7 @@ export class EmployeeSchedulePageComponent implements OnInit {
     this.store.dispatch(fromAppointments.actions.requestEntities({params}));
   }
 
-  openCreateDialog(date: Moment, employee: Employee) {
+  openCreateDialog(date: Moment, employee: IEmployee) {
     this.store.dispatch(fromAppointments.actions.openCreateAppointmentDialog({date, employee, employeeMode: true}));
   }
 }

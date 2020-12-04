@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Employee} from '@api/models';
+import {IEmployee} from '@api/models';
 
 @Component({
   selector: 'company-employee-details-card',
@@ -7,7 +7,7 @@ import {Employee} from '@api/models';
   styleUrls: ['./employee-details-card.component.css']
 })
 export class EmployeeDetailsCardComponent {
-  @Input() employee: Employee;
+  @Input() employee: IEmployee;
   @Input() companyName: string;
   // TODO: Implement details button
 }

@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {Moment} from 'moment';
-import {Employee, PanelManager, SchedulingPanel} from '@api/models';
+import {IEmployee, PanelManager, SchedulingPanel} from '@api/models';
 import {combineLatest, Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
@@ -26,7 +26,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> implements OnInit, OnDestroy {
 
   toolbarEmployees$: Observable<fromScheduling.ToolbarEmployee[]>;
-  selectedEmployees$: Observable<Employee[]>;
+  selectedEmployees$: Observable<IEmployee[]>;
   requestsCount$: Observable<number>;
   date$: Observable<Moment>;
 
@@ -82,7 +82,7 @@ export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> imp
     this.store.dispatch(fromAppointments.actions.requestEntities({params: {employees, from_date: fromDate, to_date: toDate}}));
   }
 
-  removeEmployee(panel: SchedulingPanel, employee: Employee) {
+  removeEmployee(panel: SchedulingPanel, employee: IEmployee) {
     this.updateModel(PanelManager.removeEmployee(panel, employee.id));
   }
 

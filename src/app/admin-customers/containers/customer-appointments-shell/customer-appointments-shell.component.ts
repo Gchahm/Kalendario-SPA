@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Service} from '@api/models/Service';
-import {Employee} from '@api/models/Employee';
+import {IEmployee} from '../../../api/models/IEmployee';
 import {IAppointment} from '@api/models';
 import {select, Store} from '@ngrx/store';
 import {State} from '@admin/state/admin.reducer';
-import {Customer} from '@api/models/Customer';
+import {ICustomer} from '@api/models/ICustomer';
 import {Observable} from 'rxjs';
 
 import * as fromAppointments from '@app/admin-appointments/state';
@@ -23,9 +23,9 @@ import {AppointmentQueryParams} from '@api/queryParams';
 export class CustomerAppointmentsShellComponent implements OnInit {
 
   appointments$: Observable<IAppointment[]>;
-  selectedCustomer$: Observable<Customer>;
+  selectedCustomer$: Observable<ICustomer>;
   services$: Observable<Service[]>;
-  employees$: Observable<Employee[]>;
+  employees$: Observable<IEmployee[]>;
 
   constructor(private store: Store<State>) { }
 

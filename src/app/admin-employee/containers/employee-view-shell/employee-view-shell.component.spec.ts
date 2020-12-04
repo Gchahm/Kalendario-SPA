@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {EmployeeViewShellComponent} from './employee-view-shell.component';
-import {Employee} from '@api/models';
+import {IEmployee} from '@api/models';
 
 describe('EmployeeDetailsComponent', () => {
   let component: EmployeeViewShellComponent;

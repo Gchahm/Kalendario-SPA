@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 
 import {EmployeeAdminClient} from '@api/clients';
-import {Employee} from '@api/models';
+import {IEmployee} from '@api/models';
 
 import {Action, Store} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
@@ -14,7 +14,7 @@ import {BaseEffects} from '@shared/state/base/effects';
 import {ImageSnippet} from '@shared/components/image-input/image-input.component';
 
 @Injectable()
-export class EmployeesEffects extends BaseEffects<Employee> {
+export class EmployeesEffects extends BaseEffects<IEmployee> {
   constructor(actions$: Actions,
               store: Store<fromEmployees.State>,
               private employeeAdminClient: EmployeeAdminClient) {

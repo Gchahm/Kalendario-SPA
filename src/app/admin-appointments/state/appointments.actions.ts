@@ -1,5 +1,5 @@
 import {BaseEntityActions, createActions} from '@shared/state/base/actions';
-import {IAppointment, Employee} from '@api/models';
+import {IAppointment, IEmployee} from '@api/models';
 import {ActionCreator, createAction, props} from '@ngrx/store';
 import {TypedAction} from '@ngrx/store/src/models';
 import {Moment} from 'moment';
@@ -19,20 +19,20 @@ interface AppointmentActions extends BaseEntityActions<IAppointment> {
   requestAppointmentHistory: ActionCreator<string, (props: {}) =>
     ({ id: number } & TypedAction<string>)>;
 
-  openCreateAppointmentDialog: ActionCreator<string, (props: { date: Moment, employee: Employee, employeeMode: boolean }) =>
-    ({ date: Moment, employee: Employee, employeeMode: boolean } & TypedAction<string>)>;
+  openCreateAppointmentDialog: ActionCreator<string, (props: { date: Moment, employee: IEmployee, employeeMode: boolean }) =>
+    ({ date: Moment, employee: IEmployee, employeeMode: boolean } & TypedAction<string>)>;
 
-  openCreateSelfAppointmentDialog: ActionCreator<string, (props: { date: Moment, employee: Employee }) =>
-    ({ date: Moment, employee: Employee } & TypedAction<string>)>;
+  openCreateSelfAppointmentDialog: ActionCreator<string, (props: { date: Moment, employee: IEmployee }) =>
+    ({ date: Moment, employee: IEmployee } & TypedAction<string>)>;
 
   openAppointmentEventDialog: ActionCreator<string, (props: { id: number, employeeMode: boolean }) =>
     ({ id: number, employeeMode: boolean } & TypedAction<string>)>;
 
-  initializeCurrentAppointment: ActionCreator<string, (props: { date: Moment, employee: Employee }) =>
-    ({ date: Moment, employee: Employee } & TypedAction<string>)>;
+  initializeCurrentAppointment: ActionCreator<string, (props: { date: Moment, employee: IEmployee }) =>
+    ({ date: Moment, employee: IEmployee } & TypedAction<string>)>;
 
-  initializeCurrentSelfAppointment: ActionCreator<string, (props: { date: Moment, employee: Employee }) =>
-    ({ date: Moment, employee: Employee } & TypedAction<string>)>;
+  initializeCurrentSelfAppointment: ActionCreator<string, (props: { date: Moment, employee: IEmployee }) =>
+    ({ date: Moment, employee: IEmployee } & TypedAction<string>)>;
 
   setAppointmentHistory: ActionCreator<string, (props: { appointments: IAppointment[] }) =>
     ({ appointments: IAppointment[] } & TypedAction<string>)>;
@@ -57,20 +57,20 @@ export const actions: AppointmentActions = {
     props<{ id: number }>()),
 
   openCreateAppointmentDialog: createAction(`[${storeName}] Open Create Appointment`,
-    props<{ date: Moment, employee: Employee, employeeMode: boolean }>()),
+    props<{ date: Moment, employee: IEmployee, employeeMode: boolean }>()),
 
   openCreateSelfAppointmentDialog: createAction(`[${storeName}] Open Create Self Appointment`,
-    props<{ date: Moment, employee: Employee }>()),
+    props<{ date: Moment, employee: IEmployee }>()),
 
   openAppointmentEventDialog: createAction(`[${storeName}] Open Appointment Event Dialog`,
     props<{ id: number, employeeMode: boolean }>()),
 
 
   initializeCurrentAppointment: createAction(`[${storeName}] Initialize Appointment`,
-    props<{ date: Moment, employee: Employee }>()),
+    props<{ date: Moment, employee: IEmployee }>()),
 
   initializeCurrentSelfAppointment: createAction(`[${storeName}] Initialize Self appointment`,
-    props<{ date: Moment, employee: Employee }>()),
+    props<{ date: Moment, employee: IEmployee }>()),
 
   setAppointmentHistory: createAction(`[${storeName}] Set Appointment History`,
     props<{ appointments: IAppointment[] }>()),

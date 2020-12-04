@@ -1,18 +1,18 @@
 import {BaseEntityState, baseInitialState, createBaseAdapter, createBaseReducer} from '@shared/state/base';
-import {Customer, CustomerAdapter} from '@api/models';
+import {ICustomer, CustomerAdapter} from '@api/models';
 import {actions} from './customers.actions';
 
 
-export interface State extends BaseEntityState<Customer> {
+export interface State extends BaseEntityState<ICustomer> {
 }
 
 
 const initialState: State = {
-  ...baseInitialState<Customer>(),
+  ...baseInitialState<ICustomer>(),
 };
 
 
-export const adapter = createBaseAdapter<Customer>(new CustomerAdapter());
+export const adapter = createBaseAdapter<ICustomer>(new CustomerAdapter());
 
 
-export const reducer = createBaseReducer<Customer>(initialState, adapter, actions);
+export const reducer = createBaseReducer<ICustomer>(initialState, adapter, actions);

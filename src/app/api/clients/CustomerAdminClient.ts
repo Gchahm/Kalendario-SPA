@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ModelViewSetClient} from '@api/clients/ModelViewSetClient';
-import {Customer, CustomerAdapter} from '@api/models';
+import {ICustomer, CustomerAdapter} from '@api/models';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerAdminClient extends ModelViewSetClient<Customer, CustomerAdminClientParams> {
+export class CustomerAdminClient extends ModelViewSetClient<ICustomer, CustomerAdminClientParams> {
   constructor(http: HttpClient,
               adapter: CustomerAdapter) {
     super(http, adapter, environment.apiUrl + 'admin/customers/');

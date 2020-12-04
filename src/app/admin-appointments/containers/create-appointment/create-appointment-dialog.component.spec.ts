@@ -4,12 +4,12 @@ import {CreateAppointmentDialogComponent} from './create-appointment-dialog.comp
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatDialogRefMock} from '@shared/test/stubs';
 import * as moment from 'moment';
-import {Employee} from '@api/models';
+import {IEmployee} from '@api/models';
 
 describe('CreateAppointmentDialogComponent', () => {
   let component: CreateAppointmentDialogComponent;
   let fixture: ComponentFixture<CreateAppointmentDialogComponent>;
-  const data = {employee: new Employee(), date: moment.utc(), type: ''};
+  const data = {employee: new IEmployee(), date: moment.utc(), type: ''};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

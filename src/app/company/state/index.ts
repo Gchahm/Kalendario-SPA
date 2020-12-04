@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector, MemoizedSelector} from '@ngrx/store';
 import * as fromCompany from './company.reducer';
-import {Service, Employee, IAppointment, Appointment} from '@api/models';
+import {Service, IEmployee, IAppointment, Appointment} from '@api/models';
 import {SlotsParams} from '@api/clients';
 import {Moment} from 'moment';
 import * as moment from 'moment';
@@ -63,7 +63,7 @@ export const getEmployees = createSelector(
 
 
 export interface CompanyEmployeeModel {
-  employee: Employee;
+  employee: IEmployee;
   services: Service[];
 }
 

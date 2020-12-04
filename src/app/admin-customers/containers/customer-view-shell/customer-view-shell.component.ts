@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import * as fromCustomers from '@app/admin-customers/state';
 import {ViewShellComponent} from '@shared/common/ViewShellComponent';
-import {Customer} from '@api/models';
+import {ICustomer} from '@api/models';
 import {Store} from '@ngrx/store';
 import {State} from '@admin/state';
 
@@ -11,9 +11,9 @@ import {State} from '@admin/state';
   templateUrl: './customer-view-shell.component.html',
   styleUrls: ['./customer-view-shell.component.css']
 })
-export class CustomerViewShellComponent extends ViewShellComponent<Customer> implements OnInit {
+export class CustomerViewShellComponent extends ViewShellComponent<ICustomer> implements OnInit {
 
-  model$: Observable<Customer>;
+  model$: Observable<ICustomer>;
 
   constructor(protected store: Store<State>) {
     super(store, fromCustomers.actions, fromCustomers.selectors);
