@@ -55,11 +55,9 @@
     </div>
   </div>
 
-
-
   <div *ngIf="showButtons">
-    <button [disabled]="!form.valid" class="btn btn-primary">confirm</button>
-    <button (click)="emitCancel()" class="btn btn-danger">cancel</button>
+    <button [disabled]="!form.valid" class="btn btn-admin btn-ksuccess mr-2">confirm</button>
+    <button (click)="emitCancel()" class="btn btn-admin btn-danger">cancel</button>
   </div>
 
 </form>
