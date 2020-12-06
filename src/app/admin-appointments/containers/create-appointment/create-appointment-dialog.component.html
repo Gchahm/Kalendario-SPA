@@ -11,6 +11,7 @@
   </ng-container>
   <ng-container *ngIf="(type$ | async) === appointmentType.self">
     <admin-self-appointment-form [model]="model"
+                                 [permissions]="permissions$ | async"
                                  [apiError]="apiError$ | async"
                                  (cancel)="closeDialog()"
                                  (create)="saveSelfAppointment($event)">

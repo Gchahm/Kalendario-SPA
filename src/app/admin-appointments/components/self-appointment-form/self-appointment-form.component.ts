@@ -1,10 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {BaseFormComponent} from '@shared/common/BaseFormComponent';
 import {IAppointment, IAppointmentWriteModel} from '@api/models';
 import {modelId} from '@api/models/IReadModel';
-import {FormControl} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {Moment} from 'moment';
+import {AppointmentPermissions} from '@api/permissions';
 
 @Component({
   selector: 'admin-self-appointment-form',
@@ -12,6 +10,8 @@ import {Moment} from 'moment';
   styleUrls: ['./self-appointment-form.component.scss']
 })
 export class SelfAppointmentFormComponent extends BaseFormComponent<IAppointment> {
+
+  @Input() permissions: AppointmentPermissions;
 
   writeModel(): IAppointmentWriteModel {
     return {

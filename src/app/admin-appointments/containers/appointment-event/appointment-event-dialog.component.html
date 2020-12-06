@@ -58,6 +58,7 @@
     </ng-container>
     <ng-container *ngIf="editMode">
       <admin-self-appointment-form [model]="appointment"
+                                   [permissions]="permissions$ | async"
                                    [apiError]="apiError$ | async"
                                    (cancel)="toggleEdit(false)"
                                    (update)="updateSelfAppointment($event)">
