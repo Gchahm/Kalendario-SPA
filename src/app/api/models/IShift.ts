@@ -20,9 +20,9 @@ export class Shift implements IShift {
   name: string;
 
   static fromJs(data?: any): IShift {
-    if (data === null) {
-      return null;
-    }
+    // if (data === null) {
+    //   return null;
+    // }
     data = typeof data === 'object' ? data : {};
     const result = new Shift();
     result.init(data);
@@ -30,7 +30,7 @@ export class Shift implements IShift {
   }
 
   init(data: any) {
-    this.frames = data.frames ? data.frames.map(f => new TimeFrame(f.start, f.end)) : [];
+    this.frames = data?.frames ? data.frames.map(f => new TimeFrame(f.start, f.end)) : [];
     this.name = this.frames.length > 0 ? this.frames.map(f => f.name).reduce(((p, c) => p + c)) : '';
   }
 }

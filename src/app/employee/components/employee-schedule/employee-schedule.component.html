@@ -27,16 +27,27 @@
       <hr/>
     </div>
     <div class="col-12 h5 text-center">
-      {{currentDate.format('dddd, DD MMMM YYYY')}}
+      <div class="c-pointer" (click)="dp.open()">
+        <i class="fa fa-calendar mr-2"></i>
+        {{currentDate.format('dddd, DD MMMM YYYY')}}
+      </div>
+      <div class="visually-hidden">
+        <input [ngModel]="currentDate"
+               (ngModelChange)="emitDate($event)"
+               [matDatepicker]="dp"
+               (click)="dp.open()">
+      </div>
+      <mat-datepicker #dp></mat-datepicker>
       <hr/>
       {{availability()}}
       <hr/>
-      <button *ngIf="permissions.add"
-              (click)="add.emit(currentDate)"
-              class="btn btn-primary">
-        New appointment
-      </button>
-      <hr/>
+      <ng-container *ngIf="permissions.add">
+        <button (click)="add.emit(currentDate)"
+                class="btn btn-primary">
+          New appointment
+        </button>
+        <hr/>
+      </ng-container>
     </div>
     <div class="col-12">
       <div class="pretty-scroll">
