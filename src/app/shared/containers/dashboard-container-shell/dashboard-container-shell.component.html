@@ -1,6 +1,7 @@
 <shared-dashboard-container [isMobile]="isMobile$ | async"
                             [user]="user$ | async"
                             [leftPaneOpen]="leftPaneOpen$ | async"
-                            [routes]="routes">
+                            [routes]="routes"
+                            (toggleShowLeftPane)="toggleShowLeftPane()">
   <ng-content></ng-content>
 </shared-dashboard-container>

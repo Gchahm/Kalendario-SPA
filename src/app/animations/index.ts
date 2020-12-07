@@ -38,3 +38,25 @@ export const expandCollapseAnimation = trigger('expandCollapse', [
     animate('0.4s ease-in')
   ])
 ]);
+
+export function expandCollapseDrawerAnimation(time = 0.4) {
+  return trigger('expandCollapse', [
+    state('0', style({
+      width: 0,
+      overflow: 'hidden'
+    })),
+
+    state('1', style({
+      width: '*',
+      overflow: 'hidden'
+    })),
+
+    transition('0 => 1', [
+      animate(`${time}s ease-out`)
+    ]),
+
+    transition('1 => 0', [
+      animate(`${time}s ease-in`)
+    ])
+  ]);
+}

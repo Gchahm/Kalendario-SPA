@@ -20,12 +20,14 @@ export class DashboardContainerShellComponent extends BaseContainer implements O
 
   ngOnInit(): void {
     this.store.dispatch(new fromCore.ToggleShowLeftPaneButton(true));
-    this.store.dispatch(new fromCore.ToggleLeftPane());
   }
 
   ngOnDestroy(): void {
     this.store.dispatch(new fromCore.ToggleShowLeftPaneButton(false));
   }
 
+  toggleShowLeftPane() {
+    this.store.dispatch(new fromCore.ToggleLeftPane());
+  }
 }
 
