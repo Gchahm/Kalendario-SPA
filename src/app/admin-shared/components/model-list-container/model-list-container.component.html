@@ -18,7 +18,9 @@
       <ng-container *ngTemplateOutlet="list"></ng-container>
     </mat-tab>
     <mat-tab label="Details">
-      <ng-container *ngTemplateOutlet="details"></ng-container>
+      <div class="p-4 vh-100">
+        <ng-container *ngTemplateOutlet="details"></ng-container>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </ng-template>
@@ -34,11 +36,13 @@
     <button class="btn btn-light" matTooltip="delete" (click)="onDelete()" [disabled]="!selectedModel">
       <i class="fa fa-trash c-warn"></i>
     </button>
-    <mat-form-field appearance="standard">
-      <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchChange()">
-    </mat-form-field>
+    <div>
+      <mat-form-field appearance="standard">
+        <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchChange()">
+      </mat-form-field>
+    </div>
   </div>
-  <div class="model-list pretty-scroll">
+  <div class="model-list pretty-scroll" [class.text-center]="mobileView">
 
     <div *ngIf="modelList" class="list-group">
       <button *ngFor="let model of modelList"
