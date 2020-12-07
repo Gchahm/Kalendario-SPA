@@ -74,7 +74,7 @@ export class SchedulingPageToolbarComponent {
 
   createPanel() {
     const dialogRef = this.dialog.open(TextInputDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: {message: 'type the name of the panel', label: 'name'}
     });
     dialogRef.afterClosed().subscribe(name => {
@@ -86,7 +86,7 @@ export class SchedulingPageToolbarComponent {
 
   editPanel() {
     const dialogRef = this.dialog.open(TextInputDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: {message: 'type the new name of the panel', result: this.currentPanel.name, label: 'name'}
     });
     dialogRef.afterClosed().subscribe(result => {

@@ -1,4 +1,4 @@
-<div class="scheduling-page-content-container pretty-scroll">
+<div *ngIf="showCalendar; else noEmployees" class="scheduling-page-content-container pretty-scroll">
   <div class="hours-container">
     <div class="scheduling-panel-heading"></div>
     <app-calendar-hours [date]="date"></app-calendar-hours>
@@ -11,3 +11,10 @@
   </admin-scheduling-panel-shell>
   <div class="scheduling-panel-heading w-100"></div>
 </div>
+
+<ng-template #noEmployees>
+  <div class="m-4">
+    <h3>No Employee Selected</h3>
+    <p>Use the <i class="fa fa-user-plus c-primary"></i> icon above to add employees this panel</p>
+  </div>
+</ng-template>

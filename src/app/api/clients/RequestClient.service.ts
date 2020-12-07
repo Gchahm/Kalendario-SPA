@@ -19,14 +19,14 @@ export class RequestClient extends ReadOnlyModelViewSetClient<RequestModel, Requ
 
   createAppointment(params: AddAppointmentWriteModel) {
     convertMoment(params);
-    return this.http.post<RequestModel>(this.baseUrl, params)
+    return this.http.post<RequestModel>(this.baseUrl + 'add/', params)
       .pipe(
         map(this.adapter.adapt)
       );
   }
 
   confirm(id: number, customerNotes: string) {
-    return this.http.patch<RequestModel>(this.baseUrl + id + '/', {customerNotes})
+    return this.http.patch<RequestModel>(this.baseUrl + id + '/confirm/', {customerNotes})
       .pipe(
         map(this.adapter.adapt)
       );

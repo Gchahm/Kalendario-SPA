@@ -8,9 +8,18 @@ import {Moment} from 'moment';
   styleUrls: ['./scheduling-page-content.component.css']
 })
 export class SchedulingPageContentComponent {
-  @Input() employees: IEmployee[];
+  private _employees: IEmployee[];
+  @Input() set employees(employees: IEmployee[]) {
+    this._employees = employees;
+    this.showCalendar = this._employees.length > 0;
+  }
+  get employees(): IEmployee[] {
+    return this._employees;
+  }
   @Input() date: Moment;
   @Output() close = new EventEmitter<IEmployee>();
+
+  showCalendar: boolean;
 
   emitClose(employee: IEmployee) {
     this.close.emit(employee);

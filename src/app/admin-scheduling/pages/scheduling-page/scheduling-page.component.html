@@ -16,14 +16,21 @@
     <admin-requests-shell></admin-requests-shell>
   </mat-sidenav>
   <mat-sidenav-content>
-    <admin-scheduling-page-content *ngIf="selectedModel$ | async as panel; else spinner"
+    <admin-scheduling-page-content *ngIf="selectedModel$ | async as panel; else nothingSelected"
                                    [employees]="selectedEmployees$ | async"
                                    [date]="date$ | async"
                                    (close)="removeEmployee(panel, $event)">
     </admin-scheduling-page-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<ng-template #spinner>
-  <mat-spinner class="m-auto"></mat-spinner>
+<ng-template #nothingSelected>
+  <div class="m-4">
+    <h3>No Panel selected</h3>
+    <p>Use the buttons above to create / select new panels</p>
+    <h4>What are panels?</h4>
+    <p>Panels are a way to organize the schedule.</p>
+    <p>You can create a panel named "general" and add all your staff to it. You can then create a second panel that is a subdivision of the company and add just the related employees to this panel.</p>
+    <p>This way you can group your staff in different sections to make it easier to visualize the schedule, you can create as many panels necessary and employees can repeat between panels.</p>
+  </div>
 </ng-template>
 

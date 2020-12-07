@@ -1,10 +1,10 @@
-<div mat-dialog-content>
+<mat-dialog-content>
   <p>{{data.message}}</p>
-  <mat-form-field>
-    <input matInput [placeholder]="data.label" [(ngModel)]="data.result">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button [mat-dialog-close]="data.result" cdkFocusInitial class="btn btn-primary">Ok</button>
-  <button (click)="onNoClick()" class="btn btn-danger">Cancel</button>
-</div>
+  <div class="form-group">
+    <input class="form-control form-control-admin" [placeholder]="data.label" [(ngModel)]="data.result">
+  </div>
+  <button [mat-dialog-close]="data.result" cdkFocusInitial class="btn btn-admin btn-primary mr-2">Submit</button>
+  <button (click)="onNoClick()" class="btn btn-admin btn-danger">Cancel</button>
+</mat-dialog-content>
+<mat-dialog-actions>
+</mat-dialog-actions>
