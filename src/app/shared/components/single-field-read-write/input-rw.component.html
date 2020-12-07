@@ -8,7 +8,9 @@
       <div *ngIf="useColor" class="color-picker-box" [style.background-color]="value"></div>
       <div *ngIf="useList">{{listItem()}}</div>
       <div *ngIf="!useColor && !useList">
-        {{value}}
+        <p>
+          {{value}}
+        </p>
       </div>
     </div>
   </div>
