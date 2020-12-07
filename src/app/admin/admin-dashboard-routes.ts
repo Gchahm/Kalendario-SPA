@@ -13,6 +13,8 @@ import {SchedulingPageComponent} from '@admin/../admin-scheduling/pages/scheduli
 import {CanBookAppointmentsGuard} from '@admin/guards/can-book-appointments.guard';
 import {DashBoardRoute} from '@shared/components/dashboard-container/dashboard-container.component';
 import {PERMISSION_VIEW, PermissionModels} from '@api/permissions';
+import {CanViewUsersGuard} from '@app/admin-users/guards/can-view-users.guard';
+import {CanViewUserGroupsGuard} from '@app/admin-users/guards/can-view-user-groups.guard';
 
 
 export const adminDashboardRoutes: DashBoardRoute[] =
@@ -51,25 +53,23 @@ export const adminDashboardRoutes: DashBoardRoute[] =
       fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.customer)
     },
     {
+      path: 'appointments',
+      icon: 'book',
+      component: SchedulingPageComponent,
+      canActivate: [CanBookAppointmentsGuard]
+    },
+    {
       path: 'users',
       icon: 'user-circle',
       component: UsersPageComponent,
-      // TODO
-      // canActivate: [CanViewCustomersGuard],
+      canActivate: [CanViewUsersGuard],
       fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.user)
     },
     {
       path: 'groups',
       icon: 'user-cog',
       component: GroupsPageComponent,
-      // TODO
-      // canActivate: [CanViewCustomersGuard],
+      canActivate: [CanViewUserGroupsGuard],
       fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.group)
-    },
-    {
-      path: 'appointments',
-      icon: 'book',
-      component: SchedulingPageComponent,
-      canActivate: [CanBookAppointmentsGuard]
     },
   ];

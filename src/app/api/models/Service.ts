@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {IReadModel} from './IReadModel';
 import {TimeOfDay} from './TimeOfDay';
+import {PermissionModels} from '@api/permissions';
 
 
 export class Service implements IReadModel {
-  static modelType = 'service';
+  static modelType = PermissionModels.service;
   id = 0;
   private = false;
   category: number;

@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '@api/adapter';
 import {IReadModel} from '@api/models/IReadModel';
+import {PermissionModels} from '@api/permissions';
 
 export class Group implements IGroup {
-  static modelType = 'group';
+  static modelType = PermissionModels.group;
 
   id: number;
   name: string;

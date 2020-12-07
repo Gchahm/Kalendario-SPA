@@ -12,6 +12,8 @@ export function checkForPermission(user: IUser, permission: string, model: Permi
 }
 
 export class User implements IUser {
+  static modelType = PermissionModels.user;
+
   id: number;
   firstName: string;
   lastName: string;
