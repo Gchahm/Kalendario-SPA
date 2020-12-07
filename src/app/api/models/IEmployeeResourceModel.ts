@@ -17,9 +17,9 @@ export class EmployeeResourceModel extends Employee implements IEmployeeResource
 
   init(data: any) {
     super.init(data);
-    this.scheduleModel = Schedule.fromJs(data.schedule);
-    this.services = data.services.map(s => s.id);
-    this.serviceModels = data.services.map(s => Service.fromJs(s));
+    this.scheduleModel = data.schedule ? Schedule.fromJs(data.schedule) : null;
+    this.services = data.services ? data.services.map(s => s.id) : [];
+    this.serviceModels = data.services ? data.services.map(s => Service.fromJs(s)) : [];
   }
 }
 
