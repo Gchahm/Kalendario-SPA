@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CompanyNameValidators} from '@admin/containers/_dialogs/create-company/companyName.validators';
 import {Router} from '@angular/router';
-import {AuthService} from '@shared/services/auth.service';
-import {switchMap} from 'rxjs/operators';
 import {reactiveFormErrorHandler} from '@shared/common/Util';
 import {ValidationError} from '@api/Errors';
-import {CompanyAdminClient} from '@api/clients';
+import {CompanyAdminClient, CompanyClient} from '@api/clients';
+import {Store} from '@ngrx/store';
+import * as fromCore from '@core/state';
+
 
 @Component({
   selector: 'app-create-company',
@@ -18,8 +19,9 @@ export class CreateCompanyComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private companyService: CompanyAdminClient,
-              private authService: AuthService,
+              private adminCompanyService: CompanyAdminClient,
+              private companyService: CompanyClient,
+              private store: Store<fromCore.CoreState>,
               private router: Router) {
   }
 
@@ -33,11 +35,10 @@ export class CreateCompanyComponent implements OnInit {
   onSubmit() {
     const company = this.form.value;
     // TODO: get an effect for this
-    this.companyService.post(company)
-      .pipe(
-        switchMap(p => this.authService.whoAmI())
-      ).toPromise()
+    this.adminCompanyService.post(company)
+      .toPromise()
       .then(() => {
+          this.store.dispatch(new fromCore.InitializeUser());
           this.router.navigate(['admin/home']);
         }
       ).catch(err => {

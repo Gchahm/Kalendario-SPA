@@ -5,9 +5,8 @@
         <mat-card-content>
           <h4 class="card-title text-center">create company</h4>
           <form class="form-100" [formGroup]="form" (ngSubmit)="onSubmit()">
-            <mat-form-field *ngIf="form.get('name') as name">
-              <input matInput
-                     class="form-control"
+            <div class="form-group" *ngIf="form.get('name') as name">
+              <input class="form-control form-control-admin"
                      type="text"
                      placeholder="company name"
                      name="name"
@@ -21,7 +20,7 @@
               <mat-error *ngIf="form.get('name').errors?.serverError">
                 {{name.errors?.serverError}}
               </mat-error>
-            </mat-form-field>
+            </div>
             <button class="btn btn-accent" [disabled]="!form.valid" type="submit">create</button>
           </form>
         </mat-card-content>

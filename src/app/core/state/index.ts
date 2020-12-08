@@ -2,7 +2,7 @@ import {createFeatureSelector, createSelector, MemoizedSelectorWithProps, select
 import * as fromCore from './core.reducer';
 import {pipe} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {IUser, User} from '@api/models';
+import {User} from '@api/models';
 import {ModelPermissions, PermissionModels} from '@api/permissions';
 import {userPermissions} from '@api/permissions/helpers';
 
