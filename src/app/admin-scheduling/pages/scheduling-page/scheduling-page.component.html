@@ -21,6 +21,9 @@
                                    [date]="date$ | async"
                                    (close)="removeEmployee(panel, $event)">
     </admin-scheduling-page-content>
+    <div class="overlay d-flex" *ngIf="isLoadingAppointments$ | async">
+      <mat-spinner class="m-auto"></mat-spinner>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <ng-template #nothingSelected>

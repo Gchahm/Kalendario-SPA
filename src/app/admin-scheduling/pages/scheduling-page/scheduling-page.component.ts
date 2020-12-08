@@ -29,6 +29,7 @@ export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> imp
   selectedEmployees$: Observable<IEmployee[]>;
   requestsCount$: Observable<number>;
   date$: Observable<Moment>;
+  isLoadingAppointments$: Observable<boolean>;
 
   isActive = true;
   showRequests = false;
@@ -48,6 +49,7 @@ export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> imp
     this.selectedEmployees$ = this.store.select(fromScheduling.selectors.getSelectedEmployees);
     this.requestsCount$ = this.store.select(fromRequests.selectors.selectTotal);
     this.date$ = this.store.select(fromScheduling.selectors.getDate);
+    this.isLoadingAppointments$ = this.store.select(fromAppointments.selectors.getIsLoadingEntities);
 
     this.observeStoreAndReloadAppointments();
   }
