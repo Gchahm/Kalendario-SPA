@@ -90,6 +90,11 @@ class BaseAdapter<T extends IReadModel> implements BaseEntityAdapter<T> {
       (entities: T[], search: string) => entities.filter(e => filterFn(e, search))
     );
 
+    const getIsLoadingEntities = createSelector(
+      selectState,
+      state => state.isLoadingEntities
+    );
+
     return {
       selectIds,
       selectEntities,
@@ -103,7 +108,8 @@ class BaseAdapter<T extends IReadModel> implements BaseEntityAdapter<T> {
       getCurrentId,
       getCurrent,
       getById,
-      getBySearch
+      getBySearch,
+      getIsLoadingEntities,
     };
   }
 

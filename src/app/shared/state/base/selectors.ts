@@ -12,5 +12,6 @@ export interface BaseEntitySelectors<T, V> extends EntitySelectors<T, V> {
   getCurrent: MemoizedSelector<V, T>;
   getById: MemoizedSelectorWithProps<V, number, T | null>;
   getBySearch: MemoizedSelectorWithProps<V, string, T[]>;
+  getIsLoadingEntities: MemoizedSelector<V, boolean>;
 }
 

@@ -7,6 +7,7 @@ export interface BaseEntityState<T> extends EntityState<T> {
   editMode: boolean;
   selectedId: number | null;
   search: string;
+  isLoadingEntities: boolean;
 }
 
 export function baseInitialState<T>(): BaseEntityState<T> {
@@ -17,6 +18,7 @@ export function baseInitialState<T>(): BaseEntityState<T> {
     apiError: null,
     editMode: false,
     selectedId: null,
-    search: ''
+    search: '',
+    isLoadingEntities: false
   };
 }
