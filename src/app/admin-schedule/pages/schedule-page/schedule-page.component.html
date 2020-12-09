@@ -9,15 +9,11 @@
                       (delete)="deleteModel($event)"
                       (search)="updateSearch($event)">
   <ng-container *ngIf="(selectedModel$ | async) as selectedModel">
-    <admin-schedule-details *ngIf="!(editMode$ | async)"
-                            [isMobile]="isMobile$ | async"
-                            [isTablet]="isTablet$ | async"
-                            [model]="selectedModel"></admin-schedule-details>
-    <admin-schedule-form *ngIf="editMode$ | async"
-                         [model]="selectedModel"
-                         [apiError]="apiError$ | async"
-                         (create)="saveModel($event)"
-                         (update)="updateModel($event)"
-                         (cancel)="cancelForm($event)"></admin-schedule-form>
+    <admin-schedule-details [model]="selectedModel"
+                            [apiError]="apiError$ | async"
+                            [editMode]="editMode$ | async"
+                            (create)="saveModel($event)"
+                            (update)="updateModel($event)"
+                            (cancel)="cancelForm($event)"></admin-schedule-details>
   </ng-container>
 </model-list-container>

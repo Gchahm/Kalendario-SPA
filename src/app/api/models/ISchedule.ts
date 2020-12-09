@@ -1,5 +1,5 @@
 import {Adapter} from '@api/adapter';
-import {Shift, IShift} from './IShift';
+import {Shift, IShift, IShiftWriteModel} from './IShift';
 import {IReadModel} from './IReadModel';
 import {Injectable} from '@angular/core';
 import {Moment} from 'moment';
@@ -18,7 +18,36 @@ export class Schedule implements ISchedule {
   sun: IShift;
   shifts: string[];
 
-  static fromJs(data?: any): ISchedule {
+  static toWriteModel(schedule: ISchedule): IScheduleWriteModel {
+    return {
+      id: schedule.id,
+      name: schedule.name,
+      mon: Shift.toWriteModel(schedule.mon),
+      tue: Shift.toWriteModel(schedule.tue),
+      wed: Shift.toWriteModel(schedule.wed),
+      thu: Shift.toWriteModel(schedule.thu),
+      fri: Shift.toWriteModel(schedule.fri),
+      sat: Shift.toWriteModel(schedule.sat),
+      sun: Shift.toWriteModel(schedule.sun),
+    };
+  }
+
+  static clone(schedule: ISchedule): Schedule {
+    const result = Schedule.fromJs({
+      id: schedule.id,
+      name: schedule.name,
+    });
+    result.mon = Shift.clone(schedule.mon);
+    result.tue = Shift.clone(schedule.tue);
+    result.wed = Shift.clone(schedule.wed);
+    result.thu = Shift.clone(schedule.thu);
+    result.fri = Shift.clone(schedule.fri);
+    result.sat = Shift.clone(schedule.sat);
+    result.sun = Shift.clone(schedule.sun);
+    return result;
+  }
+
+  static fromJs(data?: any): Schedule {
     data = typeof data === 'object' ? data : {};
     const result = new Schedule();
     result.init(data);
@@ -72,13 +101,13 @@ export interface ISchedule extends IReadModel {
 export interface IScheduleWriteModel {
   id: number;
   name: string;
-  mon: IShift;
-  tue: IShift;
-  wed: IShift;
-  thu: IShift;
-  fri: IShift;
-  sat: IShift;
-  sun: IShift;
+  mon: IShiftWriteModel;
+  tue: IShiftWriteModel;
+  wed: IShiftWriteModel;
+  thu: IShiftWriteModel;
+  fri: IShiftWriteModel;
+  sat: IShiftWriteModel;
+  sun: IShiftWriteModel;
 }
 
 @Injectable({

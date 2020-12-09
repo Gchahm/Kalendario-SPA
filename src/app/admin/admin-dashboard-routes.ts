@@ -25,13 +25,6 @@ export const adminDashboardRoutes: DashBoardRoute[] =
       component: HomePageComponent,
     },
     {
-      path: 'employees',
-      icon: 'user-friends',
-      component: EmployeesPageComponent,
-      canActivate: [CanViewEmployeesGuard],
-      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.employee)
-    },
-    {
       path: 'services',
       icon: 'magic',
       component: ServicesPageComponent,
@@ -44,6 +37,13 @@ export const adminDashboardRoutes: DashBoardRoute[] =
       component: SchedulePageComponent,
       canActivate: [CanViewSchedulesGuard],
       fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.schedule)
+    },
+    {
+      path: 'employees',
+      icon: 'user-friends',
+      component: EmployeesPageComponent,
+      canActivate: [CanViewEmployeesGuard],
+      fn: (user) => checkForPermission(user, PERMISSION_VIEW, PermissionModels.employee)
     },
     {
       path: 'customers',

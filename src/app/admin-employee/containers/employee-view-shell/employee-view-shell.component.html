@@ -21,7 +21,6 @@
   <div *ngIf="model.scheduleModel" class="col-sm-12 col-md-12 col-lg-12">
     <admin-schedule-details *ngIf="!(editMode$ | async)"
                             [model]="model.scheduleModel"
-                            [isMobile]="isMobile$ | async"
                             class="mt-2"></admin-schedule-details>
   </div>
 </div>

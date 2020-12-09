@@ -12,6 +12,10 @@ export class TimeFrame {
     this.end = TimeOfDay.fromString(end);
     this.name = this.start.toString() + ' - ' + this.end.toString();
   }
+
+  static clone(timeFrame: TimeFrame): TimeFrame {
+    return new TimeFrame(timeFrame.start.toISOString(), timeFrame.end.toISOString());
+  }
 }
 
 export class Shift implements IShift {
@@ -19,10 +23,20 @@ export class Shift implements IShift {
   frames: TimeFrame[];
   name: string;
 
-  static fromJs(data?: any): IShift {
-    // if (data === null) {
-    //   return null;
-    // }
+  static toWriteModel(shift: IShift): IShiftWriteModel {
+    return {
+      frames: shift.frames.map(f => ({start: f.start.toISOString(), end: f.end.toISOString()}))
+    };
+  }
+
+  static clone(shift: IShift): Shift {
+    const result = new Shift();
+    result.name = shift.name;
+    result.frames = shift.frames.map(f => TimeFrame.clone(f));
+    return result;
+  }
+
+  static fromJs(data?: any): Shift {
     data = typeof data === 'object' ? data : {};
     const result = new Shift();
     result.init(data);
@@ -41,8 +55,6 @@ export interface IShift {
 }
 
 export interface IShiftWriteModel {
-  id: number;
-  name: string;
   frames: { start: string, end: string }[];
 }
 
