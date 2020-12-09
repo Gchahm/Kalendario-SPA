@@ -1,0 +1,22 @@
+{
+  "hosting": [
+    {
+      "target": "app",
+      "public": "dist/kalendario",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    },
+    {
+      "target": "staging",
+      "public": "dist/staging",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,8 @@
     "start-ssl": "ng serve --ssl",
     "start-lan": "ng serve --ssl --host 192.168.0.19",
     "build": "ng build --prod --output-path C:\\development\\Kalendario\\Kalendario_API\\static\\ang --output-hashing none",
+    "fire-build": "ng build --configuration=firebase --output-path ./dist/kalendario",
+    "fire-staging": "ng build --configuration=staging --output-path ./dist/staging",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -37,6 +39,7 @@
     "angular-animations": "0.0.10",
     "bootstrap": "^4.4.1",
     "classlist.js": "^1.1.20150312",
+    "firebase-tools": "^8.18.0",
     "moment": "^2.24.0",
     "ngx-color-picker": "^9.0.0",
     "ngx-stripe": "^9.2.0",

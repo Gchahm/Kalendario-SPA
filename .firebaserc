@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "kalendario-479df"
+  },
+  "targets": {
+    "kalendario-479df": {
+      "hosting": {
+        "app": [
+          "kalendario-479df"
+        ],
+        "staging": [
+          "kalendario-staging"
+        ]
+      }
+    }
+  }
+}
