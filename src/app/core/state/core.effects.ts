@@ -44,6 +44,19 @@ export class CoreEffects {
   );
 
   @Effect()
+  FacebookLogin$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.CoreActionsType.FacebookLogin),
+    map((action: actions.FacebookLogin) => action.payload),
+    mergeMap((authToken) => this.authService.facebookLogin(authToken).pipe(
+        tap(user => this.toastService.success(`welcome back ${user.firstName}`)),
+        map(user => (new actions.LoginSuccess(user))),
+        catchError(err => of(new actions.LoginFail(err)))
+      )
+    )
+  );
+
+
+  @Effect()
   register$: Observable<Action> = this.actions$.pipe(
     ofType(actions.CoreActionsType.Register),
     map((action: actions.Register) => action.payload),

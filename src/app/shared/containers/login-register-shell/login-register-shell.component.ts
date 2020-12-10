@@ -14,7 +14,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./login-register-shell.component.css']
 })
 export class LoginRegisterShellComponent implements OnInit {
-  @Input() registerMode: boolean = false;
+  @Input() registerMode = false;
   apiError$: Observable<ApiError>;
 
   constructor(private store: Store<fromRoot.State>) {

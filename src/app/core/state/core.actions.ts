@@ -12,6 +12,7 @@ export enum CoreActionsType {
   InitializeUser = '[Core] Initialize User',
   InitializeUserSuccess = '[Core] Initialize User Success',
   Login = '[Core] Login',
+  FacebookLogin = '[Core] Facebook Login',
   LoginSuccess = '[Core] Login Success',
   LoginFail = '[Core]  Login User Fail',
   Register = '[Core] Register',
@@ -79,6 +80,14 @@ export class LoginFail implements Action {
   constructor(public payload: ApiError) {
   }
 }
+
+export class FacebookLogin implements Action {
+  readonly type = CoreActionsType.FacebookLogin;
+
+  constructor(public payload: string) {
+  }
+}
+
 
 export class Register implements Action {
   readonly type = CoreActionsType.Register;

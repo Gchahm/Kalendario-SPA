@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {reactiveFormErrorHandler} from '@shared/common/Util';
 import {ApiError, ValidationError} from '@api/Errors';
-import {environment} from '../../../../environments/environment';
 import {LoginModel} from '@api/models/LoginModel';
 
 @Component({
@@ -13,7 +12,6 @@ import {LoginModel} from '@api/models/LoginModel';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  showFbLogin = !environment.production;
 
   @Input()
   set apiError(error: ApiError) {
@@ -22,8 +20,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  @Output() login = new EventEmitter<LoginModel>()
-  @Output() register = new EventEmitter<void>()
+  @Output() login = new EventEmitter<LoginModel>();
+  @Output() register = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder) {
   }

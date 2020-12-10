@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
 import {IUser, User, UserAdapter} from '../../api/models/IUser';
 import {LoginModel} from '@api/models/LoginModel';
+import {FacebookAuthService} from '@shared/services/facebook-auth.service';
 
 export interface RegisterModel {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password1: string,
-  password2: string,
+  firstName: string;
+  lastName: string;
+  email: string;
+  password1: string;
+  password2: string;
 }
 
 @Injectable({
@@ -21,8 +22,10 @@ export interface RegisterModel {
 export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth/';
+  private facebookUrl = environment.apiUrl + 'social/facebook/';
 
   constructor(private http: HttpClient,
+              private facebookAuth: FacebookAuthService,
               private adapter: UserAdapter) {
   }
 
@@ -47,33 +50,28 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {})
-      .pipe(
-        map(res => {
-          AuthService.removeToken();
-          return res;
-        })
-      );
+    return this.http.post<{ detail: string }>(this.baseUrl + 'logout/', {}).pipe(
+      tap(() => AuthService.removeToken()),
+      tap(() => this.facebookAuth.logout()),
+    );
   }
 
   login(user: LoginModel): Observable<IUser> {
-    return this.http.post(this.baseUrl + 'login/', user)
-      .pipe(
-        switchMap((project: any) => {
-          AuthService.setToken(project.key);
-          return this.whoAmI();
-        })
-      );
+    return this.http.post<{ key: string }>(this.baseUrl + 'login/', user).pipe(
+      tap(({key}) => AuthService.setToken(key)),
+      switchMap(() => this.whoAmI())
+    );
+  }
+
+  facebookLogin(authToken): Observable<IUser> {
+    return this.authenticateFacebook(authToken);
   }
 
   register(form: RegisterModel): Observable<IUser> {
-    return this.http.post(this.baseUrl + 'registration/', form)
-      .pipe(
-        switchMap((project: any) => {
-          AuthService.setToken(project.key);
-          return this.whoAmI();
-        }),
-      );
+    return this.http.post<{ key: string }>(this.baseUrl + 'registration/', form).pipe(
+      tap(({key}) => AuthService.setToken(key)),
+      switchMap(() => this.whoAmI())
+    );
   }
 
   public resendConfirmationEmail() {
@@ -81,10 +79,14 @@ export class AuthService {
   }
 
   public whoAmI(): Observable<IUser> {
+    this.facebookAuth.init();
     if (AuthService.isLoggedIn()) {
       return this.getUser();
     }
-    return of(User.AnonymousUser());
+    return this.facebookAuth.getToken().pipe(
+      switchMap(authToken => this.authenticateFacebook(authToken)),
+      catchError(err => of(User.AnonymousUser()))
+    );
   }
 
   private getUser(): Observable<IUser> {
@@ -96,5 +98,12 @@ export class AuthService {
           return of(User.AnonymousUser());
         })
       );
+  }
+
+  private authenticateFacebook(authToken: string): Observable<IUser> {
+    return this.http.post<{ key: string }>(this.facebookUrl, {access_token: authToken}).pipe(
+      tap(({key}) => AuthService.setToken(key)),
+      switchMap(({key}) => this.whoAmI())
+    );
   }
 }

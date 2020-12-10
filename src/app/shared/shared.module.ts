@@ -38,6 +38,7 @@ import {CreateCustomerDialogComponent} from '@shared/containers/create-customer/
 import {CustomerFormComponent} from '@shared/components/customer-form/customer-form.component';
 import { MomentDatePipe } from './pipes/moment-date.pipe';
 import { FabButtonComponent } from './components/fab-button/fab-button.component';
+import { FacebookLoginShellComponent } from './containers/facebook-login-shell/facebook-login-shell.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { FabButtonComponent } from './components/fab-button/fab-button.component
     CreateCustomerDialogComponent,
     CustomerFormComponent,
     MomentDatePipe,
-    FabButtonComponent
+    FabButtonComponent,
+    FacebookLoginShellComponent
   ],
   imports: [
     CommonModule,
