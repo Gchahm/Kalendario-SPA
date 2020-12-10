@@ -9,6 +9,7 @@
     "build": "ng build --prod --output-path C:\\development\\Kalendario\\Kalendario_API\\static\\ang --output-hashing none",
     "fire-build": "ng build --configuration=firebase --output-path ./dist/kalendario",
     "fire-staging": "ng build --configuration=staging --output-path ./dist/staging",
+    "fire deploy": "firebase deploy --only hosting",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
