@@ -3,7 +3,7 @@
   padding: 2em;
 }
 
-.row {
+.pretty-scroll {
   max-height: 400px;
   min-height: 400px;
   width: 100%;
@@ -22,8 +22,4 @@
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.12em;
-}
-
-.s-l-item {
-  cursor: pointer;
 }

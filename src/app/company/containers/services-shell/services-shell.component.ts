@@ -3,20 +3,21 @@ import {Store} from '@ngrx/store';
 import * as fromCompany from '@company/state';
 import {Observable} from 'rxjs';
 import {Service, ServiceCategory} from '@api/models';
+import {BaseContainer} from '@app/containers/BaseContainer';
 
 @Component({
   selector: 'company-services-shell',
   templateUrl: './services-shell.component.html',
   styleUrls: ['./services-shell.component.css']
 })
-export class ServicesShellComponent {
+export class ServicesShellComponent extends BaseContainer {
   services$: Observable<Service[]>;
   categories$: Observable<ServiceCategory[]>;
   currentCategoryId$: Observable<number>;
   currentServiceId$: Observable<number>;
 
-
-  constructor(private store: Store<fromCompany.State>) {
+  constructor(store: Store<fromCompany.State>) {
+    super(store);
     this.services$ = this.store.select(fromCompany.getFilteredServices);
     this.categories$ = this.store.select(fromCompany.getServiceCategories);
     this.currentCategoryId$ = this.store.select(fromCompany.getCurrentCategoryId);

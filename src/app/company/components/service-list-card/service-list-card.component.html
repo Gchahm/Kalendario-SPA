@@ -1,17 +1,8 @@
-<div class="service-list-card-container">
-  <div class="card-title-container">
-    <h6 [matTooltip]="service.name">{{service.name}}</h6>
-<!--    <p class="c-blush">Show details</p>-->
-  </div>
-  <div>
-    <mat-radio-button [checked]="checked"
-                      [value]="service.id"
-                      (click)="selected.emit(service.id)"
-                      color="accent"></mat-radio-button>
-  </div>
-  <div class="c-primary text-right">
-    <p>{{service.price}}</p>
-    <p class="tiny light-grey">ETA: {{service.duration}}</p>
-  </div>
+<div class="card-title-container">
+  <h6 [matTooltip]="service.name">{{service.name}}</h6>
+</div>
+<div class="c-primary text-right">
+  <p>{{service.price}}</p>
+  <p class="tiny light-grey">ETA: {{service.duration}}</p>
 </div>
 

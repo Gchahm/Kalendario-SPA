@@ -11,6 +11,7 @@ import {staggeredFadeInAnimation} from '@app/animations';
   ]
 })
 export class ServiceListComponent {
+  @Input() isMobile: boolean;
   @Input() services: Service[];
   @Input() categories: ServiceCategory[];
   @Input() currentCategoryId: number;

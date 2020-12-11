@@ -2,5 +2,6 @@
                       [categories]="categories$ | async"
                       [currentCategoryId]="currentCategoryId$ | async"
                       [currentServiceId]="currentServiceId$ | async"
+                      [isMobile]="isMobile$ | async"
                       (selectCategory)="updateSelectedCategory($event)"
                       (selectService)="updateSelectedService($event)"></company-service-list>
