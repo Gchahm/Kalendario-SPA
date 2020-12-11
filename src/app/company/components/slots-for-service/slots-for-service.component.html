@@ -1,80 +1,67 @@
-<app-kalendario-card [hasShadow]="hasShadow">
-  <div [matTooltip]="disableDateInput ? disabledTooltip : ''"
-       class="text-center mb-2">
-    <button class="btn btn-primary mr-2"
-            (click)="this.book.emit()"
-            [disabled]="currentSlotId === null">
-      Book Now
-    </button>
+<div [matTooltip]="disableDateInput ? disabledTooltip : ''"
+     class="text-center mb-2">
+  <button class="btn btn-primary mr-1"
+          [class.btn-sm]="isMobile"
+          (click)="this.book.emit()"
+          [disabled]="currentSlotId === null">
+    Book Now
+  </button>
+  <button [disabled]="disableDateInput"
+          (click)="today()"
+          [class.btn-sm]="isMobile"
+          class="btn btn-accent mr-1">
+    Today
+  </button>
+  <button [disabled]="disableDateInput"
+          (click)="previousDay()"
+          [class.btn-sm]="isMobile"
+          class="btn btn-accent-dark mr-1">
+    <i class="fa fa-chevron-left"></i>
+  </button>
+  <button [disabled]="disableDateInput"
+          (click)="nextDay()"
+          [class.btn-sm]="isMobile"
+          class="btn btn-accent-dark mr-1">
+    <i class="fa fa-chevron-right"></i>
+  </button>
 
-    <button [disabled]="disableDateInput"
-            (click)="today()"
-            class="btn btn-accent mr-2">
-      Today
-    </button>
+  <mat-form-field appearance="standard">
+    <input matInput
+           [disabled]="disableDateInput"
+           readonly
+           [value]="currentDate"
+           (click)="dpAppointmentDashboard.open()"
+           (dateChange)="this.dateChange.emit($event.value)"
+           [matDatepicker]="dpAppointmentDashboard">
+    <mat-datepicker-toggle matSuffix [for]="dpAppointmentDashboard"></mat-datepicker-toggle>
+    <mat-datepicker touchUi="{{isMobile}}" #dpAppointmentDashboard></mat-datepicker>
+  </mat-form-field>
+</div>
 
-
-    <button [disabled]="disableDateInput"
-            (click)="previousDay()"
-            class="btn btn-accent-dark mr-2">
-      <i class="fa fa-chevron-left"></i>
-    </button>
-
-    <button [disabled]="disableDateInput"
-            (click)="nextDay()"
-            class="btn btn-accent-dark mr-2">
-      <i class="fa fa-chevron-right"></i>
-    </button>
-
-    <mat-form-field appearance="standard">
-      <input matInput
-             [disabled]="disableDateInput"
-             readonly
-             [value]="currentDate"
-             (click)="dpAppointmentDashboard.open()"
-             (dateChange)="this.dateChange.emit($event.value)"
-             [matDatepicker]="dpAppointmentDashboard">
-      <mat-datepicker-toggle matSuffix [for]="dpAppointmentDashboard"></mat-datepicker-toggle>
-      <mat-datepicker touchUi="{{isMobile}}" #dpAppointmentDashboard></mat-datepicker>
-    </mat-form-field>
-  </div>
-
-  <div class="slots-container">
-    <div class="row no-gutters text-center pretty-scroll">
-
-      <div class="col-12 c-accent pb-3 mb-0 sticky-top bg-white">
-        <h5 [@bounceInRight]="serviceAnimationState">
-          <div [@bounceInRight]="!serviceAnimationState">
-            {{service?.name}}
-          </div>
-        </h5>
+<div *ngIf="service" class="text-center bg-white">
+  <h5 class="c-accent" [@bounceInRight]="serviceAnimationState">
+      <span [@bounceInRight]="!serviceAnimationState">
+      {{service?.name}}
+      </span>
+  </h5>
+  <div class="row pretty-scroll">
+    <div *ngIf="!isLoading"
+         class="col-sm-12 col-md-6"
+         [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <h5>{{currentDateFormatted}}</h5>
+      <div class="mb-2" *ngFor="let event of nextDaySlots()">
+        <company-service-slot-shell [slot]="event"
+                                    [currentSlotId]="currentSlotId"></company-service-slot-shell>
       </div>
-      <div class="col-6 pb-3 sticky-top-3 bg-white">
-        <h5 [@fadeInOnEnter] [@fadeOutOnLeave] *ngIf="!isLoading">
-          {{currentDateFormatted}}
-        </h5>
+    </div>
+    <div *ngIf="!isMobile && !isLoading"
+         class="col-sm-12 col-md-6"
+         [@fadeInOnEnter] [@fadeOutOnLeave]>
+      <h5>{{nextDayFormatted}}</h5>
+      <div class="mb-2" *ngFor="let event of currentDateSlots()">
+        <company-service-slot-shell [slot]="event"
+                                    [currentSlotId]="currentSlotId"></company-service-slot-shell>
       </div>
-      <div  class="col-6 sticky-top-3 bg-white">
-        <h5 [@fadeInOnEnter] [@fadeOutOnLeave] *ngIf="!isLoading">
-          {{nextDayFormatted}}
-        </h5>
-      </div>
-
-      <ng-container *ngIf="!isLoading">
-        <div [@fadeInOnEnter] [@fadeOutOnLeave] class="col-6">
-          <div class="mb-2" *ngFor="let event of currentDateSlots()">
-            <company-service-slot-shell [slot]="event"
-                                        [currentSlotId]="currentSlotId"></company-service-slot-shell>
-          </div>
-        </div>
-        <div [@fadeInOnEnter] [@fadeOutOnLeave] class="col-6">
-          <div class="mb-2" *ngFor="let event of nextDaySlots()">
-            <company-service-slot-shell [slot]="event"
-                                        [currentSlotId]="currentSlotId"></company-service-slot-shell>
-          </div>
-        </div>
-      </ng-container>
     </div>
   </div>
-
-</app-kalendario-card>
+</div>

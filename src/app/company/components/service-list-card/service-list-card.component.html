@@ -1,8 +1,7 @@
-<div class="card-title-container">
-  <h6 [matTooltip]="service.name">{{service.name}}</h6>
+<div class="card-title-container h6" [matTooltip]="service.name" [class.c-accent]="checked">
+  {{service.name}}
 </div>
 <div class="c-primary text-right">
   <p>{{service.price}}</p>
   <p class="tiny light-grey">ETA: {{service.duration}}</p>
 </div>
-

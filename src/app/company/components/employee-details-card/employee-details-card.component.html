@@ -1,4 +1,2 @@
-<div *ngIf="employee" class="employee-details-card-container">
-  <img src="{{employee.photoUrl}}" class="company-circle-img-7">
-  <h1 class="w-100 text-right">{{employee.name}}</h1>
-</div>
+<img src="{{employee?.photoUrl}}" class="company-circle-img-7">
+<h1 class="text-right ml-4 my-auto">{{employee?.name}}</h1>

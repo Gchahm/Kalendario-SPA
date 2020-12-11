@@ -8,11 +8,3 @@
   height: 28.5rem;
   max-height: 28.5rem;
 }
-
-.sticky-top-3 {
-@supports (position: sticky) {
-  position: sticky;
-  top: 2.5rem;
-  z-index: 50;
-}
-}

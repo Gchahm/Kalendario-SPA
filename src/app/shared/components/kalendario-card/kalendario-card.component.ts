@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-kalendario-card',
@@ -6,5 +6,4 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./kalendario-card.component.css']
 })
 export class KalendarioCardComponent {
-  @Input() hasShadow = true;
 }

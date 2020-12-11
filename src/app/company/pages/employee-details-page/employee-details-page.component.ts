@@ -28,6 +28,7 @@ export class EmployeeDetailsPageComponent extends BaseContainer implements OnIni
     this.store.dispatch(new fromCompany.SetCurrentEmployeeId(id));
     this.model$ = this.store.select(fromCompany.getCurrentEmployee);
     this.companyName$ = this.store.select(fromCompany.getCompanyName);
+    this.store.dispatch(new fromCompany.SetCurrentServiceId(null));
   }
 
   ngOnDestroy() {

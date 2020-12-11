@@ -7,11 +7,12 @@
 </div>
 
 <app-kalendario-card>
+  <h2 *ngIf="!selected" [@fadeOutOnLeave]>Select a Service</h2>
   <div class="row pretty-scroll" @staggeredFadeIn>
     <div class="col-12" *ngFor="let service of services">
       <company-service-list-card [service]="service"
                                  [checked]="service.id === selected"
-                                 (selected)="select.emit($event)"></company-service-list-card>
+                                 (click)="select.emit(service.id)"></company-service-list-card>
     </div>
   </div>
 </app-kalendario-card>

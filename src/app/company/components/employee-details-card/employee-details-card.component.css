@@ -1,4 +1,4 @@
-.employee-details-card-container {
+:host {
   display: flex;
 }
 

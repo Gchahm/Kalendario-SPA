@@ -3,13 +3,7 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {ServiceSlot} from '@company/state';
 import {Service} from '@api/models';
-import {
-  bounceInLeftAnimation,
-  bounceInRightAnimation,
-  bounceInRightOnEnterAnimation, bounceOutLeftAnimation,
-  fadeInOnEnterAnimation,
-  fadeOutOnLeaveAnimation,
-} from 'angular-animations';
+import {bounceInRightAnimation, fadeInOnEnterAnimation, fadeOutOnLeaveAnimation} from 'angular-animations';
 
 @Component({
   selector: 'company-slots-for-service',
@@ -17,8 +11,6 @@ import {
   styleUrls: ['./slots-for-service.component.scss'],
   animations: [
     bounceInRightAnimation(),
-    bounceInLeftAnimation(),
-    bounceInRightOnEnterAnimation(),
     fadeInOnEnterAnimation({delay: 500}),
     fadeOutOnLeaveAnimation({duration: 300})
   ]
