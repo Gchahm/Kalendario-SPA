@@ -43,7 +43,7 @@
       </ng-template>
     </div>
 
-    <div class="col-4 form-group">
+    <div class="col-sm-12 col-md-4 form-group">
       <h5>Date</h5>
           <input readonly
                  formControlName="start"
@@ -52,11 +52,11 @@
                  class="form-control form-control-admin">
           <mat-datepicker #dp ></mat-datepicker>
     </div>
-    <div class="col-4">
+    <div class="col-sm-12 col-md-4 form-group">
       <h5>Start</h5>
       <input type="time" formControlName="startTime" class="form-control form-control-admin">
     </div>
-    <div class="col-4">
+    <div class="col-sm-12 col-md-4 form-group">
       <h5>End</h5>
       <input [@pulse]="animationState" type="time" formControlName="endTime" class="form-control form-control-admin">
     </div>
