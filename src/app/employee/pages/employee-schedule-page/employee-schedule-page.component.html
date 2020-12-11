@@ -1,11 +1,21 @@
-<div class="container mt-4" *ngIf="employee$ | async as employee">
-  <employee-schedule [currentDate]="currentDate$ | async"
-                     [appointments]="appointments$ | async"
-                     [permissions]="permissions$ | async"
-                     [employee]="employee"
-                     [startDate]="startDate"
-                     [endDate]="endDate"
-                     (updateCurrent)="updateCurrent($event)"
-                     (add)="openCreateDialog($event, employee)">
-  </employee-schedule>
+<div class="container"
+     *ngIf="employee$ | async as employee">
+  <div class="schedule-container">
+    <employee-schedule-page-header [currentDate]="currentDate$ | async"
+                                   [appointments]="appointments$ | async"
+                                   [permissions]="permissions$ | async"
+                                   [employee]="employee"
+                                   [isMobile]="isMobile$ | async"
+                                   (updateCurrent)="updateCurrent($event)"
+                                   (add)="openCreateDialog($event, employee)">
+    </employee-schedule-page-header>
+    <div class="d-flex justify-content-center" *ngIf="isLoading$ | async; else appointments">
+      <mat-spinner></mat-spinner>
+    </div>
+    <ng-template #appointments>
+      <employee-schedule-appointment *ngFor="let apt of appointments$ | async"
+                                     [appointment]="apt"
+                                     [showEdit]="(permissions$ | async).change"></employee-schedule-appointment>
+    </ng-template>
+  </div>
 </div>

@@ -13,6 +13,8 @@ import {IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 
 import * as fromAppointments from '@app/admin-appointments/state';
 import * as fromCore from '@app/core/state';
+import {BaseContainer} from '@app/containers/BaseContainer';
+import {State} from '@app/state';
 
 @Component({
   selector: 'employee-schedule-page',
@@ -20,17 +22,17 @@ import * as fromCore from '@app/core/state';
   styleUrls: ['./employee-schedule-page.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EmployeeSchedulePageComponent implements OnInit {
+export class EmployeeSchedulePageComponent extends BaseContainer implements OnInit {
 
   currentDate$: Observable<Moment>;
   appointments$: Observable<IAppointment[]>;
   permissions$: Observable<ModelPermissions>;
   employee$: Observable<IEmployeeResourceModel>;
-  startDate: Moment;
-  endDate: Moment;
+  isLoading$: Observable<boolean>;
 
 
-  constructor(private store: Store<fromAppointments.State>) {
+  constructor(store: Store<State>) {
+    super(store);
   }
 
   ngOnInit(): void {
@@ -42,33 +44,24 @@ export class EmployeeSchedulePageComponent implements OnInit {
     this.permissions$ = this.store.select(fromCore.hasPermission, {model: Appointment.modelType});
     this.currentDate$ = this.store.select(fromAppointments.selectors.selectCurrentDate)
       .pipe(map(d => moment.utc(d)));
+    this.isLoading$ = this.store.select(fromAppointments.selectors.getIsLoadingEntities);
   }
 
   initialize() {
-    this.updateCurrent(moment().utc().startOf('day'));
-    this.startDate = moment().utc().startOf('day').subtract(3, 'day');
-    this.endDate = moment().utc().startOf('day').add(3, 'day');
-    this.loadAppointments();
+    const current = moment().utc().startOf('day');
+    this.updateCurrent(current);
+    this.loadAppointments(current);
   }
 
   updateCurrent(date: Moment) {
     this.store.dispatch(fromAppointments.actions.setCurrentDate({date}));
-
-    if (date.isAfter(this.endDate)) {
-      this.startDate = date;
-      this.endDate = moment.utc(date.toISOString()).add(6, 'day');
-    }
-    if (date.isBefore(this.startDate)) {
-      this.startDate = moment.utc(date.toISOString()).subtract(6, 'day');
-      this.endDate = date;
-    }
-    this.loadAppointments();
+    this.loadAppointments(date);
   }
 
-  loadAppointments() {
+  loadAppointments(date: Moment) {
     const params: AdminAppointmentParams = {
-      fromDate: this.startDate,
-      toDate: this.endDate
+      fromDate: moment.utc(date).startOf('day'),
+      toDate: moment.utc(date).endOf('day'),
     };
     this.store.dispatch(fromAppointments.actions.requestEntities({params}));
   }

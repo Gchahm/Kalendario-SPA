@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Moment} from 'moment';
 import {IAppointment} from '@api/models';
 import * as moment from 'moment';
@@ -7,20 +7,28 @@ import {IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 import {getShift} from '@api/models/ISchedule';
 
 @Component({
-  selector: 'employee-schedule',
-  templateUrl: './employee-schedule.component.html',
-  styleUrls: ['./employee-schedule.component.css']
+  selector: 'employee-schedule-page-header',
+  templateUrl: './employee-schedule-page-header.component.html',
+  styleUrls: ['./employee-schedule-page-header.component.css']
 })
-export class EmployeeScheduleComponent {
+export class EmployeeSchedulePageHeaderComponent implements OnInit {
   @Input() currentDate: Moment;
-  @Input() startDate: Moment;
-  @Input() endDate: Moment;
   @Input() appointments: IAppointment[];
   @Input() permissions: ModelPermissions;
   @Input() employee: IEmployeeResourceModel;
-
+  @Input() isMobile: boolean;
   @Output() updateCurrent = new EventEmitter<Moment>();
   @Output() add = new EventEmitter<Moment>();
+
+  startDate: Moment;
+  endDate: Moment;
+  timeSpan: number;
+
+  ngOnInit() {
+    this.timeSpan = this.isMobile ? 2 : 3;
+    this.startDate = moment().utc().startOf('day').subtract(this.timeSpan, 'day');
+    this.endDate = moment().utc().startOf('day').add(this.timeSpan, 'day');
+  }
 
   dates(): Moment[] {
     const dates = [];
@@ -36,8 +44,17 @@ export class EmployeeScheduleComponent {
     return this.currentDate.format('DDMMYYYY') === date.format('DDMMYYYY');
   }
 
-  emitDate(value: Moment) {
-    this.updateCurrent.emit(value);
+  emitDate(date: Moment) {
+    this.updateCurrent.emit(date);
+
+    if (date.isAfter(this.endDate)) {
+      this.startDate = date;
+      this.endDate = moment.utc(date.toISOString()).add(this.timeSpan * 2, 'day');
+    }
+    if (date.isBefore(this.startDate)) {
+      this.startDate = moment.utc(date.toISOString()).subtract(this.timeSpan * 2, 'day');
+      this.endDate = date;
+    }
   }
 
   nextDay() {

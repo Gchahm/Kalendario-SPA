@@ -31,7 +31,7 @@ export class CustomerAppointmentsTableComponent implements OnInit {
     this.appointmentData = appointments.map(appointment => {
       return {
         id: appointment.id,
-        start: appointment.start.format('DD/MM/YYYY'),
+        start: appointment.start.format('DD/MM/YY'),
         employee: appointment.employee.name,
         service: appointment.service.name,
         deleted: appointment.deleted
