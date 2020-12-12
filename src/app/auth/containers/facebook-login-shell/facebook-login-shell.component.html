@@ -1,25 +1,2 @@
-<div class="fb-login-container text-center mb-4">
-  <ng-container *ngIf="isMobile$ | async; else notMob">
-    <div #someInput
-         class="fb-login-button"
-         data-size="medium"
-         data-button-type="login_with"
-         data-layout="default"
-         data-auto-logout-link="false"
-         data-scope="email"
-         data-use-continue-as="true"
-         data-width="240px"></div>
-  </ng-container>
-
-  <ng-template #notMob>
-    <div #someInput
-         class="fb-login-button"
-         data-size="large"
-         data-button-type="login_with"
-         data-layout="default"
-         data-auto-logout-link="false"
-         data-scope="email"
-         data-use-continue-as="true"
-         data-width="400px"></div>
-  </ng-template>
-</div>
+<auth-facebook-button [isMobile]="isMobile$ | async"
+                      (success)="login($event)"></auth-facebook-button>

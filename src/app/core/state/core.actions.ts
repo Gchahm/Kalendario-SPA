@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {IUser} from '@api/models';
+import {ISocialAccount, IUser} from '@api/models';
 import {ApiError} from '@api/Errors';
 import {LoginModel} from '@api/models/LoginModel';
 import {RegisterModel} from '@api/clients/auth.service';
@@ -22,6 +22,11 @@ export enum CoreActionsType {
   LogoutSuccess = '[Core] Logout Success',
   SetRequestCount = '[Core] Set Request Count',
   SetCompanyName = '[Core] Set Company Name',
+  RequestSocialAccounts = '[Core] Request Social Accounts',
+  RequestSocialAccountsSuccess = '[Core] Request Social Accounts Success',
+  RequestSocialAccountsFail = '[Core] Request Social Accounts Fail',
+  RequestFacebookConnect = '[Core] Request Facebook Connect',
+  RequestFacebookConnectFail = '[Core] Request Facebook Connect Fail',
 }
 
 export class ToggleLeftPane implements Action {
@@ -134,6 +139,38 @@ export class SetCompanyName implements Action {
   }
 }
 
+export class RequestSocialAccounts implements Action {
+  readonly type = CoreActionsType.RequestSocialAccounts;
+}
+
+export class RequestSocialAccountsSuccess implements Action {
+  readonly type = CoreActionsType.RequestSocialAccountsSuccess;
+
+  constructor(public payload: ISocialAccount[]) {
+  }
+}
+
+export class RequestSocialAccountsFail implements Action {
+  readonly type = CoreActionsType.RequestSocialAccountsFail;
+
+  constructor(public payload: any) {
+  }
+}
+
+export class RequestFacebookConnect implements Action {
+  readonly type = CoreActionsType.RequestFacebookConnect;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class RequestFacebookConnectFail implements Action {
+  readonly type = CoreActionsType.RequestFacebookConnectFail;
+
+  constructor(public payload: any) {
+  }
+}
+
 export type CoreActions = ToggleLeftPane |
   ToggleShowLeftPaneButton |
   ToggleIsMobile |
@@ -149,5 +186,10 @@ export type CoreActions = ToggleLeftPane |
   Logout |
   LogoutSuccess |
   SetRequestCount |
-  SetCompanyName;
+  SetCompanyName |
+  RequestSocialAccounts |
+  RequestSocialAccountsSuccess |
+  RequestSocialAccountsFail |
+  RequestFacebookConnect |
+  RequestFacebookConnectFail;
 

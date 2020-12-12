@@ -7,7 +7,8 @@ import {Observable, of} from 'rxjs';
 import {IUser, User, UserAdapter} from '../models/IUser';
 import {LoginModel} from '@api/models/LoginModel';
 import {FacebookAuthService} from '@app/auth/services/facebook-auth.service';
-import {IChangePassword} from '@api/models';
+import {IChangePassword, ISocialAccount} from '@api/models';
+import {parseSocial} from '@api/models/auth/ISocialAccount';
 
 export interface RegisterModel {
   firstName: string;
@@ -23,6 +24,7 @@ export interface RegisterModel {
 export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth/';
+  private socialUrl = environment.apiUrl + 'social/';
   private facebookUrl = environment.apiUrl + 'social/facebook/';
 
   constructor(private http: HttpClient,
@@ -64,8 +66,18 @@ export class AuthService {
     );
   }
 
+  socialAccounts(): Observable<ISocialAccount[]> {
+    return this.http.get<any[]>(this.socialUrl + 'accounts/').pipe(
+      map(items => items.map(i => parseSocial(i)))
+    )
+  }
+
   facebookLogin(authToken): Observable<IUser> {
     return this.authenticateFacebook(authToken);
+  }
+
+  facebookConnect(accessToken) {
+    return this.http.post(this.facebookUrl + 'connect/', {access_token: accessToken});
   }
 
   register(form: RegisterModel): Observable<IUser> {

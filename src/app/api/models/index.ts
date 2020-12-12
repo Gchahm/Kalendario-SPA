@@ -21,6 +21,7 @@ export {RequestModel, RequestAdapter, AddAppointmentWriteModel} from './RequestM
 export {IReadModel} from './IReadModel';
 
 export { IChangePassword } from './auth/ChangePassword';
+export { ISocialAccount } from './auth/ISocialAccount';
 
 
 export type Partial<T> = {

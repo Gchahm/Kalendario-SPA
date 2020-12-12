@@ -1,0 +1,8 @@
+
+<h3>Facebook</h3>
+<div *ngIf="facebook; else joinFacebook">
+  Joined on: {{facebook.dateJoined | momentDate}}
+</div>
+<ng-template #joinFacebook>
+  <auth-facebook-connect-shell></auth-facebook-connect-shell>
+</ng-template>

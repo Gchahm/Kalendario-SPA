@@ -6,7 +6,13 @@
           <customer-user-details [user]="user$ | async"></customer-user-details>
         </div>
       </mat-tab>
-      <mat-tab label="Social Accounts">Content 2</mat-tab>
+      <mat-tab label="Social Accounts">
+        <ng-template matTabContent>
+          <div class="d-flex justify-content-center mt-2">
+            <auth-social-accounts-shell></auth-social-accounts-shell>
+          </div>
+        </ng-template>
+      </mat-tab>
       <mat-tab label="Change Password">
         <div class="d-flex justify-content-center mt-2">
           <auth-change-password-shell></auth-change-password-shell>

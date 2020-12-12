@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import FacebookEventCallback = facebook.FacebookEventCallback;
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,28 @@ export class FacebookAuthService {
   //   });
   // }
 
-  fbEnsureInit(callback) {
+  onLogin(callback: FacebookEventCallback<'auth.login'>) {
+    this.fbEnsureInit( () => {
+      FB.Event.subscribe('auth.authResponseChange', callback);
+    });
+  }
+
+  unsubscribeLogin(callback: () => void) {
+    this.fbEnsureInit(() => {
+      FB.Event.unsubscribe('auth.authResponseChange', callback);
+    });
+  }
+
+  createButton() {
+    this.fbEnsureInit(() => {
+      // Ensures that the button doesn't initialized twice (this happens when the login page is the first opened page)
+      if (!document.getElementById('facebook')) {
+        FB.XFBML.parse();
+      }
+    });
+  }
+
+  private fbEnsureInit(callback: () => void) {
     if (!this.initialized) {
       setTimeout(() => this.fbEnsureInit(callback), 50);
     } else {

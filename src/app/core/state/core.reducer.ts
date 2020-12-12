@@ -1,6 +1,6 @@
 import {ApiError} from '@api/Errors';
 import {CoreActions, CoreActionsType} from './core.actions';
-import {IUser, User} from '@api/models';
+import {ISocialAccount, IUser, User} from '@api/models';
 
 export interface CoreState {
   isMobile: boolean;
@@ -11,6 +11,9 @@ export interface CoreState {
   apiError: ApiError | null;
   requestCount: number;
   companyName: string | null;
+  socialAccounts: ISocialAccount[];
+  socialAccountError: any;
+  facebookConnectError: any;
 }
 
 export const initialState: CoreState = {
@@ -21,7 +24,10 @@ export const initialState: CoreState = {
   user: null,
   apiError: null,
   requestCount: 0,
-  companyName: null
+  companyName: null,
+  socialAccounts: [],
+  socialAccountError: null,
+  facebookConnectError: null
 };
 
 
@@ -102,6 +108,27 @@ export function reducer(state: CoreState = initialState, action: CoreActions): C
       return {
         ...state,
         companyName: action.payload
+      };
+    }
+
+    case CoreActionsType.RequestSocialAccountsSuccess: {
+      return {
+        ...state,
+        socialAccounts: action.payload
+      };
+    }
+
+    case CoreActionsType.RequestSocialAccountsFail: {
+      return {
+        ...state,
+        socialAccountError: action.payload
+      };
+    }
+
+    case CoreActionsType.RequestFacebookConnectFail: {
+      return {
+        ...state,
+        facebookConnectError: action.payload
       };
     }
 

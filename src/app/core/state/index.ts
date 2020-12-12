@@ -89,3 +89,7 @@ export const hasPermission: MemoizedSelectorWithProps<object, { readonly model?:
   (user, {model}) => userPermissions(user, model)
 );
 
+export const getSocialAccounts = createSelector(
+  getCoreFeature,
+  state => state.socialAccounts
+);

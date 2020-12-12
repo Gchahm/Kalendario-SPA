@@ -23,9 +23,8 @@ export class CoreEffects {
   @Effect()
   InitializeUser$: Observable<Action> = this.actions$.pipe(
     ofType(actions.CoreActionsType.InitializeUser),
-    mergeMap(action =>
-      this.authService.whoAmI().pipe(
-        map(user => (new actions.InitializeUserSuccess(user))),
+    mergeMap(action => this.authService.whoAmI().pipe(
+      map(user => (new actions.InitializeUserSuccess(user))),
       )
     )
   );
@@ -34,11 +33,10 @@ export class CoreEffects {
   login$: Observable<Action> = this.actions$.pipe(
     ofType(actions.CoreActionsType.Login),
     map((action: actions.Login) => action.payload),
-    mergeMap(loginModel =>
-      this.authService.login(loginModel).pipe(
-        tap(user => this.toastService.success(`welcome back ${user.firstName}`)),
-        map(user => (new actions.LoginSuccess(user))),
-        catchError(err => of(new actions.LoginFail(err)))
+    mergeMap(loginModel => this.authService.login(loginModel).pipe(
+      tap(user => this.toastService.success(`welcome back ${user.firstName}`)),
+      map(user => (new actions.LoginSuccess(user))),
+      catchError(err => of(new actions.LoginFail(err)))
       )
     )
   );
@@ -48,9 +46,9 @@ export class CoreEffects {
     ofType(actions.CoreActionsType.FacebookLogin),
     map((action: actions.FacebookLogin) => action.payload),
     mergeMap((authToken) => this.authService.facebookLogin(authToken).pipe(
-        tap(user => this.toastService.success(`welcome back ${user.firstName}`)),
-        map(user => (new actions.LoginSuccess(user))),
-        catchError(err => of(new actions.LoginFail(err)))
+      tap(user => this.toastService.success(`welcome back ${user.firstName}`)),
+      map(user => (new actions.LoginSuccess(user))),
+      catchError(err => of(new actions.LoginFail(err)))
       )
     )
   );
@@ -60,11 +58,10 @@ export class CoreEffects {
   register$: Observable<Action> = this.actions$.pipe(
     ofType(actions.CoreActionsType.Register),
     map((action: actions.Register) => action.payload),
-    mergeMap(registerModel =>
-      this.authService.register(registerModel).pipe(
-        tap(user => this.toastService.success(`welcome ${user.firstName}`)),
-        map(user => (new actions.RegisterSuccess(user))),
-        catchError(err => of(new actions.RegisterFail(err)))
+    mergeMap(registerModel => this.authService.register(registerModel).pipe(
+      tap(user => this.toastService.success(`welcome ${user.firstName}`)),
+      map(user => (new actions.RegisterSuccess(user))),
+      catchError(err => of(new actions.RegisterFail(err)))
       )
     )
   );
@@ -72,12 +69,32 @@ export class CoreEffects {
   @Effect()
   logout$: Observable<Action> = this.actions$.pipe(
     ofType(actions.CoreActionsType.Logout),
-    mergeMap(action =>
-      this.authService.logout().pipe(
-        map(() => {
-          this.router.navigate(['/']);
-          return new actions.LogoutSuccess();
-        }),
+    mergeMap(action => this.authService.logout().pipe(
+      map(() => {
+        this.router.navigate(['/']);
+        return new actions.LogoutSuccess();
+      }),
+      )
+    )
+  );
+
+  @Effect()
+  RequestSocialAccounts$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.CoreActionsType.RequestSocialAccounts),
+    mergeMap(action => this.authService.socialAccounts().pipe(
+      map((accounts) => new actions.RequestSocialAccountsSuccess(accounts)),
+      catchError(err => of(new actions.RequestSocialAccountsFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  re: Observable<Action> = this.actions$.pipe(
+    ofType(actions.CoreActionsType.RequestFacebookConnect),
+    map((action: actions.RequestFacebookConnect) => action.payload),
+    mergeMap( payload => this.authService.facebookConnect(payload).pipe(
+      map(() => new actions.RequestSocialAccounts()),
+      catchError(err => of(new actions.RequestFacebookConnectFail(err)))
       )
     )
   );

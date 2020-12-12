@@ -12,7 +12,10 @@ import {UserDetailsComponent} from '@app/auth/components/user-details/user-detai
 import {AuthRoutingModule} from '@app/auth/auth-routing.module';
 import { ChangePasswordShellComponent } from './containers/change-password-shell/change-password-shell.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import {FormComponent} from '@app/auth/commom/form.component';
+import { FacebookConnectShellComponent } from './containers/facebook-connect-shell/facebook-connect-shell.component';
+import { FacebookButtonComponent } from './components/facebook-button/facebook-button.component';
+import { SocialAccountsShellComponent } from './containers/social-providers-shell/social-accounts-shell.component';
+import { SocialAccountsComponent } from './components/social-providers-list/social-accounts.component';
 
 
 @NgModule({
@@ -27,9 +30,13 @@ import {FormComponent} from '@app/auth/commom/form.component';
     ChangePasswordShellComponent,
     ResendConfirmationComponent,
     ConfirmEmailComponent,
+    FacebookConnectShellComponent,
 
     LoginRegisterPageComponent,
     ProfilePageComponent,
+    FacebookButtonComponent,
+    SocialAccountsShellComponent,
+    SocialAccountsComponent,
   ],
   imports: [
     SharedModule,
