@@ -4,7 +4,7 @@ import {select, Store} from '@ngrx/store';
 import * as fromCore from '@core/state';
 import * as fromRoot from '@app/state';
 import {LoginModel} from '@api/models/LoginModel';
-import {RegisterModel} from '@shared/services/auth.service';
+import {RegisterModel} from '@api/clients/auth.service';
 import {ApiError} from '@api/Errors';
 import {Observable} from 'rxjs';
 

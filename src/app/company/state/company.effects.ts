@@ -134,7 +134,7 @@ export class CompanyEffects {
       this.store.select(fromCompany.getCurrentRequest)
     ),
     mergeMap(([customerNotes, request]) => this.requestClient.confirm(request.id, customerNotes).pipe(
-      tap(r => this.router.navigate(['cust', 'requests'], {queryParams: {id: request.id}})),
+      tap(r => this.router.navigate(['my', 'requests'], {queryParams: {id: request.id}})),
       map(result => (new actions.SetCurrentRequest(result))),
       catchError(err => of(new actions.LoadSlotsFail(err)))
       )

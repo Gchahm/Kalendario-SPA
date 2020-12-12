@@ -1,6 +1,6 @@
 import {inject, TestBed} from '@angular/core/testing';
 import {CanViewCustomersGuard} from './can-view-customers.guard';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock} from '@shared/test/stubs';
 import {IUser, User} from '@api/models';
 import {of} from 'rxjs';

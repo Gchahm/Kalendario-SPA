@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
-import {IUser, User, UserAdapter} from '../../api/models/IUser';
+import {IUser, User, UserAdapter} from '../models/IUser';
 import {LoginModel} from '@api/models/LoginModel';
 import {FacebookAuthService} from '@shared/services/facebook-auth.service';
 
@@ -72,6 +72,10 @@ export class AuthService {
       tap(({key}) => AuthService.setToken(key)),
       switchMap(() => this.whoAmI())
     );
+  }
+
+  passwordChange() {
+    // password/change/
   }
 
   public resendConfirmationEmail() {

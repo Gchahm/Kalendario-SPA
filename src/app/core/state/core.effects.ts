@@ -7,7 +7,7 @@ import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 import {Action} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import * as actions from './core.actions';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {ToastService} from '@shared/services/toast.service';
 import {Router} from '@angular/router';
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {RegisterModel} from '@shared/services/auth.service';
+import {RegisterModel} from '@api/clients/auth.service';
 import {ApiError, ValidationError} from '@api/Errors';
 import {reactiveFormErrorHandler} from '@shared/common/Util';
 import {ErrorStateMatcher} from '@angular/material/core';

@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {CanViewEmployeesGuard} from './can-view-employees.guard';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock} from '@shared/test/stubs';
 import {User} from '@api/models';
 import {of} from 'rxjs';

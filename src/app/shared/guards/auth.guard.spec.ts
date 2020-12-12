@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {AuthGuard} from './auth.guard';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock, RouterMock, ToastServiceMock} from '@shared/test/stubs';
 import {Router} from '@angular/router';
 import {ToastService} from '@shared/services/toast.service';

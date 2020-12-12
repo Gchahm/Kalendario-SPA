@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LoginComponent} from './login.component';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock, RouterMock, ToastServiceMock} from '@shared/test/stubs';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';

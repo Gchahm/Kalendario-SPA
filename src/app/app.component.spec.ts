@@ -1,6 +1,6 @@
 import {async, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock, MediaMatcherServiceMock} from '@shared/test/stubs';
 import {MediaMatcherService} from '@shared/services/media-matcher.service';
 import {NgReduxTestingModule} from '@angular-redux/store/testing';

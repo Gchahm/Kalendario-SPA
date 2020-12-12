@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ResendConfirmationComponent} from './resend-confirmation.component';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock, RouterMock, ToastServiceMock} from '@shared/test/stubs';
 import {ToastService} from '@shared/services/toast.service';
 import {ActivatedRoute, convertToParamMap, Router} from '@angular/router';

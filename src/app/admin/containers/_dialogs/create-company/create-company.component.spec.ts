@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CreateCompanyComponent} from './create-company.component';
 import {FormBuilder} from '@angular/forms';
-import {AuthService} from '@shared/services/auth.service';
+import {AuthService} from '@api/clients/auth.service';
 import {AuthServiceMock, RouterMock} from '@shared/test/stubs';
 import {Router} from '@angular/router';
 import {NgReduxTestingModule} from '@angular-redux/store/testing';

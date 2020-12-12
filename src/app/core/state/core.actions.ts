@@ -2,7 +2,7 @@ import {Action} from '@ngrx/store';
 import {IUser} from '@api/models';
 import {ApiError} from '@api/Errors';
 import {LoginModel} from '@api/models/LoginModel';
-import {RegisterModel} from '@shared/services/auth.service';
+import {RegisterModel} from '@api/clients/auth.service';
 
 export enum CoreActionsType {
   ToggleLeftPane = '[Core] Toggle LeftPane',
