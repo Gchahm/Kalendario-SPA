@@ -16,6 +16,8 @@ import { FacebookConnectShellComponent } from './containers/facebook-connect-she
 import { FacebookButtonComponent } from './components/facebook-button/facebook-button.component';
 import { SocialAccountsShellComponent } from './containers/social-providers-shell/social-accounts-shell.component';
 import { SocialAccountsComponent } from './components/social-providers-list/social-accounts.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
+import { ResetPasswordFormComponent } from './components/reset-password-form/reset-password-form.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { SocialAccountsComponent } from './components/social-providers-list/soci
     FacebookButtonComponent,
     SocialAccountsShellComponent,
     SocialAccountsComponent,
+    ResetPasswordPageComponent,
+    ResetPasswordFormComponent,
   ],
   imports: [
     SharedModule,

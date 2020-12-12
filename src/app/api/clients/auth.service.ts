@@ -24,8 +24,7 @@ export interface RegisterModel {
 export class AuthService {
 
   private baseUrl = environment.apiUrl + 'auth/';
-  private socialUrl = environment.apiUrl + 'social/';
-  private facebookUrl = environment.apiUrl + 'social/facebook/';
+  private facebookUrl = environment.apiUrl + 'auth/facebook/';
 
   constructor(private http: HttpClient,
               private facebookAuth: FacebookAuthService,
@@ -67,7 +66,7 @@ export class AuthService {
   }
 
   socialAccounts(): Observable<ISocialAccount[]> {
-    return this.http.get<any[]>(this.socialUrl + 'accounts/').pipe(
+    return this.http.get<any[]>(this.baseUrl + 'accounts/').pipe(
       map(items => items.map(i => parseSocial(i)))
     )
   }
@@ -85,6 +84,10 @@ export class AuthService {
       tap(({key}) => AuthService.setToken(key)),
       switchMap(() => this.whoAmI())
     );
+  }
+
+  resetPassword(form: {email: string}) {
+    return this.http.post<{detail: string}>(this.baseUrl + 'password/reset/', form);
   }
 
   changePassword(model: IChangePassword) {

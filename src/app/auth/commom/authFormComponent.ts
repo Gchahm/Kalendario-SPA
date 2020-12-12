@@ -3,7 +3,7 @@ import {ApiError, ValidationError} from '@api/Errors';
 import {reactiveFormErrorHandler} from '@shared/common/Util';
 import {FormGroup} from '@angular/forms';
 
-export abstract class FormComponent<T>  {
+export abstract class AuthFormComponent<T>  {
   @Input() set apiError(error: ApiError) {
     if (error instanceof ValidationError) {
       reactiveFormErrorHandler(this.form, error);

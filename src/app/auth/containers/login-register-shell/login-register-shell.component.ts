@@ -31,8 +31,4 @@ export class LoginRegisterShellComponent implements OnInit {
   register(model: RegisterModel) {
     this.store.dispatch(new fromCore.Register(model));
   }
-
-  toggleShowLogin() {
-    this.registerMode = !this.registerMode;
-  }
 }

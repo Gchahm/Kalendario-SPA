@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {RegisterModel} from '@api/clients/auth.service';
-import {FormComponent} from '@app/auth/commom/form.component';
+import {AuthFormComponent} from '@app/auth/commom/authFormComponent';
 import {matcherValidator} from '@app/auth/commom/validators';
 
 @Component({
@@ -9,7 +9,7 @@ import {matcherValidator} from '@app/auth/commom/validators';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent extends FormComponent<RegisterModel> implements OnInit {
+export class RegisterComponent extends AuthFormComponent<RegisterModel> implements OnInit {
   constructor(private fb: FormBuilder) {
     super();
   }

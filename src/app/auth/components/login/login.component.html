@@ -1,6 +1,6 @@
-<app-kalendario-card class="login-card mat-elevation-z5">
+<app-kalendario-card class="card-400 mat-elevation-z5">
   <h5 class="card-title mb-3 text-center">Log in to Kalendario</h5>
-  <form [formGroup]="form" class="form-signin" (submit)="loginClick()">
+  <form [formGroup]="form" class="form-100" (submit)="loginClick()">
     <mat-error *ngIf="form.errors">
       <mat-list *ngFor="let error of form.errors">{{error}}</mat-list>
     </mat-error>
@@ -29,7 +29,7 @@
       </mat-error>
     </div>
 
-    <button class="btn btn-admin btn-primary mb-2" [disabled]="!form.valid" type="submit">Login</button>
+    <button class="btn btn-block btn-primary mb-2" [disabled]="!form.valid" type="submit">Login</button>
   </form>
 
   <div class="text-center my-4">
@@ -39,7 +39,8 @@
   <auth-facebook-login-shell></auth-facebook-login-shell>
 
   <hr/>
-  <div class="text-center">
-    <a (click)="registerClick()">Can't login? Sign up for an account</a>
-  </div>
+  <ol class="breadcrumb justify-content-center">
+    <li class="breadcrumb-item c-pointer"><a routerLink="/reset-password">Can't Login?</a></li>
+    <li class="breadcrumb-item c-pointer"><a routerLink="/register">Sign Up</a></li>
+  </ol>
 </app-kalendario-card>

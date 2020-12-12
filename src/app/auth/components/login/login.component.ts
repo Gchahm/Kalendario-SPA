@@ -36,8 +36,4 @@ export class LoginComponent implements OnInit {
   loginClick() {
     this.login.emit(this.form.value);
   }
-
-  registerClick() {
-    this.register.emit();
-  }
 }

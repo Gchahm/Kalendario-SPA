@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {IChangePassword} from '@api/models';
-import {FormComponent} from '@app/auth/commom/form.component';
+import {AuthFormComponent} from '@app/auth/commom/authFormComponent';
 import {matcherValidator} from '@app/auth/commom/validators';
 
 @Component({
@@ -9,7 +9,7 @@ import {matcherValidator} from '@app/auth/commom/validators';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
-export class ChangePasswordComponent extends FormComponent<IChangePassword> implements OnInit {
+export class ChangePasswordComponent extends AuthFormComponent<IChangePassword> implements OnInit {
   constructor(public fb: FormBuilder) {
     super();
   }
