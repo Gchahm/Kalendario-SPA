@@ -10,16 +10,12 @@ import * as fromCustomers from '@customers/state';
 import {EffectsModule} from '@ngrx/effects';
 import {CustomersEffects} from '@customers/state/customers.effects';
 import {CustomersRoutingModule} from '@customers/customers-routing.module';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 @NgModule({
   declarations: [
     RequestsComponent,
     RequestCardComponent,
     RequestsPageComponent,
-    ProfilePageComponent,
-    UserDetailsComponent
   ],
   imports: [
     CommonModule,

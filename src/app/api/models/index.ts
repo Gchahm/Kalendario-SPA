@@ -20,6 +20,8 @@ export {Person, IPerson} from './IPerson';
 export {RequestModel, RequestAdapter, AddAppointmentWriteModel} from './RequestModel';
 export {IReadModel} from './IReadModel';
 
+export { IChangePassword } from './auth/ChangePassword';
+
 
 export type Partial<T> = {
   [P in keyof T]?: T[P];

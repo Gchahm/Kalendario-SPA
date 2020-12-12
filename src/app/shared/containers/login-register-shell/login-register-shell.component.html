@@ -1,9 +1,0 @@
-<app-login *ngIf="!registerMode; else registerTemplate"
-           [apiError]="apiError$ | async"
-           (login)="login($event)"
-           (register)="toggleShowLogin()"></app-login>
-<ng-template #registerTemplate>
-  <app-register [apiError]="apiError$ | async"
-                (register)="register($event)"
-                (login)="toggleShowLogin()"></app-register>
-</ng-template>

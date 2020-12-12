@@ -5,7 +5,7 @@ import {EmployeeListPageComponent} from '@company/containers/employee-list-page/
 import {EmployeeDetailsPageComponent} from '@company/pages/employee-details-page/employee-details-page.component';
 import {LandingPageComponent} from '@company/pages/landing-page/landing-page.component';
 import {CartPageComponent} from '@company/pages/cart-page/cart-page.component';
-import {AuthGuard} from '@shared/guards/auth.guard';
+import {AuthGuard} from '@shared/../auth/guards/auth.guard';
 
 const routes: Routes = [
 

@@ -18,9 +18,6 @@ import {WarningDialogComponent} from './components/warning-dialog/warning-dialog
 import {DateAdapter, MAT_DATE_FORMATS} from '@angular/material/core';
 import {MomentUtcDateAdapter, MY_FORMATS} from './adapters/MomentUtcDateAdapter';
 import {AppointmentStatusPipe} from './pipes/appointment-status.pipe';
-import {LoginRegisterShellComponent} from './containers/login-register-shell/login-register-shell.component';
-import {RegisterComponent} from '@shared/components/register/register.component';
-import {LoginComponent} from '@shared/components/login/login.component';
 import {TextInputDialogComponent} from './components/text-input-dialog/text-input-dialog.component';
 import {KalendarioCardComponent} from './components/kalendario-card/kalendario-card.component';
 import {CompanyAvatarComponent} from '@shared/components/logo-avatar/company-avatar.component';
@@ -38,7 +35,6 @@ import {CreateCustomerDialogComponent} from '@shared/containers/create-customer/
 import {CustomerFormComponent} from '@shared/components/customer-form/customer-form.component';
 import { MomentDatePipe } from './pipes/moment-date.pipe';
 import { FabButtonComponent } from './components/fab-button/fab-button.component';
-import { FacebookLoginShellComponent } from './containers/facebook-login-shell/facebook-login-shell.component';
 
 
 @NgModule({
@@ -50,9 +46,6 @@ import { FacebookLoginShellComponent } from './containers/facebook-login-shell/f
     DurationInputComponent,
     WarningDialogComponent,
     AppointmentStatusPipe,
-    LoginRegisterShellComponent,
-    RegisterComponent,
-    LoginComponent,
     TextInputDialogComponent,
     KalendarioCardComponent,
     CompanyAvatarComponent,
@@ -69,7 +62,6 @@ import { FacebookLoginShellComponent } from './containers/facebook-login-shell/f
     CustomerFormComponent,
     MomentDatePipe,
     FabButtonComponent,
-    FacebookLoginShellComponent
   ],
   imports: [
     CommonModule,
@@ -105,9 +97,6 @@ import { FacebookLoginShellComponent } from './containers/facebook-login-shell/f
         DurationInputComponent,
         MatMomentDateModule,
         AppointmentStatusPipe,
-        RegisterComponent,
-        LoginComponent,
-        LoginRegisterShellComponent,
         TextInputDialogComponent,
         KalendarioCardComponent,
         KalendarioCardComponent,

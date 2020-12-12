@@ -6,7 +6,8 @@ import {Observable, of} from 'rxjs';
 
 import {IUser, User, UserAdapter} from '../models/IUser';
 import {LoginModel} from '@api/models/LoginModel';
-import {FacebookAuthService} from '@shared/services/facebook-auth.service';
+import {FacebookAuthService} from '@app/auth/services/facebook-auth.service';
+import {IChangePassword} from '@api/models';
 
 export interface RegisterModel {
   firstName: string;
@@ -74,8 +75,8 @@ export class AuthService {
     );
   }
 
-  passwordChange() {
-    // password/change/
+  changePassword(model: IChangePassword) {
+    return this.http.post(this.baseUrl + 'password/change/', model);
   }
 
   public resendConfirmationEmail() {

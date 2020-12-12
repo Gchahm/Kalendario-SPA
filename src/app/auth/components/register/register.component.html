@@ -1,0 +1,84 @@
+<app-kalendario-card class="card-400 mat-elevation-z5" *ngIf="form">
+  <h4 class="card-title">Register</h4>
+  <form [formGroup]="form" (submit)="submit()" class="form-100">
+
+    <div class="form-group" *ngIf="form.get('firstName') as firstName">
+      <input type="text"
+             class="form-control"
+             placeholder="First Name"
+             formControlName="firstName">
+      <mat-error>
+        <div *ngIf="firstName.hasError('firstName') && firstName.touched">first name is required</div>
+        <div *ngIf="firstName.errors?.serverError">
+          {{firstName.errors?.serverError}}
+        </div>
+      </mat-error>
+    </div>
+
+    <div class="form-group" *ngIf="form.get('lastName') as lastName">
+      <input type="text"
+             class="form-control"
+             placeholder="Last Name"
+             formControlName="lastName">
+
+      <mat-error>
+        <div *ngIf="lastName.hasError('lastName') && lastName.touched">last name is required</div>
+        <div *ngIf="lastName.errors?.serverError">
+          {{lastName.errors?.serverError}}
+        </div>
+      </mat-error>
+    </div>
+
+    <div class="form-group" *ngIf="form.get('email') as email">
+      <input type="email"
+             class="form-control"
+             placeholder="Email Address"
+             formControlName="email">
+      <mat-error>
+        <div *ngIf="email.hasError('required') && email.touched">email is required</div>
+        <div *ngIf="email.hasError('email') && email.touched">please enter a valid email address</div>
+        <div *ngIf="email.errors?.serverError">
+          {{email.errors?.serverError}}
+        </div>
+      </mat-error>
+    </div>
+
+    <div class="form-group" *ngIf="form.get('password1') as password1">
+      <input type="password"
+             class="form-control"
+             placeholder="Password"
+             formControlName="password1">
+
+      <mat-error>
+        <div *ngIf="password1.hasError('required') && password1.touched">password is required</div>
+        <div *ngIf="password1.hasError('minlength') && password1.touched">
+          password must have more than 8 characters
+        </div>
+        <div *ngIf="password1.errors?.serverError">
+          {{password1.errors?.serverError}}
+        </div>
+      </mat-error>
+    </div>
+
+    <div class="form-group" *ngIf="form.get('password2') as password2">
+      <input type="password"
+             class="form-control"
+             placeholder="Password"
+             formControlName="password2">
+
+      <mat-error>
+        <div *ngIf="form.hasError('mismatch') && password2.touched">
+          password must match
+        </div>
+        <div *ngIf="password2.errors?.serverError">
+          {{password2.errors?.serverError}}
+        </div>
+      </mat-error>
+    </div>
+
+    <button class="btn btn-primary mb-2" [disabled]="!form.valid" type="submit">Register</button>
+    <button class="btn btn-accent-dark" type="button" (click)="emitCancel()">Already Registered? Login</button>
+
+  </form>
+</app-kalendario-card>
+

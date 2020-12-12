@@ -10,6 +10,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {AuthModule} from '@app/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {environment} from '../environments/environment';
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
+    AuthModule,
     AppRoutingModule,
     LayoutModule,
     StoreModule.forRoot({}),

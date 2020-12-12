@@ -1,0 +1,9 @@
+<auth-login *ngIf="!registerMode; else registerTemplate"
+            [apiError]="apiError$ | async"
+            (login)="login($event)"
+            (register)="toggleShowLogin()"></auth-login>
+<ng-template #registerTemplate>
+  <auth-register [apiError]="apiError$ | async"
+                 (submitForm)="register($event)"
+                 (cancel)="toggleShowLogin()"></auth-register>
+</ng-template>
