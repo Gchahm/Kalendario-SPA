@@ -6,7 +6,8 @@ import {NotLoggedInGuard} from '@app/auth/guards/not-logged-in.guard';
 import {ConfirmEmailComponent} from '@app/auth/components/confirm-email/confirm-email.component';
 import {ResendConfirmationComponent} from '@app/auth/containers/resend-confirmation/resend-confirmation.component';
 import {ProfilePageComponent} from '@app/auth/pages/profile-page/profile-page.component';
-import {ResetPasswordPageComponent} from '@app/auth/pages/reset-password-page/reset-password-page.component';
+import {ResetPasswordRequestPageComponent} from '@app/auth/pages/reset-password-request-page/reset-password-request-page.component';
+import {ResetPasswordConfirmPageComponent} from '@app/auth/pages/reset-password-confirm-page/reset-password-confirm-page.component';
 
 const routes: Routes = [
   {
@@ -24,8 +25,13 @@ const routes: Routes = [
     component: ConfirmEmailComponent,
   },
   {
+    path: 'password-reset/confirm/:uidb64/:token',
+    component: ResetPasswordConfirmPageComponent,
+    canActivate: [NotLoggedInGuard]
+  },
+  {
     path: 'reset-password',
-    component: ResetPasswordPageComponent,
+    component: ResetPasswordRequestPageComponent,
     canActivate: [NotLoggedInGuard]
   },
   {

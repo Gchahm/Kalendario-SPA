@@ -22,6 +22,7 @@ export {IReadModel} from './IReadModel';
 
 export { IChangePassword } from './auth/ChangePassword';
 export { ISocialAccount } from './auth/ISocialAccount';
+export { ResetPassword } from './auth/ResetPassword';
 
 
 export type Partial<T> = {

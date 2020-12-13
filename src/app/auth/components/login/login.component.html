@@ -1,13 +1,13 @@
 <app-kalendario-card class="card-400 mat-elevation-z5">
   <h5 class="card-title mb-3 text-center">Log in to Kalendario</h5>
-  <form [formGroup]="form" class="form-100" (submit)="loginClick()">
+  <form [formGroup]="form" class="form-100" (ngSubmit)="loginClick()">
     <mat-error *ngIf="form.errors">
       <mat-list *ngFor="let error of form.errors">{{error}}</mat-list>
     </mat-error>
 
     <div class="form-group">
       <input id="inputEmail"
-             class="form-control form-control-admin"
+             class="form-control"
              type="email"
              placeholder="Enter email"
              formControlName="email">
@@ -19,7 +19,7 @@
 
     <div class="form-group">
       <input id="inputPassword"
-             class="form-control form-control-admin"
+             class="form-control"
              type="password"
              placeholder="Enter password"
              formControlName="password">

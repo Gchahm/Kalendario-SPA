@@ -3,11 +3,11 @@ import {AuthService} from '@api/clients/auth.service';
 import {ApiError} from '@api/Errors';
 
 @Component({
-  selector: 'app-reset-password-page',
-  templateUrl: './reset-password-page.component.html',
-  styleUrls: ['./reset-password-page.component.css']
+  selector: 'auth-reset-password-request-page',
+  templateUrl: './reset-password-request-page.component.html',
+  styleUrls: ['./reset-password-request-page.component.css']
 })
-export class ResetPasswordPageComponent {
+export class ResetPasswordRequestPageComponent {
   email: string;
   apiError: ApiError;
   message: string;
@@ -15,7 +15,7 @@ export class ResetPasswordPageComponent {
   constructor(private authService: AuthService) { }
 
   submit(form: {email: string}) {
-    this.authService.resetPassword(form)
+    this.authService.resetPasswordRequest(form)
       .toPromise()
       .then(r => this.message = r.detail)
       .catch(e => this.apiError = e);

@@ -1,6 +1,6 @@
 <app-kalendario-card class="card-400 mat-elevation-z5" *ngIf="form">
   <h4 class="card-title">Register</h4>
-  <form [formGroup]="form" (submit)="submit()" class="form-100">
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form-100">
 
     <div class="form-group" *ngIf="form.get('firstName') as firstName">
       <input type="text"

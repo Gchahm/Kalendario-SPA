@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
 import {IUser, User, UserAdapter} from '../models/IUser';
 import {LoginModel} from '@api/models/LoginModel';
 import {FacebookAuthService} from '@app/auth/services/facebook-auth.service';
-import {IChangePassword, ISocialAccount} from '@api/models';
+import {IChangePassword, ISocialAccount, ResetPassword} from '@api/models';
 import {parseSocial} from '@api/models/auth/ISocialAccount';
 
 export interface RegisterModel {
@@ -86,8 +86,12 @@ export class AuthService {
     );
   }
 
-  resetPassword(form: {email: string}) {
+  resetPasswordRequest(form: {email: string}) {
     return this.http.post<{detail: string}>(this.baseUrl + 'password/reset/', form);
+  }
+
+  resetPasswordConfirm(form: ResetPassword) {
+    return this.http.post<any>(this.baseUrl + 'password/reset/confirm/', form);
   }
 
   changePassword(model: IChangePassword) {

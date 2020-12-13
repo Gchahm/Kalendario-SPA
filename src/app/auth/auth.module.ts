@@ -16,8 +16,10 @@ import { FacebookConnectShellComponent } from './containers/facebook-connect-she
 import { FacebookButtonComponent } from './components/facebook-button/facebook-button.component';
 import { SocialAccountsShellComponent } from './containers/social-providers-shell/social-accounts-shell.component';
 import { SocialAccountsComponent } from './components/social-providers-list/social-accounts.component';
-import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
-import { ResetPasswordFormComponent } from './components/reset-password-form/reset-password-form.component';
+import { ResetPasswordRequestPageComponent } from './pages/reset-password-request-page/reset-password-request-page.component';
+import { ResetPasswordRequestFormComponent } from './components/reset-password-request-form/reset-password-request-form.component';
+import { ResetPasswordConfirmPageComponent } from './pages/reset-password-confirm-page/reset-password-confirm-page.component';
+import { ResetPasswordConfirmFormComponent } from './components/reset-password-confirm-form/reset-password-confirm-form.component';
 
 
 @NgModule({
@@ -39,8 +41,10 @@ import { ResetPasswordFormComponent } from './components/reset-password-form/res
     FacebookButtonComponent,
     SocialAccountsShellComponent,
     SocialAccountsComponent,
-    ResetPasswordPageComponent,
-    ResetPasswordFormComponent,
+    ResetPasswordRequestPageComponent,
+    ResetPasswordRequestFormComponent,
+    ResetPasswordConfirmPageComponent,
+    ResetPasswordConfirmFormComponent,
   ],
   imports: [
     SharedModule,

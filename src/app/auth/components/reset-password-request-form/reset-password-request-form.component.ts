@@ -3,11 +3,11 @@ import {AuthFormComponent} from '@app/auth/commom/authFormComponent';
 import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'auth-reset-password-form',
-  templateUrl: './reset-password-form.component.html',
-  styleUrls: ['./reset-password-form.component.css']
+  selector: 'auth-reset-password-request-form',
+  templateUrl: './reset-password-request-form.component.html',
+  styleUrls: ['./reset-password-request-form.component.css']
 })
-export class ResetPasswordFormComponent extends AuthFormComponent<{ email: string }> implements OnInit {
+export class ResetPasswordRequestFormComponent extends AuthFormComponent<{ email: string }> implements OnInit {
   constructor(public fb: FormBuilder) {
     super();
   }
