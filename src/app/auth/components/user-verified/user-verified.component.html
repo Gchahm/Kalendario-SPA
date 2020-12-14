@@ -1,0 +1,9 @@
+<i *ngIf="verified; else unverified"
+   class="fa fa-check-circle c-success"
+   [matTooltip]="toolTip"></i>
+
+<ng-template #unverified>
+    <i class="fa fa-times-circle c-danger c-pointer"
+       [matTooltip]="toolTip"
+       (click)="resendEmail()"></i>
+</ng-template>

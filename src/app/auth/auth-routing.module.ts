@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AuthGuard} from '@shared/../auth/guards/auth.guard';
 import {LoginRegisterPageComponent} from '@core/../auth/pages/login-register-page/login-register-page.component';
 import {NotLoggedInGuard} from '@app/auth/guards/not-logged-in.guard';
-import {ConfirmEmailComponent} from '@app/auth/components/confirm-email/confirm-email.component';
+import {ConfirmEmailPageComponent} from '@app/auth/pages/confirm-email-page/confirm-email-page.component';
 import {ResendConfirmationComponent} from '@app/auth/containers/resend-confirmation/resend-confirmation.component';
 import {ProfilePageComponent} from '@app/auth/pages/profile-page/profile-page.component';
 import {ResetPasswordRequestPageComponent} from '@app/auth/pages/reset-password-request-page/reset-password-request-page.component';
@@ -22,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'account-confirm-email/:emailKey',
-    component: ConfirmEmailComponent,
+    component: ConfirmEmailPageComponent,
   },
   {
     path: 'password-reset/confirm/:uidb64/:token',

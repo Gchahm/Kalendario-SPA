@@ -89,14 +89,37 @@ export class CoreEffects {
   );
 
   @Effect()
-  re: Observable<Action> = this.actions$.pipe(
+  RequestFacebookConnect$: Observable<Action> = this.actions$.pipe(
     ofType(actions.CoreActionsType.RequestFacebookConnect),
     map((action: actions.RequestFacebookConnect) => action.payload),
-    mergeMap( payload => this.authService.facebookConnect(payload).pipe(
+    mergeMap(payload => this.authService.facebookConnect(payload).pipe(
       map(() => new actions.RequestSocialAccounts()),
       catchError(err => of(new actions.RequestFacebookConnectFail(err)))
       )
     )
   );
 
+  @Effect({dispatch: false})
+  RequestResendConfirmEmail$ = this.actions$.pipe(
+    ofType(actions.CoreActionsType.RequestResendConfirmEmail),
+    mergeMap(() => this.authService.resendConfirmationEmail().pipe(
+      tap(s => this.toastService.success('Email Resent')),
+      )
+    )
+  );
+
+  @Effect()
+  RequestConfirmEmail$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.CoreActionsType.RequestConfirmEmail),
+    map((action: actions.RequestConfirmEmail) => action.payload),
+    mergeMap(payload => this.authService.verifyEmail(payload).pipe(
+      tap(s => this.toastService.success('email confirmed')),
+      map(() => new actions.RequestConfirmEmailSuccess()),
+      catchError(err => {
+        this.toastService.error('couldn\'t confirm the email address');
+        return of(new actions.RequestConfirmEmailFail());
+      })
+      )
+    )
+  );
 }

@@ -25,6 +25,7 @@ export class User implements IUser {
   groups: number[] = [];
   permissions: string[] = [];
   company: Company;
+  verified: boolean;
 
   static AnonymousUser(): IUser {
     return ANONYMOUS_USER;
@@ -49,6 +50,7 @@ export class User implements IUser {
     this.groups = data.groups ? data.groups : [];
     this.permissions = data.permissions ? data.permissions : [];
     this.company = data.owner ? Company.fromJs(data.owner) : null;
+    this.verified = !!data.verified;
   }
 }
 
@@ -62,6 +64,7 @@ export interface IUser extends IReadModel {
   groups: number[];
   permissions: string[];
   company: Company;
+  verified: boolean;
 }
 
 

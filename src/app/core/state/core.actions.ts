@@ -27,6 +27,10 @@ export enum CoreActionsType {
   RequestSocialAccountsFail = '[Core] Request Social Accounts Fail',
   RequestFacebookConnect = '[Core] Request Facebook Connect',
   RequestFacebookConnectFail = '[Core] Request Facebook Connect Fail',
+  RequestResendConfirmEmail = '[Core] Request Resend Confirm Email',
+  RequestConfirmEmail = '[Core] Request Confirm Email',
+  RequestConfirmEmailSuccess = '[Core] Request Confirm Email Success',
+  RequestConfirmEmailFail = '[Core] Request Confirm Email Fail',
 }
 
 export class ToggleLeftPane implements Action {
@@ -171,6 +175,25 @@ export class RequestFacebookConnectFail implements Action {
   }
 }
 
+export class RequestResendConfirmEmail implements Action {
+  readonly type = CoreActionsType.RequestResendConfirmEmail;
+}
+
+export class RequestConfirmEmail implements Action {
+  readonly type = CoreActionsType.RequestConfirmEmail;
+
+  constructor(public payload: any) {
+  }
+}
+
+export class RequestConfirmEmailSuccess implements Action {
+  readonly type = CoreActionsType.RequestConfirmEmailSuccess;
+}
+
+export class RequestConfirmEmailFail implements Action {
+  readonly type = CoreActionsType.RequestConfirmEmailFail;
+}
+
 export type CoreActions = ToggleLeftPane |
   ToggleShowLeftPaneButton |
   ToggleIsMobile |
@@ -191,5 +214,8 @@ export type CoreActions = ToggleLeftPane |
   RequestSocialAccountsSuccess |
   RequestSocialAccountsFail |
   RequestFacebookConnect |
-  RequestFacebookConnectFail;
+  RequestFacebookConnectFail |
+  RequestConfirmEmail |
+  RequestConfirmEmailSuccess |
+  RequestConfirmEmailFail;
 

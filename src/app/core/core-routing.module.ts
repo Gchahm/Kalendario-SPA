@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {NotLoggedInGuard} from '../auth/guards/not-logged-in.guard';
 import {AuthGuard} from '@shared/../auth/guards/auth.guard';
 import {CreateCompanyComponent} from '@admin/containers/_dialogs/create-company/create-company.component';
-import {ConfirmEmailComponent} from '../auth/components/confirm-email/confirm-email.component';
+import {ConfirmEmailPageComponent} from '../auth/pages/confirm-email-page/confirm-email-page.component';
 import {ResendConfirmationComponent} from '../auth/containers/resend-confirmation/resend-confirmation.component';
 import {LoginRegisterPageComponent} from '@core/../auth/pages/login-register-page/login-register-page.component';
 
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'account-confirm-email/:emailKey',
-    component: ConfirmEmailComponent,
+    component: ConfirmEmailPageComponent,
   },
   {
     path: 'resend-confirm-email/:when',

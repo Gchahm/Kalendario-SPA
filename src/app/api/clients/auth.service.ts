@@ -99,7 +99,7 @@ export class AuthService {
   }
 
   public resendConfirmationEmail() {
-    return this.http.post(this.baseUrl + 'resend/', {});
+    return this.http.post(this.baseUrl + 'email/', {});
   }
 
   public whoAmI(): Observable<IUser> {

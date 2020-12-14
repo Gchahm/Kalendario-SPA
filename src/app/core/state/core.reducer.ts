@@ -14,6 +14,8 @@ export interface CoreState {
   socialAccounts: ISocialAccount[];
   socialAccountError: any;
   facebookConnectError: any;
+  emailConfirmed: boolean;
+  emailConfirmationFailure: boolean;
 }
 
 export const initialState: CoreState = {
@@ -27,7 +29,9 @@ export const initialState: CoreState = {
   companyName: null,
   socialAccounts: [],
   socialAccountError: null,
-  facebookConnectError: null
+  facebookConnectError: null,
+  emailConfirmed: false,
+  emailConfirmationFailure: false
 };
 
 
@@ -129,6 +133,20 @@ export function reducer(state: CoreState = initialState, action: CoreActions): C
       return {
         ...state,
         facebookConnectError: action.payload
+      };
+    }
+
+    case CoreActionsType.RequestConfirmEmailSuccess: {
+      return {
+        ...state,
+        emailConfirmed: true
+      };
+    }
+
+    case CoreActionsType.RequestConfirmEmailFail: {
+      return {
+        ...state,
+        emailConfirmationFailure: true
       };
     }
 

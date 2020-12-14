@@ -5,7 +5,7 @@ import {LoginComponent} from '@app/auth/components/login/login.component';
 import {RegisterComponent} from '@app/auth/components/register/register.component';
 import {LoginRegisterShellComponent} from '@app/auth/containers/login-register-shell/login-register-shell.component';
 import {LoginRegisterPageComponent} from '@app/auth/pages/login-register-page/login-register-page.component';
-import {ConfirmEmailComponent} from '@app/auth/components/confirm-email/confirm-email.component';
+import {ConfirmEmailPageComponent} from '@app/auth/pages/confirm-email-page/confirm-email-page.component';
 import {ResendConfirmationComponent} from '@app/auth/containers/resend-confirmation/resend-confirmation.component';
 import {ProfilePageComponent} from '@app/auth/pages/profile-page/profile-page.component';
 import {UserDetailsComponent} from '@app/auth/components/user-details/user-details.component';
@@ -20,6 +20,7 @@ import { ResetPasswordRequestPageComponent } from './pages/reset-password-reques
 import { ResetPasswordRequestFormComponent } from './components/reset-password-request-form/reset-password-request-form.component';
 import { ResetPasswordConfirmPageComponent } from './pages/reset-password-confirm-page/reset-password-confirm-page.component';
 import { ResetPasswordConfirmFormComponent } from './components/reset-password-confirm-form/reset-password-confirm-form.component';
+import { UserVerifiedComponent } from './components/user-verified/user-verified.component';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { ResetPasswordConfirmFormComponent } from './components/reset-password-c
     FacebookLoginShellComponent,
     ChangePasswordShellComponent,
     ResendConfirmationComponent,
-    ConfirmEmailComponent,
+    ConfirmEmailPageComponent,
     FacebookConnectShellComponent,
 
     LoginRegisterPageComponent,
@@ -45,6 +46,7 @@ import { ResetPasswordConfirmFormComponent } from './components/reset-password-c
     ResetPasswordRequestFormComponent,
     ResetPasswordConfirmPageComponent,
     ResetPasswordConfirmFormComponent,
+    UserVerifiedComponent,
   ],
   imports: [
     SharedModule,

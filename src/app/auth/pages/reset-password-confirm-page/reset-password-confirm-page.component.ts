@@ -18,8 +18,7 @@ export class ResetPasswordConfirmPageComponent implements OnInit {
   apiError: ApiError;
 
   constructor(private route: ActivatedRoute,
-              private authService: AuthService,
-              private toast: ToastService) {
+              private authService: AuthService) {
   }
 
 

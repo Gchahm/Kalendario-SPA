@@ -93,3 +93,13 @@ export const getSocialAccounts = createSelector(
   getCoreFeature,
   state => state.socialAccounts
 );
+
+export const getEmailConfirmed = createSelector(
+  getCoreFeature,
+  state => state.emailConfirmed
+);
+
+export const getEmailConfirmationFailure = createSelector(
+  getCoreFeature,
+  state => state.emailConfirmationFailure
+);
