@@ -1,0 +1,49 @@
+<div [hidden]="editMode" class="list-items-header">
+  <button class="btn btn-light" matTooltip="new" (click)="create.emit()">
+    <i class="fa fa-plus c-primary"></i>
+  </button>
+  <button class="btn btn-light" matTooltip="edit" (click)="edit.emit(true)" [disabled]="!selectedModel">
+    <i class="fa fa-pen c-accent"></i>
+  </button>
+  <button class="btn btn-light" matTooltip="delete" (click)="delete.emit()" [disabled]="!selectedModel">
+    <i class="fa fa-trash c-warn"></i>
+  </button>
+  <div>
+    <mat-form-field appearance="standard">
+      <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="searchValue">
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="model-list-container"
+     [class.pretty-scroll]="!mobileView">
+  <div *ngIf="modelList" class="list-group">
+    <button *ngFor="let model of modelList"
+            (click)="selected.emit(model)"
+            [disabled]="editMode"
+            [class.c-accent]="model.id === selectedModel?.id"
+            type="button"
+            class="list-group-item list-group-item-action border-0">
+      {{model.name}}
+    </button>
+  </div>
+  <div *ngIf="categorizedList" class="list-group">
+    <ng-container *ngFor="let category of categories">
+      <button (click)="showHideCategory(category)"
+              type="button"
+              class="list-group-item list-group-item-action p-0 border-0">
+        <span class="badge badge-left py-3 badge-light">{{categorizedList[category].length}}</span>
+        <span class="badge">{{category}}</span>
+      </button>
+      <div [@expandCollapse]="showItems(category)">
+        <button *ngFor="let model of categorizedList[category]"
+                (click)="selected.emit(model)"
+                [disabled]="editMode"
+                [class.c-accent]="model.id === selectedModel?.id"
+                type="button" class="list-group-item list-group-item-action border-0">
+          {{model.name}}
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

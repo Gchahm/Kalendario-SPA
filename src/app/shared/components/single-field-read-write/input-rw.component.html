@@ -4,14 +4,12 @@
       <i [hidden]="editMode" class="fa fa-pen"></i>
     </span>
   <div class="sf-field" [hidden]="editMode">
-    <div class="d-flex">
-      <div *ngIf="useColor" class="color-picker-box" [style.background-color]="value"></div>
-      <div *ngIf="useList">{{listItem()}}</div>
-      <div *ngIf="!useColor && !useList">
-        <p>
-          {{value}}
-        </p>
-      </div>
+    <div *ngIf="useColor" class="color-picker-box" [style.background-color]="value"></div>
+    <div *ngIf="useList">{{listItem()}}</div>
+    <div *ngIf="!useColor && !useList">
+      <p>
+        {{value}}
+      </p>
     </div>
   </div>
   <div class="sf-field" [hidden]="!editMode">

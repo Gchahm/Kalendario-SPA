@@ -1,34 +1,10 @@
-.model-create {
-  width: 100%;
+.list-part {
+  max-height: calc(100vh - 65px);
+  overflow-y: hidden;
 }
 
-button:focus {
-  outline: 0;
-}
-
-.model-list {
+.detail-part {
+  min-height: calc(100vh - 65px);
+  max-height: calc(100vh - 65px);
   overflow-y: scroll;
-  min-height: 50vh;
-  max-height: 80vh;
-}
-
-.edit-desktop-container {
-  text-align: right;
-}
-
-.edit-mobile-container > button {
-  width: 100%;
-}
-
-.action-button {
-  margin-top: 10px;
-}
-
-.model-list-content {
-  margin: 2rem 2rem 0 2rem;
-}
-
-.badge-left {
-  min-width: 3rem;
-  max-width: 3rem;
 }

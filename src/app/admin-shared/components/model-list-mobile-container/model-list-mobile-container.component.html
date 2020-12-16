@@ -1,0 +1,29 @@
+<mat-tab-group mat-stretch-tabs
+               [(selectedIndex)]="tabIndex"
+               mat-align-tabs="center"
+               class="text-center">
+  <mat-tab label="List">
+    <div class="model-list-mobile-tab-content">
+      <app-model-list-items [editMode]="editMode"
+                            [modelList]="modelList"
+                            [categorizedList]="categorizedList"
+                            [selectedModel]="selectedModel"
+                            [searchValue]="searchValue"
+                            (selected)="selectModel($event)"
+                            (search)="search.emit($event)"
+                            (edit)="edit.emit($event)"
+                            (create)="create.emit($event)"
+                            (delete)="delete.emit()"></app-model-list-items>
+    </div>
+  </mat-tab>
+  <mat-tab label="Details">
+    <div class="model-list-mobile-tab-content mx-2">
+      <app-model-list-details [selectedModel]="selectedModel"
+                              [editMode]="editMode"
+                              [noSelectionTitle]="noSelectionTitle"
+                              [noSelectionText]="noSelectionText">
+        <ng-content></ng-content>
+      </app-model-list-details>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,93 +1,56 @@
-<div class="model-list-content" *ngIf="!mobileView; else mobileContainer">
-  <div class="row" *ngIf="modelList || categorizedList; else spinner">
-    <div class="col-sm-4 col-md-3 col-lg-2">
-      <ng-container *ngTemplateOutlet="list"></ng-container>
-    </div>
-    <div class="col-sm-8 col-md-9 col-lg-10">
-      <ng-container *ngTemplateOutlet="details"></ng-container>
+<ng-container *ngIf="modelList || categorizedList; else spinner">
+  <div class="mx-4" *ngIf="!mobileView; else mobileContainer">
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-lg-2 list-part">
+        <app-model-list-items [editMode]="editMode"
+                              [modelList]="modelList"
+                              [categorizedList]="categorizedList"
+                              [selectedModel]="selectedModel"
+                              [searchValue]="searchValue"
+                              (selected)="selected.emit($event)"
+                              (search)="search.emit($event)"
+                              (edit)="edit.emit($event)"
+                              (create)="create.emit($event)"
+                              (delete)="onDelete()"></app-model-list-items>
+      </div>
+      <div class="col-sm-8 col-md-9 col-lg-10">
+        <div class="detail-part mx-4 pretty-scroll">
+          <app-model-list-details [selectedModel]="selectedModel"
+                                  [editMode]="editMode"
+                                  [noSelectionTitle]="noSelectionTitle"
+                                  [noSelectionText]="noSelectionText">
+            <ng-container *ngTemplateOutlet="details"></ng-container>
+          </app-model-list-details>
+        </div>
+      </div>
     </div>
   </div>
-  <ng-template #spinner>
-    <mat-spinner class="m-auto"></mat-spinner>
-  </ng-template>
-</div>
+</ng-container>
 
-<ng-template #mobileContainer>
-  <mat-tab-group [(selectedIndex)]="tabIndex" mat-align-tabs="center">
-    <mat-tab label="List">
-      <ng-container *ngTemplateOutlet="list"></ng-container>
-    </mat-tab>
-    <mat-tab label="Details">
-      <div class="p-4 vh-100">
-        <ng-container *ngTemplateOutlet="details"></ng-container>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+<ng-template #spinner>
+  <mat-spinner class="m-auto"></mat-spinner>
 </ng-template>
 
-<ng-template #list>
-  <div [hidden]="editMode" class="text-center">
-    <button class="btn btn-light" matTooltip="new" (click)="onCreate()">
-      <i class="fa fa-plus c-primary"></i>
-    </button>
-    <button class="btn btn-light" matTooltip="edit" (click)="toggleEdit()" [disabled]="!selectedModel">
-      <i class="fa fa-pen c-accent"></i>
-    </button>
-    <button class="btn btn-light" matTooltip="delete" (click)="onDelete()" [disabled]="!selectedModel">
-      <i class="fa fa-trash c-warn"></i>
-    </button>
-    <div>
-      <mat-form-field appearance="standard">
-        <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="searchVal" (keyup)="searchChange()">
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="model-list pretty-scroll" [class.text-center]="mobileView">
-
-    <div *ngIf="modelList" class="list-group">
-      <button *ngFor="let model of modelList"
-              (click)="selectModel(model)"
-              [disabled]="editMode"
-              [class.c-accent]="model.id === selectedModel?.id"
-              type="button"
-              class="list-group-item list-group-item-action border-0">
-        {{model.name}}
-      </button>
-    </div>
-
-    <div *ngIf="categorizedList" class="list-group">
-      <ng-container *ngFor="let category of categories()">
-        <button (click)="showHideCategory(category)"
-                type="button"
-                class="list-group-item list-group-item-action p-0 border-0">
-          <span class="badge badge-left py-3 badge-light">{{categorizedList[category].length}}</span>
-          <span class="badge">{{category}}</span>
-        </button>
-        <div [@expandCollapse]="showItems(category)">
-          <button *ngFor="let model of categorizedList[category]"
-                  (click)="selectModel(model)"
-                  [disabled]="editMode"
-                  [class.c-accent]="model.id === selectedModel?.id"
-                  type="button" class="list-group-item list-group-item-action border-0">
-            {{model.name}}
-          </button>
-        </div>
-      </ng-container>
-    </div>
-
-  </div>
+<ng-template #mobileContainer>
+  <app-model-list-mobile-container [editMode]="editMode"
+                                   [selectedModel]="selectedModel"
+                                   [categorizedList]="categorizedList"
+                                   [modelList]="modelList"
+                                   [searchValue]="searchValue"
+                                   [noSelectionTitle]="noSelectionTitle"
+                                   [noSelectionText]="noSelectionText"
+                                   (selected)="selected.emit($event)"
+                                   (search)="search.emit($event)"
+                                   (edit)="edit.emit($event)"
+                                   (create)="create.emit($event)"
+                                   (delete)="onDelete()">
+    <ng-container *ngTemplateOutlet="details"></ng-container>
+  </app-model-list-mobile-container>
 </ng-template>
 
 <ng-template #details>
-  <ng-container *ngIf="showContent; else noSelection">
-    <ng-content></ng-content>
-  </ng-container>
-  <ng-template #noSelection>
-    <div class="d-flex justify-content-center mt-5">
-      <div>
-        <h3>{{noSelectionTitle}}</h3>
-        <p>{{noSelectionText}}</p>
-      </div>
-    </div>
-  </ng-template>
+  <ng-content></ng-content>
 </ng-template>
+
+
+

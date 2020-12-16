@@ -1,0 +1,11 @@
+<ng-container *ngIf="showContent; else noSelection">
+  <ng-content></ng-content>
+</ng-container>
+<ng-template #noSelection>
+  <div class="d-flex justify-content-center mt-5">
+    <div>
+      <h3>{{noSelectionTitle}}</h3>
+      <p>{{noSelectionText}}</p>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,7 @@
+div.model-list-mobile-tab-content {
+  // Remove navbar, remove tab header, remove bottom
+  //max-height: calc(100vh - 65 - 49 - 55);
+  min-height: calc(100vh - 170px);
+  max-height: calc(100vh - 170px);
+  overflow-y: scroll;
+}

@@ -1,0 +1,17 @@
+.model-list-container {
+  max-height: calc(100% - 121px);
+  overflow-y: scroll;
+}
+
+.badge-left {
+  min-width: 3rem;
+  max-width: 3rem;
+}
+
+button:focus {
+  outline: 0;
+}
+
+.list-items-header {
+  text-align: center;
+}
