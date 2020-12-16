@@ -100,7 +100,7 @@ export class CustomerInputComponent implements ControlValueAccessor, DoCheck, On
   }
 
   onKeyPress(key: KeyboardEvent) {
-    if (key.code === 'Backspace') {
+    if (key.code === 'Backspace' && this.form.value.id !== 0) {
       this.form.patchValue({id: 0, name: ''});
     }
   }

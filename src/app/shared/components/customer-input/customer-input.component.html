@@ -1,25 +1,28 @@
 <div [formGroup]="form">
-  <input type="text"
-         class="form-control form-control-admin"
-         placeholder="customer"
-         formControlName="name"
-         [matAutocomplete]="auto"
-         (keyup)="onKeyPress($event)">
-  <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let customer of customers$ | async"
-                [value]="customer.name"
-                (onSelectionChange)="selected(customer)">
-      {{ customer.name }}
-      <small>{{customer.phone}}</small>
-    </mat-option>
-    <mat-option (click)="createCustomer()">
-      <i class="fa fa-plus-circle"></i>
-      create customer
-    </mat-option>
-  </mat-autocomplete>
-  <div class="customer-details" *ngIf="customer$ | async as customer">
-    {{customer?.email}}
-    <br/>
-    {{customer?.phone}}
+  <div class="input-group">
+    <input type="text"
+           class="form-control form-control-admin"
+           placeholder="customer"
+           formControlName="name"
+           [matAutocomplete]="auto"
+           (keyup)="onKeyPress($event)">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let customer of customers$ | async"
+                  [value]="customer.name"
+                  (onSelectionChange)="selected(customer)">
+        {{ customer.name }}
+        <small>{{customer.phone}}</small>
+      </mat-option>
+    </mat-autocomplete>
+    <div class="customer-details" *ngIf="customer$ | async as customer">
+      {{customer?.email}}
+      <br/>
+      {{customer?.phone}}
+    </div>
+    <span class="input-group-text input-group-text-admin c-pointer" matTooltip="Add New Customer">
+      <i (click)="createCustomer()" class="fa fa-plus-circle"></i>
+    </span>
   </div>
+
 </div>
+
