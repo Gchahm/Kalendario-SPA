@@ -10,7 +10,7 @@ import {State} from '@app/state';
   templateUrl: './dashboard-container-shell.component.html',
   styleUrls: ['./dashboard-container-shell.component.css']
 })
-export class DashboardContainerShellComponent extends BaseContainer implements OnInit, OnDestroy {
+export class DashboardContainerShellComponent extends BaseContainer implements OnDestroy {
 
   @Input() routes: DashBoardRoute[];
 
@@ -18,7 +18,7 @@ export class DashboardContainerShellComponent extends BaseContainer implements O
     super(store);
   }
 
-  ngOnInit(): void {
+  showLeftPaneButton(): void {
     this.store.dispatch(new fromCore.ToggleShowLeftPaneButton(true));
   }
 

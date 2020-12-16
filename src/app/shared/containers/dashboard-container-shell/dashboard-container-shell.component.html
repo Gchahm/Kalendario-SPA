@@ -1,7 +1,19 @@
-<shared-dashboard-container [isMobile]="isMobile$ | async"
+<shared-dashboard-container *ngIf="!(isMobile$ | async); else mobileContainer"
                             [user]="user$ | async"
                             [leftPaneOpen]="leftPaneOpen$ | async"
                             [routes]="routes"
-                            (toggleShowLeftPane)="toggleShowLeftPane()">
-  <ng-content></ng-content>
+                            (toggleShowLeftPane)="toggleShowLeftPane()"
+                            (toggleShowLeftPaneButton)="showLeftPaneButton()">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
 </shared-dashboard-container>
+
+<ng-template #mobileContainer>
+  <auth-dashboard-mobile-container [routes]="routes"
+                                   [user]="user$ | async">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </auth-dashboard-mobile-container>
+</ng-template>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

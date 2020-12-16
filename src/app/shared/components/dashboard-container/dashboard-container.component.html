@@ -1,20 +1,19 @@
-<div class="shared-dashboard-container" [class.admin-dashboard-is-mobile]="isMobile">
+<div class="shared-dashboard-container">
   <mat-sidenav-container class="shared-dashboard-sidenav-container" [autosize]="true">
-    <mat-sidenav [mode]="isMobile ? 'over' : 'side'"
-                 [fixedInViewport]="isMobile"
+    <mat-sidenav [mode]="'side'"
+                 [fixedInViewport]="false"
                  fixedTopGap="56"
-                 [opened]="!isMobile || leftPaneOpen">
+                 [opened]="leftPaneOpen">
       <mat-nav-list *ngIf="user">
         <ng-container *ngFor="let route of routes">
           <a *ngIf="!route.fn || route.fn(user)"
              mat-list-item
              routerLink="{{route.path}}"
-             routerLinkActive #rla="routerLinkActive"
-             (click)="toggleIfMobile()">
+             routerLinkActive #rla="routerLinkActive">
             <i [matTooltip]="route.path | titlecase"
                class="fa fa-{{route.icon}} c-pointer"
                [class.c-primary]="rla.isActive"></i>
-            <span class="ml-2" [@expandCollapse]="leftPaneOpen">
+            <span class="ml-2" *ngIf="leftPaneOpen">
               {{route.path | titlecase}}
             </span>
           </a>

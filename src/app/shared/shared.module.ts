@@ -35,6 +35,7 @@ import {CreateCustomerDialogComponent} from '@shared/containers/create-customer/
 import {CustomerFormComponent} from '@shared/components/customer-form/customer-form.component';
 import { MomentDatePipe } from './pipes/moment-date.pipe';
 import { FabButtonComponent } from './components/fab-button/fab-button.component';
+import { DashboardMobileContainerComponent } from './components/dashboard-mobile-container/dashboard-mobile-container.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { FabButtonComponent } from './components/fab-button/fab-button.component
     CustomerFormComponent,
     MomentDatePipe,
     FabButtonComponent,
+    DashboardMobileContainerComponent,
   ],
   imports: [
     CommonModule,

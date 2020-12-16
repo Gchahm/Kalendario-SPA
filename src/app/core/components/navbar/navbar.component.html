@@ -1,5 +1,5 @@
 <mat-toolbar class="navbar-container">
-  <mat-toolbar-row class="bg-white company-shadow-1">
+  <mat-toolbar-row class="bg-white" [class.company-shadow-1]="!isMobile">
 
     <button *ngIf="showLeftPaneButton" mat-icon-button (click)="toggleLeftPane.emit()">
       <i class="fa fa-bars fix-size"></i>

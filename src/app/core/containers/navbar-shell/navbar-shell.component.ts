@@ -1,28 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {IUser} from '@api/models';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '@app/state';
 import * as fromCore from '@core/state';
+import {BaseContainer} from '@app/containers/BaseContainer';
 
 @Component({
   selector: 'app-navbar-shell',
   templateUrl: './navbar-shell.component.html',
   styleUrls: ['./navbar-shell.component.css']
 })
-export class NavbarShellComponent implements OnInit {
+export class NavbarShellComponent extends BaseContainer {
 
   isLoggedIn$: Observable<boolean>;
-  showLeftPaneButton$: Observable<boolean>
+  showLeftPaneButton$: Observable<boolean>;
   companyName$: Observable<string>;
-  user$: Observable<IUser>;
   cartCount$: Observable<number>;
 
-  constructor(private store: Store<fromRoot.State>) {
-  }
-
-  ngOnInit(): void {
-    this.user$ = this.store.pipe(fromCore.getCurrentUser);
+  constructor(store: Store<fromRoot.State>) {
+    super(store);
     this.showLeftPaneButton$ = this.store.select(fromCore.getShowLeftPaneButton);
     this.isLoggedIn$ = this.store.select(fromCore.getIsLoggedIn);
     this.cartCount$ = this.store.select(fromCore.getRequestCount);
