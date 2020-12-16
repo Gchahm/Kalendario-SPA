@@ -1,7 +1,13 @@
-div.model-list-mobile-tab-content {
+.model-list-mobile-tab-items {
   // Remove navbar, remove tab header, remove bottom
   //max-height: calc(100vh - 65 - 49 - 55);
-  min-height: calc(100vh - 170px);
-  max-height: calc(100vh - 170px);
+  height: calc(100vh - 169px);
+  overflow-y: hidden;
+}
+
+.model-list-mobile-tab-content {
+  // Remove navbar, remove tab header, remove bottom
+  //max-height: calc(100vh - 65 - 49 - 55);
+  height: calc(100vh - 169px);
   overflow-y: scroll;
 }
