@@ -1,13 +1,17 @@
 <ng-content></ng-content>
 <div class="mobile-tab">
   <div class="mobile-tab-container">
-    <span class="mobile-tab-item c-primary" *ngFor="let route of routes">
+    <div class="mobile-tab-item c-pointer"
+         routerLink="{{route.path}}"
+         *ngFor="let route of routes">
       <i *ngIf="!route.fn || route.fn(user)"
          [matTooltip]="route.path | titlecase"
-         routerLink="{{route.path}}"
          routerLinkActive #rla="routerLinkActive"
-         class="fa fa-{{route.icon}} c-pointer m-auto"
-         [class.c-accent]="rla.isActive"></i>
-    </span>
+         class="fa fa-{{route.icon}} route-icon"
+         [ngClass]="rla.isActive ? 'c-accent' : 'c-primary'"></i>
+      <div class="route-title">
+        {{route.path | titlecase}}
+      </div>
+    </div>
   </div>
 </div>

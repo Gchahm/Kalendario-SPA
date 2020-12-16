@@ -1,9 +1,10 @@
 .mobile-tab {
   position: fixed;
   bottom: 0;
-  max-width: 100vw;
+  width: 100vw;
   z-index: 100;
   background-color: #fafafa;
+  padding-top: 5px;
 }
 
 .mobile-tab-container {
@@ -12,10 +13,25 @@
 }
 
 .mobile-tab-item {
-  margin: 5px;
-  min-height: 40px;
-  min-width: 40px;
+  position: relative;
+  margin: 0 10px 50px 10px;
+  min-height: 100px;
+  min-width: 100px;
   display: flex;
   background-color: white;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.route-icon {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.route-title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
