@@ -1,6 +1,7 @@
-<ng-content></ng-content>
-
-<div class="mobile-tab bg-primary">
+<div class="mobile-tab-content">
+  <ng-content></ng-content>
+</div>
+<div class="mobile-tab">
   <div class="mobile-tab-container">
     <span class="mobile-tab-item c-primary" *ngFor="let route of routes">
       <i *ngIf="!route.fn || route.fn(user)"
