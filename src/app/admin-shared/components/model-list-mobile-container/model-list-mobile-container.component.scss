@@ -1,13 +1,13 @@
 .model-list-mobile-tab-items {
   // Remove navbar, remove tab header, remove bottom
-  //max-height: calc(100vh - 65 - 49 - 55);
-  height: calc(100vh - 269px);
+  //max-height: calc(100vh - 65 - 49 - 135);
+  height: calc(100vh - 249px);
   overflow-y: hidden;
 }
 
 .model-list-mobile-tab-content {
   // Remove navbar, remove tab header, remove bottom
-  //max-height: calc(100vh - 65 - 49 - 155);
-  height: calc(100vh - 269px);
+  //max-height: calc(100vh - 65 - 49 - 135);
+  height: calc(100vh - 249px);
   overflow-y: scroll;
 }

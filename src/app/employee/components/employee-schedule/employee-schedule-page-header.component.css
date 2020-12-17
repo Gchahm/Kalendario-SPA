@@ -1,21 +1,15 @@
-:host {
+.employee-header-container {
   display: block;
   position: -webkit-sticky;
   position: sticky;
-  background-color: #fafafa;
   top: 0;
   left: 0;
   z-index: 3;
 }
 
-/*.schedule-header-container {*/
-/*  position: -webkit-sticky;*/
-/*  position: sticky;*/
-/*  background-color: #fafafa;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  z-index: 3;*/
-/*}*/
+.bg-fa {
+  background-color: #fafafa;
+}
 
 .date-box {
   flex: 1;

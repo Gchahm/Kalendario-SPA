@@ -3,7 +3,7 @@
     <mat-sidenav [mode]="'side'"
                  [fixedInViewport]="false"
                  fixedTopGap="56"
-                 [opened]="leftPaneOpen">
+                 [opened]="true">
       <mat-nav-list *ngIf="user">
         <ng-container *ngFor="let route of routes">
           <a *ngIf="!route.fn || route.fn(user)"

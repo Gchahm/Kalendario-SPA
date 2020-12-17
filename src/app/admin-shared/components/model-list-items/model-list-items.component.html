@@ -15,7 +15,8 @@
   </div>
 </div>
 
-<div class="model-list-container">
+<div class="model-list-container"
+     [class.pretty-scroll]="!mobileView">
   <div *ngIf="modelList" class="list-group">
     <button *ngFor="let model of modelList"
             (click)="selected.emit(model)"
