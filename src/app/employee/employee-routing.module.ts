@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {DashBoardRoute} from '@shared/components/dashboard-container/dashboard-container.component';
-import {employeeDashboardRoutes} from '@app/employee/employee-dashboard-routes';
-import {EmployeeDashboardShellComponent} from '@app/employee/containers/employee-dashboard-shell/employee-dashboard-shell.component';
+import {EmployeeSchedulePageComponent} from '@app/employee/pages/employee-schedule-page/employee-schedule-page.component';
+import {IsEmployeeGuard} from '@app/employee/guards/is-employee.guard';
 
 const routes: DashBoardRoute[] = [
   {
     path: '',
     icon: '',
-    component: EmployeeDashboardShellComponent,
-    children: employeeDashboardRoutes
+    component: EmployeeSchedulePageComponent,
+    canActivate: [IsEmployeeGuard],
+
   },
 ];
 @NgModule({

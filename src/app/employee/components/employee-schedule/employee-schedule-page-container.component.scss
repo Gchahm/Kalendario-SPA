@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: white;
+  height: 100%;
+}
+
+.create-button {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+}

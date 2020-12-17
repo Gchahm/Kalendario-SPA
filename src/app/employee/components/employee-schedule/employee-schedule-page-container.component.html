@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-12 h5 text-center">
+    {{employee.name}}
+  </div>
+  <div class="col-12 h5 text-center">
+
+    <div class="d-flex c-primary mx-4 my-2">
+      <i class="fa fa-chevron-left c-pointer" (click)="previousDay()"></i>
+      <span class="w-100">{{currentDate.format('MMMM YYYY')}}</span>
+      <i class="fa fa-chevron-right c-pointer" (click)="nextDay()"></i>
+    </div>
+
+    <div class="d-flex justify-content-center h5 text-center">
+      <app-date-round-button *ngFor="let date of dates()"
+                             [active]="isCurrent(date)"
+                             [date]="date"
+                             (click)="emitDate(date)">
+      </app-date-round-button>
+    </div>
+
+    <hr/>
+
+    <div class="c-pointer" (click)="dp.open()">
+      <i class="fa fa-calendar mr-2"></i>
+      {{currentDate.format('dddd, DD MMMM YYYY')}}
+
+      <div class="visually-hidden">
+        <input [ngModel]="currentDate"
+               (ngModelChange)="emitDate($event)"
+               [matDatepicker]="dp"
+               (click)="dp.open()">
+      </div>
+    </div>
+
+    <mat-datepicker #dp [touchUi]="isMobile"></mat-datepicker>
+
+    <hr/>
+
+    {{availability()}}
+
+    <hr/>
+  </div>
+
+  <div class="col-12">
+    <ng-content></ng-content>
+  </div>
+
+</div>
+
+<button *ngIf="permissions.add"
+        mat-fab
+        (click)="add.emit(currentDate)"
+        class="create-button">
+  <i class="fa fa-plus"></i>
+</button>
+

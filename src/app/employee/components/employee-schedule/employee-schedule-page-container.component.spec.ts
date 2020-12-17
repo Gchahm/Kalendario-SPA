@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmployeeSchedulePageHeaderComponent } from './employee-schedule-page-header.component';
+import { EmployeeSchedulePageContainerComponent } from './employee-schedule-page-container.component';
 
 describe('EmployeeScheduleComponent', () => {
-  let component: EmployeeSchedulePageHeaderComponent;
-  let fixture: ComponentFixture<EmployeeSchedulePageHeaderComponent>;
+  let component: EmployeeSchedulePageContainerComponent;
+  let fixture: ComponentFixture<EmployeeSchedulePageContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmployeeSchedulePageHeaderComponent ]
+      declarations: [ EmployeeSchedulePageContainerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmployeeSchedulePageHeaderComponent);
+    fixture = TestBed.createComponent(EmployeeSchedulePageContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

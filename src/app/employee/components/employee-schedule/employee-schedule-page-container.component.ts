@@ -7,11 +7,11 @@ import {IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 import {getShift} from '@api/models/ISchedule';
 
 @Component({
-  selector: 'employee-schedule-page-header',
-  templateUrl: './employee-schedule-page-header.component.html',
-  styleUrls: ['./employee-schedule-page-header.component.css']
+  selector: 'employee-schedule-page-container',
+  templateUrl: './employee-schedule-page-container.component.html',
+  styleUrls: ['./employee-schedule-page-container.component.scss']
 })
-export class EmployeeSchedulePageHeaderComponent implements OnInit {
+export class EmployeeSchedulePageContainerComponent implements OnInit {
   @Input() currentDate: Moment;
   @Input() appointments: IAppointment[];
   @Input() permissions: ModelPermissions;

@@ -1,21 +1,28 @@
-<div class="container"
-     *ngIf="employee$ | async as employee">
-  <div class="schedule-container">
-    <employee-schedule-page-header [currentDate]="currentDate$ | async"
-                                   [appointments]="appointments$ | async"
-                                   [permissions]="permissions$ | async"
-                                   [employee]="employee"
-                                   [isMobile]="isMobile$ | async"
-                                   (updateCurrent)="updateCurrent($event)"
-                                   (add)="openCreateDialog($event, employee)">
-    </employee-schedule-page-header>
+<div *ngIf="!(isMobile$ | async); else schedule" class="d-flex justify-content-center h-100">
+  <div class="card-400 company-shadow-1 m-auto">
+    <ng-container *ngTemplateOutlet="schedule"></ng-container>
+  </div>
+</div>
+
+<ng-template #schedule>
+  <employee-schedule-page-container *ngIf="employee$ | async as employee"
+                                    [currentDate]="currentDate$ | async"
+                                    [appointments]="appointments$ | async"
+                                    [permissions]="permissions$ | async"
+                                    [employee]="employee"
+                                    [isMobile]="isMobile$ | async"
+                                    (updateCurrent)="updateCurrent($event)"
+                                    (add)="openCreateDialog($event, employee)">
+
     <div class="d-flex justify-content-center" *ngIf="isLoading$ | async; else appointments">
       <mat-spinner></mat-spinner>
     </div>
+
     <ng-template #appointments>
       <employee-schedule-appointment *ngFor="let apt of appointments$ | async"
                                      [appointment]="apt"
                                      [showEdit]="(permissions$ | async).change"></employee-schedule-appointment>
     </ng-template>
-  </div>
-</div>
+
+  </employee-schedule-page-container>
+</ng-template>
