@@ -1,6 +1,7 @@
 import {EventEmitter, Input, Output} from '@angular/core';
 import {ApiError, ValidationError} from '@api/Errors';
 import {FormControl, FormGroup} from '@angular/forms';
+import {reactiveFormErrorHandler} from '@shared/common/Util';
 
 export abstract class BaseRWComponent<R> {
   public form: FormGroup;
@@ -23,13 +24,7 @@ export abstract class BaseRWComponent<R> {
 
   @Input() set apiError(value: ApiError) {
     this._apiError = value;
-    if (value instanceof ValidationError) {
-      Object.keys(value.detail).forEach(prop => {
-        if (prop === 'nonFieldErrors') {
-          // TODO: SOMETHING SHOULD HAPPEN HERE
-        }
-      });
-    }
+    reactiveFormErrorHandler(this.form, value);
   }
   get apiError(): ApiError {
     return this._apiError;
