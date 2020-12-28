@@ -5,7 +5,7 @@ import {Appointment, IAppointment} from './Appointment';
 import {Moment} from 'moment';
 import {IEmployee} from './IEmployee';
 import {Company} from '@api/models/Company';
-import {IPerson, Person} from '@api/models/IPerson';
+import {IUser, User} from '@api/models/IUser';
 
 export interface RequestItem {
   employee: IEmployee;
@@ -25,7 +25,7 @@ export class RequestModel implements IReadModel {
   fee: number;
   complete: boolean;
   status: string;
-  person: IPerson;
+  user: IUser;
 
   static fromJS(data: any): RequestModel {
     data = typeof data === 'object' ? data : {};
@@ -43,9 +43,9 @@ export class RequestModel implements IReadModel {
       this.total = data.total;
       this.fee = data.fee;
       this.itemsCount = 0;
-      this.person = Person.fromJS(data.person);
+      this.user = User.fromJs(data.user);
       this.status = data.status;
-      this.name = this.person.name;
+      this.name = this.user.name;
       const items = {};
       for (const apt of data.appointments.map(a => Appointment.fromJS(a))) {
         this.itemsCount += 1;
