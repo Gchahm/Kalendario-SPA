@@ -18,7 +18,7 @@ export class SelfAppointmentFormComponent extends BaseFormComponent<IAppointment
       id: this.model.id,
       start: this.model.start,
       end: this.model.end,
-      customer: modelId(this.model.customer),
+      customer: null,
       employee: modelId(this.model.employee),
       service: modelId(this.model.service),
       status: this.model.status,

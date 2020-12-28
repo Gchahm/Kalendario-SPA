@@ -79,7 +79,7 @@ export interface IAppointmentWriteModel {
   id: number;
   start: Moment;
   end: Moment;
-  customer: number;
+  customer: number | null;
   employee: number;
   service: number;
   status: string;
