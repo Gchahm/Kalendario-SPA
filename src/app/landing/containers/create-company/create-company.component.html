@@ -1,0 +1,19 @@
+<form class="form-100" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group" *ngIf="form.get('name') as name">
+    <input class="form-control form-control-admin"
+           type="text"
+           placeholder="company name"
+           name="name"
+           formControlName="name">
+    <mat-error *ngIf="!name.pristine && name.hasError('required')">
+      name is required
+    </mat-error>
+    <mat-error *ngIf="name.hasError('shouldBeUnique')">
+      this name has already been taken
+    </mat-error>
+    <mat-error *ngIf="name.errors?.serverError">
+      {{name.errors?.serverError}}
+    </mat-error>
+  </div>
+  <button class="btn btn-block btn-accent" [disabled]="!form.valid" type="submit">create</button>
+</form>
