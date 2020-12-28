@@ -4,9 +4,9 @@ import * as moment from 'moment';
 import {Moment} from 'moment';
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
-import {IPerson, Person} from './IPerson';
 import {IReadModel} from './IReadModel';
 import {PermissionModels} from '@api/permissions';
+import {Customer, ICustomer} from '@api/models/ICustomer';
 
 export class Appointment implements IReadModel {
   static modelType = PermissionModels.appointment;
@@ -15,9 +15,9 @@ export class Appointment implements IReadModel {
   request: number;
   name;
   companyName;
-  customer;
-  employee;
-  service;
+  customer: ICustomer;
+  employee: IEmployee;
+  service: Service;
   lockEmployee: boolean;
   status;
   start: Moment;
@@ -37,7 +37,7 @@ export class Appointment implements IReadModel {
     this.id = data.id ? data.id : 0;
     this.request = data.request;
     this.companyName = data.owner?.name ? data.owner.name : '';
-    this.customer = Person.fromJS(data?.customer);
+    this.customer = Customer.fromJS(data?.customer);
     this.employee = Employee.fromJs(data?.employee);
     this.lockEmployee = data.lockEmployee;
     this.service = Service.fromJs(data?.service);
@@ -53,7 +53,7 @@ export class Appointment implements IReadModel {
 export interface IAppointment extends IReadModel {
   request: number;
   companyName;
-  customer: IPerson;
+  customer: ICustomer;
   employee: IEmployee;
   service: Service;
   lockEmployee: boolean;
