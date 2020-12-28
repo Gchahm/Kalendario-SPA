@@ -49,7 +49,7 @@ function transformToCalendarEvent(appointment: IAppointment): CalendarEvent {
   if (appointment.service !== null) {
     return {
       id: appointment.id,
-      title: appointment.status !== 'P' ? appointment.customer.firstName + ' - ' + appointment.service.name : 'pending request',
+      title: appointment.name,
       color: appointment.service.color,
       start: appointment.start,
       end: appointment.end,

@@ -13,8 +13,8 @@ export class Appointment implements IReadModel {
 
   id: number;
   request: number;
-  name;
-  companyName;
+  name: string;
+  companyName: string;
   customer: ICustomer;
   employee: IEmployee;
   service: Service;
@@ -37,7 +37,7 @@ export class Appointment implements IReadModel {
     this.id = data.id ? data.id : 0;
     this.request = data.request;
     this.companyName = data.owner?.name ? data.owner.name : '';
-    this.customer = Customer.fromJS(data?.customer);
+    this.customer = data?.customer ? Customer.fromJS(data?.customer) : null;
     this.employee = Employee.fromJs(data?.employee);
     this.lockEmployee = data.lockEmployee;
     this.service = Service.fromJs(data?.service);
@@ -47,6 +47,12 @@ export class Appointment implements IReadModel {
     this.customerNotes = data.customerNotes ? data.customerNotes : '';
     this.internalNotes = data.internalNotes ? data.internalNotes : '';
     this.deleted = data.deleted ? moment.utc(data.deleted) : null;
+
+    if (this.customer) {
+      this.name = this.status !== 'P' ? this.customer.firstName + ' - ' + this.service.name : 'pending request';
+    } else {
+      this.name = 'lock time: ' + this.internalNotes;
+    }
   }
 }
 
