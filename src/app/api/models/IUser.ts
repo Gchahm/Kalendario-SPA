@@ -1,6 +1,5 @@
 import {Adapter} from '@api/adapter';
 import {Injectable} from '@angular/core';
-import {IPerson, Person} from './IPerson';
 import {Company} from './Company';
 import {EmployeeResourceModel, IEmployeeResourceModel} from '@api/models/IEmployeeResourceModel';
 import {getApp, PermissionModels} from '@api/permissions';
@@ -21,7 +20,6 @@ export class User implements IUser {
   email: string;
   employee: IEmployeeResourceModel;
   employeeId: number;
-  person: IPerson;
   groups: number[] = [];
   permissions: string[] = [];
   company: Company;
@@ -46,7 +44,6 @@ export class User implements IUser {
     this.email = data.email ? data.email : '';
     this.employeeId = data.employeeId ? data.employeeId : '';
     this.employee = data.employee ? EmployeeResourceModel.fromJs(data.employee) : null;
-    this.person = data.person ? Person.fromJS(data.person) : null;
     this.groups = data.groups ? data.groups : [];
     this.permissions = data.permissions ? data.permissions : [];
     this.company = data.owner ? Company.fromJs(data.owner) : null;
@@ -60,7 +57,6 @@ export interface IUser extends IReadModel {
   email: string;
   employee: IEmployeeResourceModel;
   employeeId: number;
-  person: IPerson;
   groups: number[];
   permissions: string[];
   company: Company;
