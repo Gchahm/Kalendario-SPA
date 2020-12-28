@@ -1,0 +1,19 @@
+:host {
+  position: relative;
+  display: block;
+  /* Button Shadow 2 */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding-bottom: 1rem;
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.feature-box-content {
+  text-align: center;
+  background-color: #FFFFFF;
+}
