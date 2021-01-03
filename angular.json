@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kalendario-SPA": {
+    "kalendario": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/kalendario-SPA",
+            "outputPath": "dist/kalendario",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -128,18 +128,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kalendario-SPA:build"
+            "browserTarget": "kalendario:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "kalendario-SPA:build:production"
+              "browserTarget": "kalendario:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kalendario-SPA:build"
+            "browserTarget": "kalendario:build"
           }
         },
         "test": {
@@ -177,18 +177,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "kalendario-SPA:serve"
+            "devServerTarget": "kalendario:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "kalendario-SPA:serve:production"
+              "devServerTarget": "kalendario:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "kalendario-SPA",
+  "defaultProject": "kalendario",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"

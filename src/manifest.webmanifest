@@ -1,6 +1,6 @@
 {
-  "name": "kalendario-SPA",
-  "short_name": "kalendario-SPA",
+  "name": "kalendario",
+  "short_name": "kalendario",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
