@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submitForm()">
   <admin-input-rw formControlName="name" showName="Name"
                   (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
 
@@ -19,8 +19,8 @@
 
   <admin-input-rw formControlName="about" showName="About" inputType="textarea"
                   (edit)="emitEdit()" [editMode]="editMode" [apiError]="apiError"></admin-input-rw>
+  <div *ngIf="editMode">
+    <button class="btn btn-admin btn-ksuccess mr-3">Update</button>
+    <button class="btn btn-admin btn-danger" type="button" (click)="edit.emit(false)">Cancel</button>
+  </div>
 </form>
-<div *ngIf="editMode">
-  <button class="btn btn-admin btn-ksuccess mr-3" (click)="submitForm()">Update</button>
-  <button class="btn btn-admin btn-danger" type="button" (click)="edit.emit(false)">Cancel</button>
-</div>
