@@ -1,5 +1,6 @@
 import {FormGroup} from '@angular/forms';
 import {ValidationError} from '@api/Errors';
+import {isArray} from 'util';
 
 const NON_FIELD_ERRORS = 'nonFieldErrors';
 
@@ -7,7 +8,10 @@ const NON_FIELD_ERRORS = 'nonFieldErrors';
  The keys will match with a formControl name and this will ensure that the error will be raised against
  the correct control */
 export function reactiveFormErrorHandler(form: FormGroup, error: ValidationError) {
-  Object.keys(error.detail).forEach(prop => {
+  if (!error || !Array.isArray(error.detail)) {
+    return;
+  }
+  Object.keys(error?.detail).forEach(prop => {
     if (prop === NON_FIELD_ERRORS) {
       form.setErrors(error.detail[prop]);
     } else {
