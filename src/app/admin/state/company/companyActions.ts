@@ -17,6 +17,8 @@ export enum ActionTypes {
   SetCompany = '[AdminCompany] Set Company',
   SetConfig = '[AdminCompany] Set Config',
   SetApiError = '[AdminCompany] Set API Error',
+  SetStripeDetailsAPiError = '[AdminCompany] Set Stripe Details API Error',
+  SetStripeUrlAPiError = '[AdminCompany] Set Stripe URL API Error',
   RequestUpdateCompany = ' [AdminCompany] Request Update Company',
   RequestUpdateConfig = ' [AdminCompany] Request Update Config',
   RequestPhotoUpdate = ' [AdminCompany] Request Update Company Avatar',
@@ -62,6 +64,22 @@ export class SetConfig implements Action {
 
 export class SetApiError implements Action {
   readonly type = ActionTypes.SetApiError;
+
+  constructor(public payload: ApiError) {
+  }
+}
+
+
+export class SetStripeDetailsAPiError implements Action {
+  readonly type = ActionTypes.SetStripeDetailsAPiError;
+
+  constructor(public payload: ApiError) {
+  }
+}
+
+
+export class SetStripeUrlAPiError implements Action {
+  readonly type = ActionTypes.SetStripeUrlAPiError;
 
   constructor(public payload: ApiError) {
   }
@@ -116,6 +134,8 @@ export type CompanyActions = ToggleEditConfig |
   SetConfig |
   SetCompany |
   SetApiError |
+  SetStripeDetailsAPiError |
+  SetStripeUrlAPiError |
   RequestUpdateCompany |
   RequestUpdateConfig |
   RequestPhotoUpdate |

@@ -29,8 +29,10 @@ export class ModelListItemsComponent {
 
   private _categorizedList: { [key: string]: IReadModel[] };
   @Input() set categorizedList(items: { [key: string]: IReadModel[] }) {
-    this.categories = Object.keys(items);
-    this._categorizedList = items;
+    if (items) {
+      this.categories = Object.keys(items);
+      this._categorizedList = items;
+    }
   }
 
   get categorizedList() {

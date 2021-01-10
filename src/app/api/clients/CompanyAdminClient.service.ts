@@ -24,6 +24,8 @@ export class CompanyAdminClient extends ModelViewSetClient<Company, object> {
     super(http, adapter, environment.apiUrl + 'admin/companies/');
   }
 
+  stripe = environment.apiUrl + 'billing/accounts/';
+
   config(id, model): Observable<CompanyConfig> {
     return this.http.patch<CompanyConfig>(this.baseUrl + id + '/config/', model).pipe(map(this.configAdapter.adapt));
   }
@@ -36,11 +38,11 @@ export class CompanyAdminClient extends ModelViewSetClient<Company, object> {
   }
 
   stripeUrl(id: number): Observable<{ url: string }> {
-    return this.http.patch<{url: string}>(this.baseUrl + id + '/stripe/', {});
+    return this.http.post<{url: string}>(`${this.stripe}${id}/connect/`, {});
   }
 
   stripeDetails(id: number): Observable<CompanyStripeDetails> {
-    return this.http.get<CompanyStripeDetails>(this.baseUrl + id + '/stripe/details/').pipe(map(this.stripeAdapter.adapt));
+    return this.http.get<CompanyStripeDetails>(`${this.stripe}${id}/`).pipe(map(this.stripeAdapter.adapt));
   }
 }
 

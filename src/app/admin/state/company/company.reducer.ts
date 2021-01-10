@@ -4,6 +4,8 @@ import {Company, CompanyStripeDetails} from '@api/models';
 
 export interface State {
   apiError: ApiError | null;
+  stripeDetailsApiError: ApiError | null;
+  stripeUrlApiError: ApiError | null;
   companyEditMode: boolean;
   configEditMode: boolean;
   company: Company;
@@ -12,6 +14,8 @@ export interface State {
 
 const initialState: State = {
   apiError: null,
+  stripeDetailsApiError: null,
+  stripeUrlApiError: null,
   companyEditMode: false,
   configEditMode: false,
   company: null,
@@ -63,6 +67,18 @@ export function reducer(state: State = initialState, action: CompanyActions): St
       return {
         ...state,
         companyStripeDetails: action.payload
+      };
+
+    case ActionTypes.SetStripeDetailsAPiError:
+      return {
+        ...state,
+        stripeDetailsApiError: action.payload
+      };
+
+    case ActionTypes.SetStripeUrlAPiError:
+      return {
+        ...state,
+        stripeUrlApiError: action.payload
       };
 
     default:

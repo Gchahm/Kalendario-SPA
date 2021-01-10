@@ -7,20 +7,24 @@ export class CompanyStripeDetails implements IReadModel {
   static modelType = 'companyMessages';
   name = '';
   id: number;
-  stripeDetailsSubmitted: boolean;
-  stripeChargesEnabled: boolean;
-  stripePayoutsEnabled: boolean;
-  stripeDefaultCurrency: boolean;
+  detailsSubmitted: boolean;
+  chargesEnabled: boolean;
+  payoutsEnabled: boolean;
+  defaultCurrency: boolean;
+  requireConnect: boolean;
+  currentlyDue: string[];
 
   static fromJs(data: any): CompanyStripeDetails {
     data = typeof data === 'object' ? data : {};
     const result = new CompanyStripeDetails();
     if (data) {
       result.id = data.ownerId;
-      result.stripeDetailsSubmitted = data.stripeDetailsSubmitted;
-      result.stripeChargesEnabled = data.stripeChargesEnabled;
-      result.stripePayoutsEnabled = data.stripePayoutsEnabled;
-      result.stripeDefaultCurrency = data.stripeDefaultCurrency;
+      result.detailsSubmitted = data.detailsSubmitted;
+      result.chargesEnabled = data.chargesEnabled;
+      result.payoutsEnabled = data.payoutsEnabled;
+      result.defaultCurrency = data.defaultCurrency;
+      result.currentlyDue = data.currentlyDue;
+      result.requireConnect = data.requireConnect;
     }
     return result;
   }

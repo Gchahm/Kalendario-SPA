@@ -1,33 +1,42 @@
-<div class="row">
+<div class="row" *ngIf="model">
   <div class="col-6">
     <h3>Stripe Details</h3>
   </div>
   <div class="col-6 text-right">
-    <button (click)="edit.emit()" class="btn btn-admin btn-primary">Edit</button>
+    <button *ngIf="model.requireConnect" (click)="edit.emit()" class="btn btn-admin btn-primary">Edit</button>
   </div>
   <div class="col-12">
-    <table *ngIf="model" class="table table-borderless">
+    <table class="table table-borderless">
       <tbody>
       <tr>
         <th>Payment Currency</th>
-        <td>{{model.stripeDefaultCurrency}}</td>
+        <td>{{model.defaultCurrency}}</td>
       </tr>
       <tr>
         <th>Details Submitted</th>
         <td>
-          <div class="status-circle {{model.stripeDetailsSubmitted ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+          <div class="status-circle {{model.detailsSubmitted ? 'bg-ksuccess' : 'bg-danger'}}"></div>
         </td>
       </tr>
       <tr>
         <th>Payouts Enabled</th>
         <td>
-          <div class="status-circle {{model.stripePayoutsEnabled ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+          <div class="status-circle {{model.payoutsEnabled ? 'bg-ksuccess' : 'bg-danger'}}"></div>
         </td>
       </tr>
       <tr>
         <th>Charges Enabled</th>
         <td>
-          <div class="status-circle {{model.stripeChargesEnabled ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+          <div class="status-circle {{model.chargesEnabled ? 'bg-ksuccess' : 'bg-danger'}}"></div>
+        </td>
+      </tr>
+      <tr *ngIf="model.currentlyDue.length > 0">
+        <td [colSpan]="2">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of model.currentlyDue">
+              {{item}}
+            </li>
+          </ul>
         </td>
       </tr>
       </tbody>

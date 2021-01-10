@@ -75,7 +75,7 @@ export class ConfigsEffects {
     withLatestFrom(this.coreStore.pipe(getCurrentUser)),
     mergeMap(([action, user]) => this.client.stripeUrl(user.company.id).pipe(
       map(result => window.location.href = result.url),
-      catchError(err => of(new actions.SetApiError(err)))
+      catchError(err => of(new actions.SetStripeUrlAPiError(err)))
       )
     )
   );
@@ -86,7 +86,7 @@ export class ConfigsEffects {
     withLatestFrom(this.coreStore.pipe(getCurrentUser)),
     mergeMap(([action, user]) => this.client.stripeDetails(user.company.id).pipe(
       map(result => (new actions.SetStripeDetails(result))),
-      catchError(err => of(new actions.SetApiError(err)))
+      catchError(err => of(new actions.SetStripeDetailsAPiError(err)))
       )
     )
   );
