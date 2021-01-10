@@ -30,13 +30,6 @@ export class CompanyEffects {
               private dialog: MatDialog) {
   }
 
-  closeDialog() {
-    if (!!this.dialogRef) {
-      this.dialogRef.close();
-    }
-  }
-
-
   @Effect()
   RequestCompany$: Observable<Action> = this.actions$.pipe(
     ofType(actions.ActionTypes.RequestCompany),
@@ -160,4 +153,10 @@ export class CompanyEffects {
       }
     ),
   );
+
+  closeDialog() {
+    if (!!this.dialogRef) {
+      this.dialogRef.close();
+    }
+  }
 }

@@ -12,6 +12,9 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class RequestClient extends ReadOnlyModelViewSetClient<RequestModel, RequestsParam> {
+
+  billingUrl = environment.apiUrl + 'billing/';
+
   constructor(http: HttpClient,
               adapter: RequestAdapter) {
     super(http, adapter, environment.apiUrl + 'requests/');
@@ -45,8 +48,8 @@ export class RequestClient extends ReadOnlyModelViewSetClient<RequestModel, Requ
     );
   }
 
-  payment(id): Observable<StripePaymentDetails> {
-    return this.http.post<StripePaymentDetails>(this.baseUrl + id + '/payment/', {});
+  payment(requestId): Observable<StripePaymentDetails> {
+    return this.http.post<StripePaymentDetails>(this.billingUrl + 'payment/', {request_id: requestId});
   }
 }
 
