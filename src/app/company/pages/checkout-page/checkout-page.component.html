@@ -11,6 +11,7 @@
         <company-checkout [request]="request"
                           [company]="company$ | async"
                           [paymentDetails]="paymentDetails$ | async"
+                          (requestPaymentDetails)="requestPaymentDetails($event)"
                           (confirm)="submitRequest()"></company-checkout>
       </div>
     </div>
