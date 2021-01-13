@@ -16,7 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
     if (AuthService.isLoggedIn() && req.url.includes(this.baseUrl)) {
       req = req.clone({
         setHeaders: {
-          Authorization: `Token ${AuthService.getToken()}`
+          Authorization: `Bearer ${AuthService.getToken()}`
         }
       });
     }

@@ -59,8 +59,8 @@ export class AuthService {
   }
 
   login(user: LoginModel): Observable<IUser> {
-    return this.http.post<{ key: string }>(this.baseUrl + 'login/', user).pipe(
-      tap(({key}) => AuthService.setToken(key)),
+    return this.http.post<LoginResponse>(this.baseUrl + 'login/', user).pipe(
+      tap(({accessToken}) => AuthService.setToken(accessToken)),
       switchMap(() => this.whoAmI())
     );
   }
@@ -68,7 +68,7 @@ export class AuthService {
   socialAccounts(): Observable<ISocialAccount[]> {
     return this.http.get<any[]>(this.baseUrl + 'accounts/').pipe(
       map(items => items.map(i => parseSocial(i)))
-    )
+    );
   }
 
   facebookLogin(authToken): Observable<IUser> {
@@ -130,4 +130,10 @@ export class AuthService {
       switchMap(({key}) => this.whoAmI())
     );
   }
+}
+
+interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: IUser;
 }
