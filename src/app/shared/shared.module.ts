@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptorProvider} from './interceptors/token.interceptor';
 import {ErrorInterceptorProvider} from './interceptors/error.interceptor';
+import {RefreshTokenInterceptorProvider} from '@shared/interceptors/refreshToken.interceptor';
 import {ToastService} from './services/toast.service';
 import {AngularMaterialModule} from '../angular-material/angular-material.module';
 import {TranslateModule} from '@ngx-translate/core';
@@ -79,6 +80,7 @@ import { DashboardMobileContainerComponent } from './components/dashboard-mobile
   providers: [
     ErrorInterceptorProvider,
     AuthInterceptorProvider,
+    RefreshTokenInterceptorProvider,
     ToastService,
     // {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},

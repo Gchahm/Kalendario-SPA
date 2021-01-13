@@ -41,6 +41,15 @@ export class AuthService {
 
   static removeToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+  }
+
+  static setRefreshToken(token: string) {
+    localStorage.setItem('refreshToken', token);
+  }
+
+  static getRefreshToken(): string {
+    return localStorage.getItem('refreshToken');
   }
 
   static isLoggedIn() {
@@ -61,7 +70,16 @@ export class AuthService {
   login(user: LoginModel): Observable<IUser> {
     return this.http.post<LoginResponse>(this.baseUrl + 'login/', user).pipe(
       tap(({accessToken}) => AuthService.setToken(accessToken)),
+      tap(({refreshToken}) => AuthService.setRefreshToken(refreshToken)),
       switchMap(() => this.whoAmI())
+    );
+  }
+
+  refreshAccessToken(): Observable<string> {
+    const refresh = AuthService.getRefreshToken();
+    return this.http.post<RefreshAccessTokenResponse>(this.baseUrl + 'token/refresh/', {refresh}).pipe(
+      tap(({access}) => AuthService.setToken(access)),
+      map(({access}) => access)
     );
   }
 
@@ -80,9 +98,10 @@ export class AuthService {
   }
 
   register(form: RegisterModel): Observable<IUser> {
-    return this.http.post<{ key: string }>(this.baseUrl + 'registration/', form).pipe(
-      tap(({key}) => AuthService.setToken(key)),
-      switchMap(() => this.whoAmI())
+    return this.http.post<LoginResponse>(this.baseUrl + 'registration/', form).pipe(
+      tap(({accessToken}) => AuthService.setToken(accessToken)),
+      tap(({refreshToken}) => AuthService.setRefreshToken(refreshToken)),
+        switchMap(() => this.whoAmI())
     );
   }
 
@@ -136,4 +155,9 @@ interface LoginResponse {
   accessToken: string;
   refreshToken: string;
   user: IUser;
+}
+
+interface RefreshAccessTokenResponse {
+  access: string;
+  accessTokenExpiration: string;
 }
