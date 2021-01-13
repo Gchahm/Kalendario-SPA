@@ -125,7 +125,7 @@ export class CompanyEffects {
     map((action: actions.AddRequestNotes) => action.customerNotes),
     withLatestFrom(this.store.select(fromCompany.getCurrentRequest)),
     mergeMap(([customerNotes, request]) => this.requestClient.patch(request.id, customerNotes).pipe(
-      tap(r => this.router.navigate(['c', request.owner.id, 'checkout'])),
+      tap(r => this.router.navigate(['c', request.owner.name, 'checkout'])),
       map(result => (new actions.SetCurrentRequest(result))),
       catchError(err => of(new actions.LoadSlotsFail(err)))
       )
