@@ -5,7 +5,7 @@ import {Moment} from 'moment';
 @Component({
   selector: 'admin-scheduling-page-content',
   templateUrl: './scheduling-page-content.component.html',
-  styleUrls: ['./scheduling-page-content.component.css']
+  styleUrls: ['./scheduling-page-content.component.scss']
 })
 export class SchedulingPageContentComponent {
   private _employees: IEmployee[];
