@@ -8,7 +8,7 @@ const NON_FIELD_ERRORS = 'nonFieldErrors';
  The keys will match with a formControl name and this will ensure that the error will be raised against
  the correct control */
 export function reactiveFormErrorHandler(form: FormGroup, error: ValidationError) {
-  if (!error || !Array.isArray(error.detail)) {
+  if (!error) {
     return;
   }
   Object.keys(error?.detail).forEach(prop => {
