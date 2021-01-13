@@ -28,8 +28,15 @@ export class RequestClient extends ReadOnlyModelViewSetClient<RequestModel, Requ
       );
   }
 
-  confirm(id: number, customerNotes: string) {
-    return this.http.patch<RequestModel>(this.baseUrl + id + '/confirm/', {customerNotes})
+  patch(id: number, customerNotes: string) {
+    return this.http.patch<RequestModel>(`${this.baseUrl}${id}/`, {customerNotes})
+      .pipe(
+        map(this.adapter.adapt)
+      );
+  }
+
+  complete(id: number) {
+    return this.http.patch<RequestModel>(this.baseUrl + id + '/confirm/', {})
       .pipe(
         map(this.adapter.adapt)
       );
@@ -49,7 +56,7 @@ export class RequestClient extends ReadOnlyModelViewSetClient<RequestModel, Requ
   }
 
   payment(requestId): Observable<StripePaymentDetails> {
-    return this.http.post<StripePaymentDetails>(this.billingUrl + 'payment/', {request_id: requestId});
+    return this.http.put<StripePaymentDetails>(this.billingUrl + `payment/${requestId}/`, {});
   }
 }
 

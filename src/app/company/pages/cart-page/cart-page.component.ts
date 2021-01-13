@@ -17,7 +17,6 @@ export class CartPageComponent implements OnInit, OnDestroy {
   company$: Observable<CompanyDetailsResult>;
   paymentDetails$: Observable<StripePaymentDetails>;
   preBookMessage$: Observable<string>;
-  checkoutMode$: Observable<boolean>;
 
   constructor(protected store: Store<fromCompany.State>) {}
 
@@ -26,7 +25,6 @@ export class CartPageComponent implements OnInit, OnDestroy {
     this.company$ = this.store.select(fromCompany.getCompany);
     this.paymentDetails$ = this.store.select(fromCompany.getPaymentDetails);
     this.preBookMessage$ = this.store.select(fromCompany.getPreBookMessage);
-    this.checkoutMode$ = this.store.select(fromCompany.getCheckoutMode);
   }
 
   ngOnDestroy() {
@@ -38,15 +36,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new fromCompany.RequestRemoveAppointment(id));
   }
 
-  requestPaymentDetails(id: number) {
-    this.store.dispatch(new fromCompany.RequestPaymentDetails(id));
-  }
-
-  confirm(customerNotes: string) {
-    this.store.dispatch(new fromCompany.RequestConfirmCart(customerNotes));
-  }
-
-  setCheckoutMode(value: boolean) {
-    this.store.dispatch(new fromCompany.SetCheckoutMode(value));
+  addNotes(customerNotes: string) {
+    this.store.dispatch(new fromCompany.AddRequestNotes(customerNotes));
   }
 }

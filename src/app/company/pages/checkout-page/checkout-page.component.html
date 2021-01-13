@@ -1,0 +1,19 @@
+<div class="container pt-4">
+  <app-kalendario-card>
+    <div class="row" *ngIf="request$ | async as request">
+      <div class="col-12 mb-4">
+        <company-logo-shell></company-logo-shell>
+      </div>
+      <div class="col-12">
+        <company-request [request]="request"
+                         [checkoutMode]="true"></company-request>
+
+        <company-checkout [request]="request"
+                          [company]="company$ | async"
+                          [paymentDetails]="paymentDetails$ | async"
+                          (confirm)="submitRequest()"></company-checkout>
+      </div>
+    </div>
+  </app-kalendario-card>
+</div>
+

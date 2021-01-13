@@ -6,6 +6,7 @@ import {EmployeeDetailsPageComponent} from '@company/pages/employee-details-page
 import {LandingPageComponent} from '@company/pages/landing-page/landing-page.component';
 import {CartPageComponent} from '@company/pages/cart-page/cart-page.component';
 import {AuthGuard} from '@shared/../auth/guards/auth.guard';
+import {CheckoutPageComponent} from '@company/pages/checkout-page/checkout-page.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,11 @@ const routes: Routes = [
       {
         path: 'cart',
         component: CartPageComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'checkout',
+        component: CheckoutPageComponent,
         canActivate: [AuthGuard]
       },
       {

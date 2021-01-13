@@ -120,13 +120,23 @@ export class CompanyEffects {
   );
 
   @Effect()
-  RequestConfirmCart$: Observable<Action> = this.actions$.pipe(
-    ofType(actions.ActionTypes.RequestConfirmCart),
-    map((action: actions.RequestConfirmCart) => action.customerNotes),
-    withLatestFrom(
-      this.store.select(fromCompany.getCurrentRequest)
-    ),
-    mergeMap(([customerNotes, request]) => this.requestClient.confirm(request.id, customerNotes).pipe(
+  AddRequestNotes$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.ActionTypes.AddRequestNotes),
+    map((action: actions.AddRequestNotes) => action.customerNotes),
+    withLatestFrom(this.store.select(fromCompany.getCurrentRequest)),
+    mergeMap(([customerNotes, request]) => this.requestClient.patch(request.id, customerNotes).pipe(
+      tap(r => this.router.navigate(['c', request.owner.id, 'checkout'])),
+      map(result => (new actions.SetCurrentRequest(result))),
+      catchError(err => of(new actions.LoadSlotsFail(err)))
+      )
+    )
+  );
+
+  @Effect()
+  ConfirmRequest$: Observable<Action> = this.actions$.pipe(
+    ofType(actions.ActionTypes.ConfirmRequest),
+    withLatestFrom(this.store.select(fromCompany.getCurrentRequest)),
+    mergeMap(([action, request]) => this.requestClient.complete(request.id).pipe(
       tap(r => this.router.navigate(['my', 'requests'], {queryParams: {id: request.id}})),
       map(result => (new actions.SetCurrentRequest(result))),
       catchError(err => of(new actions.LoadSlotsFail(err)))

@@ -1,6 +1,4 @@
-<app-kalendario-card *ngIf="request">
-  <company-request-item *ngFor="let item of request.items"
-                        [requestItem]="item"
-                        [showBin]="!checkoutMode"
-                        (remove)="remove.emit($event)"></company-request-item>
-</app-kalendario-card>
+<company-request-item *ngFor="let item of request?.items"
+                      [requestItem]="item"
+                      [showBin]="!checkoutMode"
+                      (remove)="remove.emit($event)"></company-request-item>

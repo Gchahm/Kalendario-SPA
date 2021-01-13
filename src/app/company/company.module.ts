@@ -31,6 +31,8 @@ import {CompanyLogoShellComponent} from './containers/company-logo-shell/company
 import {RequestItemComponent} from '@company/components/request-item/request-item.component';
 import {RequestComponent} from '@company/components/request/request.component';
 import {StripeModule} from '@app/stripe/stripe.module';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -59,6 +61,8 @@ import {StripeModule} from '@app/stripe/stripe.module';
     RequestItemComponent,
     CartSummaryComponent,
     CompanyLogoShellComponent,
+    CheckoutPageComponent,
+    CheckoutComponent,
   ],
   imports: [
     CompanyRoutingModule,

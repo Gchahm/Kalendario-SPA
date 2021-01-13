@@ -1,0 +1,40 @@
+<div class="row">
+
+  <div class="col-9 h6">
+    Kalendario Fee
+  </div>
+  <div class="col-3 text-right c-primary">{{request.fee | currency :'€'}}</div>
+
+  <div class="col-12 m-2"></div>
+
+  <div class="col-9 h5">
+    TOTAL
+  </div>
+  <div class="col-3 h5 text-right c-primary">{{request.total | currency :'€'}}</div>
+
+  <div class="col-12 mt-4">
+    <div class="additional-info-box">
+      <div class="additional-info-box-title text-small">Notes</div>
+      <p>{{request.customerNotes}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="paymentDetails" class="col-12">
+    <stripe-card-element [total]="request.total | currency :'€'"
+                         [clientSecret]="paymentDetails.clientSecret"
+                         (confirmPay)="confirm.emit()"></stripe-card-element>
+  </div>
+
+  <div *ngIf="!paymentDetails" class="col-12">
+    <button *ngIf="company.config.canReceiveCardPayments"
+            (click)="requestPaymentDetails.emit(request.id)"
+            class="btn btn-primary mr-2">
+      Pay with Card
+    </button>
+    <button *ngIf="company.config.canReceiveUnpaidRequest"
+            (click)="confirm.emit()" class="btn btn-accent">
+      Pay Cash Onsite
+    </button>
+  </div>
+
+</div>

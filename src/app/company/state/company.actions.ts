@@ -24,7 +24,8 @@ export enum ActionTypes {
   SetCurrentRequest = '[Company] Update Current Request',
   OpenSlotsForServiceDialog = '[Company] Open Slots for Service Dialog',
   RequestRemoveAppointment = '[Company] Request Remove Appointment From Request',
-  RequestConfirmCart = '[Company] Request Confirm Cart',
+  AddRequestNotes = '[Company] Add Request Notes',
+  ConfirmRequest = '[Company] Complete Request',
   RequestPaymentDetails = '[Company] Request Payment Details',
   SetPaymentDetails = '[Company] Set Payment Details',
   SetCheckoutMode = '[Company] Set Checkout Mode',
@@ -162,11 +163,15 @@ export class RequestRemoveAppointment implements Action {
 }
 
 
-export class RequestConfirmCart implements Action {
-  readonly type = ActionTypes.RequestConfirmCart;
+export class AddRequestNotes implements Action {
+  readonly type = ActionTypes.AddRequestNotes;
 
   constructor(public customerNotes: string) {
   }
+}
+
+export class ConfirmRequest implements Action {
+  readonly type = ActionTypes.ConfirmRequest;
 }
 
 
@@ -212,7 +217,8 @@ export type CompanyActions = RequestCompany |
   SetCurrentRequest |
   OpenSlotsForServiceDialog |
   RequestRemoveAppointment |
-  RequestConfirmCart |
+  AddRequestNotes |
+  ConfirmRequest |
   RequestPaymentDetails |
   SetPaymentDetails |
   SetCheckoutMode;

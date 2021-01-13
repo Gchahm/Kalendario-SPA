@@ -8,24 +8,20 @@ import {StripePaymentDetails} from '@api/clients/RequestClient.service';
   styleUrls: ['./cart-summary.component.css']
 })
 export class CartSummaryComponent {
-  @Input() request: RequestModel;
+  private _request: RequestModel;
+  @Input() set request(request: RequestModel) {
+    this._request = request;
+    this.customerNotes = request.customerNotes;
+  }
+  get request(): RequestModel {
+    return this._request;
+  }
   @Input() company: CompanyDetailsResult;
   @Input() paymentDetails: StripePaymentDetails;
   @Input() preBookMessage: string;
-  @Input() checkoutMode: boolean;
   @Output() confirm = new EventEmitter<string>();
-  @Output() checkout = new EventEmitter<boolean>();
-  @Output() requestPaymentDetails = new EventEmitter<number>();
 
   customerNotes: string;
-
-  appointments(): IAppointment[] {
-    return this.request.items.reduce((p, i) => p.concat(i.appointments), []);
-  }
-
-  proceedCheckout() {
-    this.checkout.emit(true);
-  }
 
   confirmRequest() {
     this.confirm.emit(this.customerNotes);
