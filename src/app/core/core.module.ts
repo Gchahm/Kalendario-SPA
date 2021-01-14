@@ -3,7 +3,6 @@ import {SharedModule} from '@shared/shared.module';
 import {HomeComponent} from './components/home/home.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {CoreRoutingModule} from './core-routing.module';
-import {CreateCompanyComponent} from '@admin/containers/_dialogs/create-company/create-company.component';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {CoreEffects} from '@core/state/core.effects';
@@ -16,7 +15,6 @@ import { NavbarShellComponent } from './containers/navbar-shell/navbar-shell.com
   declarations: [
     HomeComponent,
     NavbarComponent,
-    CreateCompanyComponent,
     FooterComponent,
     NavbarShellComponent,
   ],

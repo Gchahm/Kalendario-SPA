@@ -3,7 +3,6 @@ import {HomeComponent} from './components/home/home.component';
 import {NgModule} from '@angular/core';
 import {NotLoggedInGuard} from '../auth/guards/not-logged-in.guard';
 import {AuthGuard} from '@shared/../auth/guards/auth.guard';
-import {CreateCompanyComponent} from '@admin/containers/_dialogs/create-company/create-company.component';
 import {ConfirmEmailPageComponent} from '../auth/pages/confirm-email-page/confirm-email-page.component';
 import {ResendConfirmationComponent} from '../auth/containers/resend-confirmation/resend-confirmation.component';
 import {LoginRegisterPageComponent} from '@core/../auth/pages/login-register-page/login-register-page.component';
@@ -31,11 +30,6 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
-  },
-  {
-    path: 'create-company',
-    component: CreateCompanyComponent,
-    canActivate: [AuthGuard]
   },
 ];
 

@@ -1,0 +1,42 @@
+<div class="row no-gutters">
+  <div class="col-sm-10 col-md-4">
+    <img class="blob-1" src="assets/img/landing-page/blob-1.png">
+  </div>
+  <div class="col-sm-12 col-md-8 heading-text responsive-fs">
+    <p class="l-p-h1">What is Kalendario?</p>
+    <p>
+      Kalendario makes your booking management easier offering tools which helps
+      you, but is also a way to let your clients book their own appointments.
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-sm-6 col-md-4 mb-5" *ngFor="let feature of features">
+      <app-feature-card [feature]="feature"
+                        class="m-4"></app-feature-card>
+    </div>
+  </div>
+</div>
+
+<div class="row no-gutters">
+<!--  <div class="col-sm-12 col-md-10">-->
+<!--  </div>-->
+<!--  <div class="d-none d-md-block col-md-2">-->
+<!--    <img class="blob-1" src="assets/img/landing-page/blob-2.png">-->
+<!--  </div>-->
+
+  <div class="col-sm-10 col-md-6">
+    <img class="blob-1" src="assets/img/landing-page/blob-3.png">
+  </div>
+  <div class="col-sm-12 col-md-6 d-flex">
+    <div class="m-auto">
+      <h4 class="card-title text-center">Ready to Start?</h4>
+      <landing-create-company *ngIf="isLoggedIn$ | async; else login"></landing-create-company>
+      <ng-template #login>
+        <auth-login-register-shell></auth-login-register-shell>
+      </ng-template>
+    </div>
+  </div>
+</div>

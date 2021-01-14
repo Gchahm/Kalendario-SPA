@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CompanyNameValidators} from '@admin/containers/_dialogs/create-company/companyName.validators';
+import {CompanyNameValidators} from '@app/landing/containers/create-company/companyName.validators';
 import {Router} from '@angular/router';
 import {reactiveFormErrorHandler} from '@shared/common/Util';
 import {ValidationError} from '@api/Errors';
@@ -10,7 +10,7 @@ import * as fromCore from '@core/state';
 
 
 @Component({
-  selector: 'app-create-company',
+  selector: 'landing-create-company',
   templateUrl: './create-company.component.html',
   styleUrls: ['./create-company.component.scss']
 })
@@ -27,8 +27,7 @@ export class CreateCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      name: ['',
-        [Validators.required], CompanyNameValidators.shouldBeUnique(this.companyService)]
+      name: ['', [Validators.required], CompanyNameValidators.shouldBeUnique(this.companyService)]
     });
   }
 
