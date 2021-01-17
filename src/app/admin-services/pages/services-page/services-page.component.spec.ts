@@ -3,7 +3,6 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ServicesPageComponent} from './services-page.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatDialogMock} from '@shared/test/stubs';
-import {NgReduxTestingModule} from '@angular-redux/store/testing';
 import {ModelViewSetClientMock} from '@api/testing';
 import {ServiceAdminClient} from '@api/clients';
 
@@ -13,7 +12,6 @@ describe('ServicesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [NgReduxTestingModule],
       declarations: [ServicesPageComponent],
       providers: [
         {provide: ServiceAdminClient, useClass: ModelViewSetClientMock},

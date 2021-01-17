@@ -1,8 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CompanyShellComponent} from './company.component';
-import {NgReduxTestingModule} from '@angular-redux/store/testing';
 import {ActivatedRoute, convertToParamMap} from '@angular/router';
+import {CompanyShellComponent} from '@company/containers/company-shell/company-shell.component';
 
 describe('CompanyComponent', () => {
   let component: CompanyShellComponent;
@@ -11,7 +10,6 @@ describe('CompanyComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        NgReduxTestingModule
       ],
       declarations: [CompanyShellComponent],
       providers: [

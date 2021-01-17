@@ -2,8 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CustomerInputComponent } from './customer-input.component';
 import {FormBuilder} from '@angular/forms';
-import {AdminServiceMock} from '@admin-schedule/test/stubs';
-import {CustomerService} from '@admin-schedule/services/customer.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 describe('CustomerInputComponent', () => {
@@ -18,7 +16,6 @@ describe('CustomerInputComponent', () => {
       declarations: [ CustomerInputComponent ],
       providers: [
         FormBuilder,
-        {provide: CustomerService, useClass: AdminServiceMock}
       ]
     })
     .compileComponents();

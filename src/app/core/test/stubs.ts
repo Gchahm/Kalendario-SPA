@@ -1,12 +1,9 @@
 import {Observable, of} from 'rxjs';
-import {ListResult} from '@admin-schedule/services/AdminModelService';
-import {IWriteModel} from '../models/interfaces/IWriteModel';
-import {ReadModelStub} from '@shared/test/stubs';
-import {Employee} from '@core/models/Employee';
-import {Service} from '@core/models/Service';
-import {Moment} from 'moment';
-import {Slot} from '@core/models/Slot';
 import * as moment from 'moment';
+import {ReadModelStub} from '@api/testing';
+import {ListResult} from '@api/results/IListResult';
+import {Employee, Service, Slot} from '@api/models';
+import {Moment} from 'moment';
 
 const READ_MODEL = new ReadModelStub();
 
@@ -16,7 +13,7 @@ export class DjangoRWModelServiceMock {
     return of({count: 1, next: '', previous: '', results: [READ_MODEL]});
   }
 
-  post(model: IWriteModel) {
+  post(model: any) {
   }
 
   detail(id: number, params): Observable<ReadModelStub> {

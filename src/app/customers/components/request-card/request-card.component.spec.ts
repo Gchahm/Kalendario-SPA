@@ -1,7 +1,7 @@
-import {RequestCardComponent} from './request-card.component';
+import {RequestCardComponent} from '@customers/components/request-card/request-card.component';
 
 describe('AppointmentCardComponent', () => {
-  let component = new RequestCardComponent;
+  const component = new RequestCardComponent(null);
 
   it('should create', () => {
     expect(component).toBeTruthy();

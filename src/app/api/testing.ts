@@ -4,10 +4,12 @@ import {IReadModel} from '@api/models';
 
 export class ReadModelStub implements IReadModel {
   id: number;
+  name: string;
 
   writeModel() {
     return undefined;
   }
+
 }
 
 const READ_MODEL = new ReadModelStub();

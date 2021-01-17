@@ -1,16 +1,15 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {DateTimeInputComponent} from './date-time-pretty-input.component';
+import {DateTimePrettyInputComponent} from './date-time-pretty-input.component';
 import {FormBuilder} from '@angular/forms';
 import * as moment from 'moment';
 
-describe('DateTimeInputComponent', () => {
-  let component: DateTimeInputComponent;
-  let fixture: ComponentFixture<DateTimeInputComponent>;
+describe('DateTimePrettyInputComponent', () => {
+  let component: DateTimePrettyInputComponent;
+  let fixture: ComponentFixture<DateTimePrettyInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DateTimeInputComponent],
+      declarations: [DateTimePrettyInputComponent],
       providers: [
         FormBuilder
       ]
@@ -19,7 +18,7 @@ describe('DateTimeInputComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DateTimeInputComponent);
+    fixture = TestBed.createComponent(DateTimePrettyInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

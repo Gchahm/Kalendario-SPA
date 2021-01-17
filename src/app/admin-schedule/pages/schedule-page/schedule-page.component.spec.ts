@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SchedulePageComponent} from './schedule-page.component';
-import {MockNgRedux, NgReduxTestingModule} from '@angular-redux/store/testing';
 import {MatDialog} from '@angular/material/dialog';
 import {ScheduleAdminClient} from '@api/clients';
 import {ModelViewSetClientMock} from '@api/testing';
@@ -18,10 +17,8 @@ describe('SchedulePageComponent', () => {
         SchedulePageComponent
       ],
       imports: [
-        NgReduxTestingModule
       ],
       providers: [
-        MockNgRedux,
         {provide: ScheduleAdminClient, useValue: ModelViewSetClientMock},
         {provide: MatDialog, useValue: matDialog}
       ]

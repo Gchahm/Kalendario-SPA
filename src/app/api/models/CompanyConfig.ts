@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '../adapter';
 import {IReadModel} from './IReadModel';
+import {PermissionModels} from '@api/permissions';
 
 
 export class CompanyConfig implements IReadModel {
-  static modelType = 'companyMessages';
+  static modelType = PermissionModels.company;
   name = '';
   ownerId = 0;
   private: boolean;
