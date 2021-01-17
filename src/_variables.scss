@@ -17,19 +17,6 @@ $link-color: #3f51b5;
 $link-hover-color: currentColor;
 $link-hover-decoration: none;
 $label-margin-bottom: 0;
-
-
-@font-face {
-  font-family: Inter;
-  src: url(assets/fonts/inter-regular.ttf) format("opentype");
-}
-
-@font-face {
-  font-family: RedHat;
-  src: url(assets/fonts/RedHatDisplay-Regular.ttf) format("opentype");
-}
-//From Figma
-
 $font-family-base: Inter, serif;
 $body-color: #3D3D51;
 $body-bg: white;
