@@ -1,60 +1,50 @@
 import {TestBed} from '@angular/core/testing';
 import {CanViewServicesGuard} from './can-view-services.guard';
-import {AuthService} from '@api/clients/auth.service';
-import {AuthServiceMock} from '@shared/test/stubs';
-import {of} from 'rxjs';
-import {IUser, User} from '@api/models';
+import {User} from '@api/models';
+import {MockStore, provideMockStore} from '@ngrx/store/testing';
+import {cold} from 'jasmine-marbles';
+
 
 describe('CanViewServicesGuard', () => {
   let guard: CanViewServicesGuard;
-  let authService: AuthService;
+  let store: MockStore;
+  const initialState = { core: {user: User.AnonymousUser()} };
 
   beforeEach(() => {
-
     TestBed.configureTestingModule({
       providers: [
-        {provide: AuthService, useClass: AuthServiceMock},
-        CanViewServicesGuard
+        CanViewServicesGuard,
+        provideMockStore({initialState}),
       ]
     });
-    guard = TestBed.inject(CanViewServicesGuard);
-    authService = TestBed.inject(AuthService);
-  });
 
-  it('should create', () => {
-    expect(guard).toBeTruthy();
+    store = TestBed.inject(MockStore);
+    guard = TestBed.inject(CanViewServicesGuard);
   });
 
   describe('canActivate', () => {
-    it('should return false if the user is anonymous', async () => {
-      let result;
+    it('should return false if the user state is not logged in', () => {
+      const expected = cold('a', {a: false});
 
-      await guard.canActivate(null, null)
-        .toPromise()
-        .then(res => {
-          result = res;
-        });
-
-      expect(result).toBeFalsy();
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
     });
 
-    it('should return true if the user has view_service permission', async () => {
-      let result;
+    it('should return false if the user does not have access to services', () => {
+      const user = User.fromJs();
+      store.setState({ core: {user} });
 
-      spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = User.fromJs();
-        user.permissions.push('scheduling.view_service');
-        return of(user);
-      });
+      const expected = cold('a', {a: false});
 
-      await guard.canActivate(null, null)
-        .toPromise()
-        .then(res => {
-          result = res;
-        });
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
+    });
 
-      expect(result).toBeTruthy();
+    it('should return true if the user has access to services', () => {
+      const user = User.fromJs({permissions: ['scheduling.view_service']});
+      store.setState({ core: {user} });
+
+      const expected = cold('a', {a: true});
+
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
     });
   });
-
 });

@@ -55,7 +55,7 @@ class BaseAdapter<T extends IReadModel> implements BaseEntityAdapter<T> {
     const getFilteredEntities = createSelector(
       selectAll,
       getSearchValue,
-      (entities, search) => entities.filter(e => filterFn(e, search))
+      (entities, search) => entities?.filter(e => filterFn(e, search))
     );
 
     const getCurrentId = createSelector(

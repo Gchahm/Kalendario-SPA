@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CompanyUiRwComponent } from './company-ui-rw.component';
+import {CompanyConfig} from '@api/models';
 
 describe('CompanyUiRwComponent', () => {
   let component: CompanyUiRwComponent;
@@ -16,6 +17,7 @@ describe('CompanyUiRwComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CompanyUiRwComponent);
     component = fixture.componentInstance;
+    component.model = CompanyConfig.fromJs({});
     fixture.detectChanges();
   });
 

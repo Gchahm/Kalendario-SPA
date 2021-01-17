@@ -2,7 +2,7 @@ import {createFeatureSelector, createSelector} from '@ngrx/store';
 import * as fromConfigs from './company.reducer';
 
 export const storeName  = 'adminCompany';
-export {State, reducer} from './company.reducer';
+export {State, reducer, initialState} from './company.reducer';
 export * from './companyActions';
 
 

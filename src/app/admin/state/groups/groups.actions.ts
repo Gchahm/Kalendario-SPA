@@ -8,8 +8,8 @@ export const storeName = 'adminGroups';
 
 
 interface GroupsActions extends BaseEntityActions<IGroup> {
-  requestLoadPermissions: ActionCreator<string, (props: {}) => ({} & TypedAction<string>)>,
-  addPermissions: ActionCreator<string, (props: {permissions: Permission[]}) => ({permissions: Permission[]} & TypedAction<string>)>,
+  requestLoadPermissions: ActionCreator<string, (props: {}) => ({} & TypedAction<string>)>;
+  addPermissions: ActionCreator<string, (props: {permissions: Permission[]}) => ({permissions: Permission[]} & TypedAction<string>)>;
 }
 
 

@@ -9,7 +9,7 @@ export interface State extends BaseEntityState<IGroup> {
 }
 
 
-const initialState: State = {
+export const initialState: State = {
   ...baseInitialState<IGroup>(),
   permissions: []
 };

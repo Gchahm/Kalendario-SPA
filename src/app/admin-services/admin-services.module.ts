@@ -5,7 +5,7 @@ import * as fromServiceCat from '@app/admin-services/state/categories';
 import {EffectsModule} from '@ngrx/effects';
 import {ServicesEffects} from '@app/admin-services/state/services.effects';
 import {ServiceCategoriesEffects} from '@app/admin-services/state/categories/serviceCategories.effects';
-import {ServiceCategoryInputComponent} from '@admin/containers/_input/service-category-input/service-category-input.component';
+import {ServiceCategoryInputComponent} from '@app/admin-services/components/service-category-input/service-category-input.component';
 import {ServiceCategoryFormComponent} from '@app/admin-services/components/service-category-form/service-category-form.component';
 import {CreateServiceDialogComponent} from '@app/admin-services/containers/create-service/create-service-dialog.component';
 import {CreateServiceCategoryDialogComponent} from '@app/admin-services/containers/create-service-category/create-service-category-dialog.component';

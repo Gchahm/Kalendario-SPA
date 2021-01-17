@@ -1,59 +1,50 @@
-import {inject, TestBed} from '@angular/core/testing';
-
+import {TestBed} from '@angular/core/testing';
 import {CanViewEmployeesGuard} from './can-view-employees.guard';
-import {AuthService} from '@api/clients/auth.service';
-import {AuthServiceMock} from '@shared/test/stubs';
+import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {User} from '@api/models';
-import {of} from 'rxjs';
+import { cold } from 'jasmine-marbles';
+
 
 describe('CanViewEmployeesGuard', () => {
   let guard: CanViewEmployeesGuard;
-  let authService: AuthService;
+  let store: MockStore;
+  const initialState = { core: {user: User.AnonymousUser()} };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {provide: AuthService, useClass: AuthServiceMock},
-        CanViewEmployeesGuard
+        CanViewEmployeesGuard,
+        provideMockStore({initialState}),
       ]
     });
+
+    store = TestBed.inject(MockStore);
     guard = TestBed.inject(CanViewEmployeesGuard);
-    authService = TestBed.inject(AuthService);
   });
 
-  it('should ...', inject([CanViewEmployeesGuard], (guard: CanViewEmployeesGuard) => {
-    expect(guard).toBeTruthy();
-  }));
-
   describe('canActivate', () => {
-    it('should return false if the user is anonymous', async () => {
-      let result;
+    it('should return false if the user state is not logged in', () => {
+      const expected = cold('a', {a: false});
 
-      await guard.canActivate(null, null)
-        .toPromise()
-        .then(res => {
-          result = res;
-        });
-
-      expect(result).toBeFalsy();
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
     });
 
-    it('should return true if the user has view_employee permission', async () => {
-      let result;
+    it('should return false if the user does not have access to employees', () => {
+      const user = User.fromJs();
+      store.setState({ core: {user} });
 
-      spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = User.fromJs();
-        user.permissions.push('scheduling.view_employee');
-        return of(user);
-      });
+      const expected = cold('a', {a: false});
 
-      await guard.canActivate(null, null)
-        .toPromise()
-        .then(res => {
-          result = res;
-        });
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
+    });
 
-      expect(result).toBeTruthy();
+    it('should return true if the user has access to employees', () => {
+      const user = User.fromJs({permissions: ['scheduling.view_employee']});
+      store.setState({ core: {user} });
+
+      const expected = cold('a', {a: true});
+
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
     });
   });
 

@@ -4,7 +4,7 @@ import * as fromReducer from './groups.reducer';
 import {IGroup, Permission} from '@api/models';
 
 import {storeName} from './groups.actions';
-export {State, reducer} from './groups.reducer';
+export {State, reducer, initialState} from './groups.reducer';
 export {actions, storeName} from './groups.actions';
 
 export interface GroupViewModel {
@@ -27,16 +27,17 @@ const getCurrentGroupViewModel: MemoizedSelector<object, GroupViewModel> = creat
   getPermissions,
   (group, permissions) => {
     return {
-      group: group,
-      permissions: !!group ? permissions.filter(p => group.permissions.includes(p.id)) : []
-    }
+      group,
+      permissions: !!group && permissions ? permissions.filter(p => group.permissions.includes(p.id)) : []
+    };
   }
 );
+
 
 export const selectors = {
   ...baseSelectors,
   getCurrentGroupViewModel,
   getPermissions
-}
+};
 
 

@@ -12,7 +12,7 @@ export interface State {
   companyStripeDetails: CompanyStripeDetails;
 }
 
-const initialState: State = {
+export const initialState: State = {
   apiError: null,
   stripeDetailsApiError: null,
   stripeUrlApiError: null,

@@ -1,58 +1,49 @@
-import {inject, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 import {CanViewCustomersGuard} from './can-view-customers.guard';
-import {AuthService} from '@api/clients/auth.service';
-import {AuthServiceMock} from '@shared/test/stubs';
-import {IUser, User} from '@api/models';
-import {of} from 'rxjs';
+import {User} from '@api/models';
+import {MockStore, provideMockStore} from '@ngrx/store/testing';
+import {cold} from 'jasmine-marbles';
 
 describe('CanViewCustomersGuard', () => {
   let guard: CanViewCustomersGuard;
-  let authService: AuthService;
+  let store: MockStore;
+  const initialState = { core: {user: User.AnonymousUser()} };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        {provide: AuthService, useClass: AuthServiceMock},
-        CanViewCustomersGuard
+        CanViewCustomersGuard,
+        provideMockStore({initialState}),
       ]
     });
+
+    store = TestBed.inject(MockStore);
     guard = TestBed.inject(CanViewCustomersGuard);
-    authService = TestBed.inject(AuthService);
   });
 
-  it('should ...', inject([CanViewCustomersGuard], (guard: CanViewCustomersGuard) => {
-    expect(guard).toBeTruthy();
-  }));
-
   describe('canActivate', () => {
-    it('should return false if the user is anonymous', async () => {
-      let result;
+    it('should return false if the user state is not logged in', () => {
+      const expected = cold('a', {a: false});
 
-      await guard.canActivate(null, null)
-        .toPromise()
-        .then(res => {
-          result = res;
-        });
-
-      expect(result).toBeFalsy();
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
     });
 
-    it('should return true if the user has view_customer permission', async () => {
-      let result;
+    it('should return false if the user does not have access to customers', () => {
+      const user = User.fromJs();
+      store.setState({ core: {user} });
 
-      spyOn(authService, 'whoAmI').and.callFake(() => {
-        const user = User.fromJs();
-        user.permissions.push('scheduling.view_customer');
-        return of(user);
-      });
+      const expected = cold('a', {a: false});
 
-      await guard.canActivate(null, null)
-        .toPromise()
-        .then(res => {
-          result = res;
-        });
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
+    });
 
-      expect(result).toBeTruthy();
+    it('should return true if the user has access to customers', () => {
+      const user = User.fromJs({permissions: ['scheduling.view_customer']});
+      store.setState({ core: {user} });
+
+      const expected = cold('a', {a: true});
+
+      expect(guard.canActivate(null, null)).toBeObservable(expected);
     });
   });
 });

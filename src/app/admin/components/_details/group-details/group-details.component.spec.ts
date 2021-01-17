@@ -16,6 +16,7 @@ describe('GroupDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GroupDetailsComponent);
     component = fixture.componentInstance;
+    component.model = {group: null, permissions: []};
     fixture.detectChanges();
   });
 

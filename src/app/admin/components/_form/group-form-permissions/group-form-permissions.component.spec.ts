@@ -16,6 +16,7 @@ describe('GroupFormPermissionsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GroupFormPermissionsComponent);
     component = fixture.componentInstance;
+    component.models = [];
     fixture.detectChanges();
   });
 

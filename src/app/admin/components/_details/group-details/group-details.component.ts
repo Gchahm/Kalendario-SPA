@@ -10,7 +10,7 @@ export class GroupDetailsComponent {
   @Input() model: GroupViewModel;
 
   permissions() {
-    return this.model.permissions.map(p => ({name: p.model, value: p.type}))
+    return this.model.permissions.map(p => ({name: p.model, value: p.type}));
   }
 
   details(): { name: string, value: string }[] {
