@@ -3,6 +3,6 @@ export const environment = {
   apiUrl: 'https://api.kalendario.ie/api/',
   assetUrl: 'assets/',
   imageStorage: 'https://res.cloudinary.com/gchahm/',
-  stripePk: 'pk_test_51HG6eSAe2CG5hLhgSySK6m0KWXT7MgcoZdCAtqfFyg8nqwL9ZklNpCVke2H1EOX6uLI0jqYuRF08wb4X65gfDE1V00inHpeisT',
+  stripePk: 'pk_live_51HG6eSAe2CG5hLhgoU99pYnvVQWWM3sX7WleC8CyEg3BxaADbqIEziaaPL4KMUj2mrEQ4URAz4XaRBpO8SZBi1NJ004iX5nM4N',
   facebookAppId: '589952628393012'
 };

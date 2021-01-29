@@ -10,7 +10,7 @@
   <div class="col-9 h5">
     TOTAL
   </div>
-  <div class="col-3 h5 text-right c-primary">{{request.total | currency :'€'}}</div>
+  <div class="col-3 h5 text-right c-primary">{{request.total + request.fee | currency :'€'}}</div>
 
   <div class="col-12 mt-4">
     <div class="additional-info-box">
