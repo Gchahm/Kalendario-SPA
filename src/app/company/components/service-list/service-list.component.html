@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="col-sm-12 col-md-9 col-lg-10">
-      <div class="row no-gutters pretty-scroll" [@staggeredFadeIn]="animationState">
+      <div class="row pretty-scroll" [@staggeredFadeIn]="animationState">
         <div class="col-sm-12 col-md-6" *ngFor="let service of services">
           <company-service-list-card [service]="service"
                                      [checked]="service.id === currentServiceId"

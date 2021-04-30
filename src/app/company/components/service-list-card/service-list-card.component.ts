@@ -10,5 +10,4 @@ export class ServiceListCardComponent {
   @Input() service: Service;
   @Input() checked: boolean;
   @Output() selected = new EventEmitter<number>();
-  // TODO: Implement details button
 }
