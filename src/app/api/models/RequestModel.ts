@@ -22,7 +22,6 @@ export class RequestModel implements IReadModel {
   items: RequestItem[] = [];
   itemsCount: number;
   total: number;
-  fee: number;
   complete: boolean;
   customerNotes: string;
   status: string;
@@ -37,7 +36,6 @@ export class RequestModel implements IReadModel {
       result.complete = data.complete;
       result.scheduledDate = data.scheduledDate;
       result.total = data.total;
-      result.fee = data.fee;
       result.itemsCount = 0;
       result.user = User.fromJs(data.user);
       result.status = data.status;
