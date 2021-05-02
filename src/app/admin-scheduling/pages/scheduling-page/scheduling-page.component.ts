@@ -58,10 +58,10 @@ export class SchedulingPageComponent extends BaseEntityPage<SchedulingPanel> imp
     const routeSnapShot = this.route.snapshot.queryParamMap;
     let date: Moment;
     if (routeSnapShot.has('date')) {
-      date = moment(routeSnapShot.get('date'));
+      date = moment(routeSnapShot.get('date')).utc();
     }
     if (!date || !date.isValid()) {
-      date = moment().startOf('day');
+      date = moment().utc().startOf('day');
     }
     this.updateDate(date);
   }
