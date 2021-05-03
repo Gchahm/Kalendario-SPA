@@ -17,7 +17,6 @@ export class SlotsForServiceShellComponent extends BaseContainer implements OnIn
   isLoading$: Observable<boolean>;
   date$: Observable<Moment>;
   service$: Observable<Service>;
-  disableDateInput$: Observable<boolean>;
   @Input() hasShadow = true;
 
   constructor(protected store: Store<fromCompany.State>) {
@@ -30,14 +29,9 @@ export class SlotsForServiceShellComponent extends BaseContainer implements OnIn
     this.date$ = this.store.select(fromCompany.getCurrentMomentDate);
     this.service$ = this.store.select(fromCompany.getCurrentService);
     this.isLoading$ = this.store.select(fromCompany.getIsLoadingSlots);
-    this.disableDateInput$ = this.store.select(fromCompany.getDisableDateInput);
   }
 
-  setDate(value: Moment) {
-    this.store.dispatch(new fromCompany.SetDate(value));
-  }
 
-  addToCart() {
-    this.store.dispatch(new fromCompany.RequestAddAppointmentRequest());
-  }
+
+
 }

@@ -14,11 +14,20 @@ export class ServiceSlotComponent {
   @Input() slot: ServiceSlot;
   @Input() currentSlotId: number;
   @Output() eventClick = new EventEmitter<void>();
+  @Output() book = new EventEmitter<void>();
 
   animationState = false;
 
   animateEmit() {
     this.animationState = !this.animationState;
-    this.eventClick.emit();
+    if (this.isSelected) {
+      this.book.emit();
+    } else {
+      this.eventClick.emit();
+    }
+  }
+
+  get isSelected(): boolean {
+    return this.slot.id === this.currentSlotId;
   }
 }

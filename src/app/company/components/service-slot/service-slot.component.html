@@ -1,7 +1,10 @@
 <div [@pulse]="animationState"
      class="slot-container bs-primary m-auto"
-     [class.no-border]="slot.id === currentSlotId"
-     [class.bg-primary-gradient]="slot.id === currentSlotId"
+     [class.no-border]="isSelected"
+     [class.bg-primary-gradient]="isSelected"
      (click)="animateEmit()">
   <p>{{slot.title}}</p>
+  <div [hidden]="!isSelected">
+    Book Now
+  </div>
 </div>

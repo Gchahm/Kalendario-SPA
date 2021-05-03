@@ -1,0 +1,33 @@
+<div [matTooltip]="disableDateInput ? disabledTooltip : ''"
+     class="text-center mb-2">
+  <button [disabled]="disableDateInput"
+          (click)="today()"
+          [class.btn-sm]="isMobile"
+          class="btn btn-accent mr-1">
+    Today
+  </button>
+  <button [disabled]="disableDateInput"
+          (click)="previousDay()"
+          [class.btn-sm]="isMobile"
+          class="btn btn-accent-dark mr-1">
+    <i class="fa fa-chevron-left"></i>
+  </button>
+  <button [disabled]="disableDateInput"
+          (click)="nextDay()"
+          [class.btn-sm]="isMobile"
+          class="btn btn-accent-dark mr-1">
+    <i class="fa fa-chevron-right"></i>
+  </button>
+
+  <mat-form-field appearance="standard">
+    <input matInput
+           [disabled]="disableDateInput"
+           readonly
+           [value]="currentDate"
+           (click)="dpAppointmentDashboard.open()"
+           (dateChange)="this.dateChange.emit($event.value)"
+           [matDatepicker]="dpAppointmentDashboard">
+    <mat-datepicker-toggle matSuffix [for]="dpAppointmentDashboard"></mat-datepicker-toggle>
+    <mat-datepicker touchUi="{{isMobile}}" #dpAppointmentDashboard></mat-datepicker>
+  </mat-form-field>
+</div>

@@ -1,10 +1,8 @@
+
 <company-slots-for-service [serviceSlots]="serviceSlots | async"
                            [currentSlotId]="getCurrentSlotId$ | async"
                            [date]="date$ | async"
                            [service]="service$ | async"
                            [isLoading]="isLoading$ | async"
                            [hasShadow]="hasShadow"
-                           [isMobile]="isMobile$ | async"
-                           [disableDateInput]="disableDateInput$ | async"
-                           (dateChange)="setDate($event)"
-                           (book)="addToCart()"></company-slots-for-service>
+                           [isMobile]="isMobile$ | async"></company-slots-for-service>

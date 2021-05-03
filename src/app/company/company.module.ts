@@ -33,6 +33,8 @@ import {RequestComponent} from '@company/components/request/request.component';
 import {StripeModule} from '@app/stripe/stripe.module';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SlotForServiceHeaderComponent } from './components/slot-for-service-header/slot-for-service-header.component';
+import { SlotsForServiceHeaderShellComponent } from './containers/slots-for-service-header-shell/slots-for-service-header-shell.component';
 
 
 @NgModule({
@@ -63,6 +65,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CompanyLogoShellComponent,
     CheckoutPageComponent,
     CheckoutComponent,
+    SlotForServiceHeaderComponent,
+    SlotsForServiceHeaderShellComponent,
   ],
   imports: [
     CompanyRoutingModule,

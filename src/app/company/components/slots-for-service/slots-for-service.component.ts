@@ -21,7 +21,6 @@ export class SlotsForServiceComponent {
   @Input() isMobile = false;
   @Input() isLoading = false;
   @Input() hasShadow = true;
-  @Input() disableDateInput = true;
 
   @Input() set date(value: Moment) {
     this.currentDate = value;
@@ -40,27 +39,13 @@ export class SlotsForServiceComponent {
     return this._service;
   }
 
-  @Output() dateChange = new EventEmitter<Moment>();
-  @Output() book = new EventEmitter<void>();
 
   currentDate: Moment;
   nextDate: Moment;
   currentDateFormatted: string;
   nextDayFormatted: string;
-  disabledTooltip = 'remove items from cart to update the date';
   serviceAnimationState: boolean;
 
-  today() {
-    this.dateChange.emit(moment.utc());
-  }
-
-  previousDay() {
-    this.dateChange.emit(this.currentDate.subtract(1, 'day'));
-  }
-
-  nextDay() {
-    this.dateChange.emit(this.currentDate.add(1, 'day'));
-  }
 
   currentDateSlots(): ServiceSlot[] {
     return this.serviceSlots.filter(s => s.start.date() === this.currentDate.date());

@@ -20,4 +20,8 @@ export class ServiceSlotShellComponent {
     this.store.dispatch(new fromCompany.SetCurrentSlotId(this.slot.id));
   }
 
+  addToCart() {
+    this.store.dispatch(new fromCompany.RequestAddAppointmentRequest());
+  }
+
 }
