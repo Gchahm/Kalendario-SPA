@@ -31,14 +31,23 @@ export class CompanyDetailsResult implements IReadModel {
 
   init(data: any) {
     if (data) {
+      let hasOtherCategory = false;
       this.id = data.id;
       this.name = data.name;
       this.address = data.address;
       this.about = data.about;
       this.avatar = data.avatar ? environment.imageStorage + data.avatar : environment.assetUrl + 'img/default-avatar.jpg';
       this.employees = data.employees.map(employee => Employee.fromJs(employee));
-      this.services = data.services.map(service => Service.fromJs(service));
+      this.services = data.services.map(service => {
+        if (!service.category) {
+          hasOtherCategory = true;
+        }
+        return Service.fromJs(service);
+      });
       this.serviceCategories = data.serviceCategories.map(cat => ServiceCategory.fromJs(cat));
+      if (hasOtherCategory) {
+        this.serviceCategories.push(ServiceCategory.otherCategory());
+      }
       this.config = CompanyConfig.fromJs(data.config);
     }
   }

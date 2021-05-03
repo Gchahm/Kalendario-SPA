@@ -15,6 +15,12 @@ export class ServiceCategory implements IReadModel {
     return result;
   }
 
+  static otherCategory(): ServiceCategory {
+    const result = new ServiceCategory();
+    result.init({id: null, name: 'Other'});
+    return result;
+  }
+
   init(data: any) {
     if (data) {
       this.id = data.id;
