@@ -45,20 +45,20 @@
       </span>
   </h5>
   <div class="row pretty-scroll">
-    <div *ngIf="!isLoading"
+    <div *ngIf="!isMobile && !isLoading"
          class="col-sm-12 col-md-6"
          [@fadeInOnEnter] [@fadeOutOnLeave]>
       <h5>{{currentDateFormatted}}</h5>
-      <div class="mb-2" *ngFor="let event of nextDaySlots()">
+      <div class="mb-2" *ngFor="let event of currentDateSlots()">
         <company-service-slot-shell [slot]="event"
                                     [currentSlotId]="currentSlotId"></company-service-slot-shell>
       </div>
     </div>
-    <div *ngIf="!isMobile && !isLoading"
+    <div *ngIf="!isLoading"
          class="col-sm-12 col-md-6"
          [@fadeInOnEnter] [@fadeOutOnLeave]>
       <h5>{{nextDayFormatted}}</h5>
-      <div class="mb-2" *ngFor="let event of currentDateSlots()">
+      <div class="mb-2" *ngFor="let event of nextDaySlots()">
         <company-service-slot-shell [slot]="event"
                                     [currentSlotId]="currentSlotId"></company-service-slot-shell>
       </div>
