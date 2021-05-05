@@ -144,9 +144,10 @@ export class AuthService {
   }
 
   private authenticateFacebook(authToken: string): Observable<IUser> {
-    return this.http.post<{ key: string }>(this.facebookUrl, {access_token: authToken}).pipe(
-      tap(({key}) => AuthService.setToken(key)),
-      switchMap(({key}) => this.whoAmI())
+    return this.http.post<LoginResponse>(this.facebookUrl, {access_token: authToken}).pipe(
+      tap(({accessToken}) => AuthService.setToken(accessToken)),
+      tap(({refreshToken}) => AuthService.setRefreshToken(refreshToken)),
+      switchMap(() => this.whoAmI())
     );
   }
 }
