@@ -23,7 +23,7 @@ export class CalendarComponents implements OnInit {
   isToday: boolean;
 
   get markerTop(): number {
-    const currentTime = moment.utc();
+    const currentTime = moment();
     return  (currentTime.hour() * 60 + currentTime.minute() - this.minStart * 60) * 2;
     // return value.toString() + 'px';
   }
