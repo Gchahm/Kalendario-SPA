@@ -16,7 +16,7 @@ export class ScheduleAppointmentComponent {
   }
 
   customerDetails(): string {
-    return this.appointment.customer.email + '\n' + this.appointment.customer.phone;
+    return this.appointment.customer?.email + '\n' + this.appointment.customer?.phone;
   }
 
   edit() {

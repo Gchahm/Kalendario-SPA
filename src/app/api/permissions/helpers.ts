@@ -10,12 +10,12 @@ import {
 } from '@api/permissions/index';
 
 
-export function userPermissions(user: IUser, model: PermissionModels): ModelPermissions {
+export function userPermissions(user: IUser | null, model: PermissionModels): ModelPermissions {
   return {
-    view: user.permissions.includes(`${getApp(model)}.${PERMISSION_VIEW}_${model}`),
-    add: user.permissions.includes(`${getApp(model)}.${PERMISSION_ADD}_${model}`),
-    change: user.permissions.includes(`${getApp(model)}.${PERMISSION_CHANGE}_${model}`),
-    delete: user.permissions.includes(`${getApp(model)}.${PERMISSION_DELETE}_${model}`),
+    view: user?.permissions.includes(`${getApp(model)}.${PERMISSION_VIEW}_${model}`),
+    add: user?.permissions.includes(`${getApp(model)}.${PERMISSION_ADD}_${model}`),
+    change: user?.permissions.includes(`${getApp(model)}.${PERMISSION_CHANGE}_${model}`),
+    delete: user?.permissions.includes(`${getApp(model)}.${PERMISSION_DELETE}_${model}`),
   };
 }
 

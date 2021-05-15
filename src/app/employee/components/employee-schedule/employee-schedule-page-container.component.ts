@@ -67,7 +67,7 @@ export class EmployeeSchedulePageContainerComponent implements OnInit {
 
   availability(): string {
     const shift = getShift(this.employee.scheduleModel, this.currentDate);
-    if (shift.frames.length > 0) {
+    if (shift?.frames.length > 0) {
       return shift.frames.map(f => f.name).reduce((previousValue, currentValue) => previousValue + ' | ' + currentValue);
     }
     return 'No Availability';

@@ -1,6 +1,8 @@
-.schedule-appointment-container {
+:host {
   font-weight: 600;
   margin: 0 15px 0 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 p {

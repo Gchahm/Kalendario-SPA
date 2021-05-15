@@ -1,29 +1,40 @@
-<div class="schedule-appointment-container">
-  <div class="row">
-    <div class="col-2 text-center m-auto c-medium-gray">
-      {{appointment.start.format('HH:mm')}}
-      <p *ngIf="showEdit">
-        <i class="fa fa-pen c-primary c-pointer"
-           (click)="edit()"></i>
-      </p>
+<div class="d-flex align-items-end justify-content-around">
+  <div *ngIf="appointment.customer" class="d-flex flex-column flex-fill text-left">
+    {{appointment.service.name}}
+    <div>
+      <i class="fa fa-clock c-primary mr-2"></i>
+      {{appointment.start.format('HH:mm')}} -
+      {{appointment.end.format('HH:mm')}}
     </div>
-    <div class="col-6 m-auto">
-      <p class="m-auto">
-        {{appointment.service.name}}
-      </p>
+    <div>
+      <i class="fa fa-address-card mr-2 c-primary"></i>
+      {{appointment.customer?.name}}
     </div>
-    <div class="col-4 c-medium-gray">
-      <p>
-        <i class="fa fa-clock c-primary mr-2"></i> {{appointment.service.duration}}
+    <div>
+      <p *ngIf="appointment.internalNotes">
+        <i class="fa fa-sticky-note c-primary mr-2"></i>
+        {{appointment.internalNotes}}
       </p>
-      <p [matTooltip]="customerDetails()"
-         [matTooltipClass]="'tooltip-ws'"
-         class="c-primary">
-        <i class="fa fa-address-card mr-2"></i>{{appointment.customer.name}}
+      <p *ngIf="appointment.customerNotes">
+        <i class="fa fa-comment-alt c-primary mr-2"></i>
+        {{appointment.customerNotes}}
       </p>
-    </div>
-    <div class="col-12">
-      <hr/>
     </div>
   </div>
+  <div *ngIf="!appointment.customer" class="flex-fill">
+    <p>Locked time
+      {{appointment.start.format('HH:MM')}} -
+      {{appointment.end.format('HH:MM')}}
+    </p>
+  </div>
+  <div>
+    <i *ngIf="showEdit" class="fa fa-pen c-primary c-pointer mr-4"
+       (click)="edit()">
+    </i>
+  </div>
 </div>
+<div>
+  <hr/>
+</div>
+
+
