@@ -36,6 +36,13 @@
         </mat-error>
       </div>
 
+      <div class="form-group">
+        <input class="form-control" placeholder="warning" formControlName="warning">
+        <mat-error *ngIf="form.get('warning').errors?.serverError">
+          {{form.get('warning').errors?.serverError}}
+        </mat-error>
+      </div>
+
     </div>
     <div class="col-sm-12 col-md-12 text-right" *ngIf="showButtons">
       <button [disabled]="!form.valid" class="btn btn-primary mr-2">confirm</button>

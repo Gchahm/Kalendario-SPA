@@ -9,6 +9,8 @@
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let customer of customers$ | async"
                   [value]="customer.name"
+                  [class.text-danger]="customer.warning"
+                  [matTooltip]="customer.warning"
                   (onSelectionChange)="selected(customer)">
         {{ customer.name }}
         <small>{{customer.phone}}</small>

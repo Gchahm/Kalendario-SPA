@@ -5,6 +5,7 @@ import {PermissionModels} from '@api/permissions';
 
 export class Customer extends Person implements ICustomer {
   static modelType = PermissionModels.customer;
+  warning: string;
 
   static fromJs(data?: any): ICustomer {
     data = typeof data === 'object' ? data : {};
@@ -15,11 +16,14 @@ export class Customer extends Person implements ICustomer {
 
   init(data: any) {
     super.init(data);
+    this.warning = data.warning;
   }
+
 }
 
 // tslint:disable-next-line:no-empty-interface
 export interface ICustomer extends IPerson {
+  warning: string;
 }
 
 export interface ICustomerWriteModel {
@@ -28,6 +32,7 @@ export interface ICustomerWriteModel {
   lastName: string;
   email: string;
   phone: string;
+  warning: string;
 }
 
 @Injectable({

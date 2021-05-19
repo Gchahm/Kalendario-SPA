@@ -42,6 +42,14 @@
                       [apiError]="apiError"></admin-input-rw>
     </div>
 
+    <div class="col-12">
+      <admin-input-rw formControlName="warning"
+                      showName="Warning"
+                      (edit)="emitEdit()"
+                      [editMode]="editMode"
+                      [apiError]="apiError"></admin-input-rw>
+    </div>
+
   </div>
 </form>
 <div *ngIf="editMode">

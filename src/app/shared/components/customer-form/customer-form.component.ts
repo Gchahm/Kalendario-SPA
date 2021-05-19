@@ -16,6 +16,7 @@ export class CustomerFormComponent extends BaseFormComponent<ICustomer> {
       lastName: this.model.lastName,
       email: this.model.email,
       phone: this.model.phone,
+      warning: this.model.warning
     };
   }
 }
