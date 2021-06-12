@@ -7,7 +7,7 @@ export class Customer extends Person implements ICustomer {
   static modelType = PermissionModels.customer;
   warning: string;
 
-  static fromJs(data?: any): ICustomer {
+  static fromJsc(data?: any): ICustomer {
     data = typeof data === 'object' ? data : {};
     const result = new Customer();
     result.init(data);
@@ -21,7 +21,6 @@ export class Customer extends Person implements ICustomer {
 
 }
 
-// tslint:disable-next-line:no-empty-interface
 export interface ICustomer extends IPerson {
   warning: string;
 }
@@ -40,6 +39,6 @@ export interface ICustomerWriteModel {
 })
 export class CustomerAdapter implements Adapter<ICustomer> {
   adapt(data: any): ICustomer {
-    return Customer.fromJs(data);
+    return Customer.fromJsc(data);
   }
 }

@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
-
-import {IUser, User, UserAdapter} from '../models/IUser';
-import {LoginModel} from '@api/models/LoginModel';
-import {FacebookAuthService} from '@app/auth/services/facebook-auth.service';
+import {Injectable} from '@angular/core';
 import {IChangePassword, ISocialAccount, ResetPassword} from '@api/models';
 import {parseSocial} from '@api/models/auth/ISocialAccount';
+import {LoginModel} from '@api/models/LoginModel';
+import {FacebookAuthService} from '@app/auth/services/facebook-auth.service';
+import {Observable, of} from 'rxjs';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+
+import {IUser, User, UserAdapter} from '../models/IUser';
 
 export interface RegisterModel {
   firstName: string;

@@ -19,7 +19,7 @@ export class CreateCustomerDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.model = Customer.fromJs();
+    this.model = Customer.fromJsc();
   }
 
   saveModel(customer) {

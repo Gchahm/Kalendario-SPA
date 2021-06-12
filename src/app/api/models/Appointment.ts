@@ -37,7 +37,7 @@ export class Appointment implements IReadModel {
     this.id = data.id ? data.id : 0;
     this.request = data.request;
     this.companyName = data.owner?.name ? data.owner.name : '';
-    this.customer = data?.customer ? Customer.fromJS(data?.customer) : null;
+    this.customer = data?.customer ? Customer.fromJsc(data?.customer) : null;
     this.employee = Employee.fromJs(data?.employee);
     this.lockEmployee = data.lockEmployee;
     this.service = Service.fromJs(data?.service);
@@ -59,7 +59,7 @@ export class Appointment implements IReadModel {
 export interface IAppointment extends IReadModel {
   request: number;
   companyName;
-  customer: ICustomer;
+  customer: ICustomer | IEmployee;
   employee: IEmployee;
   service: Service;
   lockEmployee: boolean;

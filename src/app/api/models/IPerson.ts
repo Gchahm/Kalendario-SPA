@@ -8,7 +8,7 @@ export class Person implements IPerson {
   email;
   phone;
 
-  static fromJS(data?: any): Person {
+   static fromJS(data?: any): Person {
     data = typeof data === 'object' ? data : {};
     const result = new Person();
     result.init(data);
