@@ -42,7 +42,7 @@
     "classlist.js": "^1.1.20150312",
     "firebase-tools": "^8.18.0",
     "jasmine-marbles": "^0.6.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "ngx-color-picker": "^9.0.0",
     "ngx-stripe": "^9.2.0",
     "redux": "4.0.1",
